@@ -1,4 +1,4 @@
 body {
   font-family: Century Gothic, sans-serif;
-  overflow: hidden;
+  overflow-y: scroll;
 }
