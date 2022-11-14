@@ -1,4 +1,3 @@
-export class UserInfo{
-  constructor(public email: string = '', public password: string = '') {
-  }
+export class UserInfo {
+  constructor(public username: string = '', public password: string = '') {}
 }

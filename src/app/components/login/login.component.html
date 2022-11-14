@@ -1,8 +1,8 @@
-<section class="vh-80 min-vh-100 hero-main" >
+<section class="vh-80 min-vh-100 hero-main">
   <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center " >
+    <div class="row d-flex justify-content-center align-items-center ">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div class=" bg-dark text-white" style="border-radius: 1rem;" >
+        <div class=" bg-dark text-white" style="border-radius: 1rem;">
           <div class="card-body px-5 py-3 text-center">
 
             <div class="mb-md-3 mt-md-4 ">
@@ -11,27 +11,29 @@
               <p class="text-white-50 mb-5">Please enter your email and password!</p>
 
               <div class="form-outline form-white mb-4">
-                <input type="email" id="typeEmailX" class="form-control form-control-lg " placeholder="name@example.com" [(ngModel)]="userInfo.email" (keyup.enter)="login()" />
+                <input (keyup.enter)="login()" [(ngModel)]="userInfo.username" class="form-control form-control-lg " id="typeEmailX"
+                       placeholder="name@example.com" type="email"/>
               </div>
 
               <div class="form-outline form-white mb-3">
-                <input type="password" id="typePasswordX" class="form-control form-control-lg" placeholder="password" [(ngModel)]="userInfo.password" (keyup.enter)="login()"/>
+                <input (keyup.enter)="login()" [(ngModel)]="userInfo.password" class="form-control form-control-lg" id="typePasswordX"
+                       placeholder="password" type="password"/>
               </div>
 
               <p class="small mb-3 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
 
-              <button class="btn btn-outline-light btn-lg px-5" type="submit" (click)="login()">Login</button>
+              <button (click)="login()" class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
 
               <div class="d-flex justify-content-center text-center mt-4 pt-1 ">
-                <a href="#!" class="text-white"><i class="fa fa-facebook-f fa-lg"></i></a>
-                <a href="#!" class="text-white"><i class="fa fa-twitter fa-lg mx-4 px-2"></i></a>
-                <a href="#!" class="text-white"><i class="fa fa-google fa-lg"></i></a>
+                <a class="text-white" href="#!"><i class="fa fa-facebook-f fa-lg"></i></a>
+                <a class="text-white" href="#!"><i class="fa fa-twitter fa-lg mx-4 px-2"></i></a>
+                <a class="text-white" href="#!"><i class="fa fa-google fa-lg"></i></a>
               </div>
 
             </div>
 
             <div>
-              <p class="mb-2">Don't have an account? <a href="/register" class="text-white-50 fw-bold">Sign Up</a>
+              <p class="mb-2">Don't have an account? <a class="text-white-50 fw-bold" href="/register">Sign Up</a>
               </p>
             </div>
 
