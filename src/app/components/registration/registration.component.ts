@@ -1,4 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {User} from "../../model/user.model";
 
 @Component({
   selector: 'app-registration',
@@ -8,21 +9,16 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 export class RegistrationComponent implements OnInit {
   isDriver = true;
   role = 'Driver';
-  @ViewChild("cardNum") cardNum: ElementRef | undefined;
+  user = new User();
+  reenteredPassword = '';
 
   constructor() { }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   onChange(deviceValue: any) {
     console.log(deviceValue);
-    if(deviceValue === 'Client'){
-      this.isDriver = false;
-    }else{
-      this.isDriver = true;
-    }
+    this.isDriver = deviceValue !== 'Client';
   }
 
 }

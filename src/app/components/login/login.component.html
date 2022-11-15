@@ -12,15 +12,17 @@
 
 
               <mdb-form-control class="mb-4 form-white">
-                <input mdbInput (keyup.enter)="login()" [(ngModel)]="userInfo.username" class="form-control form-control-lg text-light" id="typeEmailX"
-                       placeholder="name@example.com" type="email"/>
+                <input mdbValidate mdbInput (keyup.enter)="login()" [(ngModel)]="userInfo.username" class="form-control form-control-lg text-light" id="typeEmailX" #email="ngModel"
+                       placeholder="name@example.com" type="email" required/>
                 <label mdbLabel class="form-label text-light" for="typeEmailX">name@example.com</label>
+                <mdb-error class="mt-1" *ngIf="email.invalid && (email.dirty || email.touched)">Email is required</mdb-error>
               </mdb-form-control>
 
               <mdb-form-control class="mb-3 form-white">
-                <input mdbInput (keyup.enter)="login()" [(ngModel)]="userInfo.password" class="form-control form-control-lg text-light" id="pass"
-                       placeholder="password" type="password"/>
+                <input mdbValidate mdbInput (keyup.enter)="login()" [(ngModel)]="userInfo.password" class="form-control form-control-lg text-light" id="pass" #password="ngModel"
+                       placeholder="password" type="password" required/>
                 <label mdbLabel class="form-label " for="pass">password</label>
+                <mdb-error class="mt-1" *ngIf="password.invalid && (password.dirty || password.touched)">Password is required</mdb-error>
               </mdb-form-control>
 
               <p class="small mb-3 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>

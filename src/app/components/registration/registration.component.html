@@ -13,16 +13,18 @@
                 <div class="col-md-6 mb-4">
 
                   <mdb-form-control class="form-white">
-                    <input mdbInput type="text" id="firstName" class="form-control form-control-lg text-light" placeholder="first name"/>
+                    <input mdbValidate mdbInput [(ngModel)]="user.firstName"  #firstName="ngModel" type="text" id="firstName" class="form-control form-control-lg text-light" placeholder="first name" required/>
                     <label mdbLabel class="form-label" for="firstName">First Name</label>
+                    <mdb-error class="mt-1" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">First name is required</mdb-error>
                   </mdb-form-control>
 
                 </div>
                 <div class="col-md-6 mb-4">
 
                   <mdb-form-control class="form-white">
-                    <input mdbInput type="text" id="lastName" class="form-control form-control-lg text-light" placeholder="last name"/>
+                    <input mdbValidate mdbInput [(ngModel)]="user.lastName" #lastName="ngModel" type="text" id="lastName" class="form-control form-control-lg text-light" placeholder="last name" required/>
                     <label mdbLabel class="form-label" for="lastName">Last Name</label>
+                    <mdb-error class="mt-1" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">Last name is required</mdb-error>
                   </mdb-form-control>
 
                 </div>
@@ -32,16 +34,21 @@
                 <div class="col-md-6 mb-4 pb-2">
 
                   <mdb-form-control class="form-white">
-                    <input mdbInput type="email" id="emailAddress" class="form-control form-control-lg text-light" placeholder="name@example.com" />
+                    <input mdbValidate mdbInput [(ngModel)]="user.email" #email="ngModel" type="email" email id="emailAddress" class="form-control form-control-lg text-light" placeholder="name@example.com" required/>
                     <label mdbLabel class="form-label" for="emailAddress">Email</label>
+                    <div *ngIf="email.errors && (email.dirty || email.touched)">
+                      <mdb-error class="mt-1" *ngIf="email.errors['required']">Email is required</mdb-error>
+                      <mdb-error class="mt-1" *ngIf="email.errors['email']">Email is not in valid form</mdb-error>
+                    </div>
                   </mdb-form-control>
 
                 </div>
                 <div class="col-md-6 mb-4 pb-2">
 
                   <mdb-form-control class="form-white">
-                    <input mdbInput type="tel" id="phoneNumber" class="form-control form-control-lg text-light" placeholder="phone number"/>
+                    <input mdbValidate mdbInput [(ngModel)]="user.phoneNumber" #phone="ngModel" type="text" id="phoneNumber" class="form-control form-control-lg text-light" placeholder="phone number" required/>
                     <label mdbLabel class="form-label" for="phoneNumber">Phone Number</label>
+                    <mdb-error class="mt-1" *ngIf="phone.invalid && (phone.dirty || phone.touched)">Phone number is required</mdb-error>
                   </mdb-form-control>
 
                 </div>
@@ -50,14 +57,15 @@
               <div class="row mb-4">
                 <div class="mb-3 col-6">
                   <mdb-form-control class="form-white ">
-                    <input mdbInput type="text" id="city" class="form-control form-control-lg text-light" placeholder="city" />
+                    <input mdbValidate mdbInput [(ngModel)]="user.city" #city="ngModel" type="text" id="city" class="form-control form-control-lg text-light" placeholder="city" required/>
                     <label mdbLabel class="form-label" for="city">City</label>
+                    <mdb-error class="mt-1" *ngIf="city.invalid && (city.dirty || city.touched)">City is required</mdb-error>
                   </mdb-form-control>
                 </div>
 
                 <div class="mb-3 col-6">
                   <div class="form-floating form-white">
-                    <select (ngModelChange)="onChange($event)" [(ngModel)]="role"  class="form-select form-control  bg-dark text-light" id="role" >
+                    <select (ngModelChange)="onChange($event)" [(ngModel)]="role"  class="form-select form-control  bg-dark text-light" id="role" required>
                       <option value="Driver">Driver</option>
                       <option value="Client">Client</option>
                     </select>
@@ -71,24 +79,31 @@
               <div class="row mb-3">
                 <div class="mb-3 col-6">
                   <mdb-form-control class="form-white">
-                    <input mdbInput type="password" id="typePasswordX" class="form-control form-control-lg text-light" placeholder="new password" />
+                    <input mdbValidate mdbInput [(ngModel)]="user.password" #password="ngModel" type="password" id="typePasswordX" class="form-control form-control-lg text-light" placeholder="new password" required/>
                     <label mdbLabel class="form-label" for="typePasswordX">New password</label>
+                    <mdb-error class="mt-1" *ngIf="password.invalid && (password.dirty || password.touched)">Password is required</mdb-error>
                   </mdb-form-control>
                 </div>
 
 
                 <div class="mb-3 col-6">
                   <mdb-form-control class="form-white">
-                    <input mdbInput type="password" id="reenterPasswordX" class="form-control form-control-lg text-light" placeholder="reenter password" />
+                    <input mdbValidate mdbInput [(ngModel)]="reenteredPassword" #repassword="ngModel"
+                           type="password" id="reenterPasswordX"
+                           class="form-control form-control-lg text-light"
+                           [validateSuccess]="user.password === reenteredPassword"
+                           placeholder="reenter password"/>
                     <label mdbLabel class="form-label" for="reenterPasswordX">Reenter password</label>
+                    <mdb-error class="mt-1" *ngIf="(user.password !== reenteredPassword) && (repassword.dirty || repassword.touched)">Passwords must be same</mdb-error>
                   </mdb-form-control>
                 </div>
               </div>
 
               <div class="mb-5" [ngStyle]="{ display: isDriver ? 'none' : 'block' }">
                 <mdb-form-control class="form-white">
-                  <input mdbInput type="password" id="cardNum" class="form-control form-control-lg text-light" placeholder="new password" />
+                  <input mdbValidate mdbInput [(ngModel)]="user.cardNumber" #card="ngModel" type="password" id="cardNum" class="form-control form-control-lg text-light" placeholder="card number" required/>
                   <label mdbLabel class="form-label" for="cardNum">Card number</label>
+                  <mdb-error class="mt-1" *ngIf="card.invalid && (card.dirty || card.touched)">Card number is required</mdb-error>
                 </mdb-form-control>
               </div>
 

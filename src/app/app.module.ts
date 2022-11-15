@@ -9,20 +9,22 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import {FormsModule} from "@angular/forms";
 import {MdbFormsModule} from "mdb-angular-ui-kit/forms";
+import {MdbValidationModule} from "mdb-angular-ui-kit/validation";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavbarComponent,
-    RegistrationComponent
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    MdbFormsModule
+    MdbFormsModule,
+    MdbValidationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
