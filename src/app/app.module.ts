@@ -8,6 +8,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import {FormsModule} from "@angular/forms";
+import {MdbFormsModule} from "mdb-angular-ui-kit/forms";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {FormsModule} from "@angular/forms";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MdbFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

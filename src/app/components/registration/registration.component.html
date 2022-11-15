@@ -1,9 +1,9 @@
 <section class="vh-80 min-vh-100 hero-main" >
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center " >
-      <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+      <div class="col-12 col-md-10 col-lg-7 ">
         <div class=" bg-dark text-white" style="border-radius: 1rem;" >
-          <div class="card-body px-4 py-3 text-center">
+          <div class="card-body px-5 py-3 text-center">
 
             <div class="mb-md-3 mt-md-4 ">
 
@@ -12,18 +12,18 @@
               <div class="row">
                 <div class="col-md-6 mb-4">
 
-                  <div class="form-outline">
-                    <input type="text" id="firstName" class="form-control form-control-lg" placeholder="first name"/>
-                    <label class="form-label" for="firstName">First Name</label>
-                  </div>
+                  <mdb-form-control class="form-white">
+                    <input mdbInput type="text" id="firstName" class="form-control form-control-lg text-light" placeholder="first name"/>
+                    <label mdbLabel class="form-label" for="firstName">First Name</label>
+                  </mdb-form-control>
 
                 </div>
                 <div class="col-md-6 mb-4">
 
-                  <div class="form-outline">
-                    <input type="text" id="lastName" class="form-control form-control-lg" placeholder="last name"/>
-                    <label class="form-label" for="lastName">Last Name</label>
-                  </div>
+                  <mdb-form-control class="form-white">
+                    <input mdbInput type="text" id="lastName" class="form-control form-control-lg text-light" placeholder="last name"/>
+                    <label mdbLabel class="form-label" for="lastName">Last Name</label>
+                  </mdb-form-control>
 
                 </div>
               </div>
@@ -31,47 +31,65 @@
               <div class="row">
                 <div class="col-md-6 mb-4 pb-2">
 
-                  <div class="form-outline">
-                    <input type="email" id="emailAddress" class="form-control form-control-lg" placeholder="name@example.com" />
-                    <label class="form-label" for="emailAddress">Email</label>
-                  </div>
+                  <mdb-form-control class="form-white">
+                    <input mdbInput type="email" id="emailAddress" class="form-control form-control-lg text-light" placeholder="name@example.com" />
+                    <label mdbLabel class="form-label" for="emailAddress">Email</label>
+                  </mdb-form-control>
 
                 </div>
                 <div class="col-md-6 mb-4 pb-2">
 
-                  <div class="form-outline">
-                    <input type="tel" id="phoneNumber" class="form-control form-control-lg" placeholder="phone number"/>
-                    <label class="form-label" for="phoneNumber">Phone Number</label>
-                  </div>
+                  <mdb-form-control class="form-white">
+                    <input mdbInput type="tel" id="phoneNumber" class="form-control form-control-lg text-light" placeholder="phone number"/>
+                    <label mdbLabel class="form-label" for="phoneNumber">Phone Number</label>
+                  </mdb-form-control>
 
                 </div>
               </div>
 
               <div class="row mb-4">
-                <div class="form-outline form-white mb-3 col-6">
-                  <input type="text" id="city" class="form-control form-control-lg" placeholder="city" />
-                  <label class="form-label" for="city">City</label>
+                <div class="mb-3 col-6">
+                  <mdb-form-control class="form-white ">
+                    <input mdbInput type="text" id="city" class="form-control form-control-lg text-light" placeholder="city" />
+                    <label mdbLabel class="form-label" for="city">City</label>
+                  </mdb-form-control>
                 </div>
-                <div class="col-1"></div>
-                <div class="form-outline form-white mb-3 col-4">
-                  <select class="form-select form-select-lg form-control " id="role" >
-                    <option value="Driver">Driver</option>
-                    <option value="Client">Client</option>
-                  </select>
-                  <label class="form-label" for="role">Role</label>
+
+                <div class="mb-3 col-6">
+                  <div class="form-floating form-white">
+                    <select (ngModelChange)="onChange($event)" [(ngModel)]="role"  class="form-select form-control  bg-dark text-light" id="role" >
+                      <option value="Driver">Driver</option>
+                      <option value="Client">Client</option>
+                    </select>
+                    <label mdbLabel class="form-label text-light" for="role">Role</label>
+                  </div>
                 </div>
+
+
               </div>
 
               <div class="row mb-3">
-                <div class="form-outline form-white mb-3 col-6">
-                  <input type="password" id="typePasswordX" class="form-control form-control-lg" placeholder="new password" />
-                </div>
-                <div class="col-1"></div>
-
-                <div class="form-outline form-white mb-3 col-6">
-                  <input type="password" id="reenterPasswordX" class="form-control form-control-lg" placeholder="reenter password" />
+                <div class="mb-3 col-6">
+                  <mdb-form-control class="form-white">
+                    <input mdbInput type="password" id="typePasswordX" class="form-control form-control-lg text-light" placeholder="new password" />
+                    <label mdbLabel class="form-label" for="typePasswordX">New password</label>
+                  </mdb-form-control>
                 </div>
 
+
+                <div class="mb-3 col-6">
+                  <mdb-form-control class="form-white">
+                    <input mdbInput type="password" id="reenterPasswordX" class="form-control form-control-lg text-light" placeholder="reenter password" />
+                    <label mdbLabel class="form-label" for="reenterPasswordX">Reenter password</label>
+                  </mdb-form-control>
+                </div>
+              </div>
+
+              <div class="mb-5" [ngStyle]="{ display: isDriver ? 'none' : 'block' }">
+                <mdb-form-control class="form-white">
+                  <input mdbInput type="password" id="cardNum" class="form-control form-control-lg text-light" placeholder="new password" />
+                  <label mdbLabel class="form-label" for="cardNum">Card number</label>
+                </mdb-form-control>
               </div>
 
 
