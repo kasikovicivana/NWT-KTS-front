@@ -1,20 +1,20 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { UserInfo } from "../model/user.model";
+import { User } from "../model/user.model";
 
 @Injectable({
   providedIn: 'root',
 })
 
-export class LoginService{
+export class RegistrationService{
 
-  url = environment.backendUrl + 'auth/login';
+  url = environment.backendUrl + 'auth/register';
 
   constructor(private _http:HttpClient) {}
 
-  login(userInfo: UserInfo){
-    return this._http.post<any>(this.url, userInfo);
+  registerUser(user: User){
+    return this._http.post<any>(this.url, user);
   }
 
 }

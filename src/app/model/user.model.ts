@@ -4,13 +4,13 @@ export class UserInfo {
 
 export class User{
   constructor(public id: number = -1,
-              public firstName: string = '',
-              public lastName: string = '',
+              public name: string = '',
+              public surname: string = '',
               public email: string = '',
               public password: string = '',
               public city: string = '',
               public phoneNumber: string = '',
-              public role: string = '',
+              public role: string = 'Driver',
               public cardNumber: string = '',
               ) {}
 }

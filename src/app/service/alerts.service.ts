@@ -10,12 +10,22 @@ export class AlertsService{
   constructor() { }
 
 
-  tinyAlert() {
+  errorAlert() {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
       text: 'Wrong credentials!',
       confirmButtonColor: 'red',
+      width: 350
+    })
+  }
+
+  successAlert() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Success',
+      text: 'Bravo kralju!',
+      confirmButtonColor: 'green',
       width: 350
     })
   }

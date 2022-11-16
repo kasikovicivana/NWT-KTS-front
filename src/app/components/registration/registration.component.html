@@ -13,7 +13,7 @@
                 <div class="col-md-6 mb-4">
 
                   <mdb-form-control class="form-white">
-                    <input mdbValidate mdbInput [(ngModel)]="user.firstName"  #firstName="ngModel" type="text" id="firstName" class="form-control form-control-lg text-light" placeholder="first name" required/>
+                    <input mdbValidate mdbInput [(ngModel)]="user.name"  #firstName="ngModel" type="text" id="firstName" class="form-control form-control-lg text-light" placeholder="first name" required/>
                     <label mdbLabel class="form-label" for="firstName">First Name</label>
                     <mdb-error class="mt-1" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">First name is required</mdb-error>
                   </mdb-form-control>
@@ -22,7 +22,7 @@
                 <div class="col-md-6 mb-4">
 
                   <mdb-form-control class="form-white">
-                    <input mdbValidate mdbInput [(ngModel)]="user.lastName" #lastName="ngModel" type="text" id="lastName" class="form-control form-control-lg text-light" placeholder="last name" required/>
+                    <input mdbValidate mdbInput [(ngModel)]="user.surname" #lastName="ngModel" type="text" id="lastName" class="form-control form-control-lg text-light" placeholder="last name" required/>
                     <label mdbLabel class="form-label" for="lastName">Last Name</label>
                     <mdb-error class="mt-1" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">Last name is required</mdb-error>
                   </mdb-form-control>
@@ -65,7 +65,7 @@
 
                 <div class="mb-3 col-6">
                   <div class="form-floating form-white">
-                    <select (ngModelChange)="onChange($event)" [(ngModel)]="role"  class="form-select form-control  bg-dark text-light" id="role" required>
+                    <select (ngModelChange)="onChange($event)" [(ngModel)]="user.role"  class="form-select form-control  bg-dark text-light" id="role" required>
                       <option value="Driver">Driver</option>
                       <option value="Client">Client</option>
                     </select>
@@ -108,7 +108,7 @@
               </div>
 
 
-              <button class="btn btn-outline-light btn-lg px-5" type="submit">Register</button>
+              <button class="btn btn-outline-light btn-lg px-5" type="submit" (click)="register()">Register</button>
 
 
             </div>
