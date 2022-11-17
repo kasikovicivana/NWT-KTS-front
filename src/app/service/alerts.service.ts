@@ -10,11 +10,11 @@ export class AlertsService{
   constructor() { }
 
 
-  errorAlert() {
+  errorAlert(text:string) {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: 'Wrong credentials!',
+      text: text,
       confirmButtonColor: 'red',
       width: 350
     })

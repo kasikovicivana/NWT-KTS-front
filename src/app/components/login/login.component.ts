@@ -21,18 +21,23 @@ export class LoginComponent implements OnInit {
         (data) => {
           this.alerts.successAlert();
           this.loginSuccessful(data)},
-        (err) => this.alerts.errorAlert()
+        (err) => this.alerts.errorAlert('Wrong credentials!')
       )
     }else{
-      this.alerts.errorAlert();
+      this.alerts.errorAlert('You must enter email and password!');
     }
   }
 
   loginSuccessful(response:LoggedUser){
     console.log(response);
-    sessionStorage.setItem("accessToken", response.accessToken);
-    sessionStorage.setItem("expiresIn", response.expiresIn);
-    sessionStorage.setItem("role", response.role);
-    sessionStorage.setItem("username", response.userEmail);
+    if(response == null){
+      this.alerts.errorAlert('Verify account first!')
+    }else{
+      sessionStorage.setItem("accessToken", response.accessToken);
+      sessionStorage.setItem("expiresIn", response.expiresIn);
+      sessionStorage.setItem("role", response.role);
+      sessionStorage.setItem("username", response.userEmail);
+    }
+
   }
 }
