@@ -46,9 +46,13 @@
                 <div class="col-md-6 mb-4 pb-2">
 
                   <mdb-form-control class="form-white">
-                    <input mdbValidate mdbInput [(ngModel)]="user.phoneNumber" #phone="ngModel" type="text" id="phoneNumber" class="form-control form-control-lg text-light" placeholder="phone number" required/>
+                    <input mdbValidate mdbInput [(ngModel)]="user.phoneNumber" #phone="ngModel" type="text" id="phoneNumber"
+                           class="form-control form-control-lg text-light" placeholder="phone number" pattern="^(\+)?\d{8}\d+$"  required/>
                     <label mdbLabel class="form-label" for="phoneNumber">Phone Number</label>
-                    <mdb-error class="mt-1" *ngIf="phone.invalid && (phone.dirty || phone.touched)">Phone number is required</mdb-error>
+                    <div *ngIf="phone.errors && (phone.dirty || phone.touched)">
+                      <mdb-error class="mt-1" *ngIf="phone.errors['required']">Phone number is required</mdb-error>
+                      <mdb-error class="mt-1" *ngIf="phone.errors['pattern']">Phone number requires min 9 digits</mdb-error>
+                    </div>
                   </mdb-form-control>
 
                 </div>

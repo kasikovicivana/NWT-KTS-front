@@ -9,12 +9,22 @@ import { UserInfo } from "../model/user.model";
 
 export class LoginService{
 
-  url = environment.backendUrl + 'auth/login';
+  loginUrl = environment.backendUrl + 'auth/login';
+  getUserUrl = environment.backendUrl + 'api/user/getUser/';
 
   constructor(private _http:HttpClient) {}
 
   login(userInfo: UserInfo){
-    return this._http.post<any>(this.url, userInfo);
+    return this._http.post<any>(this.loginUrl, userInfo);
+  }
+
+  getUser(email:string){
+    return this._http.get<any>(this.getUserUrl + email);
+  }
+
+  logOut(): void {
+    sessionStorage.clear();
+    window.location.href = '/';
   }
 
 }

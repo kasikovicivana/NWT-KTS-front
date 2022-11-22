@@ -12,6 +12,7 @@ export class User{
               public phoneNumber: string = '',
               public role: string = 'Driver',
               public cardNumber: string = '',
+              public photo: string = ''
               ) {}
 }
 
