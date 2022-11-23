@@ -1,17 +1,25 @@
-<section id = "client_profile" class=" py-lg-3" style="background-image:url(assets/background.jpg) ">
-  <div  class="row py-5 px-auto" style="align-content: center">
+<section class=" py-lg-3" id="client_profile" style="background-image:url(assets/background.jpg) ">
+  <div class="row py-5 px-auto" style="align-content: center">
     <div class="col-md-8 mx-auto">
-      <div class="bg-white shadow rounded overflow-hidden" >
+      <div class="bg-white shadow rounded overflow-hidden">
         <div class="px-4 pt-0 pb-4 cover bg-dark">
-          <div class="media align-items-end profile-head" >
-            <div class="profile mr-3 pt-5" style="position: relative"><img [src]="srcData" alt="Image" width="170" class="rounded img-thumbnail">
-              <em  class='fa fa-camera' (click)="changeProfilePhoto()" style="position: absolute; bottom:5px; left:140px;color: black;background: white;border-radius: 10%;padding: 5px;cursor: pointer;" ></em>
-              <input #changePhotoButton hidden type="file" id="image_input"  class="form-control" accept="image/png, image/gif, image/jpeg" (change)="addAttachment($event)" />
+          <div class="media align-items-end profile-head">
+            <div class="profile mr-3 pt-5 pb-4 mb-4" style="position: relative">
+              <img [src]="srcData" alt="Image">
+              <em (click)="changeProfilePhoto()" class='fa fa-camera'></em>
+              <input #changePhotoButton (change)="addAttachment($event)" accept="image/png, image/gif, image/jpeg"
+                     class="form-control" hidden
+                     id="image_input" type="file"/>
             </div>
           </div>
           <div class="pb-4 pt-4">
-            <h4 class="mt-2 mb-2 mw-2 " style="color: white; float:left; padding-left: 5px" ><strong><span>{{client.name}}</span> <span>{{client.surname}}</span></strong></h4>
-            <div ><button  class="btn btn-primary profile_rose_button" type="button" (click)="showModal = true"  >Change password</button></div>
+            <h4 class="mt-2 mb-2 mw-2 " style="color: white; float:left; padding-left: 5px">
+              <strong><span>{{client.name}} </span> <span> {{client.surname}}</span></strong></h4>
+            <div>
+              <button (click)="showModal = true" class="btn btn-primary profile_rose_button" type="button">Change
+                password
+              </button>
+            </div>
           </div>
         </div>
 
@@ -19,34 +27,82 @@
           <div class="row">
             <div style="background-color: grey; padding: 50px 120px">
               <div class="p-3 py-3">
-                  <h5 class="text-right">Personal data</h5>
+                <h5 class="text-right">Personal data</h5>
 
                 <div class="row mt-2">
-                  <div class="col-md-6 inputs"><label class="labels">Name</label><input  type="text" class="form-control" placeholder="first name" [(ngModel)]="client.name" [readonly]="isReadonly"> </div>
-                  <div class="col-md-6 inputs"><label class="labels">Surname</label><input type="text" class="form-control" placeholder="last name" [(ngModel)]="client.surname" [readonly]="isReadonly"></div>
+                  <div class="col-md-6 inputs"><label class="labels">Name</label><input [(ngModel)]="client.name"
+                                                                                        [readonly]="isReadonly"
+                                                                                        class="form-control"
+                                                                                        placeholder="first name"
+                                                                                        type="text"></div>
+                  <div class="col-md-6 inputs"><label class="labels">Surname</label><input [(ngModel)]="client.surname"
+                                                                                           [readonly]="isReadonly"
+                                                                                           class="form-control"
+                                                                                           placeholder="last name"
+                                                                                           type="text">
+                  </div>
                 </div>
                 <div class="row mt-2">
-                  <div class="col-md-6 inputs"><label class="labels">Email</label><input id="email" type="text" class="form-control" placeholder="email" [(ngModel)]="client.email" [readonly]="isReadonly" ></div>
-                  <div class="col-md-6 inputs"><label class="labels">Phone number</label><input type="text" class="form-control" placeholder="phone number" [(ngModel)]="client.phoneNumber" [readonly]="isReadonly" ></div>
+                  <div class="col-md-6 inputs"><label class="labels">Email</label><input [(ngModel)]="client.email"
+                                                                                         [readonly]="isReadonly"
+                                                                                         class="form-control"
+                                                                                         id="email"
+                                                                                         placeholder="email"
+                                                                                         type="text"></div>
+                  <div class="col-md-6 inputs"><label class="labels">Phone number</label><input
+                    [(ngModel)]="client.phoneNumber"
+                    [readonly]="isReadonly"
+                    class="form-control"
+                    placeholder="phone number"
+                    type="text">
+                  </div>
                 </div>
                 <div class="row mt-2">
-                  <div class="col-md-12 inputs"><label class="labels">City</label><input type="text" class="form-control" placeholder="city" [(ngModel)]="client.city" [readonly]="isReadonly" ></div>
+                  <div class="col-md-12 inputs"><label class="labels">City</label><input [(ngModel)]="client.city"
+                                                                                         [readonly]="isReadonly"
+                                                                                         class="form-control"
+                                                                                         placeholder="city"
+                                                                                         type="text"></div>
                 </div>
                 <div class="row mt-2">
-                  <div class="col-md-12 inputs"><label class="labels">Paypal info</label><input type="text" class="form-control" [(ngModel)]="client.cardNumber" placeholder="credit card" [readonly]="isReadonly"></div>
+                  <div class="col-md-12 inputs"><label class="labels">Paypal info</label><input
+                    [(ngModel)]="client.cardNumber"
+                    [readonly]="isReadonly"
+                    class="form-control"
+                    placeholder="credit card"
+                    type="text">
+                  </div>
                 </div>
                 <div class="row">
-                  <div  class="col-12 mt-3 text-right"><button #editButton class="btn btn-primary bg-dark " style="float: right;padding: 7px 25px 7px 25px" (click)="edit()" type="button">Edit</button></div>
+                  <div class="col-12 mt-3 text-right">
+                    <button #editButton (click)="edit()" class="btn btn-primary bg-dark "
+                            style="float: right;padding: 7px 25px 7px 25px" type="button">Edit
+                    </button>
+                  </div>
                 </div>
 
-                <div class="row mt-4 mb-3" id="change_pass" hidden>
-                  <div class="col-md-6 inputs"><label class="labels">Current password</label><input id="current" type="password"  class="form-control" placeholder="current password" ></div>
+                <div class="row mt-4 mb-3" hidden id="change_pass">
+                  <div class="col-md-6 inputs"><label class="labels">Current password</label><input class="form-control"
+                                                                                                    id="current"
+                                                                                                    placeholder="current password"
+                                                                                                    type="password">
+                  </div>
                   <div class="col-6"></div>
-                  <div class="col-md-6 inputs"><label class="labels">New password</label><input id="new_pass" type="password" class="form-control" placeholder="new password" ></div>
+                  <div class="col-md-6 inputs"><label class="labels">New password</label><input class="form-control"
+                                                                                                id="new_pass"
+                                                                                                placeholder="new password"
+                                                                                                type="password">
+                  </div>
                   <div class="col-6"></div>
-                  <div class="col-md-6 inputs"><label class="labels">Re-enter new password</label><input  type="password"  class="form-control" placeholder="re-enter new password" ></div>
+                  <div class="col-md-6 inputs"><label class="labels">Re-enter new password</label><input
+                    class="form-control"
+                    placeholder="re-enter new password"
+                    type="password">
+                  </div>
                   <div class="col-6"></div>
-                  <div   class="col-2 mt-3 text-right"><button  id="editButton" class="btn btn-primary edit-button" type="button">save</button></div>
+                  <div class="col-2 mt-3 text-right">
+                    <button class="btn btn-primary edit-button" id="editButton" type="button">save</button>
+                  </div>
                 </div>
               </div>
 
@@ -54,42 +110,49 @@
             </div>
 
             <ng-container *ngIf="showModal">
-                <div class="modal-mask ">
-                  <div class="modal-wrapper">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title"  >Change password</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" (click)="showModal = false">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <mdb-form-control>
-                            <label class="labels">Old password:</label>
-                            <input mdbInput  #oldPassInput class="form-control inputField" type="text" placeholder="old password" required>
-                          </mdb-form-control>
-                          <mdb-form-control>
-                            <label class="labels">New password:</label>
-                            <input mdbInput  #newPassInput class="form-control inputField" type="text" placeholder="new password" required>
-                          </mdb-form-control>
-                          <mdb-form-control>
-                            <label class="labels">Re-enter new password:</label>
-                            <input mdbInput #reenterNewPassInput class="form-control inputField" type="text" placeholder="reenter new password" required>
-                          </mdb-form-control>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary bg-dark" (click)="showModal = false">CLOSE</button>
-                          <button type="button" class="btn btn-primary edit-button bg-dark" (click)="changePassword()">Change</button>
-                        </div>
+              <div class="modal-mask ">
+                <div class="modal-wrapper">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Change password</h5>
+                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                          <span (click)="showModal = false" aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <mdb-form-control>
+                          <label class="labels">Old password:</label>
+                          <input #oldPassInput class="form-control inputField" mdbInput placeholder="old password"
+                                 required type="text">
+                        </mdb-form-control>
+                        <mdb-form-control>
+                          <label class="labels">New password:</label>
+                          <input #newPassInput class="form-control inputField" mdbInput placeholder="new password"
+                                 required type="text">
+                        </mdb-form-control>
+                        <mdb-form-control>
+                          <label class="labels">Re-enter new password:</label>
+                          <input #reenterNewPassInput class="form-control inputField" mdbInput
+                                 placeholder="reenter new password"
+                                 required type="text">
+                        </mdb-form-control>
+                      </div>
+                      <div class="modal-footer">
+                        <button (click)="showModal = false" class="btn btn-secondary bg-dark" type="button">CLOSE
+                        </button>
+                        <button (click)="changePassword()" class="btn btn-primary edit-button bg-dark" type="button">
+                          Change
+                        </button>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
             </ng-container>
           </div>
-          </div>
         </div>
+      </div>
     </div>
-    </div>
+  </div>
 </section>

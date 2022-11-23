@@ -1,13 +1,13 @@
-.profile_rose_button{
+.profile_rose_button {
   float: right;
-  background-color: gray ;
+  background-color: gray;
   margin-right: 25px;
   margin-bottom: 10px;
   padding: 5px 5px 5px 5px
 }
 
-.modal-title{
-  margin:auto;
+.modal-title {
+  margin: auto;
   font-weight: bold;
   font-size: 25px;
 }
@@ -30,11 +30,37 @@
 }
 
 
-.labels{
+.labels {
   font-family: "Harlow Solid Italic", serif;
   font-weight: bold;
 }
 
-.inputField{
+.inputField {
   background-color: lightgray;
 }
+
+.profile {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  transition: transform .3s;
+}
+
+.profile img {
+  max-width: 100%;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+}
+
+.fa-camera {
+  position: relative;
+  bottom: 25px;
+  left: 140px;
+  color: black;
+  background: white;
+  border-radius: 10%;
+  padding: 5px;
+  cursor: pointer;
+}
+
