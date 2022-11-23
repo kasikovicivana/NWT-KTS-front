@@ -17,6 +17,7 @@ import {
 } from '@abacritt/angularx-social-login';
 import { LoginSocialComponent } from './components/login/login-social/login-social.component';
 import { MapComponent } from './components/map/map.component';
+import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MapComponent } from './components/map/map.component';
     RegistrationComponent,
     LoginSocialComponent,
     MapComponent,
+    ProfileViewComponent
   ],
   imports: [
     BrowserModule,

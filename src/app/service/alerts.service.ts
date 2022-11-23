@@ -1,13 +1,16 @@
-import {Injectable} from '@angular/core';
+import {ElementRef, Injectable, ViewChild} from '@angular/core';
 import Swal from 'sweetalert2';
+import {query} from "@angular/animations";
 
 @Injectable({
   providedIn: 'root',
 })
 
-export class AlertsService{
+export class AlertsService {
 
-  constructor() { }
+  constructor() {
+    // TODO document why this constructor is empty
+  }
 
 
   errorAlert(text:string) {
@@ -20,14 +23,27 @@ export class AlertsService{
     })
   }
 
+  errorAlertCustomMessage(errorMessage: string) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: errorMessage,
+      confirmButtonColor: 'red',
+      width: 350
+    })
+  }
+
+
   successAlert() {
     Swal.fire({
       icon: 'success',
-      title: 'Success',
-      text: 'Bravo kralju!',
+      title: 'Successfully done!',
+      text: 'Congratulations!',
       confirmButtonColor: 'green',
       width: 350
     })
   }
+
+
 
 }
