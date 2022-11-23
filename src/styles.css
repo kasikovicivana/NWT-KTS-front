@@ -1,3 +1,5 @@
+@import '../node_modules/leaflet/dist/leaflet.css';
+
 body {
   font-family: Century Gothic, sans-serif;
   overflow-y: scroll;

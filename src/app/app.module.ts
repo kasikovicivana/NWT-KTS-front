@@ -3,16 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { FormsModule } from "@angular/forms";
-import { MdbFormsModule } from "mdb-angular-ui-kit/forms";
-import { MdbValidationModule } from "mdb-angular-ui-kit/validation";
-import { ReactiveFormsModule } from "@angular/forms";
-import { SocialLoginModule,SocialAuthServiceConfig } from "@abacritt/angularx-social-login";
-import { GoogleLoginProvider,FacebookLoginProvider } from "@abacritt/angularx-social-login";
-import { LoginSocialComponent } from "./components/login/login-social/login-social.component";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
+import {
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+  SocialAuthServiceConfig,
+  SocialLoginModule,
+} from '@abacritt/angularx-social-login';
+import { LoginSocialComponent } from './components/login/login-social/login-social.component';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +25,7 @@ import { LoginSocialComponent } from "./components/login/login-social/login-soci
     NavbarComponent,
     RegistrationComponent,
     LoginSocialComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,7 @@ import { LoginSocialComponent } from "./components/login/login-social/login-soci
     MdbFormsModule,
     MdbValidationModule,
     ReactiveFormsModule,
-    SocialLoginModule
+    SocialLoginModule,
   ],
   providers: [
     {
@@ -40,7 +45,9 @@ import { LoginSocialComponent } from "./components/login/login-social/login-soci
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('876431757912-4d80ppb585036idf1r63oild8lled1un.apps.googleusercontent.com'),
+            provider: new GoogleLoginProvider(
+              '876431757912-4d80ppb585036idf1r63oild8lled1un.apps.googleusercontent.com'
+            ),
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
@@ -50,6 +57,6 @@ import { LoginSocialComponent } from "./components/login/login-social/login-soci
       } as SocialAuthServiceConfig,
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
