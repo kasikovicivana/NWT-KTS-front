@@ -1,24 +1,23 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { environment } from "src/environments/environment";
-import { UserInfo } from "../model/user.model";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { UserInfo } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
-
-export class LoginService{
-
+export class LoginService {
   loginUrl = environment.backendUrl + 'auth/login';
   getUserUrl = environment.backendUrl + 'api/user/getUser/';
 
-  constructor(private _http:HttpClient) {}
+  constructor(private _http: HttpClient) {}
 
-  login(userInfo: UserInfo){
+  login(userInfo: UserInfo) {
     return this._http.post<any>(this.loginUrl, userInfo);
   }
 
-  getUser(email:string){
+  getUser(email: string) {
     return this._http.get<any>(this.getUserUrl + email);
   }
 
@@ -27,4 +26,11 @@ export class LoginService{
     window.location.href = '/';
   }
 
+  getAuthorizationHeader() {
+    console.log(sessionStorage.getItem('accessToken'));
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ` + sessionStorage.getItem('accessToken'),
+    });
+  }
 }
