@@ -1,158 +1,164 @@
-<section class=" py-lg-3" id="client_profile" style="background-image:url(assets/background.jpg) ">
-  <div class="row py-5 px-auto" style="align-content: center">
-    <div class="col-md-8 mx-auto">
-      <div class="bg-white shadow rounded overflow-hidden">
-        <div class="px-4 pt-0 pb-4 cover bg-dark">
-          <div class="media align-items-end profile-head">
-            <div class="profile mr-3 pt-5 pb-4 mb-4" style="position: relative">
-              <img [src]="srcData" alt="Image">
-              <em (click)="changeProfilePhoto()" class='fa fa-camera'></em>
-              <input #changePhotoButton (change)="addAttachment($event)" accept="image/png, image/gif, image/jpeg"
-                     class="form-control" hidden
-                     id="image_input" type="file"/>
-            </div>
-          </div>
-          <div class="pb-4 pt-4">
-            <h4 class="mt-2 mb-2 mw-2 " style="color: white; float:left; padding-left: 5px">
-              <strong><span>{{client.name}} </span> <span> {{client.surname}}</span></strong></h4>
-            <div>
-              <button (click)="showModal = true" class="btn btn-primary profile_rose_button" type="button">Change
-                password
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="container rounded mt-1 bg-dark">
-          <div class="row">
-            <div style="background-color: grey; padding: 50px 120px">
-              <div class="p-3 py-3">
-                <h5 class="text-right">Personal data</h5>
-
-                <div class="row mt-2">
-                  <div class="col-md-6 inputs"><label class="labels">Name</label><input [(ngModel)]="client.name"
-                                                                                        [readonly]="isReadonly"
-                                                                                        class="form-control"
-                                                                                        placeholder="first name"
-                                                                                        type="text"></div>
-                  <div class="col-md-6 inputs"><label class="labels">Surname</label><input [(ngModel)]="client.surname"
-                                                                                           [readonly]="isReadonly"
-                                                                                           class="form-control"
-                                                                                           placeholder="last name"
-                                                                                           type="text">
-                  </div>
-                </div>
-                <div class="row mt-2">
-                  <div class="col-md-6 inputs"><label class="labels">Email</label><input [(ngModel)]="client.email"
-                                                                                         [readonly]="isReadonly"
-                                                                                         class="form-control"
-                                                                                         id="email"
-                                                                                         placeholder="email"
-                                                                                         type="text"></div>
-                  <div class="col-md-6 inputs"><label class="labels">Phone number</label><input
-                    [(ngModel)]="client.phoneNumber"
-                    [readonly]="isReadonly"
-                    class="form-control"
-                    placeholder="phone number"
-                    type="text">
-                  </div>
-                </div>
-                <div class="row mt-2">
-                  <div class="col-md-12 inputs"><label class="labels">City</label><input [(ngModel)]="client.city"
-                                                                                         [readonly]="isReadonly"
-                                                                                         class="form-control"
-                                                                                         placeholder="city"
-                                                                                         type="text"></div>
-                </div>
-                <div class="row mt-2">
-                  <div class="col-md-12 inputs"><label class="labels">Paypal info</label><input
-                    [(ngModel)]="client.cardNumber"
-                    [readonly]="isReadonly"
-                    class="form-control"
-                    placeholder="credit card"
-                    type="text">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12 mt-3 text-right">
-                    <button #editButton (click)="edit()" class="btn btn-primary bg-dark "
-                            style="float: right;padding: 7px 25px 7px 25px" type="button">Edit
-                    </button>
-                  </div>
-                </div>
-
-                <div class="row mt-4 mb-3" hidden id="change_pass">
-                  <div class="col-md-6 inputs"><label class="labels">Current password</label><input class="form-control"
-                                                                                                    id="current"
-                                                                                                    placeholder="current password"
-                                                                                                    type="password">
-                  </div>
-                  <div class="col-6"></div>
-                  <div class="col-md-6 inputs"><label class="labels">New password</label><input class="form-control"
-                                                                                                id="new_pass"
-                                                                                                placeholder="new password"
-                                                                                                type="password">
-                  </div>
-                  <div class="col-6"></div>
-                  <div class="col-md-6 inputs"><label class="labels">Re-enter new password</label><input
-                    class="form-control"
-                    placeholder="re-enter new password"
-                    type="password">
-                  </div>
-                  <div class="col-6"></div>
-                  <div class="col-2 mt-3 text-right">
-                    <button class="btn btn-primary edit-button" id="editButton" type="button">save</button>
-                  </div>
-                </div>
+<section class="vh-80 min-vh-100 hero-main">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-10 mb-4 mb-lg-0">
+        <div class="card mb-3" style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div class="col-md-4 gradient-custom text-center bg-dark text-white"
+                 style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+              <div class="profile mb-4 mt-5" >
+                <img [src]="srcData" alt="Image" class="img-fluid">
+                <em (click)="changeProfilePhoto()" class='fa fa-camera '></em>
+                <input #changePhotoButton (change)="addAttachment($event)" accept="image/png, image/gif, image/jpeg"
+                       class="form-control" hidden
+                       id="image_input" type="file"/>
               </div>
-
-
+              <h5>{{client.name}} {{client.surname}}</h5>
+              <p>{{client.role}}Client</p>
             </div>
+            <div class="col-md-8 ">
+              <div class="card-body p-3 ">
+                  <div class="row">
+                    <div>
+                      <div class="p-3 py-3">
+                        <h5 class="text-right">Personal data</h5>
+                        <hr class="mt-0 mb-4">
+                        <div class="row mt-2 pb-3">
+                          <div class="col-md-6">
+                          <mdb-form-control>
+                            <input mdbValidate mdbInput [(ngModel)]="client.name" [readonly]="isReadonly" [validate]="!isReadonly"  #firstName="ngModel" type="text" id="firstName" class="form-control form-control-lg" placeholder="first name" required/>
+                            <label mdbLabel class="form-label" for="firstName">First Name</label>
+                            <mdb-error class="mt-1" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">First name is required</mdb-error>
+                          </mdb-form-control>
+                          </div>
 
-            <ng-container *ngIf="showModal">
-              <div class="modal-mask ">
-                <div class="modal-wrapper">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Change password</h5>
-                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                          <span (click)="showModal = false" aria-hidden="true">&times;</span>
-                        </button>
+                          <div class="col-md-6">
+                            <mdb-form-control>
+                              <input mdbValidate mdbInput [(ngModel)]="client.surname" [readonly]="isReadonly" [validate]="!isReadonly"  #lastName="ngModel" type="text" id="lastName" class="form-control form-control-lg" placeholder="last name" required/>
+                              <label mdbLabel class="form-label" for="lastName">Last Name</label>
+                              <mdb-error class="mt-1" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">Last name is required</mdb-error>
+                            </mdb-form-control>
+                          </div>
+
+                        </div>
+                        <div class="row mt-2 pb-3">
+                          <div class="col-md-6">
+                            <mdb-form-control>
+                              <input mdbValidate mdbInput [(ngModel)]="client.email" #email="ngModel" [readonly]="isReadonly" [validate]="!isReadonly"
+                                     type="email" email id="emailAddress" class="form-control form-control-lg" placeholder="name@example.com" required/>
+                              <label mdbLabel class="form-label" for="emailAddress">Email</label>
+                              <div *ngIf="email.errors && (email.dirty || email.touched)">
+                                <mdb-error class="mt-1" *ngIf="email.errors['required']">Email is required</mdb-error>
+                                <mdb-error class="mt-1" *ngIf="email.errors['email']">Email is not in valid form</mdb-error>
+                              </div>
+                            </mdb-form-control>
+                          </div>
+
+                          <div class="col-md-6">
+                            <mdb-form-control>
+                              <input mdbValidate mdbInput [(ngModel)]="client.phoneNumber" #phone="ngModel" type="text" id="phoneNumber" [readonly]="isReadonly" [validate]="!isReadonly"
+                                     class="form-control form-control-lg" placeholder="phone number" pattern="^(\+)?\d{8}\d+$"  required/>
+                              <label mdbLabel class="form-label" for="phoneNumber">Phone Number</label>
+                              <div *ngIf="phone.errors && (phone.dirty || phone.touched)">
+                                <mdb-error class="mt-1" *ngIf="phone.errors['required']">Phone number is required</mdb-error>
+                                <mdb-error class="mt-1" *ngIf="phone.errors['pattern']">Phone number requires min 9 digits</mdb-error>
+                              </div>
+                            </mdb-form-control>
+                          </div>
+                        </div>
+                        <div class="row mt-2">
+                          <div class="col-md-12 pb-3">
+                            <mdb-form-control>
+                              <input mdbValidate mdbInput [(ngModel)]="client.city" #city="ngModel" type="text" id="city" [readonly]="isReadonly" [validate]="!isReadonly"
+                                     class="form-control form-control-lg" placeholder="city" required/>
+                              <label mdbLabel class="form-label" for="city">City</label>
+                              <mdb-error class="mt-1" *ngIf="city.invalid && (city.dirty || city.touched)">City is required</mdb-error>
+                            </mdb-form-control>
+                          </div>
+                        </div>
+                        <div class="row mt-2">
+                          <div class="col-md-12 pb-3">
+                            <mdb-form-control>
+                              <input mdbValidate mdbInput [(ngModel)]="client.cardNumber" #card="ngModel" type="password" id="cardNum" [readonly]="isReadonly" [validate]="!isReadonly"
+                                     class="form-control form-control-lg" placeholder="card number" required/>
+                              <label mdbLabel class="form-label" for="cardNum">Card number</label>
+                              <mdb-error class="mt-1" *ngIf="card.invalid && (card.dirty || card.touched)">Card number is required</mdb-error>
+                            </mdb-form-control>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12 mt-3 text-right">
+                            <button #editButton (click)="edit()" class="btn btn-primary bg-dark"
+                                    style="float: right" type="button">Edit
+                            </button>
+                            <button (click)="showModal = true" class="btn btn-primary bg-dark" type="button">Change
+                              password
+                            </button>
+                          </div>
+                        </div>
+
                       </div>
-                      <div class="modal-body">
-                        <mdb-form-control>
-                          <label class="labels">Old password:</label>
-                          <input #oldPassInput class="form-control inputField" mdbInput placeholder="old password"
-                                 required type="text">
-                        </mdb-form-control>
-                        <mdb-form-control>
-                          <label class="labels">New password:</label>
-                          <input #newPassInput class="form-control inputField" mdbInput placeholder="new password"
-                                 required type="text">
-                        </mdb-form-control>
-                        <mdb-form-control>
-                          <label class="labels">Re-enter new password:</label>
-                          <input #reenterNewPassInput class="form-control inputField" mdbInput
-                                 placeholder="reenter new password"
-                                 required type="text">
-                        </mdb-form-control>
-                      </div>
-                      <div class="modal-footer">
-                        <button (click)="showModal = false" class="btn btn-secondary bg-dark" type="button">CLOSE
-                        </button>
-                        <button (click)="changePassword()" class="btn btn-primary edit-button bg-dark" type="button">
-                          Change
-                        </button>
-                      </div>
+
+
                     </div>
+
+                    <ng-container *ngIf="showModal">
+                      <div class="modal-mask ">
+                        <div class="modal-wrapper">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content bg-dark text-white">
+                              <div class="modal-header">
+                                <h5 class="modal-title text-uppercase">Change password</h5>
+                                <button aria-label="Close" class="close bg-dark" data-dismiss="modal" type="button">
+                                  <span (click)="showModal = false" aria-hidden="true" class="text-white">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+
+                                <div class="mb-4">
+                                  <mdb-form-control class="form-white">
+                                    <input mdbInput mdbValidate #oldPassInput class="form-control form-control-lg text-light"
+                                           placeholder="old password" id="old_pass"
+                                           required type="password">
+                                    <label mdbLabel class="form-label text-light" for="old_pass">Old password</label>
+                                  </mdb-form-control>
+                                </div>
+
+                                <div class="pb-4">
+                                <mdb-form-control class="form-white">
+                                  <input #newPassInput class="form-control form-control-lg text-light" mdbInput placeholder="new password"
+                                         required type="password">
+                                  <label mdbLabel class="form-label text-light">New password:</label>
+                                </mdb-form-control>
+                                </div>
+
+                                <mdb-form-control class="form-white">
+                                  <input #reenterNewPassInput class="form-control form-control-lg text-light" mdbInput
+                                         placeholder="reenter new password"
+                                         required type="password">
+                                  <label mdbLabel class="form-label text-light">Re-enter new password:</label>
+                                </mdb-form-control>
+                              </div>
+                              <div class="modal-footer">
+                                <button (click)="showModal = false" class="btn btn-outline-light" type="button">CLOSE
+                                </button>
+                                <button (click)="changePassword()" class="btn btn-outline-light" type="button">
+                                  Change
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
                   </div>
-                </div>
+
               </div>
-            </ng-container>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
