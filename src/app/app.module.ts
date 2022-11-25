@@ -18,6 +18,7 @@ import {
 import { LoginSocialComponent } from './components/login/login-social/login-social.component';
 import { MapComponent } from './components/map/map.component';
 import { ProfileViewComponent } from './components/profile-view/profile-view.component';
+import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ProfileViewComponent } from './components/profile-view/profile-view.com
     RegistrationComponent,
     LoginSocialComponent,
     MapComponent,
-    ProfileViewComponent
+    ProfileViewComponent,
+    ActivateAccountComponent,
   ],
   imports: [
     BrowserModule,

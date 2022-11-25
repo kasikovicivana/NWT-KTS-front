@@ -1,0 +1,32 @@
+.hero-main {
+  background-attachment: fixed;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.863),
+    rgba(0, 0, 0, 0.582),
+    rgba(0, 0, 0, 0.075)
+  ), url('/assets/a7.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: fit-content;
+  width: 100%;
+  opacity: 1;
+}
+
+h2 {
+  color: white;
+}
+
+p {
+  color: white;
+}
+
+.btn:hover {
+  color: black;
+  background: white;
+}
+
+select:focus {
+  box-shadow: 0 1px 1px white inset, 0 0 5px white;
+}
+
