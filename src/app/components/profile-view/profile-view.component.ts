@@ -5,6 +5,7 @@ import { Image } from '../../model/image.model';
 import { AlertsService } from '../../service/alerts.service';
 import { ImageService } from '../../service/image.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { BoundsLiteral } from 'leaflet';
 
 @Component({
   selector: 'app-profile-view',
@@ -16,13 +17,17 @@ export class ProfileViewComponent implements OnInit {
   showModal: boolean = false;
   isReadonly: boolean = true;
   imageUrl: string = '';
+  emailPattern =
+    /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/;
+  phoneNumberPattern = /^(\+)?\d{8}\d+$/;
   srcData: SafeResourceUrl | undefined;
+  isDataValid: boolean = false;
+  newPass: string = '';
+  reenteredPass: string = '';
 
   @ViewChild('editButton') editButton: ElementRef | undefined;
   @ViewChild('changePhotoButton') changePhotoButton: ElementRef | undefined;
   @ViewChild('oldPassInput') oldPassInput: ElementRef | undefined;
-  @ViewChild('newPassInput') newPassInput: ElementRef | undefined;
-  @ViewChild('reenterNewPassInput') reenterNewPassInput: ElementRef | undefined;
 
   constructor(
     private profileViewService: ProfileViewService,
@@ -40,20 +45,40 @@ export class ProfileViewComponent implements OnInit {
       });
     });
   }
+  validateData() {
+    this.isDataValid =
+      this.client.name != '' &&
+      this.client.surname != '' &&
+      this.client.email != '' &&
+      this.client.phoneNumber != '' &&
+      this.client.city != '' &&
+      this.client.role != '' &&
+      this.emailPattern.test(this.client.email) &&
+      this.phoneNumberPattern.test(this.client.phoneNumber);
+    if (this.client.role === 'Client') {
+      this.isDataValid = this.isDataValid && this.client.cardNumber != '';
+    }
+  }
 
   edit(): void {
     if (this.editButton != undefined) {
       if (this.editButton.nativeElement.innerHTML === 'Save') {
-        this.profileViewService.saveClient(this.client).subscribe();
-        this.alerts.successAlert();
+        this.validateData();
+        if (this.isDataValid) {
+          this.profileViewService.saveClient(this.client).subscribe();
+          this.alerts.successAlert();
+        } else {
+          this.alerts.errorAlert('You must fill all fields!');
+        }
       }
 
       if (this.editButton.nativeElement.innerHTML === 'Edit') {
         this.editButton.nativeElement.innerHTML = 'Save';
+        this.isReadonly = false;
       } else {
         this.editButton.nativeElement.innerHTML = 'Edit';
+        this.isReadonly = true;
       }
-      this.isReadonly = !this.isReadonly;
     }
   }
 
@@ -82,7 +107,6 @@ export class ProfileViewComponent implements OnInit {
   changePassword() {
     let isCorrectPass = undefined;
     let context = this;
-    let newPass = this.newPassInput?.nativeElement.value;
     this.profileViewService
       .isOldPasswordCorrect(this.oldPassInput?.nativeElement.value)
       .subscribe((data) => {
@@ -93,7 +117,7 @@ export class ProfileViewComponent implements OnInit {
           );
           return;
         }
-        context.profileViewService.changePassword(newPass).subscribe();
+        context.profileViewService.changePassword(context.newPass).subscribe();
         context.alerts.successAlert();
       });
     this.showModal = false;

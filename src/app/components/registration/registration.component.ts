@@ -6,25 +6,29 @@ import { RegistrationService } from "src/app/service/registration.service";
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
-  emailPattern = /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/;
-  phoneNumberPattern=/^(\+)?\d{8}\d+$/;
+  emailPattern =
+    /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/;
+  phoneNumberPattern = /^(\+)?\d{8}\d+$/;
   isDriver = true;
   user = new User();
   reenteredPassword = '';
   isDataValid = true;
 
-  constructor(private registrationService: RegistrationService,private alerts: AlertsService) { }
+  constructor(
+    private registrationService: RegistrationService,
+    private alerts: AlertsService
+  ) {}
 
   ngOnInit(): void {}
 
-  onChange(deviceValue: String) {
+  onChange(deviceValue: string) {
     this.isDriver = deviceValue !== 'Client';
   }
 
-  validateData(){
+  validateData() {
     this.isDataValid =
       this.user.name != '' &&
       this.user.surname != '' &&
@@ -35,26 +39,26 @@ export class RegistrationComponent implements OnInit {
       this.user.role != '' &&
       this.emailPattern.test(this.user.email) &&
       this.phoneNumberPattern.test(this.user.phoneNumber);
-    if(this.user.role === 'Client'){
+    if (this.user.role === 'Client') {
       this.isDataValid = this.isDataValid && this.user.cardNumber != '';
     }
   }
 
-  register(){
+  register() {
     console.log(this.user.role);
     this.validateData();
-    if(this.isDataValid){
+    if (this.isDataValid) {
       this.registrationService.registerUser(this.user).subscribe(
         (data) => {
           this.alerts.successAlert();
-          setTimeout(function (){window.location.href='/'},1000);
+          setTimeout(function () {
+            window.location.href = '/';
+          }, 1000);
         },
         (err) => this.alerts.errorAlert('You already have account!')
       );
-    }else{
+    } else {
       this.alerts.errorAlert('You must fill all fields!');
     }
-
   }
-
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Client } from '../model/client.model';
 import { LoginService } from './login.service';
@@ -14,33 +14,25 @@ export class ProfileViewService {
 
   getLoggedUserInfo() {
     const newUrl = this.url + '/getClient';
-    // const header = this.loginService.getAuthorizationHeader();
-    return this._http.get<any>(newUrl, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ` + sessionStorage.getItem('accessToken'),
-      }),
-    });
+    const header = this.loginService.getAuthorizationHeader();
+    return this._http.get<any>(newUrl, { headers: header });
   }
 
   saveClient(client: Client) {
     const newUrl = this.url + '/saveClient';
-    // const header = this.loginService.getAuthorizationHeader();
-    return this._http.post<any>(newUrl, client, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ` + sessionStorage.getItem('accessToken'),
-      }),
-    });
+    const header = this.loginService.getAuthorizationHeader();
+    return this._http.post<any>(newUrl, client, { headers: header });
   }
 
   changePassword(newPassword: string) {
     const newUrl = this.url + '/changePassword';
-    return this._http.post<any>(newUrl, newPassword);
+    const header = this.loginService.getAuthorizationHeader();
+    return this._http.post<any>(newUrl, newPassword, { headers: header });
   }
 
   isOldPasswordCorrect(oldPassword: string) {
     const newUrl = this.url + '/checkOldPassword';
-    return this._http.post<any>(newUrl, oldPassword);
+    const header = this.loginService.getAuthorizationHeader();
+    return this._http.post<any>(newUrl, oldPassword, { headers: header });
   }
 }

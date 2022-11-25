@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Image } from '../model/image.model';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ImageService {
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private loginService: LoginService) {}
 
   url = environment.backendUrl + 'api/image';
 
   HTTPOptionsForBlob: Object = {
     responseType: 'blob',
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ` + sessionStorage.getItem('accessToken'),
+    }),
   };
 
   loadImage(photoUrl: string) {
@@ -22,9 +27,7 @@ export class ImageService {
 
   addImage(image: Image) {
     const newUrl = this.url + '/addImage';
-    console.log(image.data);
-    console.log('ide post za sliku');
-    console.log(image.path);
-    return this._http.post<any>(newUrl, image);
+    const header = this.loginService.getAuthorizationHeader();
+    return this._http.post<any>(newUrl, image, { headers: header });
   }
 }
