@@ -33,4 +33,8 @@ export class LoginService {
       Authorization: `Bearer ` + sessionStorage.getItem('accessToken'),
     });
   }
+
+  getLoggedUserEmail() {
+    return sessionStorage.getItem('username');
+  }
 }

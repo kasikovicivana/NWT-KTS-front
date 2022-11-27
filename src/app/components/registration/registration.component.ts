@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from "src/app/model/user.model";
-import { AlertsService } from "src/app/service/alerts.service";
-import { RegistrationService } from "src/app/service/registration.service";
+import { User } from 'src/app/model/user.model';
+import { AlertsService } from 'src/app/service/alerts.service';
+import { RegistrationService } from 'src/app/service/registration.service';
 
 @Component({
   selector: 'app-registration',
@@ -10,7 +10,7 @@ import { RegistrationService } from "src/app/service/registration.service";
 })
 export class RegistrationComponent implements OnInit {
   emailPattern =
-    /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/;
+    /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/\d=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/\d=?A-Z^_`a-z{|}~]+)*@[A-Za-z\d]([A-Za-z\d-]{0,61}[A-Za-z\d])?(\.[A-Za-z\d]([A-Za-z\d-]{0,61}[A-Za-z\d])?)*$/;
   phoneNumberPattern = /^(\+)?\d{8}\d+$/;
   isDriver = true;
   user = new User();
