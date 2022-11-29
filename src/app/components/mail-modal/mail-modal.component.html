@@ -1,0 +1,27 @@
+<div class="modal-content bg-light">
+  <div class="modal-header">
+    <h5 class="modal-title text-dark" id="exampleModalLabel">Enter your email address</h5>
+    <button (click)="close()" aria-label="Close" class="btn-close" type="button"></button>
+  </div>
+  <div class="modal-body">
+    <h6 class="text-dark">We will send you a link to reset your password.</h6>
+
+    <mdb-form-control class="mb-4 mt-3 bg-light">
+      <input #email="ngModel" (keyup.enter)="sendMail()" [(ngModel)]="mail"
+             class="form-control form-control-lg text-dark"
+             id="typeEmailX" mdbInput mdbValidate
+             placeholder="name@example.com" required type="email"/>
+      <label class="form-label text-dark" for="typeEmailX" mdbLabel>email</label>
+      <mdb-error *ngIf="email.invalid && (email.dirty || email.touched)" class="mt-1">Email is required
+      </mdb-error>
+    </mdb-form-control>
+
+
+  </div>
+  <div class="modal-footer">
+    <button (click)="close()" class="btn btn-secondary" type="button">
+      Close
+    </button>
+    <button (click)="sendMail()" class="btn btn-primary" type="button">Send</button>
+  </div>
+</div>

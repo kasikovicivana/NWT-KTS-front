@@ -8,22 +8,27 @@ import {
   SocialAuthService,
   SocialUser,
 } from '@abacritt/angularx-social-login';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { MailModalComponent } from '../mail-modal/mail-modal.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
+  providers: [MdbModalService],
 })
 export class LoginComponent implements OnInit {
   userInfo = new UserInfo();
   socialUser!: SocialUser;
   isLoggedIn?: boolean = false;
   isRegistered?: boolean = false;
+  modalRef: MdbModalRef<MailModalComponent> | null = null;
 
   constructor(
     private socialAuthService: SocialAuthService,
     private loginService: LoginService,
-    private alerts: AlertsService
+    private alerts: AlertsService,
+    private modalService: MdbModalService
   ) {}
 
   ngOnInit() {
@@ -87,5 +92,14 @@ export class LoginComponent implements OnInit {
 
   logOutSocial(): void {
     this.socialAuthService.signOut().then((r) => {});
+  }
+
+  openMailModal() {
+    this.modalRef = this.modalService.open(MailModalComponent, {
+      data: { title: 'Enter your email address' },
+    });
+    this.modalRef.onClose.subscribe((message: any) => {
+      console.log(message);
+    });
   }
 }

@@ -19,6 +19,9 @@ import { LoginSocialComponent } from './components/login/login-social/login-soci
 import { MapComponent } from './components/map/map.component';
 import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
+import { PasswordChangeComponent } from './components/password-change/password-change.component';
+import { MailModalComponent } from './components/mail-modal/mail-modal.component';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,8 @@ import { ActivateAccountComponent } from './components/activate-account/activate
     MapComponent,
     ProfileViewComponent,
     ActivateAccountComponent,
+    PasswordChangeComponent,
+    MailModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +45,7 @@ import { ActivateAccountComponent } from './components/activate-account/activate
     MdbValidationModule,
     ReactiveFormsModule,
     SocialLoginModule,
+    OverlayModule,
   ],
   providers: [
     {

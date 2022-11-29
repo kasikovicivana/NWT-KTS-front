@@ -6,6 +6,7 @@ import { MapComponent } from './components/map/map.component';
 import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
+import { PasswordChangeComponent } from './components/password-change/password-change.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'map', component: MapComponent },
   { path: 'profile', component: ProfileViewComponent },
   { path: 'activate/:token', component: ActivateAccountComponent },
+  { path: 'changePassword/:token', component: PasswordChangeComponent },
 ];
 
 @NgModule({
