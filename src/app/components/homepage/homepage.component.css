@@ -1,0 +1,30 @@
+.input-group input:focus{
+  box-shadow: 0 1px 1px green inset, 0 0 5px green;
+  border-color: forestgreen;
+}
+
+.button_row{
+  padding-left: 50%;
+}
+
+.inputs{
+  padding-left: 40px;
+}
+
+.list-group-item.active{
+  border-left: 4px solid green;
+}
+.list-group-item{
+  background: #181818;
+  color: white;
+  border-bottom-color: #181818;
+}
+
+.route_type{
+  font-size: 15px;
+  color: darkgray;
+}
+
+.time{
+  color: limegreen;
+}

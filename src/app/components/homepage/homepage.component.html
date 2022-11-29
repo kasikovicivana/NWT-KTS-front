@@ -1,0 +1,61 @@
+<section style="overflow: hidden">
+  <div class="row">
+    <div class="inputs min-vh-100 col-3 bg-dark py-5 ">
+      <div class="input-group flex-nowrap w-75 pb-4">
+        <span class="input-group-text" id="start"><em class="fa fa-home fa-lg" ></em></span>
+        <input type="text" class="form-control bg-dark text-white" placeholder="Start point" aria-label="start"/>
+      </div>
+      <div class="input-group flex-nowrap w-75 pb-3">
+        <span class="input-group-text" id="end"><em class="fa fa-map-marker fa-lg px-1" ></em></span>
+        <input type="text" class="form-control bg-dark text-white" placeholder="End point" aria-label="Username"/>
+      </div>
+      <div class="button_row">
+        <button type="button" class="btn btn-success btn-rounded ">Find</button>
+      </div>
+
+      <div class="list-group list-group-light py-5 w-75" >
+        <a href="javascript:void(0)" (click)="selectRoute('route_1')" id="route_1" class="list-group-item list-group-item-action px-3 pt-2 rounded-3 mb-2 list-group-item-dark " [class.active]="active == 'route_1'">
+          <div class="h-50">
+            <div class="row">
+              <span class="col-8">Preko Puskinove</span>
+              <span class="col-4 time">20 min</span>
+            </div>
+            <div class="row">
+              <span class="col-8 route_type">Fastest route</span>
+              <span class="col-4">15 km</span>
+            </div>
+          </div>
+
+        </a>
+        <a href="javascript:void(0)"(click)="selectRoute('route_2')" id="route_2" class="list-group-item list-group-item-action px-3 rounded-3 mb-2 list-group-item-dark" [class.active]="active == 'route_2'">
+          <div class="h-50">
+            <div class="row">
+              <span class="col-8">Preko Limanskog</span>
+              <span class="col-4 time">25 min</span>
+            </div>
+            <div class="row">
+              <span class="col-8 route_type">Shortest route</span>
+              <span class="col-4">13 km</span>
+            </div>
+          </div>
+        </a>
+        <a href="javascript:void(0)" (click)="selectRoute('route_3')" id="route_3" class="list-group-item list-group-item-action px-3 rounded-3 mb-2 list-group-item-dark" [class.active]="active == 'route_3'">
+          <div class="h-50">
+            <div class="row">
+              <span class="col-8">Preko groblja</span>
+              <span class="col-4 time">30 min</span>
+            </div>
+            <div class="row">
+              <span class="col-8 route_type">Recommended</span>
+              <span class="col-4">20 km</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+    <div class="col-9">
+      <app-map></app-map>
+    </div>
+  </div>
+</section>

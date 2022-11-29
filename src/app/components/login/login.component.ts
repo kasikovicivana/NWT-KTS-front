@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
         (data) => {
           this.alerts.successAlert();
           this.loginSuccessful(data);
+          setTimeout(() => window.location.href = '/home', 1000);
         },
         (err) => {
           this.alerts.errorAlert('Wrong credentials!');

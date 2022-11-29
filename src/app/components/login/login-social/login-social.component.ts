@@ -50,7 +50,7 @@ export class LoginSocialComponent implements OnInit {
       (data) => {
         this.alerts.successAlert();
         this.loginSuccessful(data)
-        //idi dalje
+        setTimeout(() => window.location.href = '/home', 1000);
       },
       (err) => this.alerts.errorAlert('Wrong credentials!')
     )

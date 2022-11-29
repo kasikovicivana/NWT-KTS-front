@@ -51,9 +51,7 @@ export class RegistrationComponent implements OnInit {
       this.registrationService.registerUser(this.user).subscribe(
         (data) => {
           this.alerts.successAlert();
-          setTimeout(function () {
-            window.location.href = '/';
-          }, 1000);
+          setTimeout(() => window.location.href = '/', 1000);
         },
         (err) => this.alerts.errorAlert('You already have account!')
       );

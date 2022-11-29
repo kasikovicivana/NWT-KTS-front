@@ -22,6 +22,7 @@ import { ActivateAccountComponent } from './components/activate-account/activate
 import { PasswordChangeComponent } from './components/password-change/password-change.component';
 import { MailModalComponent } from './components/mail-modal/mail-modal.component';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { HomepageComponent } from './components/homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
     ActivateAccountComponent,
     PasswordChangeComponent,
     MailModalComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,
