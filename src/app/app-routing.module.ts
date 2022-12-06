@@ -6,7 +6,7 @@ import { MapComponent } from './components/map/map.component';
 import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 import { PasswordChangeComponent } from './components/password-change/password-change.component';
-import { HomepageComponent } from "./components/homepage/homepage.component";
+import { HomepageComponent } from './components/homepage/homepage.component';
 import { PurchaseTokensComponent } from './components/purchase-tokens/purchase-tokens.component';
 import { SuccessfulPaymentComponent } from './components/purchase-tokens/confirm-payment/successful-payment.component';
 
@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileViewComponent },
   { path: 'activate/:token', component: ActivateAccountComponent },
   { path: 'changePassword/:token', component: PasswordChangeComponent },
-  { path: 'home', component: HomepageComponent}
+  { path: 'home', component: HomepageComponent },
   { path: 'purchaseTokens', component: PurchaseTokensComponent },
   { path: 'confirmPayment', component: SuccessfulPaymentComponent },
 ];
