@@ -1,0 +1,14 @@
+.my_radio{
+  accent-color: limegreen;
+  margin-right: 8px;
+  transform: scale(1.5);
+}
+
+#price:read-only{
+  background: #282828;
+}
+
+.input-group input:focus{
+  box-shadow: 0 1px 1px green inset, 0 0 5px green;
+  border-color: forestgreen;
+}

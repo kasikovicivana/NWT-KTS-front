@@ -23,6 +23,16 @@ import { PasswordChangeComponent } from './components/password-change/password-c
 import { MailModalComponent } from './components/mail-modal/mail-modal.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { NgStepperModule } from 'angular-ng-stepper';
+import { CdkStepperModule } from '@angular/cdk/stepper';
+import { StepOneComponent } from './components/steps/step-one/step-one.component';
+import { StepTwoComponent } from './components/steps/step-two/step-two.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MdbCheckboxModule } from 'mdb-angular-ui-kit/checkbox';
+import { StepThreeComponent } from './components/steps/step-three/step-three.component';
+import { MdbRadioModule } from 'mdb-angular-ui-kit/radio';
+import { StepperModalComponent } from './components/modals/stepper-modal/stepper-modal.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +46,11 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     ActivateAccountComponent,
     PasswordChangeComponent,
     MailModalComponent,
-    HomepageComponent
+    HomepageComponent,
+    StepOneComponent,
+    StepTwoComponent,
+    StepThreeComponent,
+    StepperModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +62,12 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     ReactiveFormsModule,
     SocialLoginModule,
     OverlayModule,
+    NgStepperModule,
+    CdkStepperModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
+    MdbCheckboxModule,
+    MdbRadioModule,
   ],
   providers: [
     {

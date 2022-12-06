@@ -71,3 +71,10 @@
   top: 40px;
 }
 
+.modal-header{
+  border: 2px solid #282828;
+}
+
+.modal-footer{
+  border: 2px solid #282828;
+}

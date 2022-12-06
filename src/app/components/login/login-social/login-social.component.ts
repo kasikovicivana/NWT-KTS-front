@@ -27,6 +27,7 @@ export class LoginSocialComponent implements OnInit {
     this.user.role = 'Client';
     this.user.password = this.socialUser.id;
     this.user.photo = this.socialUser.photoUrl;
+    this.user.isSocialLogin = true;
   }
 
   login(){

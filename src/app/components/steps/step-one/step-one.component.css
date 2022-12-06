@@ -1,0 +1,19 @@
+.list-group-item.active{
+  border-left: 4px solid green;
+}
+.list-group-item{
+  background: #181818;
+  color: white;
+  border-bottom-color: #181818;
+}
+
+[type=checkbox]:checked{
+  accent-color: limegreen;
+}
+
+
+
+.green-check{
+  margin-right: 10px;
+  transform: scale(1.5);
+}

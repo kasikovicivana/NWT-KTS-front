@@ -1,0 +1,32 @@
+<div class="container">
+  <h5 class="text-center mt-4 mb-3">Riding with anyone?</h5>
+
+    <div class="inputs mb-4">
+      <div *ngFor="let passenger of passengers; let i = index;trackBy:trackByIndex;" class="row" >
+        <mdb-form-control class="form-white mb-4 col-11">
+          <input #email="ngModel" [(ngModel)]="passengers[i]" class="form-control form-control-lg text-light"
+                 id="user_{{i}}" mdbInput mdbValidate name="user_{{i}}"
+                 placeholder="name@example.com" email type="email"/>
+          <label class="form-label text-light" for="user_{{i}}" mdbLabel>name@example.com</label>
+          <mdb-error *ngIf="email.invalid && (email.dirty || email.touched)" class="mt-1">Email is not in valid form
+          </mdb-error>
+        </mdb-form-control>
+        <a *ngIf="i != 0" href="javascript:void(0)" (click)="removeUser(i)" class="close_x col-1"><span class=""><em class="fa fa-close fa-lg" style="color: darkred"></em></span></a>
+      </div>
+
+      <a href="javascript:void(0)" (click)="addUser()" class="link-light">
+        <em class="fa fa-plus-circle"></em>
+        <span class="px-2">Add user</span>
+      </a>
+    </div>
+
+
+    <div class="buttons row">
+      <div class="button col-9">
+        <button class="btn btn-success btn-rounded previous" cdkStepperPrevious>Previous</button>
+      </div>
+      <div class="button col-3">
+        <button class="btn btn-success btn-rounded" [disabled]="isNextDisabled()" cdkStepperNext>Next</button>
+      </div>
+    </div>
+</div>

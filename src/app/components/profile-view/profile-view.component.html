@@ -7,7 +7,8 @@
             <div class="col-md-4 gradient-custom text-center bg-dark text-white"
                  style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
               <div class="profile mb-4 mt-5" >
-                <img [src]="srcData" alt="Image" class="img-fluid">
+                <img *ngIf="!client.isSocialLogin" [src]="srcData" alt="Image" class="img-fluid">
+                <img *ngIf="client.isSocialLogin" src="{{client.photo}}" alt="Image" class="img-fluid">
                 <em (click)="changeProfilePhoto()" class='fa fa-camera '></em>
                 <input #changePhotoButton (change)="addAttachment($event)" accept="image/png, image/gif, image/jpeg"
                        class="form-control" hidden
@@ -91,8 +92,8 @@
                             <button #editButton (click)="edit()" class="btn btn-primary bg-dark"
                                     style="float: right" type="button">Edit
                             </button>
-                            <button (click)="showModal = true" class="btn btn-primary bg-dark" type="button">Change
-                              password
+                            <button (click)="showModal = true" *ngIf="!client.isSocialLogin" class="btn btn-primary bg-dark" type="button">
+                              Change password
                             </button>
                           </div>
                         </div>

@@ -39,10 +39,12 @@ export class ProfileViewComponent implements OnInit {
   ngOnInit(): void {
     this.profileViewService.getLoggedUserInfo().subscribe((data) => {
       this.client = data;
-      this.imageService.loadImage(this.client.photo).subscribe((data) => {
-        this.imageUrl = URL.createObjectURL(data);
-        this.srcData = this.sanitizer.bypassSecurityTrustUrl(this.imageUrl);
-      });
+      if(!this.client.isSocialLogin){
+        this.imageService.loadImage(this.client.photo).subscribe((data) => {
+          this.imageUrl = URL.createObjectURL(data);
+          this.srcData = this.sanitizer.bypassSecurityTrustUrl(this.imageUrl);
+        });
+      }
     });
   }
   validateData() {

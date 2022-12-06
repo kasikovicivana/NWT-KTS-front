@@ -1,19 +1,37 @@
 <section style="overflow: hidden">
   <div class="row">
     <div class="inputs min-vh-100 col-3 bg-dark py-5 ">
-      <div class="input-group flex-nowrap w-75 pb-4">
-        <span class="input-group-text" id="start"><em class="fa fa-home fa-lg" ></em></span>
-        <input type="text" class="form-control bg-dark text-white" placeholder="Start point" aria-label="start"/>
-      </div>
-      <div class="input-group flex-nowrap w-75 pb-3">
-        <span class="input-group-text" id="end"><em class="fa fa-map-marker fa-lg px-1" ></em></span>
-        <input type="text" class="form-control bg-dark text-white" placeholder="End point" aria-label="Username"/>
-      </div>
-      <div class="button_row">
-        <button type="button" class="btn btn-success btn-rounded ">Find</button>
+
+      <div class="points">
+        <div class="input-group flex-nowrap w-75 pb-3">
+          <span class="input-group-text" id="start"><em class="fa fa-home fa-lg" ></em></span>
+          <input type="text" class="form-control bg-dark text-white" placeholder="Start point" aria-label="start"/>
+        </div>
+
+        <div *ngFor="let pin of pins; let i = index"  class="input-group flex-nowrap  pb-3">
+          <span class="input-group-text" id="pin_{{i}}"><em class="fa fa-map-marker fa-lg px-1" ></em></span>
+          <input type="text" class="form-control bg-dark text-white" placeholder="Add point" aria-label="Username"/>
+          <a href="javascript:void(0)" (click)="removePin(i)" class="close_x"><span class=""><em class="fa fa-close fa-lg" style="color: darkred"></em></span></a>
+        </div>
+
+        <div class="input-group flex-nowrap w-75 pb-3">
+          <span class="input-group-text" id="end"><em class="fa fa-map-marker fa-lg px-1" ></em></span>
+          <input type="text" class="form-control bg-dark text-white" placeholder="End point" aria-label="Username"/>
+        </div>
       </div>
 
-      <div class="list-group list-group-light py-5 w-75" >
+      <div class="row">
+        <a href="javascript:void(0)" (click)="addPin()" class="link-light col-6">
+          <em class="fa fa-plus-circle"></em>
+          <span class="px-2">Add destination</span>
+        </a>
+        <div class="col-5">
+          <button type="button" class="btn btn-success btn-rounded ">Find</button>
+        </div>
+      </div>
+
+
+      <div class="list-group list-group-light pt-5 pb-3 w-75" >
         <a href="javascript:void(0)" (click)="selectRoute('route_1')" id="route_1" class="list-group-item list-group-item-action px-3 pt-2 rounded-3 mb-2 list-group-item-dark " [class.active]="active == 'route_1'">
           <div class="h-50">
             <div class="row">
@@ -53,9 +71,18 @@
         </a>
       </div>
 
+      <div class="button_row" *ngIf="isLoggedIn">
+        <button type="button" class="btn btn-success btn-rounded " (click)="this.showModal = true">Choose</button>
+      </div>
     </div>
     <div class="col-9">
       <app-map></app-map>
     </div>
+
+
+    <div *ngIf="showModal">
+      <app-stepper-modal (messageEvent)="receiveMessage($event)"></app-stepper-modal>
+    </div>
+
   </div>
 </section>
