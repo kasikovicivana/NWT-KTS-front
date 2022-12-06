@@ -80,10 +80,10 @@
                         <div class="row mt-2">
                           <div class="col-md-12 pb-3">
                             <mdb-form-control>
-                              <input mdbValidate mdbInput [(ngModel)]="client.cardNumber" #card="ngModel" type="text" id="cardNum" [readonly]="isReadonly" [validate]="!isReadonly"
-                                     class="form-control form-control-lg" placeholder="card number" required/>
-                              <label mdbLabel class="form-label" for="cardNum">Card number</label>
-                              <mdb-error class="mt-1" *ngIf="card.invalid && (card.dirty || card.touched)">Card number is required</mdb-error>
+                              <input mdbValidate mdbInput [(ngModel)]="client.tokens" #card="ngModel" type="number" id="cardNum" [readonly]="isReadonly" [validate]="!isReadonly"
+                                     class="form-control form-control-lg" placeholder="tokens" required/>
+                              <label mdbLabel class="form-label" for="cardNum">Tokens</label>
+                              <mdb-error class="mt-1" *ngIf="card.invalid && (card.dirty || card.touched)">Tokens number is required</mdb-error>
                             </mdb-form-control>
                           </div>
                         </div>
@@ -94,6 +94,7 @@
                             </button>
                             <button (click)="showModal = true" *ngIf="!client.isSocialLogin" class="btn btn-primary bg-dark" type="button">
                               Change password
+
                             </button>
                           </div>
                         </div>

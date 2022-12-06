@@ -8,7 +8,7 @@ export class Client {
     public phoneNumber: string = '',
     public role: string = 'Client',
     public city: string = '',
-    public cardNumber: string = '',
+    public tokens: number = 0.0,
     public photo: string = '',
     public enabled: boolean = true,
     public blocked: boolean = false,

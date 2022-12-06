@@ -27,12 +27,16 @@ import { NgStepperModule } from 'angular-ng-stepper';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { StepOneComponent } from './components/steps/step-one/step-one.component';
 import { StepTwoComponent } from './components/steps/step-two/step-two.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule,
+} from '@angular/platform-browser/animations';
 import { MdbCheckboxModule } from 'mdb-angular-ui-kit/checkbox';
 import { StepThreeComponent } from './components/steps/step-three/step-three.component';
 import { MdbRadioModule } from 'mdb-angular-ui-kit/radio';
 import { StepperModalComponent } from './components/modals/stepper-modal/stepper-modal.component';
+import { PurchaseTokensComponent } from './components/purchase-tokens/purchase-tokens.component';
+import { SuccessfulPaymentComponent } from './components/purchase-tokens/confirm-payment/successful-payment.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,8 @@ import { StepperModalComponent } from './components/modals/stepper-modal/stepper
     StepTwoComponent,
     StepThreeComponent,
     StepperModalComponent,
+    PurchaseTokensComponent,
+    SuccessfulPaymentComponent,
   ],
   imports: [
     BrowserModule,

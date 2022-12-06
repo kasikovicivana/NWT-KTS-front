@@ -1,0 +1,44 @@
+<section class="vh-80 min-vh-100 token-main bg-dark">
+
+
+  <div class="col-4 bg-dark text-center" style="margin: 100px  220px  auto auto; height: 400px; width:600px" >
+    <div class="row"> <h4 class="title">TOKENS INFO</h4> </div>
+    <div class="row" style="padding: 30px">
+    <div class="col-6 purchase-part">
+      <div class="subtitle">
+        Current tokens number:
+        <p style="padding: 10px">
+          <span style="padding: 10px">{{client.tokens}} tokens</span>
+          =>
+          <span style="padding: 10px">{{client.tokens * tokenPrice}} USD</span>
+        </p>
+      </div>
+
+      <div class="subtitle">
+        Need more tokens?
+      </div>
+      <div style="padding: 17px" >
+        <mdb-form-control class="mb-3 form-white">
+          <input #tokens="ngModel"  [(ngModel)]="token" class="form-control form-control-lg text-light"
+                 id="pass" mdbInput mdbValidate min="0.0"
+                 placeholder="tokens" required type="number"/>
+          <label class="form-label " for="pass" mdbLabel>Enter tokens number</label>
+          <mdb-error *ngIf="tokens.invalid && (tokens.dirty || tokens.touched)" class="mt-1">
+            Tokens number is required
+          </mdb-error>
+        </mdb-form-control>
+      </div>
+      <div >
+        <button (click)="purchase()" class="btn btn-primary bg-success" style="float: right;margin-right: 25px" type="button"> Buy </button>
+
+      </div>
+
+    </div>
+    <div class="col-6" style="color: white; text-align: left; font-size: 16px; padding: 25px ">
+      <em class="fa fa-question-circle" style="color: green;font-size: 20px; padding-right: 13px"></em>
+      Tokens are used for paying uber rides. Currently, price of one token is 5 dollars. Payment for uber tokens is
+      possible using paypal account. <em class="fa fa-cc-paypal" style="padding-left: 10px;font-size: 25px"></em>
+    </div>
+    </div>
+  </div>
+</section>

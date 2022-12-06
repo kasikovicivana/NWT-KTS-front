@@ -5,7 +5,6 @@ import { Image } from '../../model/image.model';
 import { AlertsService } from '../../service/alerts.service';
 import { ImageService } from '../../service/image.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { BoundsLiteral } from 'leaflet';
 
 @Component({
   selector: 'app-profile-view',
@@ -58,8 +57,14 @@ export class ProfileViewComponent implements OnInit {
       this.emailPattern.test(this.client.email) &&
       this.phoneNumberPattern.test(this.client.phoneNumber);
     if (this.client.role === 'Client') {
-      this.isDataValid = this.isDataValid && this.client.cardNumber != '';
+      this.isDataValid = this.isDataValid && this.client.tokens != 0.0;
     }
+  }
+
+  viewModal(): void {
+    this.showModal = true;
+    this.newPass = '';
+    this.reenteredPass = '';
   }
 
   edit(): void {
@@ -89,14 +94,14 @@ export class ProfileViewComponent implements OnInit {
   }
 
   addAttachment(fileInput: any) {
-    const fileReaded = fileInput.target.files[0];
+    const fileRead = fileInput.target.files[0];
     let picturePath = new FileReader();
-    picturePath.readAsDataURL(fileReaded);
+    picturePath.readAsDataURL(fileRead);
     let that = this;
     picturePath.onload = (e) => {
       if (e.target != null) {
         let i = new Image();
-        i.path = fileReaded.name;
+        i.path = fileRead.name;
         i.data = e.target.result as string;
         that.imageService.addImage(i).subscribe();
         that.client.photo = i.path;

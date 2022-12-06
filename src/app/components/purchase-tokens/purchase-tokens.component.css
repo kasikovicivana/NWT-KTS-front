@@ -1,0 +1,28 @@
+.token-main {
+  background-attachment: fixed;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.863),
+    rgba(0, 0, 0, 0.382),
+    rgba(0, 0, 0, 0.005)
+  ),
+  url('/assets/back4.jpg');
+  background-size: contain;
+  overflow: hidden;
+}
+
+.title{
+  color: white;
+  padding-top: 30px;
+}
+
+.subtitle{
+  color: white;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.purchase-part{
+  border-right: 3px ridge green;
+
+}

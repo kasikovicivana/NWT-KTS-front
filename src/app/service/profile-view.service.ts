@@ -13,8 +13,7 @@ export class ProfileViewService {
   url = environment.backendUrl + 'api/user';
 
   getLoggedUserInfo() {
-    const newUrl =
-      this.url + '/getClient/' + this.loginService.getLoggedUserEmail();
+    const newUrl = this.url + '/getClient';
     const header = this.loginService.getAuthorizationHeader();
     return this._http.get<any>(newUrl, { headers: header });
   }

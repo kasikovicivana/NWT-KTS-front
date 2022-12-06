@@ -27,14 +27,9 @@ export class LoginService {
   }
 
   getAuthorizationHeader() {
-    console.log(sessionStorage.getItem('accessToken'));
     return new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ` + sessionStorage.getItem('accessToken'),
     });
-  }
-
-  getLoggedUserEmail() {
-    return sessionStorage.getItem('username');
   }
 }
