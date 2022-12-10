@@ -4,11 +4,15 @@
 }
 
 .button_row{
-  padding-left: 45%;
+  padding-left: 55%;
 }
 
 .inputs{
   padding-left: 40px;
+}
+
+.points{
+  padding-right: 40px;
 }
 
 .list-group-item.active{
@@ -20,18 +24,32 @@
   border-bottom-color: #181818;
 }
 
-.route_type{
+.accordion-button{
+  background: #181818;
+  color: white;
+}
+
+ .route_type{
   font-size: 15px;
   color: darkgray;
 }
+
+ .accordion{
+   padding-right: 40px;
+ }
 
 .time{
   color: limegreen;
 }
 
 .close_x{
-  padding-right: 17%;
-  padding-left: 3%;
+  padding-left: 10px;
+}
+
+.my_radio{
+  accent-color: limegreen;
+  margin-right: 8px;
+  transform: scale(1.5);
 }
 
 

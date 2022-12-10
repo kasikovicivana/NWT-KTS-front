@@ -10,6 +10,7 @@ export class HomepageComponent implements OnInit {
   isLoggedIn: boolean = false;
   pins: Array<string> = [];
   showModal: boolean = false;
+  isMyChoice: boolean = false;
 
   constructor() {}
 
