@@ -1,0 +1,57 @@
+.chat-button{
+  position: absolute;
+  z-index: 9999;
+  bottom: 20px;
+  right: 30px;
+}
+
+.chat-pos{
+  position: absolute;
+  z-index: 9999;
+  bottom: 20px;
+  right: 0;
+}
+
+body{
+  background: #EEEEEE;
+}
+.card{
+  width: 300px;
+  border: none;
+  border-radius: 15px;
+}
+.chat-div{
+  border-radius: 15px 15px 0 0;
+  font-size: 18px;
+  height: 43px;
+}
+.chat{
+  border: none;
+  background: #E2FFE8;
+  font-size: 13px;
+  border-radius: 20px;
+  padding: 12px;
+}
+.chat-me{
+  border: 1px solid #E7E7E9;
+  font-size: 13px;
+  border-radius: 20px;
+  padding: 12px;
+}
+
+.dot{
+  font-weight: bold;
+}
+.form-control{
+  border-radius: 12px;
+  border: 1px solid #F0F0F0;
+  font-size: 13px;
+  height: 35px;
+}
+.form-control:focus{
+  box-shadow: none;
+}
+.form-control::placeholder{
+  font-size: 13px;
+  color: #C4C4C4;
+}

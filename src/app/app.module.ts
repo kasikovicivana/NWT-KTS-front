@@ -39,6 +39,7 @@ import { PurchaseTokensComponent } from './components/purchase-tokens/purchase-t
 import { SuccessfulPaymentComponent } from './components/purchase-tokens/confirm-payment/successful-payment.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { CollapseListComponent } from './components/collapse-list/collapse-list.component';
+import { LiveChatComponent } from './components/live-chat/live-chat.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { CollapseListComponent } from './components/collapse-list/collapse-list.
     SuccessfulPaymentComponent,
     SideBarComponent,
     CollapseListComponent,
+    LiveChatComponent,
   ],
   imports: [
     BrowserModule,
