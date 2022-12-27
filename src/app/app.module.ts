@@ -37,6 +37,8 @@ import { MdbRadioModule } from 'mdb-angular-ui-kit/radio';
 import { StepperModalComponent } from './components/modals/stepper-modal/stepper-modal.component';
 import { PurchaseTokensComponent } from './components/purchase-tokens/purchase-tokens.component';
 import { SuccessfulPaymentComponent } from './components/purchase-tokens/confirm-payment/successful-payment.component';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { CollapseListComponent } from './components/collapse-list/collapse-list.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { SuccessfulPaymentComponent } from './components/purchase-tokens/confirm
     StepperModalComponent,
     PurchaseTokensComponent,
     SuccessfulPaymentComponent,
+    SideBarComponent,
+    CollapseListComponent,
   ],
   imports: [
     BrowserModule,

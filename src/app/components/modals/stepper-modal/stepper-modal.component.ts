@@ -6,12 +6,12 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./stepper-modal.component.css'],
 })
 export class StepperModalComponent implements OnInit {
-  @Output() messageEvent = new EventEmitter<string>();
+  @Output() closeModal = new EventEmitter<boolean>();
   constructor() {}
 
   ngOnInit(): void {}
 
-  sendMessage() {
-    this.messageEvent.emit('show');
+  closeStepperModal() {
+    this.closeModal.emit(false);
   }
 }

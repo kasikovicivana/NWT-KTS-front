@@ -6,31 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homepage.component.css'],
 })
 export class HomepageComponent implements OnInit {
-  active: string = 'route_2';
-  isLoggedIn: boolean = false;
-  pins: Array<string> = [];
   showModal: boolean = false;
-  isMyChoice: boolean = false;
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.isLoggedIn = sessionStorage.getItem('username') != null;
-  }
+  ngOnInit(): void {}
 
-  selectRoute(route: string) {
-    this.active = route;
-  }
-
-  addPin() {
-    this.pins.push('');
-  }
-
-  removePin(i: number) {
-    this.pins.splice(i, 1);
-  }
-
-  receiveMessage($event: string) {
+  setShowModalToFalse() {
     this.showModal = false;
+  }
+
+  setShowModalToTrue() {
+    this.showModal = true;
   }
 }
