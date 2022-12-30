@@ -28,8 +28,13 @@
         <div class="chat ml-2"><span class="text-muted dot">. . .</span></div>
       </div>
 
+      <div *ngFor="let m of webSocket.webSocketMessage" class="d-flex flex-row p-3">
+        <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-7.png" width="30" height="30">
+        <div class="chat ml-2"><span class="text-muted dot">{{m.message}}</span></div>
+      </div>
+
       <div class="form-group px-3 pb-2">
-        <textarea class="form-control" rows="5" placeholder="Type your message"></textarea>
+        <textarea class="form-control" [(ngModel)]="messageText" (keyup.enter)="sendMessage()"  rows="5" placeholder="Type your message"></textarea>
       </div>
     </div>
   </div>
