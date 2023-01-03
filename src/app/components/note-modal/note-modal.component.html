@@ -1,0 +1,34 @@
+<section>
+  <div class="modal-mask ">
+    <div class="modal-wrapper">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark text-white">
+          <div class="modal-header">
+            <h5 class="modal-title text-uppercase">Notes for {{currentUser?.name +" "+currentUser?.surname}}</h5>
+            <button aria-label="Close" class="close bg-dark" data-dismiss="modal" type="button">
+              <span (click)="close()" aria-hidden="true" class="text-white">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="overflow-y: auto;max-height: 250px">
+            <div *ngFor="let pin of notes; let i = index;trackBy:customTrackBy"  class="input-group flex-nowrap  pb-3 min-vh-80" >
+              <span class="input-group-text" id="pin_{{i}}"><em class="fa fa-pencil fa-lg px-1" ></em></span>
+              <input type="text" class="form-control bg-dark text-white" placeholder="Add note" aria-label="Username" [(ngModel)]="notes[i]" />
+              <a href="javascript:void(0)" (click)="removeNote(i)" class="close_x"><span class=""> <em class="fa fa-close fa-lg" style="color: darkred"></em></span></a>
+            </div>
+
+          </div>
+          <div class="modal-footer row">
+            <a href="javascript:void(0)" (click)="addNote()" class="link-light col-8" >
+              <em class="fa fa-plus-circle"></em>
+              <span class="px-2">Add note</span>
+            </a>
+            <button  class="btn btn-outline-light bg-success col-2" type="button" style="margin-right: 30px" (click)="saveNotes()">
+              Save
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
