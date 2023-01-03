@@ -1,6 +1,6 @@
 import { Note } from './note.model';
 
-export class Client {
+export class Driver {
   public notes: [Note] | undefined;
 
   constructor(

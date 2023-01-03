@@ -1,0 +1,35 @@
+.browse-card{
+  transition: transform .2s;
+  width: 100%
+}
+.browse-card:hover{
+  transform: scale(1.07);
+}
+.image {
+  max-height: 200px;
+  width: 250px;
+}
+.view_button{
+  background-color: #2e6b6b;
+  color: white;
+}
+.view_button:hover{
+  background-color: #4AAE9B;
+}
+button{
+  color: white;
+}
+a{
+  text-decoration: none;
+}
+
+.profile {
+  transition: transform .3s;
+}
+.profile img {
+  max-width: 100%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-left: 15px;
+}

@@ -1,0 +1,37 @@
+<section >
+  <div class="my-2" >
+    <article class="media shadow p-4  bg-dark row"  >
+      <div class="col-4 gradient-custom text-center bg-dark text-white"
+           style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; float: right">
+        <div class="profile mb-3 mt-3" >
+          <img src="/assets/a.jpg" alt="Image" class="img-fluid">
+        </div>
+
+      </div>
+
+      <div class="col-3" style="color: white">
+        <span style="color: white; margin-left: 25px;">
+          <h3>{{user.name+" "+user.surname}}</h3>
+        </span>
+        <br>
+          Contact info
+          <div style="margin-top: 15px;margin-left: 10px">
+            <em class = "fa fa-phone"></em>  {{ user.phoneNumber}} <br>
+            <em class = "fa fa-envelope"></em> {{ user.email}}
+          </div>
+      </div>
+
+      <div class="col-4">
+        <div style="margin-top: 150px">
+        <button  #blockButton class="btn btn-outline-light bg-success" type="button" style="float: left" (click)="blockUser()">
+          Block
+        </button>
+
+        <button  class="btn btn-outline-light bg-success" type="button" style="margin-left: 20px" (click)="viewNotes()" >
+          View notes
+        </button>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

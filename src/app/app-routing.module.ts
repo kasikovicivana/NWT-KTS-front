@@ -9,6 +9,8 @@ import { PasswordChangeComponent } from './components/password-change/password-c
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { PurchaseTokensComponent } from './components/purchase-tokens/purchase-tokens.component';
 import { SuccessfulPaymentComponent } from './components/purchase-tokens/confirm-payment/successful-payment.component';
+import { UserBlockCardComponent } from './components/user-block-card/user-block-card.component';
+import { BlockUserComponent } from './components/block-user/block-user.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -20,6 +22,8 @@ const routes: Routes = [
   { path: 'home', component: HomepageComponent },
   { path: 'purchaseTokens', component: PurchaseTokensComponent },
   { path: 'confirmPayment', component: SuccessfulPaymentComponent },
+  { path: 'card', component: UserBlockCardComponent },
+  { path: 'blockUsers', component: BlockUserComponent },
 ];
 
 @NgModule({

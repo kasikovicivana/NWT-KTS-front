@@ -1,0 +1,12 @@
+.main {
+  background: lightgray linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.563),
+    rgba(0, 0, 0, 0.382),
+    rgba(0, 0, 0, 0.005)
+  ) fixed;
+  background-size: cover;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Client } from '../model/client.model';
 import { LoginService } from './login.service';
+import { Driver } from '../model/driver.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,16 +13,15 @@ export class ProfileViewService {
 
   url = environment.backendUrl + 'api/user';
 
-  getLoggedUserInfo() {
+  getLoggedClient() {
     const newUrl = this.url + '/getClient';
     const header = this.loginService.getAuthorizationHeader();
     return this._http.get<any>(newUrl, { headers: header });
   }
-
-  saveClient(client: Client) {
-    const newUrl = this.url + '/saveClient';
+  getLoggedUser() {
+    const newUrl = this.url + '/getLoggedUser';
     const header = this.loginService.getAuthorizationHeader();
-    return this._http.post<any>(newUrl, client, { headers: header });
+    return this._http.get<any>(newUrl, { headers: header });
   }
 
   changePassword(newPassword: string) {

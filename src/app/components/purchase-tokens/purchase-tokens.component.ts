@@ -21,7 +21,7 @@ export class PurchaseTokensComponent implements OnInit {
   tokenPrice: number = 0.0;
 
   ngOnInit(): void {
-    this.profileViewService.getLoggedUserInfo().subscribe((data) => {
+    this.profileViewService.getLoggedClient().subscribe((data) => {
       this.client = data;
     });
     this.tokenService.getTokenPrice().subscribe((data) => {

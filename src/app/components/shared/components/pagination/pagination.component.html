@@ -1,0 +1,30 @@
+<div class="text-center">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li
+        class="page-item"
+        (click)="selected(_activePage - 1)"
+        *ngIf="_activePage > 1"
+      >
+        <a class="page-link">Previous</a>
+      </li>
+
+      <li
+        class="page-item"
+        *ngFor="let i of pages"
+        (click)="selected(i)"
+        [ngClass]="{ active: i === _activePage }"
+      >
+        <a class="page-link" [style.background-color]=" i === _activePage ? '#5cb85c': 'black' ">{{ i }}</a>
+      </li>
+
+      <li
+        class="page-item"
+        (click)="selected(_activePage + 1)"
+        *ngIf="_activePage < pages.length"
+      >
+        <a class="page-link">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>

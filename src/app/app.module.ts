@@ -39,6 +39,10 @@ import { PurchaseTokensComponent } from './components/purchase-tokens/purchase-t
 import { SuccessfulPaymentComponent } from './components/purchase-tokens/confirm-payment/successful-payment.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { CollapseListComponent } from './components/collapse-list/collapse-list.component';
+import { UserBlockCardComponent } from './components/user-block-card/user-block-card.component';
+import { BlockUserComponent } from './components/block-user/block-user.component';
+import { PaginationComponent } from './components/shared/components/pagination/pagination.component';
+import { NoteModalComponent } from './components/note-modal/note-modal.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +65,10 @@ import { CollapseListComponent } from './components/collapse-list/collapse-list.
     SuccessfulPaymentComponent,
     SideBarComponent,
     CollapseListComponent,
+    UserBlockCardComponent,
+    BlockUserComponent,
+    PaginationComponent,
+    NoteModalComponent,
   ],
   imports: [
     BrowserModule,

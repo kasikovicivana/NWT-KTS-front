@@ -7,6 +7,7 @@ import { AlertsService } from '../../../service/alerts.service';
 import { ProfileViewService } from '../../../service/profile-view.service';
 import * as Timers from 'timers';
 import { delay } from 'rxjs';
+import { UserService } from '../../../service/user.service';
 
 @Component({
   selector: 'app-confirm-payment',
@@ -18,7 +19,8 @@ export class SuccessfulPaymentComponent implements OnInit {
     private tokenService: TokensService,
     private alertsService: AlertsService,
     private router: Router,
-    private profileViewService: ProfileViewService
+    private profileViewService: ProfileViewService,
+    private userService: UserService
   ) {}
 
   token: string = '';
@@ -77,12 +79,12 @@ export class SuccessfulPaymentComponent implements OnInit {
     });
     this.tokenService.pay(this.token, this.id).subscribe({
       next: async () => {
-        this.profileViewService.getLoggedUserInfo().subscribe((data) => {
+        this.profileViewService.getLoggedClient().subscribe((data) => {
           this.client = data;
           if (this.payingSources.amount != 0.0) {
             this.client.tokens += this.payingSources.amount / this.tokenPrice;
           }
-          this.profileViewService.saveClient(this.client).subscribe();
+          this.userService.saveClient(this.client).subscribe();
         });
         this.alertsService.successAlert();
         await this.delay(800);

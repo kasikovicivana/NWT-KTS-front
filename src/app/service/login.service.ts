@@ -29,6 +29,7 @@ export class LoginService {
   getAuthorizationHeader() {
     return new HttpHeaders({
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
       Authorization: `Bearer ` + sessionStorage.getItem('accessToken'),
     });
   }

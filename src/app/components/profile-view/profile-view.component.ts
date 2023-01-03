@@ -5,6 +5,7 @@ import { Image } from '../../model/image.model';
 import { AlertsService } from '../../service/alerts.service';
 import { ImageService } from '../../service/image.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-profile-view',
@@ -32,13 +33,14 @@ export class ProfileViewComponent implements OnInit {
     private profileViewService: ProfileViewService,
     private alerts: AlertsService,
     private imageService: ImageService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
-    this.profileViewService.getLoggedUserInfo().subscribe((data) => {
+    this.profileViewService.getLoggedClient().subscribe((data) => {
       this.client = data;
-      if(!this.client.isSocialLogin){
+      if (!this.client.isSocialLogin) {
         this.imageService.loadImage(this.client.photo).subscribe((data) => {
           this.imageUrl = URL.createObjectURL(data);
           this.srcData = this.sanitizer.bypassSecurityTrustUrl(this.imageUrl);
@@ -72,7 +74,7 @@ export class ProfileViewComponent implements OnInit {
       if (this.editButton.nativeElement.innerHTML === 'Save') {
         this.validateData();
         if (this.isDataValid) {
-          this.profileViewService.saveClient(this.client).subscribe();
+          this.userService.saveClient(this.client).subscribe();
           this.alerts.successAlert();
         } else {
           this.alerts.errorAlert('You must fill all fields!');
@@ -105,7 +107,7 @@ export class ProfileViewComponent implements OnInit {
         i.data = e.target.result as string;
         that.imageService.addImage(i).subscribe();
         that.client.photo = i.path;
-        that.profileViewService.saveClient(that.client).subscribe();
+        that.userService.saveClient(that.client).subscribe();
         location.reload();
       }
     };
