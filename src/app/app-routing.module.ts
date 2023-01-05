@@ -9,6 +9,7 @@ import { PasswordChangeComponent } from './components/password-change/password-c
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { PurchaseTokensComponent } from './components/purchase-tokens/purchase-tokens.component';
 import { SuccessfulPaymentComponent } from './components/purchase-tokens/confirm-payment/successful-payment.component';
+import { AdminChatBoxComponent } from './components/admin-chat-box/admin-chat-box.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'home', component: HomepageComponent },
   { path: 'purchaseTokens', component: PurchaseTokensComponent },
   { path: 'confirmPayment', component: SuccessfulPaymentComponent },
+  { path: 'messages', component: AdminChatBoxComponent },
 ];
 
 @NgModule({

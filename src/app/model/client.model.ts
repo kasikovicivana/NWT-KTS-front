@@ -15,3 +15,12 @@ export class Client {
     public isSocialLogin: boolean = false
   ) {}
 }
+
+export class MessageClient {
+  constructor(
+    public name: string = '',
+    public surname: string = '',
+    public email: string = '',
+    public photo: string = ''
+  ) {}
+}

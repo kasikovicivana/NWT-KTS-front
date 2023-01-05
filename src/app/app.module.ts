@@ -40,6 +40,7 @@ import { SuccessfulPaymentComponent } from './components/purchase-tokens/confirm
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { CollapseListComponent } from './components/collapse-list/collapse-list.component';
 import { LiveChatComponent } from './components/live-chat/live-chat.component';
+import { AdminChatBoxComponent } from './components/admin-chat-box/admin-chat-box.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { LiveChatComponent } from './components/live-chat/live-chat.component';
     SideBarComponent,
     CollapseListComponent,
     LiveChatComponent,
+    AdminChatBoxComponent,
   ],
   imports: [
     BrowserModule,

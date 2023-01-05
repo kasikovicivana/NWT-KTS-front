@@ -17,9 +17,16 @@ body{
 }
 .card{
   width: 300px;
+  height: 500px;
   border: none;
   border-radius: 15px;
 }
+
+.chat-body{
+  height: 100%;
+  overflow: auto;
+}
+
 .chat-div{
   border-radius: 15px 15px 0 0;
   font-size: 18px;
@@ -39,9 +46,6 @@ body{
   padding: 12px;
 }
 
-.dot{
-  font-weight: bold;
-}
 .form-control{
   border-radius: 12px;
   border: 1px solid #F0F0F0;
