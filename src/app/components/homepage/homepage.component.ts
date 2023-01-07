@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
   showModal: boolean = false;
+  loggedUserRole: string | null = sessionStorage.getItem('role');
 
   constructor() {}
 

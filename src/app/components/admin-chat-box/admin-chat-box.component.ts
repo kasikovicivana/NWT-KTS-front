@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { WebSocketService } from '../../service/web-socket.service';
 import { ChatMessage, ClientChatMessage } from '../../model/chat.model';
 import { MessageClient } from '../../model/client.model';
@@ -14,8 +14,12 @@ export class AdminChatBoxComponent implements OnInit {
   messageText: string = '';
   email: string | null = sessionStorage.getItem('username');
   clientBoxes: MessageClient[] = [];
-  clientPhotos: SafeResourceUrl[] = [];
+  clientPhotos: Map<string, SafeResourceUrl> = new Map<
+    string,
+    SafeResourceUrl
+  >();
   activeClient: MessageClient = new MessageClient();
+  @ViewChild('scrollMe') myScrollContainer: ElementRef | undefined;
 
   constructor(
     public webSocket: WebSocketService,
@@ -50,11 +54,16 @@ export class AdminChatBoxComponent implements OnInit {
     let usernames = this.clientBoxes.map((x) => x.email);
     if (client.email != this.email && !usernames.includes(client.email)) {
       this.clientBoxes.push(client);
-      this.imageService.loadImage(client.photo).subscribe((data) => {
-        let imageUrl = URL.createObjectURL(data);
-        this.clientPhotos.push(this.sanitizer.bypassSecurityTrustUrl(imageUrl));
-      });
+      this.loadProfilePhoto(client);
     }
+  }
+
+  loadProfilePhoto(client: MessageClient) {
+    this.imageService.loadImage(client.photo).subscribe((data) => {
+      let imageUrl = URL.createObjectURL(data);
+      let src = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+      this.clientPhotos.set(client.email, src);
+    });
   }
 
   sendMessage() {
@@ -69,5 +78,16 @@ export class AdminChatBoxComponent implements OnInit {
 
   changeActiveClient(client: MessageClient) {
     this.activeClient = client;
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer!.nativeElement.scrollTop =
+        this.myScrollContainer!.nativeElement.scrollHeight;
+    } catch (err) {}
   }
 }

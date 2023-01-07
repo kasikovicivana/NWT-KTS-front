@@ -38,6 +38,9 @@ export class WebSocketService {
 
   sendMessage(msg: ChatMessage) {
     this.stompClient.send('/send/message', {}, JSON.stringify(msg));
+    const fullUrl = this.url + '/saveMessage';
+    const header = this.loginService.getAuthorizationHeader();
+    this._http.post(fullUrl, msg, { headers: header }).subscribe();
   }
 
   getUserMessages() {

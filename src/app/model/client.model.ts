@@ -1,3 +1,5 @@
+import { SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+
 export class Client {
   constructor(
     public id: number = -1,

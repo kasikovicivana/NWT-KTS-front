@@ -15,7 +15,7 @@
           <li *ngFor="let client of clientBoxes" [class.active]="activeClient.email === client.email" (click)="changeActiveClient(client)">
             <div class="d-flex bd-highlight">
               <div class="img_cont">
-                <img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-7.png" class="rounded-circle user_img">
+                <img [src]="clientPhotos.get(client.email)" class="rounded-circle user_img">
               </div>
               <div class="user_info">
                 <span>{{client.name}} {{client.surname}}</span>
@@ -31,19 +31,19 @@
         <div class="card-header msg_head">
           <div class="d-flex bd-highlight">
             <div class="img_cont">
-              <img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-7.png" class="rounded-circle user_img">
+              <img [src]="clientPhotos.get(activeClient.email)" class="rounded-circle user_img">
             </div>
             <div class="user_info">
               <span>Chat with {{activeClient.name}} {{activeClient.surname}}</span>
             </div>
           </div>
         </div>
-        <div class="card-body msg_card_body">
+        <div class="card-body msg_card_body" #scrollMe>
           <ng-container *ngFor="let message of webSocket.webSocketMessage">
             <ng-container *ngIf="message.from === activeClient.email || message.to === activeClient.email">
               <div *ngIf="message.from != email" class="d-flex justify-content-start mb-4">
                 <div class="img_cont_msg">
-                  <img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-7.png" class="rounded-circle user_img_msg">
+                  <img [src]="clientPhotos.get(message.from)" class="rounded-circle user_img_msg">
                 </div>
                 <div class="msg_container">
                   {{message.text}}
