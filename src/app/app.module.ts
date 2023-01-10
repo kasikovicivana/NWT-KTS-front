@@ -49,6 +49,8 @@ import {
   StarRatingConfigService,
   StarRatingModule,
 } from 'angular-star-rating';
+import { LiveChatComponent } from './components/live-chat/live-chat.component';
+import { AdminChatBoxComponent } from './components/admin-chat-box/admin-chat-box.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,8 @@ import {
     PaginationComponent,
     NoteModalComponent,
     GradeModalComponent,
+    LiveChatComponent,
+    AdminChatBoxComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,9 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
   showModal: boolean = false;
-  active: string = 'route_2';
-  isLoggedIn: boolean = false;
-  pins: Array<string> = [];
+  loggedUserRole: string | null = sessionStorage.getItem('role');
 
   constructor() {}
 

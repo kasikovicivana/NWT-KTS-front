@@ -11,6 +11,7 @@ import { PurchaseTokensComponent } from './components/purchase-tokens/purchase-t
 import { SuccessfulPaymentComponent } from './components/purchase-tokens/confirm-payment/successful-payment.component';
 import { UserBlockCardComponent } from './components/user-block-card/user-block-card.component';
 import { BlockUserComponent } from './components/block-user/block-user.component';
+import { AdminChatBoxComponent } from './components/admin-chat-box/admin-chat-box.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'confirmPayment', component: SuccessfulPaymentComponent },
   { path: 'card', component: UserBlockCardComponent },
   { path: 'blockUsers', component: BlockUserComponent },
+  { path: 'messages', component: AdminChatBoxComponent },
 ];
 
 @NgModule({

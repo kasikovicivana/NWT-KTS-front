@@ -1,3 +1,5 @@
+import { SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+
 import { Note } from './note.model';
 
 export class Client {
@@ -17,5 +19,14 @@ export class Client {
     public enabled: boolean = true,
     public blocked: boolean = false,
     public isSocialLogin: boolean = false
+  ) {}
+}
+
+export class MessageClient {
+  constructor(
+    public name: string = '',
+    public surname: string = '',
+    public email: string = '',
+    public photo: string = ''
   ) {}
 }

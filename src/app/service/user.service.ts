@@ -11,6 +11,7 @@ import { LoginService } from './login.service';
 import { Client } from '../model/client.model';
 import { Driver } from '../model/driver.model';
 import { Observable } from 'rxjs';
+import { ProfileViewService } from './profile-view.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,9 @@ import { Observable } from 'rxjs';
 export class UserService {
   url = environment.backendUrl + 'api/user';
 
-  constructor(private _http: HttpClient, private loginService: LoginService) {}
+  constructor(private _http: HttpClient, private loginService: LoginService,
+    private profileViewService: ProfileViewService
+  ) {}
 
   sendPasswordReset(email: string) {
     return this._http.get<HttpStatusCode>(
