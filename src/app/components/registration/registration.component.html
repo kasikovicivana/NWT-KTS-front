@@ -103,13 +103,6 @@
                 </div>
               </div>
 
-              <div class="mb-5" [ngStyle]="{ display: isDriver ? 'none' : 'block' }">
-                <mdb-form-control class="form-white">
-                  <input mdbValidate mdbInput [(ngModel)]="user.cardNumber" #card="ngModel" type="password" id="cardNum" class="form-control form-control-lg text-light" placeholder="card number" required/>
-                  <label mdbLabel class="form-label" for="cardNum">Card number</label>
-                  <mdb-error class="mt-1" *ngIf="card.invalid && (card.dirty || card.touched)">Card number is required</mdb-error>
-                </mdb-form-control>
-              </div>
 
 
               <button class="btn btn-outline-light btn-lg px-5" type="submit" (click)="register()">Register</button>

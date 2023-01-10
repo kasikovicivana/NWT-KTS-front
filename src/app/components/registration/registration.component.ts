@@ -39,19 +39,15 @@ export class RegistrationComponent implements OnInit {
       this.user.role != '' &&
       this.emailPattern.test(this.user.email) &&
       this.phoneNumberPattern.test(this.user.phoneNumber);
-    if (this.user.role === 'Client') {
-      this.isDataValid = this.isDataValid && this.user.cardNumber != '';
-    }
   }
 
   register() {
-    console.log(this.user.role);
     this.validateData();
     if (this.isDataValid) {
       this.registrationService.registerUser(this.user).subscribe(
         (data) => {
           this.alerts.successAlert();
-          setTimeout(() => window.location.href = '/', 1000);
+          setTimeout(() => (window.location.href = '/'), 1000);
         },
         (err) => this.alerts.errorAlert('You already have account!')
       );

@@ -1,0 +1,35 @@
+<section>
+  <div class="modal-mask ">
+    <div class="modal-wrapper">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark text-white">
+          <div class="modal-header">
+            <h5 class="modal-title text-uppercase">Rate drive</h5>
+            <button aria-label="Close" class="close bg-dark" data-dismiss="modal" type="button">
+              <span  aria-hidden="true" class="text-white">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="max-height: 300px">
+            <strong style="font-style: italic;">Rate driver:</strong><br>
+            <span class="tab" >{{grade.driverName}} {{grade.driverSurname}}</span>
+            <star-rating [rating]="grade.driverGrade" (starClickChange)="rateDriver($event)"></star-rating> <br>
+            <strong style="font-style: italic;">Rate car:</strong><br>
+            <span class="tab">{{grade.carType}}</span>
+            <star-rating [rating]="grade.carGrade" (starClickChange)="rateCar($event)"></star-rating><br><br>
+            <mdb-form-control class="mb-4 form-white">
+              <textarea [(ngModel)]="grade.comment" class="form-control form-control-lg text-light"
+                     id="typeEmailX" mdbInput
+                     placeholder="Write a comment" type="text"></textarea>
+              <label class="form-label text-light" for="typeEmailX" mdbLabel>Write a comment</label>
+            </mdb-form-control>
+          </div>
+          <div class="modal-footer row">
+            <button (click)="saveGrade()" class="btn btn-outline-light bg-success col-2" type="button" style="margin-right: 30px" >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

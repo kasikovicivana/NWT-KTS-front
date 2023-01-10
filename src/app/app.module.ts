@@ -43,6 +43,12 @@ import { UserBlockCardComponent } from './components/user-block-card/user-block-
 import { BlockUserComponent } from './components/block-user/block-user.component';
 import { PaginationComponent } from './components/shared/components/pagination/pagination.component';
 import { NoteModalComponent } from './components/note-modal/note-modal.component';
+import { GradeModalComponent } from './components/grade-modal/grade-modal.component';
+import {
+  StarRating,
+  StarRatingConfigService,
+  StarRatingModule,
+} from 'angular-star-rating';
 
 @NgModule({
   declarations: [
@@ -69,6 +75,7 @@ import { NoteModalComponent } from './components/note-modal/note-modal.component
     BlockUserComponent,
     PaginationComponent,
     NoteModalComponent,
+    GradeModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,6 +93,7 @@ import { NoteModalComponent } from './components/note-modal/note-modal.component
     NoopAnimationsModule,
     MdbCheckboxModule,
     MdbRadioModule,
+    StarRatingModule.forRoot(),
   ],
   providers: [
     {
@@ -106,6 +114,7 @@ import { NoteModalComponent } from './components/note-modal/note-modal.component
         ],
       } as SocialAuthServiceConfig,
     },
+    StarRatingConfigService,
   ],
   bootstrap: [AppComponent],
 })

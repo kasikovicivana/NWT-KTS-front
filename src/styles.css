@@ -1,5 +1,5 @@
 @import '../node_modules/leaflet/dist/leaflet.css';
-
+@import '~css-star-rating/css/star-rating.css';
 body {
   font-family: Century Gothic, sans-serif;
   overflow: hidden;

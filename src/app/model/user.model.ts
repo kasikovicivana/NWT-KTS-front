@@ -16,10 +16,10 @@ export class User {
     public city: string = '',
     public phoneNumber: string = '',
     public role: string = 'Driver',
-    public cardNumber: string = '',
     public photo: string = '',
     public isSocialLogin: boolean = false,
-    public blocked: boolean = false
+    public blocked: boolean = false,
+    public tokens: number = 0.0
   ) {}
 }
 

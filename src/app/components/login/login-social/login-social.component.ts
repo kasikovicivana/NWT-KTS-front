@@ -37,7 +37,6 @@ export class LoginSocialComponent implements OnInit {
     if (
       this.user.city != '' &&
       this.user.phoneNumber != '' &&
-      this.user.cardNumber != '' &&
       this.phoneNumberPattern.test(this.user.phoneNumber)
     ) {
       this.registrationService.registerUser(this.user).subscribe(
