@@ -44,11 +44,7 @@ import { BlockUserComponent } from './components/block-user/block-user.component
 import { PaginationComponent } from './components/shared/components/pagination/pagination.component';
 import { NoteModalComponent } from './components/note-modal/note-modal.component';
 import { GradeModalComponent } from './components/grade-modal/grade-modal.component';
-import {
-  StarRating,
-  StarRatingConfigService,
-  StarRatingModule,
-} from 'angular-star-rating';
+import { StarRatingConfigService, StarRatingModule } from 'angular-star-rating';
 import { LiveChatComponent } from './components/live-chat/live-chat.component';
 import { AdminChatBoxComponent } from './components/admin-chat-box/admin-chat-box.component';
 

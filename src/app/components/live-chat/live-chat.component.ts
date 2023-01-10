@@ -30,7 +30,7 @@ export class LiveChatComponent implements OnInit {
 
   ngOnInit(): void {
     if (sessionStorage.getItem('role') === 'ROLE_client') {
-      this.profileViewService.getLoggedUserInfo().subscribe((data) => {
+      this.profileViewService.getLoggedClient().subscribe((data) => {
         this.client = data;
         if (!this.client.isSocialLogin) {
           this.imageService.loadImage(this.client.photo).subscribe((data) => {
