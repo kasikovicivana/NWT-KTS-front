@@ -9,6 +9,8 @@ import { DriverRoutes } from '../../model/driverRoutes.model';
 import 'leaflet.marker.slideto';
 import 'leaflet-extra-markers';
 import { Route } from '../../model/route.model';
+import * as SockJS from 'sockjs-client';
+import * as Stomp from 'stompjs';
 
 @Component({
   selector: 'app-map',
@@ -18,13 +20,59 @@ import { Route } from '../../model/route.model';
 export class MapComponent implements AfterViewInit {
   private map: L.Map | L.LayerGroup | any;
   private positions = new Map<string, Marker>();
+  private routes = new Map<string, any>();
 
-  private m: Marker | null = null;
+  private stompClient: any;
 
   constructor(
     private mapService: MapService,
     private driveService: DriveService
-  ) {}
+  ) {
+    this.initializeWebSocketConnection();
+  }
+
+  initializeWebSocketConnection() {
+    let ws = new SockJS('http://localhost:9000/socket');
+    this.stompClient = Stomp.over(ws);
+    this.stompClient.debug = null;
+    let that = this;
+    this.stompClient.connect({}, function () {
+      that.openGlobalSocket();
+    });
+  }
+
+  openGlobalSocket() {
+    this.stompClient.subscribe(
+      '/map-updates/new-drive',
+      (message: { body: string }) => {
+        let driverRoutes = JSON.parse(message.body);
+        // uklanjamo ga iz liste pozicija
+        this.positions.delete(driverRoutes.username);
+        this.simulate(driverRoutes).then(() => {});
+      }
+    );
+
+    this.stompClient.subscribe(
+      '/map-updates/stop-drive',
+      (message: { body: string }) => {
+        console.log('stigla poruka');
+        let username = message.body;
+        this.routes.get(username)?.remove();
+        this.routes.delete(username);
+        // treba nam i nova pozicija za ovog vozaca
+      }
+    );
+
+    this.stompClient.subscribe(
+      '/map-updates/driver-active',
+      (message: { body: string }) => {}
+    );
+
+    this.stompClient.subscribe(
+      '/map-updates/driver-not-active',
+      (message: { body: string }) => {}
+    );
+  }
 
   ngAfterViewInit(): void {
     this.map = L.map('map', {
@@ -159,6 +207,8 @@ export class MapComponent implements AfterViewInit {
         .addTo(this.map);
 
       a.bindPopup(username);
+      this.routes.set(username, a);
+      // dodaj a u neku globalnu listu pod kljucem username
     }
   }
 
