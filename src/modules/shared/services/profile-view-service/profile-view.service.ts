@@ -13,25 +13,21 @@ export class ProfileViewService {
 
   getLoggedClient() {
     const newUrl = this.url + '/getClient';
-    const header = this.loginService.getAuthorizationHeader();
-    return this._http.get<any>(newUrl, { headers: header });
+    return this._http.get<any>(newUrl);
   }
 
   getLoggedUser() {
     const newUrl = this.url + '/getLoggedUser';
-    const header = this.loginService.getAuthorizationHeader();
-    return this._http.get<any>(newUrl, { headers: header });
+    return this._http.get<any>(newUrl);
   }
 
   changePassword(newPassword: string) {
     const newUrl = this.url + '/changePassword';
-    const header = this.loginService.getAuthorizationHeader();
-    return this._http.post<any>(newUrl, newPassword, { headers: header });
+    return this._http.post<any>(newUrl, newPassword);
   }
 
   isOldPasswordCorrect(oldPassword: string) {
     const newUrl = this.url + '/checkOldPassword';
-    const header = this.loginService.getAuthorizationHeader();
-    return this._http.post<any>(newUrl, oldPassword, { headers: header });
+    return this._http.post<any>(newUrl, oldPassword);
   }
 }

@@ -63,9 +63,7 @@ export class NoteService {
 
   saveNotes(data: EditNote) {
     const newUrl = this.noteUrl + '/saveNotes';
-    return this._http.post<any>(newUrl, data.notesObj, {
-      headers: this.loginService.getAuthorizationHeader(),
-    });
+    return this._http.post<any>(newUrl, data.notesObj);
   }
 
   getAdminInfo(): Observable<number> {
@@ -82,22 +80,16 @@ export class NoteService {
 
   remove(note: Note): Observable<HttpClient> {
     const newUrl = this.noteUrl + '/deleteNote/' + note.id;
-    return this._http.delete<any>(newUrl, {
-      headers: this.loginService.getAuthorizationHeader(),
-    });
+    return this._http.delete<any>(newUrl);
   }
 
   getMaxId() {
     const newUrl = this.noteUrl + '/getMaxId';
-    return this._http.get<any>(newUrl, {
-      headers: this.loginService.getAuthorizationHeader(),
-    });
+    return this._http.get<any>(newUrl);
   }
 
   getNotes(user: Client | Driver) {
     const newUrl = this.noteUrl + '/getNotes/' + user.id;
-    return this._http.get<any>(newUrl, {
-      headers: this.loginService.getAuthorizationHeader(),
-    });
+    return this._http.get<any>(newUrl);
   }
 }

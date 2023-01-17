@@ -26,7 +26,6 @@ export class ImageService {
 
   addImage(image: Image) {
     const newUrl = this.url + '/addImage';
-    const header = this.loginService.getAuthorizationHeader();
-    return this._http.post<any>(newUrl, image, { headers: header });
+    return this._http.post<any>(newUrl, image);
   }
 }

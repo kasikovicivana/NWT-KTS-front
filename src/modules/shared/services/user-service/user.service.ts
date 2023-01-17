@@ -40,7 +40,7 @@ export class UserService {
   getClients(page: number, size: number) {
     const newUrl = this.url + '/getClients';
     let queryParams = {
-      headers: this.loginService.getAuthorizationHeader(),
+      //      headers: this.loginService.getAuthorizationHeader(),
       observe: 'response' as 'body',
       params: new HttpParams()
         .set('page', String(page))
@@ -53,7 +53,7 @@ export class UserService {
   getDrivers(page: number, size: number) {
     const newUrl = this.url + '/getDrivers';
     let queryParams = {
-      headers: this.loginService.getAuthorizationHeader(),
+      //      headers: this.loginService.getAuthorizationHeader(),
       observe: 'response' as 'body',
       params: new HttpParams()
         .set('page', String(page))
@@ -64,19 +64,16 @@ export class UserService {
 
   saveClient(client: Client) {
     const newUrl = this.url + '/saveClient';
-    const header = this.loginService.getAuthorizationHeader();
-    return this._http.post<any>(newUrl, client, { headers: header });
+    return this._http.post<any>(newUrl, client);
   }
 
   saveDriver(driver: Driver) {
     const newUrl = this.url + '/saveDriver';
-    const header = this.loginService.getAuthorizationHeader();
-    return this._http.post<any>(newUrl, driver, { headers: header });
+    return this._http.post<any>(newUrl, driver);
   }
 
   getLoggedUserInfo() {
     const newUrl = this.url + '/getClient';
-    const header = this.loginService.getAuthorizationHeader();
-    return this._http.get<any>(newUrl, { headers: header });
+    return this._http.get<any>(newUrl);
   }
 }

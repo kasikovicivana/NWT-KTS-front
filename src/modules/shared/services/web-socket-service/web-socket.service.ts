@@ -38,15 +38,11 @@ export class WebSocketService {
   sendMessage(msg: ChatMessage) {
     this.stompClient.send('/send/message', {}, JSON.stringify(msg));
     const fullUrl = this.url + '/saveMessage';
-    const header = this.loginService.getAuthorizationHeader();
-    this._http.post(fullUrl, msg, { headers: header }).subscribe();
+    this._http.post(fullUrl, msg).subscribe();
   }
 
   getUserMessages() {
     const fullUrl = this.url + '/getMessages';
-    const header = this.loginService.getAuthorizationHeader();
-    return this._http.get<Array<ClientChatMessage>>(fullUrl, {
-      headers: header,
-    });
+    return this._http.get<Array<ClientChatMessage>>(fullUrl);
   }
 }

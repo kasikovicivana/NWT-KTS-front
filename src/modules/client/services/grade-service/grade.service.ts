@@ -10,19 +10,15 @@ import { GradeModel } from '../../../app/model/grade.model';
 export class GradeService {
   gradeUrl = environment.backendUrl + 'api/grade';
 
-  constructor(private _http: HttpClient, private loginService: LoginService) {}
+  constructor(private _http: HttpClient) {}
 
   getGrade() {
     const newUrl = this.gradeUrl + '/getGrade/' + 1; //driveId
-    return this._http.get<any>(newUrl, {
-      headers: this.loginService.getAuthorizationHeader(),
-    });
+    return this._http.get<any>(newUrl);
   }
 
   saveGrade(grade: GradeModel) {
     const newUrl = this.gradeUrl + '/save';
-    return this._http.post<any>(newUrl, grade, {
-      headers: this.loginService.getAuthorizationHeader(),
-    });
+    return this._http.post<any>(newUrl, grade);
   }
 }

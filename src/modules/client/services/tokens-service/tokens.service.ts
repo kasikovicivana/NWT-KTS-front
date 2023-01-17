@@ -83,7 +83,6 @@ export class TokensService {
 
   getTokenPrice() {
     const payUrl = this.systemUrl + `/getTokenPrice`;
-    const header = this.loginService.getAuthorizationHeader();
-    return this._http.get<any>(payUrl, { headers: header });
+    return this._http.get<any>(payUrl);
   }
 }

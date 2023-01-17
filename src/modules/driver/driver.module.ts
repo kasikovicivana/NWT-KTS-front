@@ -13,6 +13,7 @@ import {
 import { MdbCheckboxModule } from 'mdb-angular-ui-kit/checkbox';
 import { MdbRadioModule } from 'mdb-angular-ui-kit/radio';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [],
@@ -30,6 +31,7 @@ import { CommonModule } from '@angular/common';
     NoopAnimationsModule,
     MdbCheckboxModule,
     MdbRadioModule,
+    SharedModule,
     //RouterModule.forChild(AuthRoutes),
   ],
   providers: [],

@@ -26,11 +26,11 @@ export class LoginService {
     window.location.href = '/';
   }
 
-  getAuthorizationHeader() {
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      Authorization: `Bearer ` + sessionStorage.getItem('accessToken'),
-    });
-  }
+  // getAuthorizationHeader() {
+  //   return new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Access-Control-Allow-Origin': '*',
+  //     Authorization: `Bearer ` + sessionStorage.getItem('accessToken'),
+  //   });
+  // }
 }

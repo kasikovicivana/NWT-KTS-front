@@ -7,7 +7,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { UtilService } from '../../services/util.service';
+import { UtilService } from '../../services/util-service/util.service';
 
 @Component({
   selector: 'app-pagination',
