@@ -1,0 +1,42 @@
+<section class="main vh-100">
+  <div class="row bg-dark">
+    <span style="margin-left: 20px;color: white">
+      <span style="margin-left: 230px"><strong>Choose role: </strong></span>
+       <input (click)="getClients(0)" checked id="client" name="role" style="margin-left: 20px" type="radio"
+              value="Client">
+       <label for="client">Client</label>
+       <input (click)="getDrivers(0)" id="driver" name="role" style="margin-left: 20px" type="radio" value="Driver">
+       <label for="driver">Driver</label>
+    </span>
+  </div>
+  <div style="margin-left: 250px; margin-right: 250px; ">
+    <span *ngIf="showClients">
+      <span *ngFor="let x of clients">
+        <app-user-block-card (blockEvent)="blockClient($event)" (someEvent)="viewModal($event)"
+                             [user]="x"></app-user-block-card>
+      </span>
+    <span *ngIf="clients === undefined"><br> <h4> There are no clients to show. </h4>
+    </span>
+    </span>
+    <span *ngIf="!showClients">
+      <span *ngFor="let x of drivers">
+        <app-user-block-card (blockEvent)="blockDriver($event)" (someEvent)="viewModal($event)"
+                             [user]="x"></app-user-block-card>
+      </span>
+    <span *ngIf="drivers === undefined"><br> <h4> There are no drivers to show. </h4> </span>
+    </span>
+
+    <app-pagination #pagination
+                    (pageSelected)="changePage($event)"
+                    *ngIf="totalSize!==0"
+                    [activePage]="currentPage"
+                    [pageSize]="pageSize"
+                    [totalItems]="totalSize"
+    >
+    </app-pagination>
+  </div>
+
+  <app-note-modal (closeEvent)="close()" *ngIf="showModal" [currentUser]="currentUser" [notesObj]="notesObj"
+                  [notes]="notes"></app-note-modal>
+
+</section>

@@ -1,0 +1,23 @@
+<section style="overflow: hidden">
+  <div class="row">
+
+    <div class="col-3">
+      <app-side-bar (openModal)="setShowModalToTrue()"></app-side-bar>
+    </div>
+
+
+    <div class="col-9">
+      <app-map></app-map>
+    </div>
+
+    <div *ngIf="loggedUserRole !== 'ROLE_admin'">
+      <app-live-chat></app-live-chat>
+    </div>
+
+
+    <div *ngIf="showModal">
+      <app-stepper-modal (closeModal)="setShowModalToFalse()"></app-stepper-modal>
+    </div>
+
+  </div>
+</section>

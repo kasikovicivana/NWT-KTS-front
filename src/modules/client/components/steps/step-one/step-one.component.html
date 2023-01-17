@@ -1,0 +1,87 @@
+<div class="container">
+  <form #formRef="ngForm"
+        (ngSubmit)="stepOneSubmit()"
+        [formGroup]="stepOneForm"
+        autocomplete="off"
+        novalidate>
+
+    <div class="list-group list-group-light pt-3 pb-3">
+      <a (click)="selectCar('car_1')" [class.active]="active === 'car_1'"
+         class="list-group-item list-group-item-action px-3 pt-2 rounded-3 mb-2 list-group-item-dark"
+         href="javascript:void(0)"
+         id="car_1">
+        <div class="row align-items-center">
+          <div class="col-3">
+            <img alt="" class="rounded-1" src="../../../../../assets/c4.png"
+                 style="height: 45px"/>
+          </div>
+          <span class="col-5" style="font-size: 18px;padding-left: 20px">Comfort ride</span>
+          <span class="col-2" style="margin-left: -30px"><em class="fa fa-user"></em> 4</span>
+          <span class="col-2" style="font-size: 18px;margin-left: 20px">$25</span>
+        </div>
+      </a>
+      <a (click)="selectCar('car_2')" [class.active]="active === 'car_2'"
+         class="list-group-item list-group-item-action px-3 rounded-3 mb-2 list-group-item-dark"
+         href="javascript:void(0)"
+         id="car_2">
+        <div class="row align-items-center">
+          <div class="col-3">
+            <img alt="" class="rounded-1" src="../../../../../assets/c5.png"
+                 style="height: 45px"/>
+          </div>
+          <span class="col-5" style="font-size: 18px;padding-left: 20px">Van XL</span>
+          <span class="col-2" style="margin-left: -30px"><em class="fa fa-user"></em> 6</span>
+          <span class="col-2" style="font-size: 18px;margin-left: 20px">$30</span>
+        </div>
+      </a>
+      <a (click)="selectCar('car_3')" [class.active]="active === 'car_3'"
+         class="list-group-item list-group-item-action px-3 rounded-3 mb-2 list-group-item-dark"
+         href="javascript:void(0)"
+         id="car_3">
+        <div class="row align-items-center">
+          <div class="col-3">
+            <img alt="" class="rounded-1" src="../../../../../assets/c6.png"
+                 style="height: 45px"/>
+          </div>
+          <span class="col-5" style="font-size: 18px;padding-left: 20px">Minibus</span>
+          <span class="col-2" style="margin-left: -30px"><em class="fa fa-user"></em> 8</span>
+          <span class="col-2" style="font-size: 18px;margin-left: 20px">$40</span>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="row pb-3">
+      <div class="form-check col-6">
+        <input
+          class="green-check"
+          id="pets"
+          mdbCheckbox
+          type="checkbox"
+          value=""
+        />
+        <label class="form-check-label" for="pets">
+          Riding with pets
+        </label>
+      </div>
+
+      <div class="form-check col-6">
+        <input
+          class="green-check"
+          id="babies"
+          mdbCheckbox
+          type="checkbox"
+          value=""
+        />
+        <label class="form-check-label" for="babies">
+          Riding with babies
+        </label>
+      </div>
+    </div>
+
+    <div class="button">
+      <button cdkStepperNext class="btn btn-success btn-rounded" type="submit">Next</button>
+    </div>
+
+  </form>
+</div>
