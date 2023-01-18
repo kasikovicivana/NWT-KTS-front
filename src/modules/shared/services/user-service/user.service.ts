@@ -76,4 +76,9 @@ export class UserService {
     const newUrl = this.url + '/getClient';
     return this._http.get<any>(newUrl);
   }
+
+  getLoggedAdmin() {
+    const newUrl = this.url + '/getLoggedAdmin';
+    return this._http.get<any>(newUrl);
+  }
 }

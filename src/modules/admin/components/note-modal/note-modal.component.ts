@@ -5,6 +5,8 @@ import { Driver } from '../../../app/model/driver.model';
 import { NoteService } from '../../services/note-service/note.service';
 import { Note } from '../../../app/model/note.model';
 import { AlertsService } from '../../../shared/services/alerts-service/alerts.service';
+import { ProfileViewService } from '../../../shared/services/profile-view-service/profile-view.service';
+import { UserService } from '../../../shared/services/user-service/user.service';
 
 @Component({
   selector: 'app-note-modal',
@@ -25,7 +27,8 @@ export class NoteModalComponent {
 
   constructor(
     private noteService: NoteService,
-    private alertService: AlertsService
+    private alertService: AlertsService,
+    private userService: UserService
   ) {}
 
   customTrackBy(index: number): number {
@@ -59,12 +62,17 @@ export class NoteModalComponent {
       data.notesObj = this.notesObj;
       data.notes = this.notes;
       data.user = this.currentUser;
-      this.noteService.getAdminInfo().subscribe((res) => {
-        data.adminId = res;
-        this.noteService.editNotes(data);
-        this.noteService.saveNotes(data).subscribe();
-        this.close();
-        this.alertService.successAlert();
+      this.userService.getLoggedAdmin().subscribe({
+        next: (res) => {
+          data.adminId = res.id;
+          this.noteService.editNotes(data);
+          this.noteService.saveNotes(data).subscribe();
+          this.close();
+          this.alertService.successAlert();
+        },
+        error: (err) => {
+          console.log(err);
+        },
       });
     }
   }

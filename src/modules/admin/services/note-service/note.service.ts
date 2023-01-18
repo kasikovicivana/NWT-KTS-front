@@ -71,6 +71,7 @@ export class NoteService {
     let subject = new Subject<number>();
     this.userService.getLoggedUser().subscribe({
       next: (data) => {
+        console.log(data);
         adminId = data.id;
         subject.next(adminId);
       },
