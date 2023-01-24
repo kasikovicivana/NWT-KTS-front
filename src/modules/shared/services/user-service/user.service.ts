@@ -25,6 +25,11 @@ export class UserService {
     );
   }
 
+  getUser(email: string) {
+    let getUserUrl = environment.backendUrl + 'api/user/getUser/';
+    return this._http.get<any>(getUserUrl + email);
+  }
+
   resetPassword(token: string, newPassword: string) {
     const header = new HttpHeaders({
       'Content-Type': 'application/json',

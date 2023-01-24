@@ -1,0 +1,19 @@
+<section class="vh-80 min-vh-100 hero-main">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-10 mb-4 mb-lg-0">
+        <div class="mb-4 col-2">
+          <div class="form-floating form-white">
+            <select class="form-select form-control bg-dark text-light" id="role" required>
+              <option value="Driver">Date</option>
+              <option value="Client">Price</option>
+              <option value="Client">Route</option>
+            </select>
+            <label mdbLabel class="form-label text-light" for="role">Sort by</label>
+          </div>
+        </div>
+        <app-drive-history-table [drives]="drives"></app-drive-history-table>
+      </div>
+    </div>
+  </div>
+</section>

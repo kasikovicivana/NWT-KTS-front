@@ -2,7 +2,7 @@ import { MessageClient } from './client.model';
 
 export class ChatMessage {
   constructor(
-    public from: string = '',
+    public from: MessageClient,
     public text: string = '',
     public to: string = ''
   ) {}

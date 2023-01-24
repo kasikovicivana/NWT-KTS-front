@@ -17,16 +17,16 @@
 
 
         <ng-container *ngFor="let m of webSocket.webSocketMessage">
-          <div *ngIf="m.from !== client.email" class="d-flex flex-row p-2">
+          <div *ngIf="m.from.email !== client.email" class="d-flex flex-row p-2">
             <img height="30" src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-7.png"
                  width="30">
             <div class="chat ml-2"><span class="text-muted">{{m.text}}</span></div>
           </div>
-          <div *ngIf="m.from === client.email" class="d-flex flex-row p-2 justify-content-end">
+          <div *ngIf="m.from.email === client.email" class="d-flex flex-row p-2 justify-content-end">
             <div class="bg-white mr-2 chat-me"><span class="text-muted">{{m.text}}</span></div>
             <img *ngIf="client.email !== '' && !client.isSocialLogin" [src]="srcData" alt="Image" class="p-1"
                  height="30" style="border-radius: 50%;" width="30">
-            <img *ngIf="client.email !== '' && client.isSocialLogin" alt="Image" class="img-fluid"
+            <img *ngIf="client.email !== '' && client.isSocialLogin" alt="Image" class="p-1" style="border-radius: 50%;"
                  height="30" src="{{client.photo}}" width="30">
             <img *ngIf="client.email === ''"
                  height="30" src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-7.png"

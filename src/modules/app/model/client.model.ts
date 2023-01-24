@@ -27,6 +27,7 @@ export class MessageClient {
     public name: string = '',
     public surname: string = '',
     public email: string = '',
-    public photo: string = ''
+    public photo: string = '',
+    public isSocialLogin: boolean = false
   ) {}
 }

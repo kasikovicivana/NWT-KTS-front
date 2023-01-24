@@ -3,6 +3,7 @@ import { PurchaseTokensComponent } from './pages/purchase-tokens/purchase-tokens
 import { SuccessfulPaymentComponent } from './pages/confirm-payment/successful-payment.component';
 import { ProfileViewComponent } from './pages/profile-view/profile-view.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
+import { ClientDriveHistoryComponent } from './pages/client-drive-history/client-drive-history.component';
 
 export const ClientRoutes: Routes = [
   {
@@ -27,5 +28,11 @@ export const ClientRoutes: Routes = [
     path: 'home',
     pathMatch: 'full',
     component: HomepageComponent,
+  },
+
+  {
+    path: 'clientHistory',
+    pathMatch: 'full',
+    component: ClientDriveHistoryComponent,
   },
 ];

@@ -1,0 +1,26 @@
+<table class="table bg-white table-hover " style="border-radius: .5rem;font-size: 18px">
+  <thead class="table-dark">
+  <tr>
+    <th scope="col">Route</th>
+    <th scope="col">Price</th>
+    <th scope="col">Date</th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let drive of drives">
+    <td>Strazilovska-Puskinova</td>
+    <td>{{drive.price}}$</td>
+    <td>{{drive.startTime[2]}}.{{drive.startTime[1]}}.{{drive.startTime[0]}}</td>
+    <td>
+      <button
+        type="button"
+        class="btn btn-rounded btn-sm fw-bold btn-success"
+        style="font-size: 15px">
+        Details
+      </button>
+    </td>
+  </tr>
+
+  </tbody>
+</table>

@@ -30,6 +30,7 @@ import { MapComponent } from '../shared/components/map/map.component';
 import { CollapseListComponent } from '../shared/components/collapse-list/collapse-list.component';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
+import { ClientDriveHistoryComponent } from './pages/client-drive-history/client-drive-history.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { SharedModule } from '../shared/shared.module';
     SideBarComponent,
     MapComponent,
     CollapseListComponent,
+    ClientDriveHistoryComponent,
   ],
   imports: [
     RouterModule.forChild(ClientRoutes),

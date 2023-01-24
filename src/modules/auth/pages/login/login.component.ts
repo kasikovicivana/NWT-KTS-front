@@ -10,6 +10,7 @@ import {
 } from '@abacritt/angularx-social-login';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { MailModalComponent } from '../../../app/components/mail-modal/mail-modal.component';
+import { UserService } from '../../../shared/services/user-service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private socialAuthService: SocialAuthService,
     private loginService: LoginService,
+    private userService: UserService,
     private alerts: AlertsService,
     private modalService: MdbModalService
   ) {}
@@ -36,7 +38,7 @@ export class LoginComponent implements OnInit {
       this.socialUser = user;
       this.isLoggedIn = user != null;
       if (this.isLoggedIn) {
-        this.loginService.getUser(this.socialUser.email).subscribe(
+        this.userService.getUser(this.socialUser.email).subscribe(
           (data) => {
             this.isRegistered = true;
             this.userInfo.username = this.socialUser.email;

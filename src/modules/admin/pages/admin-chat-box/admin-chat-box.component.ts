@@ -10,6 +10,10 @@ import { ChatMessage, ClientChatMessage } from '../../../app/model/chat.model';
 import { MessageClient } from '../../../app/model/client.model';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ImageService } from '../../../shared/services/image-service/image.service';
+import { UserService } from '../../../shared/services/user-service/user.service';
+import { Browser } from 'leaflet';
+import retina = Browser.retina;
+import { User } from '../../../app/model/user.model';
 
 @Component({
   selector: 'app-admin-chat-box',
@@ -30,7 +34,8 @@ export class AdminChatBoxComponent implements OnInit, AfterViewChecked {
   constructor(
     public webSocket: WebSocketService,
     private imageService: ImageService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    public userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +44,7 @@ export class AdminChatBoxComponent implements OnInit, AfterViewChecked {
       //this.webSocket.webSocketMessage = [...data.map()];
       data.map((x) =>
         this.webSocket.webSocketMessage.push(
-          new ChatMessage(x.from.email, x.text, x.to.email)
+          new ChatMessage(x.from, x.text, x.to.email)
         )
       );
       this.addClients(data);
@@ -54,6 +59,11 @@ export class AdminChatBoxComponent implements OnInit, AfterViewChecked {
       this.findClients(message.from);
       this.findClients(message.to);
     }
+  }
+
+  checkClient(m: ChatMessage): boolean {
+    let usernames = this.clientBoxes.map((x) => x.email);
+    return m.from.email != this.email && !usernames.includes(m.from.email);
   }
 
   findClients(client: MessageClient) {
@@ -73,11 +83,9 @@ export class AdminChatBoxComponent implements OnInit, AfterViewChecked {
   }
 
   sendMessage() {
-    let msg = new ChatMessage(
-      this.email!,
-      this.messageText,
-      this.activeClient.email
-    );
+    let admin = new MessageClient();
+    admin.email = this.email!;
+    let msg = new ChatMessage(admin, this.messageText, this.activeClient.email);
     this.webSocket.sendMessage(msg);
     this.messageText = '';
   }

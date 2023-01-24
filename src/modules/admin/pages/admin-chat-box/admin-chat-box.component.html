@@ -17,13 +17,28 @@
                   [class.active]="activeClient.email === client.email">
                 <div class="d-flex bd-highlight">
                   <div class="img_cont">
-                    <img [src]="clientPhotos.get(client.email)" class="rounded-circle user_img">
+                    <img *ngIf="!client.isSocialLogin" [src]="clientPhotos.get(client.email)" class="rounded-circle user_img">
+                    <img *ngIf="client.isSocialLogin" src="{{client.photo}}" alt="Image" class="rounded-circle user_img">
                   </div>
                   <div class="user_info">
                     <span>{{client.name}} {{client.surname}}</span>
                   </div>
                 </div>
               </li>
+              <div *ngFor="let message of webSocket.webSocketMessage" (click)="changeActiveClient(message.from)" [class.active]="activeClient.email === message.from.email">
+                <li *ngIf="checkClient(message)">
+                  <div class="d-flex bd-highlight">
+                    <div class="img_cont">
+                      <img *ngIf="!message.from.isSocialLogin" [src]="clientPhotos.get(message.from.email)" class="rounded-circle user_img">
+                      <img *ngIf="message.from.isSocialLogin" src="{{message.from.photo}}" alt="Image" class="rounded-circle user_img">
+                    </div>
+                    <div class="user_info">
+                      <span>{{message.from.name}} {{message.from.surname}}</span>
+                    </div>
+                  </div>
+                </li>
+              </div>
+
             </div>
           </div>
           <div class="card-footer"></div>
@@ -34,7 +49,8 @@
           <div class="card-header msg_head">
             <div class="d-flex bd-highlight">
               <div class="img_cont">
-                <img [src]="clientPhotos.get(activeClient.email)" class="rounded-circle user_img">
+                <img *ngIf="!activeClient.isSocialLogin" [src]="clientPhotos.get(activeClient.email)" class="rounded-circle user_img">
+                <img *ngIf="activeClient.isSocialLogin" src="{{activeClient.photo}}" alt="Image" class="rounded-circle user_img_msg">
               </div>
               <div class="user_info">
                 <span>Chat with {{activeClient.name}} {{activeClient.surname}}</span>
@@ -43,17 +59,19 @@
           </div>
           <div #scrollMe class="card-body msg_card_body">
             <ng-container *ngFor="let message of webSocket.webSocketMessage">
-              <ng-container *ngIf="message.from === activeClient.email || message.to === activeClient.email">
-                <div *ngIf="message.from !== email" class="d-flex justify-content-start mb-4">
+              <ng-container *ngIf="message.from.email === activeClient.email || message.to === activeClient.email">
+                <div *ngIf="message.from.email !== email" class="d-flex justify-content-start mb-4">
                   <div class="img_cont_msg">
-                    <img [src]="clientPhotos.get(message.from)" class="rounded-circle user_img_msg">
+                    <img *ngIf="!activeClient.isSocialLogin" [src]="clientPhotos.get(message.from.email)" class="rounded-circle user_img_msg">
+                    <img *ngIf="activeClient.isSocialLogin" src="{{activeClient.photo}}" alt="Image" class="rounded-circle user_img_msg">
+
                   </div>
                   <div class="msg_container">
                     {{message.text}}
                   </div>
                 </div>
 
-                <div *ngIf="message.from === email" class="d-flex justify-content-end mb-4">
+                <div *ngIf="message.from.email === email" class="d-flex justify-content-end mb-4">
                   <div class="msg_container_send">
                     {{message.text}}
                   </div>

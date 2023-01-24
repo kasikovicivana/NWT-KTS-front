@@ -26,7 +26,7 @@ export class WebSocketService {
       that.stompClient.subscribe('/chat', (message: { body: string }) => {
         if (message.body) {
           let msg: ChatMessage = JSON.parse(message.body);
-          if (msg.from === client || isAdmin || msg.to === client) {
+          if (msg.from.email === client || isAdmin || msg.to === client) {
             that.webSocketMessage.push(msg);
             console.log(message.body);
           }

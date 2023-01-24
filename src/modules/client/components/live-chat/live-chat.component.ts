@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { WebSocketService } from '../../../shared/services/web-socket-service/web-socket.service';
 import { ChatMessage } from '../../../app/model/chat.model';
-import { Client } from '../../../app/model/client.model';
+import { Client, MessageClient } from '../../../app/model/client.model';
 import { ProfileViewService } from '../../../shared/services/profile-view-service/profile-view.service';
 import { ImageService } from '../../../shared/services/image-service/image.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -61,7 +61,7 @@ export class LiveChatComponent implements OnInit, AfterViewChecked {
         //this.webSocket.webSocketMessage = [...data];
         data.map((x) =>
           this.webSocket.webSocketMessage.push(
-            new ChatMessage(x.from.email, x.text, x.to.email)
+            new ChatMessage(x.from, x.text, x.to.email)
           )
         );
       },
@@ -85,7 +85,14 @@ export class LiveChatComponent implements OnInit, AfterViewChecked {
   }
 
   sendMessage() {
-    let msg = new ChatMessage(this.client.email, this.messageText, 'admins');
+    let sender = new MessageClient(
+      this.client.name,
+      this.client.surname,
+      this.client.email,
+      this.client.photo,
+      this.client.isSocialLogin
+    );
+    let msg = new ChatMessage(sender, this.messageText, 'admins');
     this.webSocket.sendMessage(msg);
     this.messageText = '';
   }

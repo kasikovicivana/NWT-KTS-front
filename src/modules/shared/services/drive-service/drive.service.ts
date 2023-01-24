@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { DriverRoutes } from '../../../app/model/driverRoutes.model';
+import { Drive } from '../../../app/model/drive.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,5 +18,9 @@ export class DriveService {
 
   loadPositions() {
     return this._http.get<any>(this.url + '/positions');
+  }
+
+  getClientDriveHistory() {
+    return this._http.get<Set<Drive>>(this.url + '/getAll');
   }
 }
