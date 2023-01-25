@@ -45,7 +45,6 @@ import { ClientDriveHistoryComponent } from './pages/client-drive-history/client
     StepTwoComponent,
     StepThreeComponent,
     SideBarComponent,
-    MapComponent,
     CollapseListComponent,
     ClientDriveHistoryComponent,
   ],
@@ -68,5 +67,6 @@ import { ClientDriveHistoryComponent } from './pages/client-drive-history/client
     StarRatingModule.forChild(),
   ],
   providers: [],
+  exports: [GradeModalComponent],
 })
 export class ClientModule {}

@@ -3,12 +3,12 @@ import { Route } from './route.model';
 
 export class Drive {
   constructor(
-    public id: number,
-    public driver: Driver,
-    public startTime: number[],
-    public endTIme: number[],
-    public price: number,
-    public status: string,
+    public id: number = 0,
+    public driver: Driver = new Driver(),
+    public startTime: Date = new Date(),
+    public endTIme: Date = new Date(),
+    public price: number = 0,
+    public status: string = '',
     public routes: Set<Route> = new Set<Route>()
   ) {}
 }

@@ -8,7 +8,9 @@ import { Drive } from '../../../app/model/drive.model';
   styleUrls: ['./client-drive-history.component.css'],
 })
 export class ClientDriveHistoryComponent implements OnInit {
-  public drives: Set<Drive> = new Set<Drive>();
+  public drives: Drive[] = [];
+  showModal: boolean = false;
+  drive: Drive = new Drive();
   constructor(private driveService: DriveService) {}
 
   ngOnInit(): void {
@@ -16,8 +18,40 @@ export class ClientDriveHistoryComponent implements OnInit {
       (data) => {
         console.log(data);
         this.drives = data;
+        this.convertToDate();
+        this.sortByDate();
       },
       (err) => console.log(err)
     );
+  }
+
+  convertToDate() {
+    for (let drive of this.drives) {
+      let date = drive.startTime.toString();
+      let comp = date.split(',');
+      drive.startTime = new Date(
+        parseFloat(comp[0]),
+        parseFloat(comp[1]) - 1,
+        parseFloat(comp[2])
+      );
+    }
+  }
+
+  sortByDate() {
+    this.drives.sort((a, b) => b.startTime.getTime() - a.startTime.getTime());
+  }
+
+  onChangeSort(sortBy: string) {
+    if (sortBy === 'Price') {
+      this.drives.sort((a, b) => a.price - b.price);
+    } else if (sortBy === 'Date') {
+      this.sortByDate();
+    }
+    //jos za rute kad budu dodati nazivi ulice
+  }
+
+  openModal(drive: Drive) {
+    this.showModal = true;
+    this.drive = drive;
   }
 }

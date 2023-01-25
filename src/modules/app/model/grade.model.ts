@@ -8,4 +8,5 @@ export interface GradeModel {
   driverSurname: string;
   driveId: number;
   carType: string;
+  clientEmail: string;
 }

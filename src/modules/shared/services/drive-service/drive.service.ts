@@ -21,6 +21,14 @@ export class DriveService {
   }
 
   getClientDriveHistory() {
-    return this._http.get<Set<Drive>>(this.url + '/getAll');
+    return this._http.get<Drive[]>(this.url + '/getAllClientDrives');
+  }
+
+  getDriverDriveHistory() {
+    return this._http.get<Drive[]>(this.url + '/getAllDriverDrives');
+  }
+
+  getDriveHistory() {
+    return this._http.get<Drive[]>(this.url + '/getAll');
   }
 }

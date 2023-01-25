@@ -17,6 +17,11 @@ export class GradeService {
     return this._http.get<any>(newUrl);
   }
 
+  getAllDriveGrades(driveId: number) {
+    const newUrl = this.gradeUrl + '/getAllGrades/' + driveId;
+    return this._http.get<GradeModel[]>(newUrl);
+  }
+
   saveGrade(grade: GradeModel) {
     const newUrl = this.gradeUrl + '/save';
     return this._http.post<any>(newUrl, grade);

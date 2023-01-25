@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Drive } from '../../../app/model/drive.model';
 
 @Component({
@@ -7,9 +7,14 @@ import { Drive } from '../../../app/model/drive.model';
   styleUrls: ['./drive-history-table.component.css'],
 })
 export class DriveHistoryTableComponent implements OnInit {
-  @Input() drives: Set<Drive> = new Set<Drive>();
+  @Input() drives: Drive[] = [];
+  @Output() openModal = new EventEmitter<Drive>();
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  openDetailsModal(drive: Drive) {
+    this.openModal.emit(drive);
+  }
 }

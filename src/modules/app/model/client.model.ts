@@ -1,5 +1,3 @@
-import { SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-
 import { Note } from './note.model';
 
 export class Client {
