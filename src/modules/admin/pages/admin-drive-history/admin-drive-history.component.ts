@@ -1,24 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { DriveService } from '../../../shared/services/drive-service/drive.service';
 import { Drive } from '../../../app/model/drive.model';
+import { DriveService } from '../../../shared/services/drive-service/drive.service';
 
 @Component({
-  selector: 'app-client-drive-history',
-  templateUrl: './client-drive-history.component.html',
-  styleUrls: ['./client-drive-history.component.css'],
+  selector: 'app-admin-drive-history',
+  templateUrl: './admin-drive-history.component.html',
+  styleUrls: ['./admin-drive-history.component.css'],
 })
-export class ClientDriveHistoryComponent implements OnInit {
+export class AdminDriveHistoryComponent implements OnInit {
   public drives: Drive[] = [];
   showModal: boolean = false;
   drive: Drive = new Drive();
   constructor(private driveService: DriveService) {}
 
   ngOnInit(): void {
-    this.getDriveHistory();
-  }
-
-  getDriveHistory() {
-    this.driveService.getClientDriveHistory().subscribe(
+    this.driveService.getDriveHistory().subscribe(
       (data) => {
         this.drives = data;
         this.convertToDate();

@@ -26,7 +26,6 @@ import { StepOneComponent } from './components/steps/step-one/step-one.component
 import { StepTwoComponent } from './components/steps/step-two/step-two.component';
 import { StepThreeComponent } from './components/steps/step-three/step-three.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
-import { MapComponent } from '../shared/components/map/map.component';
 import { CollapseListComponent } from '../shared/components/collapse-list/collapse-list.component';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';

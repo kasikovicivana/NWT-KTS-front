@@ -17,4 +17,17 @@ export class DriveHistoryTableComponent implements OnInit {
   openDetailsModal(drive: Drive) {
     this.openModal.emit(drive);
   }
+
+  sortByDate() {
+    this.drives.sort((a, b) => b.startTime.getTime() - a.startTime.getTime());
+  }
+
+  onChangeSort(sortBy: string) {
+    if (sortBy === 'Price') {
+      this.drives.sort((a, b) => a.price - b.price);
+    } else if (sortBy === 'Date') {
+      this.sortByDate();
+    }
+    //jos za rute kad budu dodati nazivi ulice
+  }
 }

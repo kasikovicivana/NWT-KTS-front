@@ -14,8 +14,10 @@
       <li *ngIf="role === 'ROLE_admin'" class="nav-item">
         <a class="nav-link" href="/messages">Messages </a>
       </li>
-      <li *ngIf="role === 'ROLE_client'" class="nav-item">
-        <a class="nav-link" href="/clientHistory">History </a>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="role === 'ROLE_client'" href="/clientHistory">History </a>
+        <a class="nav-link" *ngIf="role === 'ROLE_driver'" href="/driverHistory">History </a>
+        <a class="nav-link" *ngIf="role === 'ROLE_admin'" href="/adminHistory">History </a>
       </li>
     </ul>
     <span class="navbar-text">

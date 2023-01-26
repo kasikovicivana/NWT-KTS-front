@@ -7,9 +7,6 @@ import { BlockUserComponent } from './pages/block-user/block-user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
-import { OverlayModule } from '@angular/cdk/overlay';
-import { NgStepperModule } from 'angular-ng-stepper';
-import { CdkStepperModule } from '@angular/cdk/stepper';
 import {
   BrowserAnimationsModule,
   NoopAnimationsModule,
@@ -21,6 +18,7 @@ import { UserBlockCardComponent } from './components/user-block-card/user-block-
 import { PaginationComponent } from '../shared/components/pagination/pagination.component';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
+import { AdminDriveHistoryComponent } from './pages/admin-drive-history/admin-drive-history.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +27,7 @@ import { SharedModule } from '../shared/shared.module';
     NoteModalComponent,
     UserBlockCardComponent,
     PaginationComponent,
+    AdminDriveHistoryComponent,
   ],
   imports: [
     RouterModule.forChild(AdminRoutes),
@@ -38,9 +37,6 @@ import { SharedModule } from '../shared/shared.module';
     MdbFormsModule,
     MdbValidationModule,
     ReactiveFormsModule,
-    OverlayModule,
-    NgStepperModule,
-    CdkStepperModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
     MdbCheckboxModule,

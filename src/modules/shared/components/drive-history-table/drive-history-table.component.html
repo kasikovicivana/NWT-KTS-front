@@ -1,25 +1,38 @@
-<table class="table bg-white table-hover " style="border-radius: .5rem;font-size: 18px">
-  <thead class="table-dark">
-  <tr>
-    <th scope="col">Route</th>
-    <th scope="col">Price</th>
-    <th scope="col">Date</th>
-    <th scope="col"></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let drive of drives">
-    <td>Strazilovska-Puskinova</td>
-    <td>{{drive.price}}$</td>
-    <td>{{drive.startTime.getDate()}}.{{drive.startTime.getMonth() + 1}}.{{drive.startTime.getFullYear()}}</td>
-    <td>
-      <button
-        type="button"
-        class="btn btn-rounded btn-sm fw-bold btn-success"
-        style="font-size: 15px" (click)="openDetailsModal(drive)">
-        Details
-      </button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div>
+  <div class="mb-4 col-2">
+    <div class="form-floating form-white">
+      <select #sortBy (change)="onChangeSort(sortBy.value)" class="form-select form-control bg-dark text-light" id="role" required>
+        <option value="Date">Date</option>
+        <option value="Price">Price</option>
+        <option value="Route">Route</option>
+      </select>
+      <label mdbLabel class="form-label text-light" for="role">Sort by</label>
+    </div>
+  </div>
+  <table class="table bg-white table-hover " style="border-radius: .5rem;font-size: 18px">
+    <thead class="table-dark">
+    <tr>
+      <th scope="col">Route</th>
+      <th scope="col">Price</th>
+      <th scope="col">Date</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let drive of drives">
+      <td>Strazilovska-Puskinova</td>
+      <td>{{drive.price}}$</td>
+      <td>{{drive.startTime.getDate()}}.{{drive.startTime.getMonth() + 1}}.{{drive.startTime.getFullYear()}}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-rounded btn-sm fw-bold btn-success"
+          style="font-size: 15px" (click)="openDetailsModal(drive)">
+          Details
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

@@ -5,9 +5,9 @@ import { DriveHistoryTableComponent } from './components/drive-history-table/dri
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
 import { CommonModule } from '@angular/common';
 import { DriveDetailsModalComponent } from './components/drive-details-modal/drive-details-modal.component';
-import { ClientModule } from '../client/client.module';
 import { MapComponent } from './components/map/map.component';
 import { StarRatingModule } from 'angular-star-rating';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 
 @NgModule({
   providers: [
@@ -23,6 +23,6 @@ import { StarRatingModule } from 'angular-star-rating';
     DriveDetailsModalComponent,
     MapComponent,
   ],
-  imports: [MdbRippleModule, CommonModule, StarRatingModule],
+  imports: [MdbRippleModule, CommonModule, StarRatingModule, MdbFormsModule],
 })
 export class SharedModule {}

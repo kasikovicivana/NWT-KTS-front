@@ -11,13 +11,34 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-5">
-              <div class="img_cont">
-                <img [src]="srcData" class="rounded-circle user_img">
+              <div *ngIf="role === 'ROLE_client'">
+                <div class="img_cont">
+                  <img [src]="srcData" class="rounded-circle user_img">
+                </div>
+                <div class="text-center">
+                  <h5 class="pt-3" style="padding-bottom: 0">{{drive.driver.name}} {{drive.driver.surname}}</h5>
+                  <p class="pt-0">Driver</p>
+                </div>
               </div>
-              <div class="text-center">
-                <h5 class="pt-3" style="padding-bottom: 0">{{drive.driver.name}} {{drive.driver.surname}}</h5>
-                <p class="pt-0">Driver</p>
+
+              <div>
+                <div *ngIf="role === 'ROLE_admin'">
+                  <strong>Driver: </strong><span class="pt-3" style="padding-bottom: 0">{{drive.driver.name}} {{drive.driver.surname}}</span>
+                </div>
+                <div class="row" *ngIf="role === 'ROLE_admin' || role === 'ROLE_driver'">
+                  <div class="col-4" >
+                    <strong>Passengers: </strong>
+                  </div>
+                  <div class="col-8 px-1">
+                    <ul>
+                      <li *ngFor="let a of drive.passengers">{{a.name}} {{a.surname}}</li>
+                    </ul>
+                  </div>
+
+                </div>
+
               </div>
+
 
               <div class="row pt-3 pb-1">
                 <span class="col-6" style="padding-right: 0">Driver grade: </span><star-rating class="col-5" [rating]="driverGrade"></star-rating>
@@ -32,7 +53,7 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer justify-content-start">
+        <div *ngIf="role === 'ROLE_client'" class="modal-footer justify-content-start">
           <button
             type="button"
             class="btn btn-rounded btn-sm fw-bold btn-success"
