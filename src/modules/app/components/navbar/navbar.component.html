@@ -8,8 +8,17 @@
       <li class="nav-item">
         <a class="nav-link" href="/home">Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/profile">Profile </a>
+      <li *ngIf="role === 'ROLE_client'" class="nav-item">
+        <a class="nav-link" href="/clientProfile">Profile </a>
+      </li>
+      <li *ngIf="role === 'ROLE_client'" class="nav-item">
+        <a class="nav-link" href="/purchaseTokens">Tokens </a>
+      </li>
+      <li *ngIf="role === 'ROLE_admin'" class="nav-item">
+        <a class="nav-link" href="/adminProfile">Profile </a>
+      </li>
+      <li *ngIf="role === 'ROLE_driver'" class="nav-item">
+        <a class="nav-link" href="/driverProfile">Profile </a>
       </li>
       <li *ngIf="role === 'ROLE_admin'" class="nav-item">
         <a class="nav-link" href="/messages">Messages </a>
@@ -18,6 +27,15 @@
         <a class="nav-link" *ngIf="role === 'ROLE_client'" href="/clientHistory">History </a>
         <a class="nav-link" *ngIf="role === 'ROLE_driver'" href="/driverHistory">History </a>
         <a class="nav-link" *ngIf="role === 'ROLE_admin'" href="/adminHistory">History </a>
+      </li>
+      <li *ngIf="role === 'ROLE_admin'" class="nav-item">
+        <a class="nav-link" href="/reviewDriverChanges">Review changes </a>
+      </li>
+      <li *ngIf="role === 'ROLE_admin'" class="nav-item">
+        <a class="nav-link" href="/blockUsers">Block users</a>
+      </li>
+      <li *ngIf="role === 'ROLE_admin'" class="nav-item">
+        <a class="nav-link" href="/addDriver">Add driver</a>
       </li>
     </ul>
     <span class="navbar-text">

@@ -1,0 +1,45 @@
+<section>
+  <div class="my-2">
+    <article class="media shadow p-4  bg-dark row">
+      <div class="col-3 gradient-custom text-center bg-dark text-white"
+           style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; float: right">
+        <div class="profile mb-3 mt-3">
+          <img [src]="srcData" alt="Image" class="img-fluid">
+        </div>
+
+      </div>
+
+      <div class="col-3" style="color: white">
+        <span style="color: white; margin-left: 25px;">
+          <h3>{{driver.name + " " + driver.surname}}</h3>
+        </span>
+        <br>
+        Contact info
+        <div style="margin-top: 15px;margin-left: 10px">
+          <em class="fa fa-phone"></em>  {{ driver.phoneNumber}} <br>
+          <em class="fa fa-envelope"></em> {{ driver.email}}
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div style="margin-top: 150px">
+          <button  (click)="approveChanges()" class="btn btn-rounded  fw-bold btn-success" style="float: left"
+                  type="button">
+            Approve
+          </button>
+
+          <button (click)="rejectChanges()" class="btn btn-rounded  fw-bold btn-success" style="margin-left: 20px"
+                  type="button">
+            Reject
+          </button>
+
+          <button  class="btn btn-rounded  fw-bold btn-success" style="margin-left: 20px"
+                  type="button">
+            <a style="color: white" routerLink="/detailedDriverChanges/{{info.id}}" routerLinkActive="active">View changes</a>
+          </button>
+
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

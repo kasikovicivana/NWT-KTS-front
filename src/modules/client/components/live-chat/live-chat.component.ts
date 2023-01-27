@@ -8,9 +8,9 @@ import {
 import { WebSocketService } from '../../../shared/services/web-socket-service/web-socket.service';
 import { ChatMessage } from '../../../app/model/chat.model';
 import { Client, MessageClient } from '../../../app/model/client.model';
-import { ProfileViewService } from '../../../shared/services/profile-view-service/profile-view.service';
 import { ImageService } from '../../../shared/services/image-service/image.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { UserService } from '../../../shared/services/user-service/user.service';
 
 @Component({
   selector: 'app-live-chat',
@@ -27,14 +27,14 @@ export class LiveChatComponent implements OnInit, AfterViewChecked {
 
   constructor(
     public webSocket: WebSocketService,
-    private profileViewService: ProfileViewService,
+    private userService: UserService,
     private imageService: ImageService,
     private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
     if (sessionStorage.getItem('role') === 'ROLE_client') {
-      this.profileViewService.getLoggedClient().subscribe((data) => {
+      this.userService.getLoggedClient().subscribe((data) => {
         this.client = data;
         if (!this.client.isSocialLogin) {
           this.imageService.loadImage(this.client.photo).subscribe((data) => {

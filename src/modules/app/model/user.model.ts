@@ -16,7 +16,7 @@ export class User {
     public city: string = '',
     public phoneNumber: string = '',
     public role: string = 'Driver',
-    public photo: string = '',
+    public photo: string = 'unknown.jpg',
     public isSocialLogin: boolean = false,
     public blocked: boolean = false,
     public tokens: number = 0.0

@@ -1,0 +1,145 @@
+<section class="card mb-3" style="border-radius: .5rem;">
+  <div class="row g-0">
+  <div class="col-md-4 gradient-custom text-center bg-dark text-white"
+       style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+    <div class="profile mb-4 mt-5" >
+      <img *ngIf="!info.isSocialLogin" [src]="srcData" alt="Image" class="img-fluid">
+      <img *ngIf="info.isSocialLogin" src="{{info.photo}}" alt="Image" class="img-fluid">
+      <em *ngIf="!approveChanges && info.role !== 'Admin'" (click)="changeProfilePhoto()" class='fa fa-camera '></em>
+      <input #changePhotoButton (change)="addAttachment($event)" accept="image/png, image/gif, image/jpeg"
+             class="form-control" hidden
+             id="image_input" type="file"/>
+    </div>
+    <h5>{{info.name}} {{info.surname}}</h5>
+    <p>{{info.role}}</p>
+  </div>
+  <div class="col-md-8 ">
+    <div class="card-body p-3 ">
+      <div class="row">
+        <div>
+          <div class="p-3 py-3">
+            <h5 class="text-right">Personal data</h5>
+            <hr class="mt-0 mb-4">
+            <div class="row mt-2 pb-3">
+              <div class="col-md-6">
+                <mdb-form-control>
+                  <input mdbValidate mdbInput [(ngModel)]="info.name" [readonly]="isReadonly" [validate]="!isReadonly" #firstName="ngModel" type="text" id="firstName" class="form-control form-control-lg" placeholder="first name" required/>
+                  <label mdbLabel class="form-label" for="firstName">First Name</label>
+                  <mdb-error class="mt-1" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">First name is required</mdb-error>
+                </mdb-form-control>
+              </div>
+
+              <div class="col-md-6">
+                <mdb-form-control>
+                  <input mdbValidate mdbInput [(ngModel)]="info.surname" [readonly]="isReadonly" [validate]="!isReadonly" #lastName="ngModel" type="text" id="lastName" class="form-control form-control-lg" placeholder="last name" required/>
+                  <label mdbLabel class="form-label" for="lastName">Last Name</label>
+                  <mdb-error class="mt-1" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">Last name is required</mdb-error>
+                </mdb-form-control>
+              </div>
+
+            </div>
+            <div class="row mt-2 pb-3">
+              <div class="col-md-6">
+                <mdb-form-control>
+                  <input mdbValidate mdbInput [(ngModel)]="info.email" #email="ngModel" [readonly]="isReadonly" [validate]="!isReadonly"
+                         type="email" email id="emailAddress" class="form-control form-control-lg" placeholder="name@example.com" required/>
+                  <label mdbLabel class="form-label" for="emailAddress">Email</label>
+                  <div *ngIf="email.errors && (email.dirty || email.touched)">
+                    <mdb-error class="mt-1" *ngIf="email.errors['required']">Email is required</mdb-error>
+                    <mdb-error class="mt-1" *ngIf="email.errors['email']">Email is not in valid form</mdb-error>
+                  </div>
+                </mdb-form-control>
+              </div>
+
+              <div class="col-md-6">
+                <mdb-form-control>
+                  <input mdbValidate mdbInput [(ngModel)]="info.phoneNumber" #phone="ngModel" type="text" id="phoneNumber" [readonly]="isReadonly" [validate]="!isReadonly"
+                         class="form-control form-control-lg" placeholder="phone number" pattern="^(\+)?\d{8}\d+$" required/>
+                  <label mdbLabel class="form-label" for="phoneNumber">Phone Number</label>
+                  <div *ngIf="phone.errors && (phone.dirty || phone.touched)">
+                    <mdb-error class="mt-1" *ngIf="phone.errors['required']">Phone number is required</mdb-error>
+                    <mdb-error class="mt-1" *ngIf="phone.errors['pattern']">Phone number requires min 9 digits</mdb-error>
+                  </div>
+                </mdb-form-control>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-12 pb-3">
+                <mdb-form-control>
+                  <input mdbValidate mdbInput [(ngModel)]="info.city" #city="ngModel" type="text" id="city" [readonly]="isReadonly" [validate]="!isReadonly"
+                         class="form-control form-control-lg" placeholder="city" required/>
+                  <label mdbLabel class="form-label" for="city">City</label>
+                  <mdb-error class="mt-1" *ngIf="city.invalid && (city.dirty || city.touched)">City is required</mdb-error>
+                </mdb-form-control>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 mt-3 text-right">
+                <button *ngIf="info.role !== 'Driver' && !approveChanges" #editButton (click)="edit()" class="btn btn-primary bg-dark"
+                        style="float: right" type="button">Edit
+                </button>
+                <button (click)="showModal = true" *ngIf="!info.isSocialLogin && !approveChanges" class="btn btn-primary bg-dark" type="button">
+                  Change password
+
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+
+        <ng-container *ngIf="showModal && !approveChanges">
+          <app-change-password-modal (closeEvent)="closeModal()"></app-change-password-modal>
+        </ng-container>
+      </div>
+
+      <div *ngIf="info.role === 'Driver' || approveChanges">
+        <div class="p-3 py-2 pb-3 mb-3">
+
+          <h5 class="text-right">Car info</h5>
+          <hr class="mt-0 ">
+          <div class="row mt-2 ">
+            <div class="col-md-4">
+              <mdb-form-control>
+                <label mdbLabel class="form-label" style="margin-left: 20px" for="car">Car type <em class="fa fa-question-circle" title="Click me for more info!" (click)="modalView()"  style="font-size: 20px;"></em> </label>
+                <select class="form-select " [(ngModel)]="type" style="width: 80%" aria-label="car_type" id="car" [disabled]="isReadonly">
+                  <option *ngFor="let opt of carTypes" [id]="opt.type" [value]="opt.type" >{{opt.type}}</option>
+                </select>
+              </mdb-form-control>
+            </div>
+            <div class="col-md-4" style="padding-top: 20px">
+              <mdb-form-control>
+                <input class="form-check-input green-check" mdbCheckbox type="checkbox" value=""  [disabled]="isReadonly" id="babies" [checked]="babiesAllowed" (change)="changeBabiesAllowed()">
+                <label class="form-check-label" for="babies" style="font-size: 15px">
+                  Babies allowed
+                </label>
+              </mdb-form-control>
+
+              <mdb-form-control>
+                <input class="form-check-input green-check" mdbCheckbox type="checkbox" value="" [disabled]="isReadonly" id="petFriendly" [checked]="petFriendly" (change)="changepetFriendly()">
+                <label class="form-check-label" for="petFriendly" style="font-size: 15px">
+                  Pet friendly
+                </label>
+              </mdb-form-control>
+            </div>
+            <app-car-type-info *ngIf="viewCarTypeInfo" [carTypes]="carTypes!" (closeEvent)="viewCarTypeInfo=false"></app-car-type-info>
+          </div>
+          <button *ngIf="info.role === 'Driver' && !approveChanges" #requestApprovalButton (click)="requestApproval()" class="btn btn-primary bg-dark"
+                  style="float: right" type="button">Edit
+          </button>
+          <button *ngIf="approveChanges"  (click)="reject()" class="btn btn-primary bg-dark"
+                  style="float: right;margin-left: 10px" type="button">Reject
+          </button>
+          <button *ngIf="approveChanges" (click)="approve()" class="btn btn-primary bg-dark"
+                  style="float: right" type="button">Approve
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

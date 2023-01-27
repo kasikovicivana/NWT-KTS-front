@@ -17,7 +17,7 @@ export class ImageService {
     }),
   };
 
-  constructor(private _http: HttpClient, private loginService: LoginService) {}
+  constructor(private _http: HttpClient) {}
 
   loadImage(photoUrl: string) {
     const newUrl = this.url + '/getImage/' + photoUrl;
@@ -26,6 +26,6 @@ export class ImageService {
 
   addImage(image: Image) {
     const newUrl = this.url + '/addImage';
-    return this._http.post<any>(newUrl, image);
+    return this._http.post<any>(newUrl, image, this.HTTPOptionsForBlob);
   }
 }

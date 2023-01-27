@@ -12,7 +12,7 @@
   <div style="margin-left: 250px; margin-right: 250px; ">
     <span *ngIf="showClients">
       <span *ngFor="let x of clients">
-        <app-user-block-card (blockEvent)="blockClient($event)" (someEvent)="viewModal($event)"
+        <app-user-block-card (blockClient)="blockClient($event)" (someEvent)="viewModal($event)"
                              [user]="x"></app-user-block-card>
       </span>
     <span *ngIf="clients === undefined"><br> <h4> There are no clients to show. </h4>
@@ -20,20 +20,22 @@
     </span>
     <span *ngIf="!showClients">
       <span *ngFor="let x of drivers">
-        <app-user-block-card (blockEvent)="blockDriver($event)" (someEvent)="viewModal($event)"
+        <app-user-block-card (blockDriver)="blockDriver($event)" (blockClient)="blockClient($event)" (someEvent)="viewModal($event)"
                              [user]="x"></app-user-block-card>
       </span>
     <span *ngIf="drivers === undefined"><br> <h4> There are no drivers to show. </h4> </span>
     </span>
 
     <app-pagination #pagination
+                    *ngIf="totalSize !== 0"
                     (pageSelected)="changePage($event)"
-                    *ngIf="totalSize!==0"
                     [activePage]="currentPage"
                     [pageSize]="pageSize"
                     [totalItems]="totalSize"
     >
     </app-pagination>
+    <br/>
+    <br/>
   </div>
 
   <app-note-modal (closeEvent)="close()" *ngIf="showModal" [currentUser]="currentUser" [notesObj]="notesObj"

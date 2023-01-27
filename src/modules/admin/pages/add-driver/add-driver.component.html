@@ -1,0 +1,51 @@
+<section class="vh-80 min-vh-100 hero-main" >
+  <div class="container py-4 h-100">
+    <div class="row d-flex justify-content-center align-items-center " >
+      <div class="col-12 col-md-10 col-lg-7 ">
+        <div class=" bg-dark text-white" style="border-radius: 1rem;" >
+          <div class="card-body px-5 py-3 text-center">
+
+            <div class="mb-md-3 mt-md-2 " >
+
+              <h2 class="fw-bold mb-5 text-uppercase">Register driver and car</h2>
+
+              <app-input-user-info [user]="user"></app-input-user-info>
+
+              <hr>
+              <div class="row">
+              <div class="col-md-6">
+                <mdb-form-control class="form-white">
+                  <label mdbLabel class="form-label text-light" style="float: left"   for="car">Car type <em class="fa fa-question-circle" title="Click me for more info!" (click)="modalView()"  style="font-size: 20px;color: white"></em> </label>
+                  <select class="form-select bg-dark text-light" style="width: 80%" [(ngModel)]="type" aria-label="car_type" id="car"  >
+                    <option *ngFor="let opt of carTypes" [id]="opt.type" [value]="opt.type" >{{opt.type}}</option>
+                  </select>
+                </mdb-form-control>
+              </div>
+              <div class="col-md-6" style="padding-top: 35px" >
+                <mdb-form-control style="float: left">
+                  <input class="form-check-input green-check" mdbCheckbox type="checkbox" value="" id="babies" [checked]="babiesAllowed" (change)="changeBabiesAllowed()">
+                  <label class="form-check-label" for="babies" style="font-size: 15px">
+                    Babies allowed
+                  </label>
+                </mdb-form-control>
+
+                <mdb-form-control style="float: left; margin-left: 30px">
+                  <input class="form-check-input green-check" mdbCheckbox type="checkbox" value="" id="petFriendly" [checked]="petFriendly" (change)="changepetFriendly()">
+                  <label class="form-check-label" for="petFriendly" style="font-size: 15px">
+                    Pet friendly
+                  </label>
+                </mdb-form-control>
+              </div>
+              <app-car-type-info *ngIf="viewCarTypeInfo" [carTypes]="carTypes!" (closeEvent)="viewCarTypeInfo=false"></app-car-type-info>
+              </div>
+              <button class="btn btn-outline-light btn-lg px-5" style="margin-top: 30px" type="submit" (click)="addDriver()">Add</button>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

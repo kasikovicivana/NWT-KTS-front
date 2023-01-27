@@ -4,7 +4,8 @@
       <div class="col-4 gradient-custom text-center bg-dark text-white"
            style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; float: right">
         <div class="profile mb-3 mt-3">
-          <img alt="Image" class="img-fluid" src="/src/assets/a.jpg">
+          <img *ngIf="!user.isSocialLogin" [src]="srcData" alt="Image" class="img-fluid">
+          <img *ngIf="user.isSocialLogin" src="{{user.photo}}" alt="Image" class="img-fluid">
         </div>
 
       </div>
@@ -23,12 +24,12 @@
 
       <div class="col-4">
         <div style="margin-top: 150px">
-          <button #blockButton (click)="blockUser()" class="btn btn-outline-light bg-success" style="float: left"
+          <button #blockButton (click)="blockUser()" class="btn btn-rounded  fw-bold btn-success" style="float: left"
                   type="button">
             Block
           </button>
 
-          <button (click)="viewNotes()" class="btn btn-outline-light bg-success" style="margin-left: 20px"
+          <button (click)="viewNotes()" class="btn btn-rounded  fw-bold btn-success" style="margin-left: 20px"
                   type="button">
             View notes
           </button>

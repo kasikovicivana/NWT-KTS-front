@@ -19,6 +19,11 @@ import { PaginationComponent } from '../shared/components/pagination/pagination.
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { AdminDriveHistoryComponent } from './pages/admin-drive-history/admin-drive-history.component';
+import { ProfileViewComponent } from './pages/profile-view/profile-view.component';
+import { DriverEditCardComponent } from './components/driver-edit-card/driver-edit-card.component';
+import { ReviewDriverChangesComponent } from './pages/review-driver-changes/review-driver-changes.component';
+import { DetailedDriverChangesComponent } from './pages/detailed-driver-changes/detailed-driver-changes.component';
+import { AddDriverComponent } from './pages/add-driver/add-driver.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +33,11 @@ import { AdminDriveHistoryComponent } from './pages/admin-drive-history/admin-dr
     UserBlockCardComponent,
     PaginationComponent,
     AdminDriveHistoryComponent,
+    ProfileViewComponent,
+    DriverEditCardComponent,
+    ReviewDriverChangesComponent,
+    DetailedDriverChangesComponent,
+    AddDriverComponent,
   ],
   imports: [
     RouterModule.forChild(AdminRoutes),

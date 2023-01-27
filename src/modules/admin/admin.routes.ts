@@ -2,6 +2,10 @@ import { Routes } from '@angular/router';
 import { BlockUserComponent } from './pages/block-user/block-user.component';
 import { AdminChatBoxComponent } from './pages/admin-chat-box/admin-chat-box.component';
 import { AdminDriveHistoryComponent } from './pages/admin-drive-history/admin-drive-history.component';
+import { ProfileViewComponent } from './pages/profile-view/profile-view.component';
+import { ReviewDriverChangesComponent } from './pages/review-driver-changes/review-driver-changes.component';
+import { DetailedDriverChangesComponent } from './pages/detailed-driver-changes/detailed-driver-changes.component';
+import { AddDriverComponent } from './pages/add-driver/add-driver.component';
 
 export const AdminRoutes: Routes = [
   {
@@ -18,5 +22,25 @@ export const AdminRoutes: Routes = [
     path: 'adminHistory',
     pathMatch: 'full',
     component: AdminDriveHistoryComponent,
+  },
+  {
+    path: 'adminProfile',
+    pathMatch: 'full',
+    component: ProfileViewComponent,
+  },
+  {
+    path: 'reviewDriverChanges',
+    pathMatch: 'full',
+    component: ReviewDriverChangesComponent,
+  },
+  {
+    path: 'detailedDriverChanges/:id',
+    pathMatch: 'full',
+    component: DetailedDriverChangesComponent,
+  },
+  {
+    path: 'addDriver',
+    pathMatch: 'full',
+    component: AddDriverComponent,
   },
 ];

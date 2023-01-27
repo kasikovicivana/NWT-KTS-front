@@ -5,7 +5,7 @@
         <div class="modal-content bg-dark text-white">
           <div class="modal-header">
             <h5 class="modal-title text-uppercase">Rate drive</h5>
-            <button aria-label="Close" class="close bg-dark" data-dismiss="modal" type="button">
+            <button aria-label="Close" class="close bg-dark" data-dismiss="modal" type="button" (click)="close()">
               <span  aria-hidden="true" class="text-white">&times;</span>
             </button>
           </div>
@@ -24,7 +24,7 @@
             </mdb-form-control>
           </div>
           <div class="modal-footer row">
-            <button (click)="saveGrade()" class="btn btn-outline-light bg-success col-2" type="button" style="margin-right: 30px" >
+            <button (click)="saveGrade()" class="btn btn-rounded btn-sm fw-bold btn-success col-2" type="button" style="margin-right: 30px" >
               Save
             </button>
           </div>

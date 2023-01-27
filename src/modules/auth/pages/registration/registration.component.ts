@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from 'src/modules/app/model/user.model';
 import { AlertsService } from 'src/modules/shared/services/alerts-service/alerts.service';
 import { RegistrationService } from 'src/modules/app/service/registration-service/registration.service';
@@ -8,13 +8,12 @@ import { RegistrationService } from 'src/modules/app/service/registration-servic
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css'],
 })
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit {
   emailPattern =
     /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/\d=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/\d=?A-Z^_`a-z{|}~]+)*@[A-Za-z\d]([A-Za-z\d-]{0,61}[A-Za-z\d])?(\.[A-Za-z\d]([A-Za-z\d-]{0,61}[A-Za-z\d])?)*$/;
   phoneNumberPattern = /^(\+)?\d{8}\d+$/;
   isDriver = true;
   user = new User();
-  reenteredPassword = '';
   isDataValid = true;
 
   constructor(
@@ -22,8 +21,8 @@ export class RegistrationComponent {
     private alerts: AlertsService
   ) {}
 
-  onChange(deviceValue: string) {
-    this.isDriver = deviceValue !== 'Client';
+  ngOnInit(): void {
+    this.user.role = 'Client';
   }
 
   validateData() {

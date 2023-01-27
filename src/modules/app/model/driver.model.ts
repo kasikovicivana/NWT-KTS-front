@@ -19,3 +19,20 @@ export class Driver {
     public isSocialLogin: boolean = false
   ) {}
 }
+
+export interface DriverCarInfo {
+  id: number;
+  driverId: number;
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+  phoneNumber: string;
+  role: string;
+  city: string;
+  photo: string;
+  isSocialLogin: boolean;
+  type: string;
+  petFriendly: boolean;
+  babiesAllowed: boolean;
+}

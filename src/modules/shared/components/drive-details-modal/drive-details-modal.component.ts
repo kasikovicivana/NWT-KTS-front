@@ -20,6 +20,7 @@ export class DriveDetailsModalComponent implements OnInit {
   grades: GradeModel[] = [];
   rateDrive: boolean = true;
   role: string | null = sessionStorage.getItem('role');
+  showGradeModal: boolean = false;
 
   constructor(
     private imageService: ImageService,

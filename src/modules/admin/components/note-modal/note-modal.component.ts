@@ -5,7 +5,6 @@ import { Driver } from '../../../app/model/driver.model';
 import { NoteService } from '../../services/note-service/note.service';
 import { Note } from '../../../app/model/note.model';
 import { AlertsService } from '../../../shared/services/alerts-service/alerts.service';
-import { ProfileViewService } from '../../../shared/services/profile-view-service/profile-view.service';
 import { UserService } from '../../../shared/services/user-service/user.service';
 
 @Component({

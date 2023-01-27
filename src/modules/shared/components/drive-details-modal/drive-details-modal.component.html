@@ -72,10 +72,12 @@
             <button
               type="button"
               class="btn btn-rounded btn-sm fw-bold btn-success"
-              style="font-size: 14px;">
+              style="font-size: 14px;"
+              (click)="showGradeModal=true">
               Rate drive
             </button>
           </div>
+          <app-grade-modal *ngIf="showGradeModal" (closeModal)="showGradeModal=false"  (closeDetailsModal)="closeDetailsModal()" [drive]="drive"></app-grade-modal>
         </div>
       </div>
     </div>

@@ -19,7 +19,7 @@ import {
 import { MdbCheckboxModule } from 'mdb-angular-ui-kit/checkbox';
 import { MdbRadioModule } from 'mdb-angular-ui-kit/radio';
 import { StarRatingModule } from 'angular-star-rating';
-import { GradeModalComponent } from './components/grade-modal/grade-modal.component';
+import { GradeModalComponent } from '../shared/components/grade-modal/grade-modal.component';
 import { LiveChatComponent } from './components/live-chat/live-chat.component';
 import { StepperModalComponent } from './components/stepper-modal/stepper-modal.component';
 import { StepOneComponent } from './components/steps/step-one/step-one.component';
@@ -37,7 +37,6 @@ import { ClientDriveHistoryComponent } from './pages/client-drive-history/client
     SuccessfulPaymentComponent,
     ProfileViewComponent,
     HomepageComponent,
-    GradeModalComponent,
     LiveChatComponent,
     StepperModalComponent,
     StepOneComponent,
@@ -66,6 +65,6 @@ import { ClientDriveHistoryComponent } from './pages/client-drive-history/client
     StarRatingModule.forChild(),
   ],
   providers: [],
-  exports: [GradeModalComponent],
+  exports: [LiveChatComponent, StepperModalComponent],
 })
 export class ClientModule {}

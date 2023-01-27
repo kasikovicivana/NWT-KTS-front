@@ -4,10 +4,11 @@ import { Client } from '../../../app/model/client.model';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from '../../../app/service/login-service/login.service';
 import { Note } from '../../../app/model/note.model';
-import { ProfileViewService } from '../../../shared/services/profile-view-service/profile-view.service';
 import { Driver } from '../../../app/model/driver.model';
 import { Observable, Subject } from 'rxjs';
 import { EditNote } from '../../../app/model/editNote.model';
+import { UserService } from '../../../shared/services/user-service/user.service';
+import { User } from '../../../app/model/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class NoteService {
   constructor(
     private _http: HttpClient,
     private loginService: LoginService,
-    private userService: ProfileViewService
+    private userService: UserService
   ) {
     this.getMaxId().subscribe({
       next: (info) => {
@@ -29,7 +30,7 @@ export class NoteService {
     });
   }
 
-  private static getNoteInfo(user: Driver | Client) {
+  private static getNoteInfo(user: User) {
     let driverId: number = -1;
     let clientId: number = -1;
     if (user.role === 'Driver') {
@@ -89,7 +90,7 @@ export class NoteService {
     return this._http.get<any>(newUrl);
   }
 
-  getNotes(user: Client | Driver) {
+  getNotes(user: User) {
     const newUrl = this.noteUrl + '/getNotes/' + user.id;
     return this._http.get<any>(newUrl);
   }

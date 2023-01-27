@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { PayingInfoModel } from '../../../app/model/payingInfo.model';
 import { Client } from '../../../app/model/client.model';
 import { AlertsService } from '../../../shared/services/alerts-service/alerts.service';
-import { ProfileViewService } from '../../../shared/services/profile-view-service/profile-view.service';
 import { UserService } from '../../../shared/services/user-service/user.service';
 
 @Component({
@@ -27,7 +26,7 @@ export class SuccessfulPaymentComponent implements OnInit {
     private tokenService: TokensService,
     private alertsService: AlertsService,
     private router: Router,
-    private profileViewService: ProfileViewService,
+    private profileViewService: UserService,
     private userService: UserService
   ) {}
 

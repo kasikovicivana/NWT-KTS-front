@@ -12,8 +12,8 @@ export class GradeService {
 
   constructor(private _http: HttpClient) {}
 
-  getGrade() {
-    const newUrl = this.gradeUrl + '/getGrade/' + 1; //driveId
+  getGrade(id: number) {
+    const newUrl = this.gradeUrl + '/getGrade/' + id;
     return this._http.get<any>(newUrl);
   }
 

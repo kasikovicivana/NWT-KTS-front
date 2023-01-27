@@ -19,7 +19,7 @@ export const ClientRoutes: Routes = [
   },
 
   {
-    path: 'profile',
+    path: 'clientProfile',
     pathMatch: 'full',
     component: ProfileViewComponent,
   },

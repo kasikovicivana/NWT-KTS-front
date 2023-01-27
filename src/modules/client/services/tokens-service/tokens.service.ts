@@ -33,7 +33,7 @@ export class TokensService {
     const body = {
       intent: 'CAPTURE',
       application_context: {
-        return_url: 'https://localhost:4200/confirmPayment',
+        return_url: 'http://localhost:4200/confirmPayment',
       },
       purchase_units: [
         {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TokensService } from '../../services/tokens-service/tokens.service';
-import { ProfileViewService } from '../../../shared/services/profile-view-service/profile-view.service';
 import { Client } from '../../../app/model/client.model';
 import { AlertsService } from '../../../shared/services/alerts-service/alerts.service';
+import { UserService } from '../../../shared/services/user-service/user.service';
 
 @Component({
   selector: 'app-purchase-tokens',
@@ -16,7 +16,7 @@ export class PurchaseTokensComponent implements OnInit {
 
   constructor(
     private tokenService: TokensService,
-    private profileViewService: ProfileViewService,
+    private profileViewService: UserService,
     private alertsService: AlertsService
   ) {}
 

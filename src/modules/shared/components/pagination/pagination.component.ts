@@ -53,19 +53,19 @@ export class PaginationComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log('ivana......');
-    // console.log('changes total je');
-    // console.log(changes);
-    // if (changes.totalItems?.currentValue) {
-    //   this.totalItems = changes.totalItems?.currentValue;
-    //   this.pages = [];
-    //   for (
-    //     let i = 1;
-    //     i <= this.utilService.getNoPages(this.totalItems, this.pageSize);
-    //     i++
-    //   ) {
-    //     this.pages.push(i);
-    //   }
-    // }
+    console.log('changes total je');
+    console.log(changes);
+    if (changes['totalItems'].currentValue) {
+      this.totalItems = changes['totalItems'].currentValue;
+      this.pages = [];
+      for (
+        let i = 1;
+        i <= this.utilService.getNoPages(this.totalItems, this.pageSize);
+        i++
+      ) {
+        this.pages.push(i);
+      }
+    }
   }
 
   //

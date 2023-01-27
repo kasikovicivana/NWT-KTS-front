@@ -4,6 +4,7 @@ import { Note } from '../../../app/model/note.model';
 import { Client } from '../../../app/model/client.model';
 import { Driver } from '../../../app/model/driver.model';
 import { NoteService } from '../../services/note-service/note.service';
+import { User } from '../../../app/model/user.model';
 
 @Component({
   selector: 'app-block-user',
@@ -39,10 +40,12 @@ export class BlockUserComponent implements OnInit {
   }
 
   getClients(page: number): void {
+    console.log('kao dobavlja klijenteee');
     this.showClients = true;
     this.userService.getClients(page, this.pageSize).subscribe((data) => {
       this.clients = data.body;
-      this.totalSize = Number(data.headers.get('Total-items'));
+      this.totalSize = Number(data.headers.get('total-items'));
+      console.log(this.totalSize);
       if (this.clients != undefined && this.clients?.length < 1) {
         this.clients = undefined;
       }
@@ -53,7 +56,7 @@ export class BlockUserComponent implements OnInit {
     this.showClients = false;
     this.userService.getDrivers(page, this.pageSize).subscribe((data) => {
       this.drivers = data.body;
-      this.totalSize = Number(data.headers.get('Total-items'));
+      this.totalSize = Number(data.headers.get('total-items'));
       if (this.drivers != undefined) this.totalSize = this.drivers?.length;
       if (this.drivers != undefined && this.drivers?.length < 1) {
         this.drivers = undefined;

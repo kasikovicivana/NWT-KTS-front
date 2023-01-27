@@ -1,3 +1,6 @@
 .uberApp{
   overflow: hidden;
 }
+.swal2-container {
+  z-index: 100;
+}

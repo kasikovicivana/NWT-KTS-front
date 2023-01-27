@@ -1,0 +1,41 @@
+
+.btn:hover{
+  color: black;
+  background: white;
+}
+
+
+.labels {
+  font-family: "Harlow Solid Italic", serif;
+  font-weight: bold;
+}
+
+.inputField {
+  background-color: lightgray;
+}
+
+.profile {
+  transition: transform .3s;
+}
+
+.profile img {
+  max-width: 100%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-left: 20px;
+}
+
+.fa-camera {
+  position: relative;
+  color: black;
+  background: white;
+  border-radius: 10%;
+  padding: 5px;
+  cursor: pointer;
+  top: 40px;
+}
+
+em:hover {
+  cursor: pointer;
+}
