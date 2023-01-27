@@ -4,6 +4,7 @@ import { SuccessfulPaymentComponent } from './pages/confirm-payment/successful-p
 import { ProfileViewComponent } from './pages/profile-view/profile-view.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { ClientDriveHistoryComponent } from './pages/client-drive-history/client-drive-history.component';
+import { ClientDriveReportComponent } from './pages/client-drive-report/client-drive-report.component';
 
 export const ClientRoutes: Routes = [
   {
@@ -34,5 +35,11 @@ export const ClientRoutes: Routes = [
     path: 'clientHistory',
     pathMatch: 'full',
     component: ClientDriveHistoryComponent,
+  },
+
+  {
+    path: 'clientReport',
+    pathMatch: 'full',
+    component: ClientDriveReportComponent,
   },
 ];

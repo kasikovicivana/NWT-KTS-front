@@ -8,6 +8,8 @@ import { DriveDetailsModalComponent } from './components/drive-details-modal/dri
 import { MapComponent } from './components/map/map.component';
 import { StarRatingModule } from 'angular-star-rating';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import { DriveChartComponent } from './components/drive-chart/drive-chart.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   providers: [
@@ -17,12 +19,20 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
     DriveHistoryTableComponent,
     DriveDetailsModalComponent,
     MapComponent,
+    DriveChartComponent,
   ],
   exports: [
     DriveHistoryTableComponent,
     DriveDetailsModalComponent,
     MapComponent,
+    DriveChartComponent,
   ],
-  imports: [MdbRippleModule, CommonModule, StarRatingModule, MdbFormsModule],
+  imports: [
+    MdbRippleModule,
+    CommonModule,
+    StarRatingModule,
+    MdbFormsModule,
+    NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
+  ],
 })
 export class SharedModule {}
