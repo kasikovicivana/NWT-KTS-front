@@ -24,13 +24,12 @@ export class Interceptor implements HttpInterceptor {
     }
 
     if (
+      req.url.includes('https://api-m.sandbox.paypal.com') ||
       req.url.includes(
-        'https://api-m.sandbox.paypal.com' ||
-          req.url ==
-            'https://api.openrouteservice.org/v2/directions/driving-car/geojson' ||
-          req.url.includes(
-            'https://api.openrouteservice.org/geocode/search/structured'
-          )
+        'https://api.openrouteservice.org/v2/directions/driving-car/geojson'
+      ) ||
+      req.url.includes(
+        'https://api.openrouteservice.org/geocode/search/structured'
       )
     ) {
       return next.handle(req);
