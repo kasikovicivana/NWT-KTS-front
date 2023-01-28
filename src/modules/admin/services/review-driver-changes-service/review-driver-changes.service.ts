@@ -7,7 +7,7 @@ import { DriverCarInfo } from '../../../app/model/driver.model';
   providedIn: 'root',
 })
 export class ReviewDriverChangesService {
-  basicUrl = environment.backendUrl + 'api/user';
+  basicUrl = environment.backendUrl + 'api/driver';
 
   constructor(private _http: HttpClient) {}
 

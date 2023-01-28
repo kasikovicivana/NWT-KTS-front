@@ -43,8 +43,11 @@
         <a class="nav-link" *ngIf="role === 'ROLE_admin'" href="/adminReport">Report </a>
       </li>
     </ul>
+
     <span class="navbar-text">
-     <a href="#" (click)="logout()">Logout</a>
+      <button *ngIf="role === 'ROLE_driver'" #activeButton (click)="changeDriverActivity()" class="btn btn-rounded  fw-bold btn-success" style="margin-right: 30px"
+              type="button">Active</button>
+     <a style="padding-bottom: 15px" href="#" (click)="logout()">Logout</a>
     </span>
   </div>
 </nav>

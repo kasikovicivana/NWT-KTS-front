@@ -5,6 +5,7 @@ import { ImageService } from '../../../shared/services/image-service/image.servi
 import { UserService } from '../../../shared/services/user-service/user.service';
 import { ReviewDriverChangesService } from '../../services/review-driver-changes-service/review-driver-changes.service';
 import { AlertsService } from '../../../shared/services/alerts-service/alerts.service';
+import { DriverService } from '../../../shared/services/driver-service/driver.service';
 
 @Component({
   selector: 'app-driver-edit-card',
@@ -25,11 +26,12 @@ export class DriverEditCardComponent implements OnInit {
     private imageService: ImageService,
     private sanitizer: DomSanitizer,
     private reviewDriverChangesService: ReviewDriverChangesService,
-    private alerts: AlertsService
+    private alerts: AlertsService,
+    private driverService: DriverService
   ) {}
 
   ngOnInit() {
-    this.userService.getDriverById(this.info.driverId).subscribe({
+    this.driverService.getDriverById(this.info.driverId).subscribe({
       next: (data) => {
         this.driver = data;
         this.imageService.loadImage(this.driver.photo).subscribe((data) => {

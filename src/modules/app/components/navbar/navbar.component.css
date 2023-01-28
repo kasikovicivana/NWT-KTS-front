@@ -1,0 +1,7 @@
+.active {
+  color: green;
+}
+
+.input::after{
+  border-color: red !important;
+}

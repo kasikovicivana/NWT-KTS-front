@@ -29,8 +29,6 @@ export class AddDriverComponent implements OnInit {
     private alerts: AlertsService,
     private registrationService: RegistrationService
   ) {}
-
-  isDriver = true;
   user = new User();
   reenteredPassword = '';
 

@@ -11,6 +11,7 @@ import { LoginService } from '../../../app/service/login-service/login.service';
 import { Client } from '../../../app/model/client.model';
 import { Driver, DriverCarInfo } from '../../../app/model/driver.model';
 import { User } from '../../../app/model/user.model';
+import { CarModel } from '../../../app/model/car.model';
 
 @Injectable({
   providedIn: 'root',
