@@ -1,13 +1,13 @@
-<section style="overflow: hidden">
+<section>
   <div class="row">
 
-    <div class="col-3" style="padding: 0">
-      <app-side-bar (openModal)="setShowModalToTrue()"></app-side-bar>
+    <div class="col-3">
+      <app-side-bar (changeRouteType)="changeRouteType($event)" (openModal)="setShowModalToTrue()"
+                    (showPositions)="showPositions($event)"></app-side-bar>
     </div>
 
-
-    <div class="col-9" style="padding: 0">
-      <app-map></app-map>
+    <div class="col-9">
+      <app-route-map></app-route-map>
     </div>
 
     <div *ngIf="loggedUserRole !== 'ROLE_admin'">

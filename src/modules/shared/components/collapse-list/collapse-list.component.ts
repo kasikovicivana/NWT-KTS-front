@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { RouteDetails } from '../../../app/model/routeDetails';
 
 @Component({
   selector: 'app-collapse-list',
@@ -6,11 +7,25 @@ import { Component } from '@angular/core';
   styleUrls: ['./collapse-list.component.css'],
 })
 export class CollapseListComponent {
-  active: string = 'route_2';
+  @Output() changeRoute = new EventEmitter<any>();
+
+  positions: string[] = [];
+  routes: RouteDetails[][] = [];
+  chosen: string[] = [];
 
   constructor() {}
 
-  selectRoute(route: string) {
-    this.active = route;
+  selectRoute(i: number, route: string) {
+    this.chosen[i] = route;
+    this.changeRoute.emit({ i, route });
+  }
+
+  showRouteOptions(routes: RouteDetails[][], positions: string[]) {
+    this.routes = routes;
+    this.positions = positions;
+    this.chosen = [];
+    routes.forEach(() => {
+      this.chosen.push('recommended');
+    });
   }
 }

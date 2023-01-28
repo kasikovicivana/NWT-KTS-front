@@ -1,64 +1,69 @@
-<div class="inputs min-vh-100 bg-dark py-5 ">
+<div class="inputs min-vh-100 bg-dark py-5" id="sidebar">
 
   <div class="points">
     <div class="input-group flex-nowrap pb-3">
-      <span class="input-group-text" id="start"><em class="fa fa-home fa-lg" ></em></span>
-      <input type="text" class="form-control bg-dark text-white" placeholder="Start point" aria-label="start"/>
+      <span class="input-group-text" id="start"><em class="fa fa-home fa-lg"></em></span>
+      <input [(ngModel)]="start" aria-label="start" class="form-control bg-dark text-white" placeholder="Start point"
+             type="text"/>
     </div>
 
-    <div *ngFor="let pin of pins; let i = index"  class="input-group flex-nowrap pb-3" style="width: 108%">
-      <span class="input-group-text" id="pin_{{i}}"><em class="fa fa-map-marker fa-lg px-1"></em></span>
-      <input type="text" class="form-control bg-dark text-white" placeholder="Add point" aria-label="Username"/>
-      <a href="javascript:void(0)" (click)="removePin(i)" class="close_x"><span class=""><em class="fa fa-close fa-lg" style="color: darkred"></em></span></a>
+    <div *ngFor="let pin of pins; let i = index; trackBy: trackByFn" class="input-group flex-nowrap pb-3"
+         style="width: 108%">
+      <span class="input-group-text"><em class="fa fa-map-marker fa-lg px-1"></em></span>
+      <input [(ngModel)]="pins[i]" aria-label="Username" class="form-control bg-dark text-white" id="pin_{{i}}"
+             placeholder="Add point"
+             type="text"/>
+      <a (click)="removePin(i)" class="close_x" href="javascript:void(0)"><span class=""><em class="fa fa-close fa-lg"
+                                                                                             style="color: darkred"></em></span></a>
     </div>
 
     <div class="input-group flex-nowrap pb-3">
-      <span class="input-group-text" id="end"><em class="fa fa-map-marker fa-lg px-1" ></em></span>
-      <input type="text" class="form-control bg-dark text-white" placeholder="End point" aria-label="Username"/>
+      <span class="input-group-text" id="end"><em class="fa fa-map-marker fa-lg px-1"></em></span>
+      <input [(ngModel)]="end" aria-label="end" class="form-control bg-dark text-white" placeholder="End point"
+             type="text"/>
     </div>
   </div>
 
   <div class="row pt-2">
-    <a href="javascript:void(0)" (click)="addPin()" class="link-light col-7">
+    <a (click)="addPin()" class="link-light col-7" href="javascript:void(0)">
       <em class="fa fa-plus-circle"></em>
       <span class="px-2">Add destination</span>
     </a>
     <div class="col-5">
-      <button type="button" class="btn btn-success btn-rounded ">Find</button>
+      <button (click)="findPositions()" class="btn btn-success btn-rounded" type="button">Find</button>
     </div>
   </div>
 
   <div class="row py-4">
     <div class="form-check col-6">
       <input
-        mdbRadio
-        class="my_radio"
-        type="radio"
-        name="choice"
-        id="system"
-        [checked]="true"
         (change)="isMyChoice = false"
+        [checked]="true"
+        class="my_radio"
+        id="system"
+        mdbRadio
+        name="choice"
+        type="radio"
       />
       <label class="form-check-label text-white" for="system"> System choice </label>
     </div>
     <div class="form-check col-6">
       <input
-        mdbRadio
+        (change)="myChoice()"
         class="my_radio"
-        type="radio"
-        name="choice"
         id="my"
-        (change)="isMyChoice = true"
+        mdbRadio
+        name="choice"
+        type="radio"
       />
       <label class="form-check-label text-white" for="my"> My choice </label>
     </div>
   </div>
 
-  <div *ngIf="isMyChoice">
-    <app-collapse-list></app-collapse-list>
-  </div>
+  <app-collapse-list (changeRoute)="changeRoute($event)" [hidden]="!isMyChoice"></app-collapse-list>
 
-  <div class="button_row" *ngIf="isLoggedIn">
-    <button type="button" class="btn btn-success btn-rounded " (click)="openStepperModal()">Choose</button>
+
+  <div *ngIf="isLoggedIn" class="button_row">
+    <button (click)="openStepperModal()" class="btn btn-success btn-rounded " type="button">Choose</button>
   </div>
 </div>

@@ -1,76 +1,67 @@
 <div class="accordion pt-2 pb-4" id="accordionFlushExample">
-  <div class="accordion-item border-dark bg-dark">
-    <h2 class="accordion-header" id="flush-headingOne">
-      <button aria-controls="flush-collapseOne" aria-expanded="false" class="accordion-button collapsed"
-              data-bs-target="#flush-collapseOne" data-bs-toggle="collapse" type="button">
-        Strazilovska - Puskinova
-      </button>
-    </h2>
-    <div aria-labelledby="flush-headingOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample"
-         id="flush-collapseOne">
-      <div class="accordion-body px-0 py-1">
-        <div class="list-group list-group-light">
-          <a (click)="selectRoute('route_1')" [class.active]="active === 'route_1'"
-             class="list-group-item list-group-item-action px-3 pt-2 rounded-3 mb-2 list-group-item-dark "
-             href="javascript:void(0)"
-             id="route_1">
-            <div class="h-50">
-              <div class="row">
-                <span class="col-8">Preko Puskinove</span>
-                <span class="col-4 time">20 min</span>
+  <div *ngFor="let p of positions; let i = index;" class="accordion-item border-dark bg-dark">
+    <section *ngIf="positions.length-1 !== positions.indexOf(p)">
+      <h2 [attr.id]="'flush-headingOne' + i" class="accordion-header">
+        <button [attr.aria-controls]="'flush-collapseOne' + i" [attr.data-bs-target]="'#flush-collapseOne' + i"
+                aria-expanded="false"
+                class="accordion-button collapsed" data-bs-toggle="collapse" type="button">
+          {{p}} - {{positions[positions.indexOf(p) + 1]}}
+        </button>
+      </h2>
+      <div [attr.aria-labelledby]="'flush-headingOne' + i" [attr.id]="'flush-collapseOne' + i"
+           class="accordion-collapse collapse"
+           data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body px-0 py-1">
+          <div class="list-group list-group-light">
+            <a (click)="selectRoute(i, 'recommended')" [class.active]="chosen[i] === 'recommended'"
+               class="list-group-item list-group-item-action px-3 pt-2 rounded-3 mb-2 list-group-item-dark "
+               href="javascript:void(0)"
+               id="route_1">
+              <div class="h-50">
+                <div class="row">
+                  <span class="col-8">Recommended</span>
+                  <span class="col-4 time">{{routes[i][0].duration}} min</span>
+                </div>
+                <div class="row">
+                  <span class="col-8 route_type">Recommended route</span>
+                  <span class="col-4">{{routes[i][0].distance}} km</span>
+                </div>
               </div>
-              <div class="row">
-                <span class="col-8 route_type">Fastest route</span>
-                <span class="col-4">15 km</span>
-              </div>
-            </div>
 
-          </a>
-          <a (click)="selectRoute('route_2')" [class.active]="active === 'route_2'"
-             class="list-group-item list-group-item-action px-3 rounded-3 mb-2 list-group-item-dark"
-             href="javascript:void(0)"
-             id="route_2">
-            <div class="h-50">
-              <div class="row">
-                <span class="col-8">Preko Limanskog</span>
-                <span class="col-4 time">25 min</span>
+            </a>
+            <a (click)="selectRoute(i, 'fastest')" [class.active]="chosen[i] === 'fastest'"
+               class="list-group-item list-group-item-action px-3 rounded-3 mb-2 list-group-item-dark"
+               href="javascript:void(0)"
+               id="route_2">
+              <div class="h-50">
+                <div class="row">
+                  <span class="col-8">Fastest</span>
+                  <span class="col-4 time">{{routes[i][1].duration}} min</span>
+                </div>
+                <div class="row">
+                  <span class="col-8 route_type">Fastest route</span>
+                  <span class="col-4">{{routes[i][1].distance}} km</span>
+                </div>
               </div>
-              <div class="row">
-                <span class="col-8 route_type">Shortest route</span>
-                <span class="col-4">13 km</span>
+            </a>
+            <a (click)="selectRoute(i, 'shortest')" [class.active]="chosen[i] === 'shortest'"
+               class="list-group-item list-group-item-action px-3 rounded-3 mb-2 list-group-item-dark"
+               href="javascript:void(0)"
+               id="route_3">
+              <div class="h-50">
+                <div class="row">
+                  <span class="col-8">Shortest</span>
+                  <span class="col-4 time">{{routes[i][2].duration}} min</span>
+                </div>
+                <div class="row">
+                  <span class="col-8 route_type">Shortest route</span>
+                  <span class="col-4">{{routes[i][2].distance}} km</span>
+                </div>
               </div>
-            </div>
-          </a>
-          <a (click)="selectRoute('route_3')" [class.active]="active === 'route_3'"
-             class="list-group-item list-group-item-action px-3 rounded-3 mb-2 list-group-item-dark"
-             href="javascript:void(0)"
-             id="route_3">
-            <div class="h-50">
-              <div class="row">
-                <span class="col-8">Preko groblja</span>
-                <span class="col-4 time">30 min</span>
-              </div>
-              <div class="row">
-                <span class="col-8 route_type">Recommended</span>
-                <span class="col-4">20 km</span>
-              </div>
-            </div>
-          </a>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="accordion-item border-dark bg-dark text-white">
-    <h2 class="accordion-header" id="flush-headingThree">
-      <button aria-controls="flush-collapseThree" aria-expanded="false" class="accordion-button collapsed"
-              data-bs-target="#flush-collapseThree" data-bs-toggle="collapse" type="button">
-        Puskinova - Doza Djerdja
-      </button>
-    </h2>
-    <div aria-labelledby="flush-headingThree" class="accordion-collapse collapse"
-         data-bs-parent="#accordionFlushExample"
-         id="flush-collapseThree">
-      <div class="accordion-body">Isto ono.</div>
-    </div>
+    </section>
   </div>
 </div>

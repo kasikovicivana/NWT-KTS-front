@@ -1,27 +1,28 @@
-.input-group input:focus{
+.input-group input:focus {
   box-shadow: 0 1px 1px green inset, 0 0 5px green;
   border-color: forestgreen;
 }
 
-.button_row{
+.button_row {
   padding-left: 55%;
 }
 
-.inputs{
+.inputs {
   padding-left: 40px;
 }
 
-.points{
+.points {
   padding-right: 40px;
 }
 
 
-.close_x{
+.close_x {
   padding-left: 10px;
 }
 
-.my_radio{
+.my_radio {
   accent-color: limegreen;
   margin-right: 8px;
   transform: scale(1.5);
 }
+

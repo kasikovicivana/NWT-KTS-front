@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
   HttpEvent,
-  HttpInterceptor,
+  HttpHandler,
   HttpHeaders,
+  HttpInterceptor,
+  HttpRequest,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -18,9 +18,28 @@ export class Interceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
+    if (req.url.includes('https://nominatim.openstreetmap.org/search?')) {
+      const cloned = req.clone({
+        headers: new HttpHeaders({
+          'Access-Control-Allow-Origin': '*',
+        }),
+      });
+      return next.handle(cloned);
+    }
+
+    if (
+      req.url ==
+        'https://api.openrouteservice.org/v2/directions/driving-car/geojson' ||
+      req.url.includes(
+        'https://api.openrouteservice.org/geocode/search/structured'
+      )
+    ) {
+      return next.handle(req);
+    }
+
     const item = sessionStorage.getItem('accessToken');
-    //yzyconst authToken = `Bearer ` + item
     if (item) {
+      console.log('treba da azuriraa');
       const cloned = req.clone({
         headers: new HttpHeaders({
           'Content-Type': 'application/json',

@@ -1,4 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { RouteDetails } from '../../../app/model/routeDetails';
+import { CollapseListComponent } from '../../../shared/components/collapse-list/collapse-list.component';
 
 @Component({
   selector: 'app-side-bar',
@@ -7,11 +15,26 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class SideBarComponent implements OnInit {
   @Output() openModal = new EventEmitter<boolean>();
+  @Output() showPositions = new EventEmitter<string[]>();
+  @Output() changeRouteType = new EventEmitter<any>();
+
   isMyChoice: boolean = false;
   isLoggedIn: boolean = false;
-  pins: Array<string> = [];
+  pins: string[] = [];
+  start: string = '';
+  end: string = '';
+  routes: RouteDetails[][] = [];
+  list: CollapseListComponent | undefined;
 
   constructor() {}
+
+  @ViewChild(CollapseListComponent) set content(
+    content: CollapseListComponent
+  ) {
+    if (content) {
+      this.list = content;
+    }
+  }
 
   ngOnInit(): void {
     this.isLoggedIn = sessionStorage.getItem('username') != null;
@@ -21,11 +44,50 @@ export class SideBarComponent implements OnInit {
     this.pins.push('');
   }
 
+  trackByFn(index: number, item: string) {
+    return index;
+  }
+
   removePin(i: number) {
     this.pins.splice(i, 1);
   }
 
   openStepperModal() {
     this.openModal.emit(true);
+  }
+
+  findPositions() {
+    let positions = this.getPositions();
+    this.showPositions.emit(positions);
+  }
+
+  showRouteOptions(routes: RouteDetails[][]) {
+    this.routes = routes;
+
+    let positions = this.getPositions();
+
+    if (this.isMyChoice) {
+      this.list?.showRouteOptions(this.routes, positions);
+    }
+  }
+
+  myChoice() {
+    this.isMyChoice = true;
+    let positions = this.getPositions();
+    this.list?.showRouteOptions(this.routes, positions);
+  }
+
+  changeRoute(params: any) {
+    this.changeRouteType.emit(params);
+  }
+
+  private getPositions() {
+    let positions: string[] = [];
+    positions.push(this.start);
+    for (let pin of this.pins) {
+      positions.push(pin);
+    }
+    positions.push(this.end);
+    return positions;
   }
 }

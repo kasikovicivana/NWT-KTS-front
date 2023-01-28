@@ -11,6 +11,7 @@ import 'leaflet-extra-markers';
 import { Route } from '../../../app/model/route.model';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
+import { Position } from '../../../app/model/position.model';
 
 @Component({
   selector: 'app-map',
@@ -47,30 +48,54 @@ export class MapComponent implements AfterViewInit {
       (message: { body: string }) => {
         let driverRoutes = JSON.parse(message.body);
         // uklanjamo ga iz liste pozicija
+        this.positions.get(driverRoutes.username)?.remove();
         this.positions.delete(driverRoutes.username);
-        this.simulate(driverRoutes).then(() => {});
+        this.simulate(new DriverRoutes(driverRoutes)).then(() => {});
       }
     );
 
     this.stompClient.subscribe(
       '/map-updates/stop-drive',
       (message: { body: string }) => {
-        console.log('stigla poruka');
-        let username = message.body;
+        let data = JSON.parse(message.body);
+        let username: string = '';
+        for (let d in data) {
+          username = d;
+        }
+        const pos: Position = new Position(data[username]);
         this.routes.get(username)?.remove();
         this.routes.delete(username);
+
+        const greenMarker = L.ExtraMarkers.icon({
+          icon: 'fa-car',
+          markerColor: 'green',
+          iconColor: 'white',
+          shape: 'circle',
+          prefix: 'fa',
+        });
+
+        let marker = L.marker([pos.lat, pos.lon], { icon: greenMarker })
+          .addTo(this.map)
+          .bindPopup(username);
+        this.positions.set(username, marker);
         // treba nam i nova pozicija za ovog vozaca
       }
     );
 
     this.stompClient.subscribe(
       '/map-updates/driver-active',
-      (message: { body: string }) => {}
+      (message: { body: string }) => {
+        // treba nam username i pozicija
+        // mozda da zakucamo na neku poziciju ?
+      }
     );
 
     this.stompClient.subscribe(
       '/map-updates/driver-not-active',
-      (message: { body: string }) => {}
+      (message: { body: string }) => {
+        let username = message.body;
+        this.routes.delete(username);
+      }
     );
   }
 
@@ -85,35 +110,6 @@ export class MapComponent implements AfterViewInit {
       duration: 2.5,
     });
 
-    L.marker([49.41943, 8.686507]).addTo(this.map);
-
-    const greenIcon = new L.Icon({
-      iconUrl: './assets/markers/marker-icon-green.png',
-      shadowUrl: './assets/markers/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41],
-    });
-
-    L.marker([49.41461, 8.681495], { icon: greenIcon })
-      .addTo(this.map)
-      .bindPopup('Start')
-      .openPopup();
-
-    const redIcon = new L.Icon({
-      iconUrl: './assets/markers/marker-icon-red.png',
-      shadowUrl: './assets/markers/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41],
-    });
-
-    L.marker([49.420318, 8.687872], { icon: redIcon })
-      .addTo(this.map)
-      .bindPopup('End');
-
     const tiles = L.tileLayer(
       'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       {
@@ -123,13 +119,6 @@ export class MapComponent implements AfterViewInit {
     );
 
     tiles.addTo(this.map);
-
-    this.mapService.getData().subscribe((data) => {
-      let path = L.geoJSON(data).addTo(this.map);
-      data.features[0].geometry.coordinates.forEach((c: any[]) => {
-        c.reverse();
-      });
-    });
 
     this.load();
   }
@@ -153,16 +142,16 @@ export class MapComponent implements AfterViewInit {
           this.positions.set(key, marker);
         }
       },
-      error: (err) => {},
+      error: () => {},
     });
 
     this.driveService.loadDrives().subscribe({
       next: (values) => {
         for (let v of values) {
-          this.simulate(new DriverRoutes(v)).then((value) => {});
+          this.simulate(new DriverRoutes(v)).then(() => {});
         }
       },
-      error: (err) => {},
+      error: () => {},
     });
   }
 
@@ -178,7 +167,7 @@ export class MapComponent implements AfterViewInit {
     coordinates: number[][],
     duration: number
   ) {
-    var redMarker = L.ExtraMarkers.icon({
+    let redMarker = L.ExtraMarkers.icon({
       icon: 'fa-car',
       markerColor: 'red',
       iconColor: 'white',
@@ -213,13 +202,7 @@ export class MapComponent implements AfterViewInit {
   }
 
   private async getData(value: DriverRoutes) {
-    const start: Date = new Date(
-      value.start[0],
-      value.start[1] - 1,
-      value.start[2],
-      value.start[3],
-      value.start[4]
-    );
+    const start: Date = value.start;
 
     let coordinates: number[][] = [];
     let duration = 0;
@@ -230,8 +213,8 @@ export class MapComponent implements AfterViewInit {
       let rDuration = 0;
 
       let data = await this.getRouteData(r, now, start, duration);
-      rCoordinates = (data as any).rCoordinates;
-      rDuration = (data as any).routeDuration;
+      rCoordinates = data.rCoordinates;
+      rDuration = data.routeDuration;
       coordinates = [...coordinates, ...rCoordinates];
       duration += rDuration;
     }
@@ -270,6 +253,8 @@ export class MapComponent implements AfterViewInit {
               routeDuration = rDuration;
             }
           }
+          console.log('GET ROUTE DATA');
+          console.log(rCoordinates);
           resolve({ rCoordinates, routeDuration });
         },
         error: (err) => {

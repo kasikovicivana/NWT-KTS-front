@@ -19,7 +19,6 @@ import {
 import { MdbCheckboxModule } from 'mdb-angular-ui-kit/checkbox';
 import { MdbRadioModule } from 'mdb-angular-ui-kit/radio';
 import { StarRatingModule } from 'angular-star-rating';
-import { GradeModalComponent } from '../shared/components/grade-modal/grade-modal.component';
 import { LiveChatComponent } from './components/live-chat/live-chat.component';
 import { StepperModalComponent } from './components/stepper-modal/stepper-modal.component';
 import { StepOneComponent } from './components/steps/step-one/step-one.component';
@@ -32,6 +31,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ClientDriveHistoryComponent } from './pages/client-drive-history/client-drive-history.component';
 import { ClientDriveReportComponent } from './pages/client-drive-report/client-drive-report.component';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { RouteMapComponent } from './components/route-map/route-map.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +48,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
     CollapseListComponent,
     ClientDriveHistoryComponent,
     ClientDriveReportComponent,
+    RouteMapComponent,
   ],
   imports: [
     RouterModule.forChild(ClientRoutes),
