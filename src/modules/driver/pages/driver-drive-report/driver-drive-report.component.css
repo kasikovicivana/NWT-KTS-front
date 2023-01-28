@@ -1,0 +1,12 @@
+.hero-main {
+  background-attachment: fixed;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.863),
+    rgba(0, 0, 0, 0.582),
+    rgba(0, 0, 0, 0.075)
+  ),
+  url('/assets/a.jpg');
+  background-size: cover;
+  overflow: hidden;
+}

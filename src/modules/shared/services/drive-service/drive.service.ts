@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { DriverRoutes } from '../../../app/model/driverRoutes.model';
 import { Drive } from '../../../app/model/drive.model';
+import { Report } from '../../../app/model/report.model';
 
 @Injectable({
   providedIn: 'root',
@@ -30,5 +31,16 @@ export class DriveService {
 
   getDriveHistory() {
     return this._http.get<Drive[]>(this.url + '/getAll');
+  }
+
+  getClientDrivesByDate(dates: Report) {
+    return this._http.post<Drive[]>(this.url + '/getAllByClientDate', dates);
+  }
+  getDriverDrivesByDate(dates: Report) {
+    return this._http.post<Drive[]>(this.url + '/getAllByDriverDate', dates);
+  }
+
+  getDrivesByDate(dates: Report) {
+    return this._http.post<Drive[]>(this.url + '/getAllByDate', dates);
   }
 }

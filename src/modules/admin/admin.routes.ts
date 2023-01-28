@@ -6,6 +6,7 @@ import { ProfileViewComponent } from './pages/profile-view/profile-view.componen
 import { ReviewDriverChangesComponent } from './pages/review-driver-changes/review-driver-changes.component';
 import { DetailedDriverChangesComponent } from './pages/detailed-driver-changes/detailed-driver-changes.component';
 import { AddDriverComponent } from './pages/add-driver/add-driver.component';
+import { AdminDriveReportComponent } from './pages/admin-drive-report/admin-drive-report.component';
 
 export const AdminRoutes: Routes = [
   {
@@ -42,5 +43,10 @@ export const AdminRoutes: Routes = [
     path: 'addDriver',
     pathMatch: 'full',
     component: AddDriverComponent,
+  },
+  {
+    path: 'adminReport',
+    pathMatch: 'full',
+    component: AdminDriveReportComponent,
   },
 ];

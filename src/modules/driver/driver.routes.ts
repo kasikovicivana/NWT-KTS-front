@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { DriverDriveHistoryComponent } from './pages/driver-drive-history/driver-drive-history.component';
 import { ProfileViewComponent } from './pages/profile-view/profile-view.component';
+import { DriverDriveReportComponent } from './pages/driver-drive-report/driver-drive-report.component';
 
 export const DriverRoutes: Routes = [
   {
@@ -12,5 +13,10 @@ export const DriverRoutes: Routes = [
     path: 'driverProfile',
     pathMatch: 'full',
     component: ProfileViewComponent,
+  },
+  {
+    path: 'driverReport',
+    pathMatch: 'full',
+    component: DriverDriveReportComponent,
   },
 ];

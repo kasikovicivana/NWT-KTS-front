@@ -30,6 +30,8 @@ import { CollapseListComponent } from '../shared/components/collapse-list/collap
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { ClientDriveHistoryComponent } from './pages/client-drive-history/client-drive-history.component';
+import { ClientDriveReportComponent } from './pages/client-drive-report/client-drive-report.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { ClientDriveHistoryComponent } from './pages/client-drive-history/client
     SideBarComponent,
     CollapseListComponent,
     ClientDriveHistoryComponent,
+    ClientDriveReportComponent,
   ],
   imports: [
     RouterModule.forChild(ClientRoutes),
@@ -63,6 +66,7 @@ import { ClientDriveHistoryComponent } from './pages/client-drive-history/client
     MdbRadioModule,
     SharedModule,
     StarRatingModule.forChild(),
+    NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
   ],
   providers: [],
   exports: [LiveChatComponent, StepperModalComponent],

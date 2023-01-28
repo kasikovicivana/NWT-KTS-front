@@ -37,6 +37,11 @@
       <li *ngIf="role === 'ROLE_admin'" class="nav-item">
         <a class="nav-link" href="/addDriver">Add driver</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="role === 'ROLE_client'" href="/clientReport">Report </a>
+        <a class="nav-link" *ngIf="role === 'ROLE_driver'" href="/driverReport">Report </a>
+        <a class="nav-link" *ngIf="role === 'ROLE_admin'" href="/adminReport">Report </a>
+      </li>
     </ul>
     <span class="navbar-text">
      <a href="#" (click)="logout()">Logout</a>

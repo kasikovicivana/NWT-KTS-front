@@ -24,6 +24,7 @@ import { DriverEditCardComponent } from './components/driver-edit-card/driver-ed
 import { ReviewDriverChangesComponent } from './pages/review-driver-changes/review-driver-changes.component';
 import { DetailedDriverChangesComponent } from './pages/detailed-driver-changes/detailed-driver-changes.component';
 import { AddDriverComponent } from './pages/add-driver/add-driver.component';
+import { AdminDriveReportComponent } from './pages/admin-drive-report/admin-drive-report.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AddDriverComponent } from './pages/add-driver/add-driver.component';
     ReviewDriverChangesComponent,
     DetailedDriverChangesComponent,
     AddDriverComponent,
+    AdminDriveReportComponent,
   ],
   imports: [
     RouterModule.forChild(AdminRoutes),

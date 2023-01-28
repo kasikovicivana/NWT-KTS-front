@@ -1,6 +1,6 @@
 import { Driver } from './driver.model';
 import { Route } from './route.model';
-import { Client } from './client.model';
+import { Client, ClientDrive } from './client.model';
 
 export class Drive {
   constructor(
@@ -11,6 +11,7 @@ export class Drive {
     public price: number = 0,
     public status: string = '',
     public routes: Set<Route> = new Set<Route>(),
-    public passengers: Set<Client> = new Set<Client>()
+    public passengers: Set<ClientDrive> = new Set<ClientDrive>(),
+    public distance: number = 0
   ) {}
 }

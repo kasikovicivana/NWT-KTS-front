@@ -29,3 +29,13 @@ export class MessageClient {
     public isSocialLogin: boolean = false
   ) {}
 }
+
+export class ClientDrive {
+  constructor(
+    public id: number = -1,
+    public name: string = '',
+    public surname: string = '',
+    public email: string = '',
+    public price: number = 0
+  ) {}
+}

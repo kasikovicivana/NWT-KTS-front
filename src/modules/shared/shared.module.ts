@@ -10,7 +10,6 @@ import { ProfileInfoComponent } from './components/profile-info/profile-info.com
 import { RouterModule } from '@angular/router';
 import { ClientRoutes } from '../client/client.routes';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -27,6 +26,10 @@ import { CarTypeInfoComponent } from './components/car-type-info/car-type-info.c
 import { InputUserInfoComponent } from './components/input-user-info/input-user-info.component';
 import { ClientModule } from '../client/client.module';
 import { GradeModalComponent } from './components/grade-modal/grade-modal.component';
+import { DriveChartComponent } from './components/drive-chart/drive-chart.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { DriveReportComponent } from './components/drive-report/drive-report.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,8 @@ import { GradeModalComponent } from './components/grade-modal/grade-modal.compon
     DriveDetailsModalComponent,
     MapComponent,
     GradeModalComponent,
+    DriveChartComponent,
+    DriveReportComponent,
   ],
 
   imports: [
@@ -47,7 +52,6 @@ import { GradeModalComponent } from './components/grade-modal/grade-modal.compon
     FormsModule,
     MdbFormsModule,
     MdbValidationModule,
-    ReactiveFormsModule,
     OverlayModule,
     NgStepperModule,
     CdkStepperModule,
@@ -57,6 +61,12 @@ import { GradeModalComponent } from './components/grade-modal/grade-modal.compon
     MdbRadioModule,
     MdbRippleModule,
     StarRatingModule,
+    MdbRippleModule,
+    CommonModule,
+    StarRatingModule,
+    MdbFormsModule,
+    NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
+    FormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
@@ -69,6 +79,8 @@ import { GradeModalComponent } from './components/grade-modal/grade-modal.compon
     InputUserInfoComponent,
     CarTypeInfoComponent,
     GradeModalComponent,
-  ],
+    DriveChartComponent,
+    DriveReportComponent,
+  ]
 })
 export class SharedModule {}
