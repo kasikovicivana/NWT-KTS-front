@@ -89,4 +89,8 @@ export class HomepageComponent {
 
     this.mapChild?.displayRoute(this.chosenRoutes[params.i], params.i);
   }
+
+  finish(params: any) {
+    // imamo sve parametre, saljemo na  bek..
+  }
 }

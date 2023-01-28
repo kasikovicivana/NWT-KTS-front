@@ -11,7 +11,6 @@ import { LoginService } from '../../../app/service/login-service/login.service';
 import { Client } from '../../../app/model/client.model';
 import { Driver, DriverCarInfo } from '../../../app/model/driver.model';
 import { User } from '../../../app/model/user.model';
-import { CarModel } from '../../../app/model/car.model';
 
 @Injectable({
   providedIn: 'root',
@@ -91,6 +90,11 @@ export class UserService {
 
   getLoggedClient() {
     const newUrl = this.url + '/getClient';
+    return this._http.get<any>(newUrl);
+  }
+
+  getClientByMail(mail: string) {
+    const newUrl = this.url + '/getClient/' + mail;
     return this._http.get<any>(newUrl);
   }
 

@@ -4,4 +4,9 @@
 body {
   font-family: Century Gothic, sans-serif;
   overflow: hidden;
+
+}
+
+.swal2-container {
+  z-index: 20000 !important;
 }

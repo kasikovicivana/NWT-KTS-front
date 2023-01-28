@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { UserService } from '../../../../shared/services/user-service/user.service';
+import { AlertsService } from '../../../../shared/services/alerts-service/alerts.service';
 
 @Component({
   selector: 'app-step-two',
@@ -8,12 +10,17 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class StepTwoComponent {
   public stepTwoForm: FormGroup;
-  public passengers: Array<string> = [''];
+  public passengers: Array<string> = [];
   public p: string = '';
   emailPattern =
     /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/\d=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/\d=?A-Z^_`a-z{|}~]+)*@[A-Za-z\d]([A-Za-z\d-]{0,61}[A-Za-z\d])?(\.[A-Za-z\d]([A-Za-z\d-]{0,61}[A-Za-z\d])?)*$/;
+  passengerInput: string = '';
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private alertService: AlertsService
+  ) {
     this.stepTwoForm = this.fb.group({});
   }
 
@@ -40,10 +47,27 @@ export class StepTwoComponent {
   }
 
   addUser() {
-    this.passengers.push('');
+    if (sessionStorage.getItem('username') === this.passengerInput) {
+      this.alertService.errorAlert("You can't add yourself. Idiot.");
+      return;
+    }
+    if (this.passengerInput !== '') {
+      this.userService.getClientByMail(this.passengerInput).subscribe({
+        next: () => {
+          this.passengers.push(this.passengerInput);
+        },
+        error: (err) => {
+          this.alertService.errorAlert('User not found');
+        },
+      });
+    }
   }
 
   removeUser(i: number) {
     this.passengers.splice(i, 1);
+  }
+
+  getData(): string[] {
+    return this.passengers;
   }
 }

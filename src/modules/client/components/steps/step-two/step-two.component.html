@@ -2,23 +2,31 @@
   <h5 class="text-center mt-4 mb-3">Riding with anyone?</h5>
 
   <div class="inputs mb-4">
-    <div *ngFor="let passenger of passengers; let i = index;trackBy:trackByIndex;" class="row">
-      <mdb-form-control class="form-white mb-4 col-11">
-        <input #email="ngModel" [(ngModel)]="passengers[i]" class="form-control form-control-lg text-light"
-               email id="user_{{i}}" mdbInput mdbValidate
-               name="user_{{i}}" placeholder="name@example.com" type="email"/>
-        <label class="form-label text-light" for="user_{{i}}" mdbLabel>name@example.com</label>
+    <div class="row">
+      <mdb-form-control class="form-white col-8 mt-2" style="height: 50px">
+        <input #email="ngModel" [(ngModel)]="passengerInput" class="form-control form-control-lg text-light"
+               email id="userInput" mdbInput mdbValidate
+               name="userInput" placeholder="name@example.com" type="email"/>
+        <label class="form-label text-light" for="userInput" mdbLabel>name@example.com</label>
         <mdb-error *ngIf="email.invalid && (email.dirty || email.touched)" class="mt-1">Email is not in valid form
         </mdb-error>
       </mdb-form-control>
-      <a (click)="removeUser(i)" *ngIf="i !== 0" class="close_x col-1" href="javascript:void(0)"><span class=""><em
+      <button (click)="addUser()" class="btn btn-success btn-rounded col-3 m-lg-3 mt-0"><em
+        class="fa fa-plus-circle"></em><span
+        class="px-2">Add</span></button>
+    </div>
+
+
+    <div *ngFor="let passenger of passengers; let i = index; trackBy:trackByIndex;" class="row">
+      <div style="width: 400px; overflow: hidden">
+        <span>{{passenger}}</span>
+      </div>
+
+      <a (click)="removeUser(i)" class="close_x col-1 ms-auto" href="javascript:void(0)"><span class=""><em
         class="fa fa-close fa-lg" style="color: darkred"></em></span></a>
     </div>
 
-    <a (click)="addUser()" class="link-light" href="javascript:void(0)">
-      <em class="fa fa-plus-circle"></em>
-      <span class="px-2">Add user</span>
-    </a>
+
   </div>
 
 

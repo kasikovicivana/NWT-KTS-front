@@ -9,11 +9,12 @@ import { AlertsService } from '../../../../shared/services/alerts-service/alerts
 })
 export class StepThreeComponent implements OnInit {
   public stepThreeForm: FormGroup;
-  public price: number = 500;
   public aloneCheck: boolean = true;
 
-  @Output() closeModal = new EventEmitter<boolean>();
+  @Output() finish = new EventEmitter<boolean>();
   @Input() passengers: Array<string> = [];
+
+  @Input() price: number = 0;
 
   constructor(private fb: FormBuilder, private alert: AlertsService) {
     this.stepThreeForm = this.fb.group({});
@@ -38,6 +39,6 @@ export class StepThreeComponent implements OnInit {
 
   finishRideChoice() {
     this.alert.successAlert();
-    this.closeModal.emit(false);
+    this.finish.emit(this.aloneCheck);
   }
 }

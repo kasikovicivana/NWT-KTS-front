@@ -1,9 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CarService } from '../../../../shared/services/car-service/car.service';
 import { CarType } from '../../../../app/model/carType.model';
 import { Driver } from '../../../../app/model/driver.model';
-import { UserService } from '../../../../shared/services/user-service/user.service';
 import { CarModel } from '../../../../app/model/car.model';
 import { DriverService } from '../../../../shared/services/driver-service/driver.service';
 
@@ -19,6 +18,8 @@ export class StepOneComponent implements OnInit {
   petsCheckbox: boolean = false;
   babiesCheckbox: boolean = false;
   driver: Driver | undefined;
+
+  price: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -38,8 +39,9 @@ export class StepOneComponent implements OnInit {
 
   stepOneSubmit() {}
 
-  selectCar(car: string) {
-    this.active = car;
+  selectCar(car: CarType) {
+    this.active = car.type;
+    this.price = car.price + 120 * 1.5; // treba nam br kilometara
   }
 
   findDriver() {
@@ -55,5 +57,13 @@ export class StepOneComponent implements OnInit {
         this.driver = data;
       },
     });
+  }
+
+  getData(): any {
+    return {
+      car: this.active,
+      pet: this.petsCheckbox,
+      babies: this.babiesCheckbox,
+    };
   }
 }
