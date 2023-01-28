@@ -1,1 +1,1 @@
-<div echarts [options]="chartOption"  class="demo-chart"></div>
+<div (chartInit)="onChartInit($event)" echarts [options]="chartOption"  class="demo-chart"></div>

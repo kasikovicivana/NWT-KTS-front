@@ -19,6 +19,7 @@ import { PaginationComponent } from '../shared/components/pagination/pagination.
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { AdminDriveHistoryComponent } from './pages/admin-drive-history/admin-drive-history.component';
+import { AdminDriveReportComponent } from './pages/admin-drive-report/admin-drive-report.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AdminDriveHistoryComponent } from './pages/admin-drive-history/admin-dr
     UserBlockCardComponent,
     PaginationComponent,
     AdminDriveHistoryComponent,
+    AdminDriveReportComponent,
   ],
   imports: [
     RouterModule.forChild(AdminRoutes),

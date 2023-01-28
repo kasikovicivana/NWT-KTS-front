@@ -1,0 +1,79 @@
+<div class="card my-3 row" style="border-radius: .5rem;">
+  <div class="row pt-2 pb-3">
+    <div class="col-2">
+      <label for="start" class="text-dark" style="font-weight: normal;font-size: 17px">Start date: </label>
+      <input type="date" [(ngModel)]="startDate" id="start" class="form-control" [max]="today" >
+    </div>
+    <div class="col-2">
+      <label for="end" class="text-dark" style="font-weight: normal;font-size: 17px">End date: </label>
+      <input type="date" [(ngModel)]="endDate" id="end" class="form-control" [max]="today" >
+    </div>
+    <div class="col-2 pt-4">
+      <button
+        type="button"
+        class="btn btn-rounded btn-sm fw-bold btn-info"
+        style="font-size: 14px;"
+        (click)="getDrives()"
+      >
+        Get report
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4" *ngIf="yDataRides.length != 0">
+      <div class="row">
+        <div class="col-6">
+          <p>● Number of rides per day</p>
+        </div>
+        <div class="col-6">
+          <table class="table table-sm table-bordered">
+            <tbody>
+            <tr><td>Sum: {{ridesSum}}</td></tr>
+            <tr *ngIf="drives.length != 0"><td>Average: {{ridesSum/drives.length}}</td></tr>
+            <tr *ngIf="drives.length === 0"><td>Average: {{ridesSum}}</td></tr>
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+
+      <app-drive-chart *ngIf="show" [xData]="xData" [yData]="yDataRides" [type]="'Rides'" ></app-drive-chart>
+    </div>
+    <div class="col-4" *ngIf="yDataDistance.length != 0">
+      <div class="row">
+        <div class="col-6">
+          <p>● Number of kilometers per day</p>
+        </div>
+        <div class="col-6">
+          <table class="table table-sm table-bordered">
+            <tbody>
+            <tr><td>Sum: {{distanceSum}}</td></tr>
+            <tr *ngIf="drives.length != 0"><td>Average: {{distanceSum/drives.length}}</td></tr>
+            <tr *ngIf="drives.length === 0"><td>Average: {{distanceSum}}</td></tr>
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+      <app-drive-chart *ngIf="show" [xData]="xData" [yData]="yDataDistance" [type]="'Distance'" ></app-drive-chart>
+    </div>
+    <div class="col-4" *ngIf="yDataPrice.length != 0">
+      <div class="row">
+        <div class="col-6">
+          <p>● Costs per day</p>
+        </div>
+        <div class="col-6">
+          <table class="table table-sm table-bordered">
+            <tbody>
+            <tr><td>Sum: {{priceSum}}</td></tr>
+            <tr *ngIf="drives.length != 0"><td>Average: {{priceSum/drives.length}}</td></tr>
+            <tr *ngIf="drives.length === 0"><td>Average: {{priceSum}}</td></tr>
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+      <app-drive-chart *ngIf="show" [xData]="xData" [yData]="yDataPrice" [type]="'Price'" ></app-drive-chart>
+    </div>
+  </div>
+</div>

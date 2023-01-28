@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-drive-chart',
@@ -6,14 +12,21 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./drive-chart.component.css'],
 })
 export class DriveChartComponent implements OnInit {
-  @Input() xData: string[] = [];
   @Input() yData: number[] = [];
+  @Input() xData: string[] = [];
   @Input() type: string = '';
   chartOption: any;
+  chartInstance: any;
 
   constructor() {}
 
   ngOnInit(): void {
+    console.log(this.xData);
+    console.log(this.yData);
+    this.chartOptionInit();
+  }
+
+  chartOptionInit() {
     let color;
     if (this.type === 'Rides') {
       color = '#3398DB';
@@ -22,7 +35,6 @@ export class DriveChartComponent implements OnInit {
     } else {
       color = '#d94011';
     }
-
     this.chartOption = {
       color: [color],
       tooltip: {
@@ -60,5 +72,9 @@ export class DriveChartComponent implements OnInit {
         },
       ],
     };
+  }
+
+  onChartInit(e: any) {
+    this.chartInstance = e;
   }
 }
