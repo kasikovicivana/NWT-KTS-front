@@ -14,7 +14,25 @@ export class Interceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (req.url.includes('https://api-m.sandbox.paypal.com')) {
+    if (req.url.includes('https://nominatim.openstreetmap.org/search?')) {
+      const cloned = req.clone({
+        headers: new HttpHeaders({
+          'Access-Control-Allow-Origin': '*',
+        }),
+      });
+      return next.handle(cloned);
+    }
+
+    if (
+      req.url.includes(
+        'https://api-m.sandbox.paypal.com' ||
+          req.url ==
+            'https://api.openrouteservice.org/v2/directions/driving-car/geojson' ||
+          req.url.includes(
+            'https://api.openrouteservice.org/geocode/search/structured'
+          )
+      )
+    ) {
       return next.handle(req);
     }
 
@@ -47,7 +65,6 @@ export class Interceptor implements HttpInterceptor {
           Authorization: `Bearer ` + sessionStorage.getItem('accessToken'),
         }),
       });
-
       return next.handle(cloned);
     } else {
       return next.handle(req);
