@@ -24,7 +24,6 @@ import { MdbRadioModule } from 'mdb-angular-ui-kit/radio';
 import { ChangePasswordModalComponent } from './components/change-password-modal/change-password-modal.component';
 import { CarTypeInfoComponent } from './components/car-type-info/car-type-info.component';
 import { InputUserInfoComponent } from './components/input-user-info/input-user-info.component';
-import { ClientModule } from '../client/client.module';
 import { GradeModalComponent } from './components/grade-modal/grade-modal.component';
 import { DriveChartComponent } from './components/drive-chart/drive-chart.component';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -81,6 +80,6 @@ import { FormsModule } from '@angular/forms';
     GradeModalComponent,
     DriveChartComponent,
     DriveReportComponent,
-  ]
+  ],
 })
 export class SharedModule {}
