@@ -15,10 +15,6 @@ export class MapService {
   constructor(private _http: HttpClient) {}
 
   getRoute(start: Position, end: Position, type: string) {
-    console.log('GET ROUTE');
-    console.log('Lat start: ' + start.lat + '         Lon start' + start.lon);
-    console.log('Lat end: ' + end.lat + '         Lon end' + end.lon);
-    console.log('\n\n');
     return this._http.post<any>(
       this.url,
       {
@@ -51,18 +47,6 @@ export class MapService {
   }
 
   getAddressInfo(address: string) {
-    // return this._http.get<any>(
-    //   this.addressUrl +
-    //     '?' +
-    //     'address=' +
-    //     address +
-    //     '&layers=street' +
-    //     '&country=RS' +
-    //     '&locality=Novi Sad' +
-    //     '&api_key=' +
-    //     '5b3ce3597851110001cf62487e5e4084d501444283da51d998b7cdbd'
-    // );
-
     return this._http.get<any>(
       this.nominatim + 'q=' + address + '&format=geojson'
     );
@@ -77,7 +61,7 @@ export class MapService {
           const duration: number =
             response.features[0].properties.summary.duration; // sekunde
           const distance = response.features[0].properties.summary.distance; // metri
-          resolve({ coordinates, duration, type, distance });
+          resolve({ coordinates, duration, type, distance, start, end });
         },
         error: (err) => {
           reject(err);

@@ -28,7 +28,6 @@ export class HomepageComponent {
   }
 
   setShowModalToTrue() {
-    //this.sidebar?.calculateDistance(this.chosenRoutes);
     this.distance = 0;
     this.chosenRoutes.forEach((r) => {
       this.distance += r.distance;
@@ -42,7 +41,7 @@ export class HomepageComponent {
 
     for (let pos of positions) {
       let { lat, lon } = await this.mapService.getCoordinates(pos);
-      coordinates.push(new Position({ lat, lon }));
+      coordinates.push(new Position({ lat, lon, address: pos }));
     }
 
     let routes: RouteDetails[][] = [];
