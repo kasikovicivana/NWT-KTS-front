@@ -21,6 +21,9 @@ export class CollapseListComponent {
   }
 
   showRouteOptions(routes: RouteDetails[][], positions: string[]) {
+    if (routes.length < positions.length - 1) {
+      return;
+    }
     this.routes = routes;
     this.positions = positions;
     this.chosen = [];

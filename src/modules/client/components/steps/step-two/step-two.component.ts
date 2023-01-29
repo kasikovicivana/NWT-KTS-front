@@ -28,24 +28,6 @@ export class StepTwoComponent {
     return index;
   }
 
-  isNextDisabled() {
-    if (this.passengers.length > 1) {
-      for (let p of this.passengers) {
-        if (p == '' || !this.emailPattern.test(p)) {
-          return true;
-        }
-      }
-    } else {
-      if (
-        this.passengers[0] != '' &&
-        !this.emailPattern.test(this.passengers[0])
-      ) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   addUser() {
     if (sessionStorage.getItem('username') === this.passengerInput) {
       this.alertService.errorAlert("You can't add yourself. Idiot.");

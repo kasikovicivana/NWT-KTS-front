@@ -38,7 +38,7 @@ export class StepThreeComponent implements OnInit {
   }
 
   finishRideChoice() {
-    this.alert.successAlert();
+    this.alert.successAlert(); // ...
     this.finish.emit(this.aloneCheck);
   }
 }

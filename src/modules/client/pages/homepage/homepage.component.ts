@@ -16,6 +16,7 @@ export class HomepageComponent {
   chosenRoutes: RouteDetails[] = [];
 
   allRoutes: RouteDetails[][] = [];
+  distance: number = 0;
 
   @ViewChild(RouteMapComponent) mapChild: RouteMapComponent | undefined;
   @ViewChild(SideBarComponent) sidebar: SideBarComponent | undefined;
@@ -27,6 +28,11 @@ export class HomepageComponent {
   }
 
   setShowModalToTrue() {
+    //this.sidebar?.calculateDistance(this.chosenRoutes);
+    this.distance = 0;
+    this.chosenRoutes.forEach((r) => {
+      this.distance += r.distance;
+    });
     this.showModal = true;
   }
 

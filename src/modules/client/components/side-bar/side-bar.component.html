@@ -30,7 +30,9 @@
       <span class="px-2">Add destination</span>
     </a>
     <div class="col-5">
-      <button (click)="findPositions()" class="btn btn-success btn-rounded" type="button">Find</button>
+      <button (click)="findPositions()" [disabled]="isFindDisabled()" class="btn btn-success btn-rounded" type="button">
+        Find
+      </button>
     </div>
   </div>
 
@@ -39,6 +41,7 @@
       <input
         (change)="isMyChoice = false"
         [checked]="true"
+        [disabled]="isChooseDisabled()"
         class="my_radio"
         id="system"
         mdbRadio
@@ -50,6 +53,7 @@
     <div class="form-check col-6">
       <input
         (change)="myChoice()"
+        [disabled]="isChooseDisabled()"
         class="my_radio"
         id="my"
         mdbRadio
@@ -64,6 +68,8 @@
 
 
   <div *ngIf="isLoggedIn" class="button_row">
-    <button (click)="openStepperModal()" class="btn btn-success btn-rounded " type="button">Choose</button>
+    <button (click)="openStepperModal()" [disabled]="isChooseDisabled()" class="btn btn-success btn-rounded "
+            type="button">Choose
+    </button>
   </div>
 </div>

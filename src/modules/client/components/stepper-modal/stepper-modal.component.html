@@ -16,7 +16,7 @@
                 <div class="step-bullet">1</div>
                 <div class="step-title">Car type</div>
               </ng-template>
-              <app-step-one #stepOne></app-step-one>
+              <app-step-one #stepOne [distance]="distance"></app-step-one>
             </cdk-step>
 
             <cdk-step [optional]="false" [stepControl]="stepTwo.stepTwoForm">
@@ -33,7 +33,8 @@
                 <div class="step-title">Payment</div>
               </ng-template>
               <app-step-three #stepThree (finish)="finish($event)"
-                              [passengers]="stepTwo.passengers" [price]="stepOne.price"></app-step-three>
+                              [passengers]="stepTwo.passengers"
+                              [price]="stepOne.price"></app-step-three>
             </cdk-step>
 
           </ng-stepper>

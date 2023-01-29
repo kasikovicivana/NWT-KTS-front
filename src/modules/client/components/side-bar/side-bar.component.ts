@@ -53,6 +53,7 @@ export class SideBarComponent implements OnInit {
   }
 
   openStepperModal() {
+    // ...
     this.openModal.emit(true);
   }
 
@@ -63,9 +64,7 @@ export class SideBarComponent implements OnInit {
 
   showRouteOptions(routes: RouteDetails[][]) {
     this.routes = routes;
-
     let positions = this.getPositions();
-
     if (this.isMyChoice) {
       this.list?.showRouteOptions(this.routes, positions);
     }
@@ -79,6 +78,22 @@ export class SideBarComponent implements OnInit {
 
   changeRoute(params: any) {
     this.changeRouteType.emit(params);
+  }
+
+  isFindDisabled() {
+    if (this.start === '' || this.end === '') {
+      return true;
+    }
+    for (let p of this.pins) {
+      if (p === '') {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isChooseDisabled() {
+    return this.routes.length === 0;
   }
 
   private getPositions() {

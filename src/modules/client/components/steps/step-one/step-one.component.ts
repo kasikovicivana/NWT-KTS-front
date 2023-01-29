@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CarService } from '../../../../shared/services/car-service/car.service';
 import { CarType } from '../../../../app/model/carType.model';
@@ -13,13 +13,15 @@ import { DriverService } from '../../../../shared/services/driver-service/driver
 })
 export class StepOneComponent implements OnInit {
   public stepOneForm: FormGroup;
-  active: string = 'Comfort ride';
-  carTypes: [CarType] | undefined;
+  active: string = '';
+  carTypes: CarType[] = [];
   petsCheckbox: boolean = false;
   babiesCheckbox: boolean = false;
   driver: Driver | undefined;
 
   price: number = 0;
+
+  @Input() distance: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -33,6 +35,8 @@ export class StepOneComponent implements OnInit {
     this.carService.getCarTypes().subscribe({
       next: (data) => {
         this.carTypes = data;
+        this.active = this.carTypes[0].type;
+        this.price = this.carTypes[0].price + 120 * this.distance;
       },
     });
   }
@@ -41,7 +45,7 @@ export class StepOneComponent implements OnInit {
 
   selectCar(car: CarType) {
     this.active = car.type;
-    this.price = car.price + 120 * 1.5; // treba nam br kilometara
+    this.price = car.price + 120 * this.distance;
   }
 
   findDriver() {
@@ -64,6 +68,7 @@ export class StepOneComponent implements OnInit {
       car: this.active,
       pet: this.petsCheckbox,
       babies: this.babiesCheckbox,
+      price: this.price,
     };
   }
 }

@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { StepOneComponent } from '../steps/step-one/step-one.component';
 import { StepTwoComponent } from '../steps/step-two/step-two.component';
 
@@ -10,6 +16,8 @@ import { StepTwoComponent } from '../steps/step-two/step-two.component';
 export class StepperModalComponent {
   @Output() closeModal = new EventEmitter<boolean>();
   @Output() finishOrder = new EventEmitter<any>();
+
+  @Input() distance: number = 0;
 
   stepOne: StepOneComponent | undefined;
   stepTwo: StepTwoComponent | undefined;
@@ -33,7 +41,7 @@ export class StepperModalComponent {
   }
 
   finish(alone: boolean) {
-    let { car, pet, babies } = this.stepOne?.getData();
+    let { car, pet, babies, price } = this.stepOne?.getData();
     let passengers: string[] | undefined = this.stepTwo?.getData();
     // saljem na homepage
     this.finishOrder.emit({ alone, car, pet, babies, passengers });
