@@ -36,11 +36,16 @@ export class DriveService {
   getClientDrivesByDate(dates: Report) {
     return this._http.post<Drive[]>(this.url + '/getAllByClientDate', dates);
   }
+
   getDriverDrivesByDate(dates: Report) {
     return this._http.post<Drive[]>(this.url + '/getAllByDriverDate', dates);
   }
 
   getDrivesByDate(dates: Report) {
     return this._http.post<Drive[]>(this.url + '/getAllByDate', dates);
+  }
+
+  getDrivePriceForClient(id: number) {
+    return this._http.get<number>(this.url + '/getDrivePriceByClient/' + id);
   }
 }
