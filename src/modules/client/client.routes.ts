@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { PurchaseTokensComponent } from './pages/purchase-tokens/purchase-tokens.component';
-import { SuccessfulPaymentComponent } from './pages/confirm-payment/successful-payment.component';
+import { SuccessfulPaymentComponent } from './pages/confirm-token-payment/successful-payment.component';
 import { ProfileViewComponent } from './pages/profile-view/profile-view.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { ClientDriveHistoryComponent } from './pages/client-drive-history/client-drive-history.component';
 import { ClientDriveReportComponent } from './pages/client-drive-report/client-drive-report.component';
+import { NotificationViewComponent } from './pages/notification-view/notification-view.component';
+import { ApproveDrivePaymentComponent } from './pages/approve-drive-payment/approve-drive-payment.component';
 
 export const ClientRoutes: Routes = [
   {
@@ -41,5 +43,16 @@ export const ClientRoutes: Routes = [
     path: 'clientReport',
     pathMatch: 'full',
     component: ClientDriveReportComponent,
+  },
+
+  {
+    path: 'notifications',
+    pathMatch: 'full',
+    component: NotificationViewComponent,
+  },
+  {
+    path: 'approveDrivePayment/:id',
+    pathMatch: 'full',
+    component: ApproveDrivePaymentComponent,
   },
 ];

@@ -1,0 +1,25 @@
+<div>
+
+  <table class="table bg-white table-hover " style="border-radius: .55rem;font-size: 18px">
+    <thead class="table-dark">
+    <tr>
+      <th scope="col">Notifications</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let notification of notifications">
+      <td colspan="3">{{notification.message}}</td>
+      <td style="float: right;padding: 0 10px 0 0;">
+        <button *ngIf="notification.reason==='APPROVE_PAYMENT'" class="btn btn-rounded  fw-bold btn-success" style="margin: 15px;"
+                    type="button" (click)="sendToApprove(notification.driveId)">View
+        </button>
+        <span style="font-size: 9px;padding-left: 10px">{{notification.dateTime}}</span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

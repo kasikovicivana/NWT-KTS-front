@@ -1,0 +1,27 @@
+<section class="vh-80 min-vh-100 token-main bg-dark">
+
+
+  <div class="col-4 bg-dark text-center" style="margin: 100px  260px  auto auto; height: 350px; width:500px" >
+    <div class="row"> <h4 class="title">APPROVE PAYMENT <em class="fa fa-credit-card title"></em></h4> </div>
+    <div class="row" style="padding-left: 30px">
+      <div >
+        <span class="subtitle" style="float: left; font-size: 20px">Payment info <em class="fa fa-question-circle title"></em> </span>
+        <p class="text" style="padding-top: 10px;">
+          <br>
+          <br>
+        <p class="text" style="padding-left: 30px;" >
+          Drive route:  {{info.startPlace}} - {{info.endPlace}}<br/>
+        </p>
+        <p class="text" style="padding-left: 30px;" >
+          Amount:  {{info.price}} $<br/>
+        </p>
+
+        <div >
+          <button (click)="confirm()" class="btn btn-primary bg-success" style="float: right;margin-right: 35px" type="button"> Confirm </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>

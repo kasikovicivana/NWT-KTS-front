@@ -7,7 +7,7 @@ import { AlertsService } from '../../../shared/services/alerts-service/alerts.se
 import { UserService } from '../../../shared/services/user-service/user.service';
 
 @Component({
-  selector: 'app-confirm-payment',
+  selector: 'app-confirm-token-payment',
   templateUrl: './successful-payment.component.html',
   styleUrls: ['./successful-payment.component.css'],
 })

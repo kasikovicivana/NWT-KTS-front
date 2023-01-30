@@ -4,6 +4,11 @@ import { Position } from '../../../app/model/position.model';
 import { RouteDetails } from '../../../app/model/routeDetails';
 import { RouteMapComponent } from '../../components/route-map/route-map.component';
 import { SideBarComponent } from '../../components/side-bar/side-bar.component';
+import * as SockJS from 'sockjs-client';
+import * as Stomp from 'stompjs';
+import { DriverRoutes } from '../../../app/model/driverRoutes.model';
+import * as L from 'leaflet';
+import { NotificationModel } from '../../../app/model/notification.model';
 
 @Component({
   selector: 'app-homepage',
@@ -17,11 +22,35 @@ export class HomepageComponent {
 
   allRoutes: RouteDetails[][] = [];
   distance: number = 0;
+  private stompClient: any;
 
   @ViewChild(RouteMapComponent) mapChild: RouteMapComponent | undefined;
   @ViewChild(SideBarComponent) sidebar: SideBarComponent | undefined;
 
-  constructor(private mapService: MapService) {}
+  constructor(private mapService: MapService) {
+    this.initializeWebSocketConnection();
+  }
+
+  initializeWebSocketConnection() {
+    let ws = new SockJS('http://localhost:9000/socket');
+    this.stompClient = Stomp.over(ws);
+    this.stompClient.debug = null;
+    let that = this;
+    this.stompClient.connect({}, function () {
+      that.openGlobalSocket();
+    });
+  }
+
+  openGlobalSocket() {
+    this.stompClient.subscribe(
+      '/notification/approvePayment',
+      (message: { body: string }) => {
+        let notification = JSON.parse(message.body);
+        // uklanjamo ga iz liste pozicija
+        console.log(notification);
+      }
+    );
+  }
 
   setShowModalToFalse() {
     this.showModal = false;

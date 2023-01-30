@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClientRoutes } from './client.routes';
 import { PurchaseTokensComponent } from './pages/purchase-tokens/purchase-tokens.component';
-import { SuccessfulPaymentComponent } from './pages/confirm-payment/successful-payment.component';
+import { SuccessfulPaymentComponent } from './pages/confirm-token-payment/successful-payment.component';
 import { ProfileViewComponent } from './pages/profile-view/profile-view.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -32,6 +32,9 @@ import { ClientDriveHistoryComponent } from './pages/client-drive-history/client
 import { ClientDriveReportComponent } from './pages/client-drive-report/client-drive-report.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { RouteMapComponent } from './components/route-map/route-map.component';
+import { NotificationViewComponent } from './pages/notification-view/notification-view.component';
+import { NotificationTableComponent } from './components/notification-table/notification-table.component';
+import { ApproveDrivePaymentComponent } from './pages/approve-drive-payment/approve-drive-payment.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,9 @@ import { RouteMapComponent } from './components/route-map/route-map.component';
     ClientDriveHistoryComponent,
     ClientDriveReportComponent,
     RouteMapComponent,
+    NotificationViewComponent,
+    NotificationTableComponent,
+    ApproveDrivePaymentComponent,
   ],
   imports: [
     RouterModule.forChild(ClientRoutes),

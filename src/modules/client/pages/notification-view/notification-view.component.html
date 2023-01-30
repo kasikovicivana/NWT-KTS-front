@@ -1,0 +1,12 @@
+<section class="vh-80 min-vh-100 hero-main">
+  <div class="container py-5 h-100">
+    <div *ngIf="notifications.length != 0" class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-10 mb-4 mb-lg-0">
+        <app-notification-table  [notifications]="notifications"></app-notification-table>
+      </div>
+    </div>
+    <div *ngIf="notifications.length == 0">
+      There are no notifications!
+    </div>
+  </div>
+</section>

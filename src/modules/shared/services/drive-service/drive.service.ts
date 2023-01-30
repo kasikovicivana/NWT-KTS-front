@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { DriverRoutes } from '../../../app/model/driverRoutes.model';
 import { Drive } from '../../../app/model/drive.model';
 import { Report } from '../../../app/model/report.model';
+import { ClientDriveModel } from '../../../app/model/clientDrive.model';
 
 @Injectable({
   providedIn: 'root',
@@ -46,6 +47,12 @@ export class DriveService {
   }
 
   getDrivePriceForClient(id: number) {
-    return this._http.get<number>(this.url + '/getDrivePriceByClient/' + id);
+    return this._http.get<ClientDriveModel>(
+      this.url + '/getDrivePriceByClient/' + id
+    );
+  }
+
+  approvePayment(id: number) {
+    return this._http.get<VoidFunction>(this.url + '/approvePayment/' + id);
   }
 }
