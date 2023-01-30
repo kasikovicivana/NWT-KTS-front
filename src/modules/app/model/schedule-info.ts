@@ -11,6 +11,7 @@ export class ScheduleInfo {
   public splitFaire: boolean = false;
   public reservation: boolean = false;
   public routes: RouteDetails[] = [];
+  public reservationTime: Date | undefined = undefined;
 
   public constructor(s: any) {
     this.passengers = s.passengers;
@@ -23,5 +24,6 @@ export class ScheduleInfo {
     this.splitFaire = s.splitFaire;
     this.reservation = s.reservation;
     this.routes = s.routes;
+    this.reservationTime = s.reservationTime;
   }
 }

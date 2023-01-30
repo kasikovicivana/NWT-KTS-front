@@ -9,9 +9,6 @@ import * as Stomp from 'stompjs';
 import { ScheduleInfo } from '../../../app/model/schedule-info';
 import { DriveService } from '../../../shared/services/drive-service/drive.service';
 import { NotificationService } from 'src/modules/shared/services/notification-service/notification.service';
-import { DriverRoutes } from '../../../app/model/driverRoutes.model';
-import * as L from 'leaflet';
-import { NotificationModel } from '../../../app/model/notification.model';
 
 @Component({
   selector: 'app-homepage',
@@ -168,6 +165,7 @@ export class HomepageComponent {
       splitFaire: !params.alone,
       reservation: params.reserve,
       routes: this.chosenRoutes,
+      reservationTime: params.reservationTime,
     });
 
     this.driveService.addDrive(info).subscribe();

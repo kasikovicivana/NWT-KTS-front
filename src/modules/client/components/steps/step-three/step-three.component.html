@@ -68,10 +68,23 @@
       <button cdkStepperPrevious class="btn btn-success btn-rounded previous">Previous</button>
     </div>
     <div class="button col-3">
-      <button (click)="reserveRide()" cdkStepperNext class="btn btn-success btn-rounded">Reserve</button>
+      <button (click)="reservation()" cdkStepperNext class="btn btn-success btn-rounded">Reserve</button>
     </div>
     <div class="button col-3">
       <button (click)="finishRideChoice()" cdkStepperNext class="btn btn-success btn-rounded">Finish</button>
+    </div>
+  </div>
+
+  <div *ngIf="isReservation" class="buttons row mt-4">
+    <div class="col-5 mt-1">
+      <label for="time">Reservation time</label>
+    </div>
+    <div class="col-5">
+      <input [(ngModel)]="reservationTime" class="form-control" id="time" type="time"/>
+    </div>
+    <div class="button ms-auto col-2">
+      <button (click)="reserveRide()" [disabled]="isReservationDisabled()" class="btn btn-success btn-rounded">End
+      </button>
     </div>
   </div>
 
