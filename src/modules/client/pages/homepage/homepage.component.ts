@@ -73,6 +73,32 @@ export class HomepageComponent {
         }
       }
     );
+    this.stompClient.subscribe(
+      '/notification/noAvailableDriver',
+      (message: { body: string }) => {
+        let notification = JSON.parse(message.body);
+        console.log(notification);
+        console.log(notification.message);
+        if (sessionStorage.getItem('username') === notification.receiverEmail) {
+          this.notificationService.showRejectedDriveNotification(
+            notification.message
+          );
+        }
+      }
+    );
+    this.stompClient.subscribe(
+      '/notification/approvedDrive',
+      (message: { body: string }) => {
+        let notification = JSON.parse(message.body);
+        console.log(notification);
+        console.log(notification.message);
+        if (sessionStorage.getItem('username') === notification.receiverEmail) {
+          this.notificationService.showAcceptedDriveNotification(
+            notification.message
+          );
+        }
+      }
+    );
   }
 
   setShowModalToFalse() {

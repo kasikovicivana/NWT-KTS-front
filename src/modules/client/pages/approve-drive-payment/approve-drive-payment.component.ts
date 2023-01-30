@@ -57,6 +57,19 @@ export class ApproveDrivePaymentComponent implements OnInit {
         }
       }
     );
+    this.stompClient.subscribe(
+      '/notification/approvedDrive',
+      (message: { body: string }) => {
+        let notification = JSON.parse(message.body);
+        console.log(notification);
+        console.log(notification.message);
+        if (sessionStorage.getItem('username') === notification.receiverEmail) {
+          this.notificationService.showAcceptedDriveNotification(
+            notification.message
+          );
+        }
+      }
+    );
   }
 
   confirm() {

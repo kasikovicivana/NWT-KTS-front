@@ -35,4 +35,12 @@ export class NotificationService {
   showRejectedPaymentNotification(message: string) {
     this.toast.error(message, 'REJECTED payment!');
   }
+
+  showRejectedDriveNotification(message: string) {
+    this.toast.error(message, 'REJECTED drive!');
+  }
+
+  showAcceptedDriveNotification(message: string) {
+    this.toast.success(message, 'Accepted drive!');
+  }
 }
