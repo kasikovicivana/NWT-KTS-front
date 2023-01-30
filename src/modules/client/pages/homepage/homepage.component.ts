@@ -166,7 +166,7 @@ export class HomepageComponent {
       distance: this.distance,
       duration: this.duration,
       splitFaire: !params.alone,
-      reservation: false,
+      reservation: params.reserve,
       routes: this.chosenRoutes,
     });
 

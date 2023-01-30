@@ -19,8 +19,12 @@ export class DriveService {
     return this._http.get<Set<DriverRoutes>>(this.url + '/current');
   }
 
-  loadPositions() {
-    return this._http.get<any>(this.url + '/positions');
+  loadPositionsActive() {
+    return this._http.get<any>(this.url + '/positionsActive');
+  }
+
+  loadPositionsInactive() {
+    return this._http.get<any>(this.url + '/positionsInactive');
   }
 
   getClientDriveHistory() {

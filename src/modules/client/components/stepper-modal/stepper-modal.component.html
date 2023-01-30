@@ -33,6 +33,7 @@
                 <div class="step-title">Payment</div>
               </ng-template>
               <app-step-three #stepThree (finish)="finish($event)"
+                              (reserve)="reserve($event)"
                               [passengers]="stepTwo.passengers"
                               [price]="stepOne.price"></app-step-three>
             </cdk-step>

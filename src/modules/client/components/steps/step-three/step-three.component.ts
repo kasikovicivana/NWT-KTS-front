@@ -12,6 +12,7 @@ export class StepThreeComponent implements OnInit {
   public aloneCheck: boolean = true;
 
   @Output() finish = new EventEmitter<boolean>();
+  @Output() reserve = new EventEmitter<boolean>();
   @Input() passengers: Array<string> = [];
 
   @Input() price: number = 0;
@@ -40,5 +41,10 @@ export class StepThreeComponent implements OnInit {
   finishRideChoice() {
     this.alert.successAlert(); // ...
     this.finish.emit(this.aloneCheck);
+  }
+
+  reserveRide() {
+    this.alert.successAlert(); // ...
+    this.reserve.emit(this.aloneCheck);
   }
 }

@@ -64,8 +64,11 @@
 
 
   <div class="buttons row">
-    <div class="button col-9">
+    <div class="button col-6">
       <button cdkStepperPrevious class="btn btn-success btn-rounded previous">Previous</button>
+    </div>
+    <div class="button col-3">
+      <button (click)="reserveRide()" cdkStepperNext class="btn btn-success btn-rounded">Reserve</button>
     </div>
     <div class="button col-3">
       <button (click)="finishRideChoice()" cdkStepperNext class="btn btn-success btn-rounded">Finish</button>

@@ -11,7 +11,6 @@ import 'leaflet-extra-markers';
 import { Route } from '../../../app/model/route.model';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
-import { Position } from '../../../app/model/position.model';
 
 @Component({
   selector: 'app-map',
@@ -24,6 +23,22 @@ export class MapComponent implements AfterViewInit {
   private routes = new Map<string, any>();
 
   private stompClient: any;
+
+  private greenCar: any = L.ExtraMarkers.icon({
+    icon: 'fa-car',
+    markerColor: 'green',
+    iconColor: 'white',
+    shape: 'circle',
+    prefix: 'fa',
+  });
+
+  private blackCar: any = L.ExtraMarkers.icon({
+    icon: 'fa-car',
+    markerColor: 'black',
+    iconColor: 'white',
+    shape: 'circle',
+    prefix: 'fa',
+  });
 
   constructor(
     private mapService: MapService,
@@ -47,9 +62,7 @@ export class MapComponent implements AfterViewInit {
       '/map-updates/new-drive',
       (message: { body: string }) => {
         let driverRoutes = JSON.parse(message.body);
-        // uklanjamo ga iz liste pozicija
         this.positions.get(driverRoutes.username)?.remove();
-        this.positions.delete(driverRoutes.username);
         this.simulate(new DriverRoutes(driverRoutes)).then(() => {});
       }
     );
@@ -62,31 +75,18 @@ export class MapComponent implements AfterViewInit {
         for (let d in data) {
           username = d;
         }
-        const pos: Position = new Position(data[username]);
         this.routes.get(username)?.remove();
         this.routes.delete(username);
 
-        const greenMarker = L.ExtraMarkers.icon({
-          icon: 'fa-car',
-          markerColor: 'green',
-          iconColor: 'white',
-          shape: 'circle',
-          prefix: 'fa',
-        });
-
-        let marker = L.marker([pos.lat, pos.lon], { icon: greenMarker })
-          .addTo(this.map)
-          .bindPopup(username);
-        this.positions.set(username, marker);
-        // treba nam i nova pozicija za ovog vozaca
+        this.positions.get(username)?.addTo(this.map);
       }
     );
 
     this.stompClient.subscribe(
       '/map-updates/driver-active',
       (message: { body: string }) => {
-        // treba nam username i pozicija
-        // mozda da zakucamo na neku poziciju ?
+        let username = message.body;
+        this.positions.get(username)?.setIcon(this.blackCar);
       }
     );
 
@@ -95,6 +95,7 @@ export class MapComponent implements AfterViewInit {
       (message: { body: string }) => {
         let username = message.body;
         this.routes.delete(username);
+        this.positions.get(username)?.setIcon(this.blackCar);
       }
     );
   }
@@ -124,19 +125,24 @@ export class MapComponent implements AfterViewInit {
   }
 
   load(): void {
-    const greenMarker = L.ExtraMarkers.icon({
-      icon: 'fa-car',
-      markerColor: 'green',
-      iconColor: 'white',
-      shape: 'circle',
-      prefix: 'fa',
-    });
-
-    this.driveService.loadPositions().subscribe({
+    this.driveService.loadPositionsActive().subscribe({
       next: (values) => {
         for (let key in values) {
           const item = values[key];
-          let marker = L.marker([item.lat, item.lon], { icon: greenMarker })
+          let marker = L.marker([item.lat, item.lon], { icon: this.greenCar })
+            .addTo(this.map)
+            .bindPopup(key);
+          this.positions.set(key, marker);
+        }
+      },
+      error: () => {},
+    });
+
+    this.driveService.loadPositionsInactive().subscribe({
+      next: (values) => {
+        for (let key in values) {
+          const item = values[key];
+          let marker = L.marker([item.lat, item.lon], { icon: this.blackCar })
             .addTo(this.map)
             .bindPopup(key);
           this.positions.set(key, marker);
@@ -159,6 +165,7 @@ export class MapComponent implements AfterViewInit {
     let data = await this.getData(value);
     const coordinates = data.coordinates;
     const duration = data.duration;
+    this.positions.get(value.username)?.remove();
     await this.moveCar(value.username, coordinates, duration);
   }
 
@@ -188,7 +195,7 @@ export class MapComponent implements AfterViewInit {
             easing: (L as any).Motion.Ease.easeInOutQuart,
           },
           {
-            removeOnEnd: true,
+            removeOnEnd: false,
             showMarker: true,
             icon: redMarker,
           }
@@ -197,7 +204,6 @@ export class MapComponent implements AfterViewInit {
 
       a.bindPopup(username);
       this.routes.set(username, a);
-      // dodaj a u neku globalnu listu pod kljucem username
     }
   }
 
@@ -253,8 +259,6 @@ export class MapComponent implements AfterViewInit {
               routeDuration = rDuration;
             }
           }
-          console.log('GET ROUTE DATA');
-          console.log(rCoordinates);
           resolve({ rCoordinates, routeDuration });
         },
         error: (err) => {

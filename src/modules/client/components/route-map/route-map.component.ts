@@ -12,11 +12,10 @@ import { Position } from '../../../app/model/position.model';
 })
 export class RouteMapComponent implements AfterViewInit {
   private map: L.Map | L.LayerGroup | any;
-  private routeDetails: RouteDetails[][] = [];
   private displayedRoutes: any[] = [];
 
   private greenMarker = L.ExtraMarkers.icon({
-    icon: 'fa-car',
+    icon: 'fa-star',
     markerColor: 'green',
     iconColor: 'white',
     shape: 'circle',
@@ -24,7 +23,7 @@ export class RouteMapComponent implements AfterViewInit {
   });
 
   private redMarker = L.ExtraMarkers.icon({
-    icon: 'fa-car',
+    icon: 'fa-star',
     markerColor: 'red',
     iconColor: 'white',
     shape: 'circle',
@@ -32,7 +31,7 @@ export class RouteMapComponent implements AfterViewInit {
   });
 
   private blueMarker = L.ExtraMarkers.icon({
-    icon: 'fa-car',
+    icon: 'fa-star',
     markerColor: 'blue',
     iconColor: 'white',
     shape: 'circle',
@@ -104,7 +103,6 @@ export class RouteMapComponent implements AfterViewInit {
   }
 
   showRoutes(routes: RouteDetails[][]) {
-    this.routeDetails = routes;
     for (let r of this.displayedRoutes) {
       r.remove();
     }

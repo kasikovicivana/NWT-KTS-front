@@ -41,9 +41,16 @@ export class StepperModalComponent {
   }
 
   finish(alone: boolean) {
+    this.sendDriveData(alone, false);
+  }
+
+  reserve(alone: boolean) {
+    this.sendDriveData(alone, true);
+  }
+
+  sendDriveData(alone: boolean, reserve: boolean) {
     let { car, pet, babies, price } = this.stepOne?.getData();
     let passengers: string[] | undefined = this.stepTwo?.getData();
-    // saljem na homepage
     this.finishOrder.emit({
       alone,
       car,
@@ -51,6 +58,7 @@ export class StepperModalComponent {
       babies,
       passengers,
       price,
+      reserve,
     });
   }
 }
