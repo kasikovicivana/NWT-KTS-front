@@ -1,3 +1,5 @@
+import { RouteDetails } from './routeDetails';
+
 export class ScheduleInfo {
   public passengers: string[] = [];
   public car: string = '';
@@ -8,6 +10,7 @@ export class ScheduleInfo {
   public duration: number = 0;
   public splitFaire: boolean = false;
   public reservation: boolean = false;
+  public routes: RouteDetails[] = [];
 
   public constructor(s: any) {
     this.passengers = s.passengers;
@@ -19,5 +22,6 @@ export class ScheduleInfo {
     this.duration = s.duration;
     this.splitFaire = s.splitFaire;
     this.reservation = s.reservation;
+    this.routes = s.routes;
   }
 }

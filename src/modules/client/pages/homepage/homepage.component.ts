@@ -130,6 +130,7 @@ export class HomepageComponent {
   finish(params: any) {
     // neko obavjestenje da potvrdi placanjee
     // imamo sve parametre, saljemo na  bek..
+
     let info: ScheduleInfo = new ScheduleInfo({
       passengers: params.passengers,
       car: params.car,
@@ -140,6 +141,7 @@ export class HomepageComponent {
       duration: this.duration,
       splitFaire: !params.alone,
       reservation: false,
+      routes: this.chosenRoutes,
     });
 
     this.driveService.addDrive(info).subscribe();
