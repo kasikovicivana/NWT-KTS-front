@@ -5,6 +5,7 @@ import { DriverRoutes } from '../../../app/model/driverRoutes.model';
 import { Drive } from '../../../app/model/drive.model';
 import { Report } from '../../../app/model/report.model';
 import { ClientDriveModel } from '../../../app/model/clientDrive.model';
+import { ScheduleInfo } from '../../../app/model/schedule-info';
 
 @Injectable({
   providedIn: 'root',
@@ -54,5 +55,9 @@ export class DriveService {
 
   approvePayment(id: number) {
     return this._http.get<VoidFunction>(this.url + '/approvePayment/' + id);
+  }
+
+  addDrive(info: ScheduleInfo) {
+    return this._http.post<any>(this.url + '/saveDrive', info);
   }
 }
