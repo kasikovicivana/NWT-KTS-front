@@ -12,6 +12,7 @@
     "src/polyfills.ts"
   ],
   "include": [
+    "node_modules/mdb-angular-ui-kit/index.d.ts",
     "src/**/*.spec.ts",
     "src/**/*.d.ts"
   ]

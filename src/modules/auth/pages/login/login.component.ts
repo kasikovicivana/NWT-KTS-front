@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
         (data) => {
           this.alerts.successAlert();
           this.loginSuccessful(data);
-          setTimeout(() => (window.location.href = '/home'), 1000);
+          setTimeout(() => this.redirectToHomepage(), 1000);
         },
         (err) => {
           this.alerts.errorAlert('Wrong credentials!');
@@ -68,6 +68,10 @@ export class LoginComponent implements OnInit {
     } else {
       this.alerts.errorAlert('You must enter email and password!');
     }
+  }
+
+  redirectToHomepage() {
+    window.location.href = '/home';
   }
 
   loginSuccessful(response: LoggedUser) {

@@ -52,27 +52,7 @@ import { SharedModule } from '../shared/shared.module';
     MdbRadioModule,
     SharedModule,
   ],
-  providers: [
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              '876431757912-4d80ppb585036idf1r63oild8lled1un.apps.googleusercontent.com'
-            ),
-          },
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('2042751709255530'),
-          },
-        ],
-      } as SocialAuthServiceConfig,
-    },
-    StarRatingConfigService,
-  ],
+  providers: [StarRatingConfigService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
