@@ -168,7 +168,10 @@ export class HomepageComponent {
       reservationTime: params.reservationTime,
     });
 
-    this.driveService.addDrive(info).subscribe();
+    this.driveService.addDrive(info).subscribe({
+      next: () => {},
+      error: () => {},
+    });
     // greska.. ??
 
     this.setShowModalToFalse();
