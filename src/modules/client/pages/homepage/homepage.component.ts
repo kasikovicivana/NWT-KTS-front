@@ -8,6 +8,10 @@ import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 import { ScheduleInfo } from '../../../app/model/schedule-info';
 import { DriveService } from '../../../shared/services/drive-service/drive.service';
+import { NotificationService } from 'src/modules/shared/services/notification-service/notification.service';
+import { DriverRoutes } from '../../../app/model/driverRoutes.model';
+import * as L from 'leaflet';
+import { NotificationModel } from '../../../app/model/notification.model';
 
 @Component({
   selector: 'app-homepage',
@@ -28,8 +32,11 @@ export class HomepageComponent {
 
   constructor(
     private mapService: MapService,
-    private driveService: DriveService
-  ) {}
+    private driveService: DriveService,
+    private notificationService: NotificationService
+  ) {
+    this.initializeWebSocketConnection();
+  }
 
   initializeWebSocketConnection() {
     let ws = new SockJS('http://localhost:9000/socket');
@@ -46,8 +53,14 @@ export class HomepageComponent {
       '/notification/approvePayment',
       (message: { body: string }) => {
         let notification = JSON.parse(message.body);
-        // uklanjamo ga iz liste pozicija
         console.log(notification);
+        console.log(notification.message);
+        if (sessionStorage.getItem('username') === notification.receiverEmail) {
+          this.notificationService.showApprovePaymentNotification(
+            notification.message,
+            notification.driveId
+          );
+        }
       }
     );
   }

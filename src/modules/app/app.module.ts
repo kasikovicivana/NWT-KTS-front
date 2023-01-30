@@ -28,6 +28,7 @@ import { DriverModule } from '../driver/driver.module';
 import { AuthModule } from '../auth/auth.module';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
+import 'ngx-toastr/toastr';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, MailModalComponent],

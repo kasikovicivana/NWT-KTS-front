@@ -29,6 +29,7 @@ import { DriveChartComponent } from './components/drive-chart/drive-chart.compon
 import { NgxEchartsModule } from 'ngx-echarts';
 import { DriveReportComponent } from './components/drive-report/drive-report.component';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,9 @@ import { FormsModule } from '@angular/forms';
     MdbFormsModule,
     NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
     FormsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },

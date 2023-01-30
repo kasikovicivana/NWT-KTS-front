@@ -36,7 +36,8 @@
               "node_modules/@sweetalert2/themes/dark/dark.scss",
               "node_modules/sweetalert2/src/sweetalert2.scss",
               "src/styles.css",
-              "node_modules/leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css"
+              "node_modules/leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.js"

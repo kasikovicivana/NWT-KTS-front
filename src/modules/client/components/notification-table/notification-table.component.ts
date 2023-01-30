@@ -11,7 +11,9 @@ export class NotificationTableComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.notifications);
+  }
 
   sendToApprove(driveId: number) {
     window.location.href = '/approveDrivePayment/' + driveId;

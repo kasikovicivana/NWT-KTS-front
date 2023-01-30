@@ -4,4 +4,6 @@ export interface NotificationModel {
   dateTime: string;
   driveId: number;
   reason: string;
+  receiverEmail: string;
+  approvedPayment: boolean;
 }
