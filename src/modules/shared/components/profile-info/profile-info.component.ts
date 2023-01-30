@@ -16,7 +16,6 @@ import { User } from '../../../app/model/user.model';
 import { CarType } from '../../../app/model/carType.model';
 import { CarService } from '../../services/car-service/car.service';
 import { DomUtil } from 'leaflet';
-import getClass = DomUtil.getClass;
 import { DriverCarInfo } from '../../../app/model/driver.model';
 
 @Component({

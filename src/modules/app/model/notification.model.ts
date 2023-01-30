@@ -6,4 +6,5 @@ export interface NotificationModel {
   reason: string;
   receiverEmail: string;
   approvedPayment: boolean;
+  driveStatus: string;
 }

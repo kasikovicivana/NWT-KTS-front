@@ -63,6 +63,19 @@ export class HomepageComponent {
         }
       }
     );
+    this.stompClient.subscribe(
+      '/notification/rejectedPayment',
+      (message: { body: string }) => {
+        let notification = JSON.parse(message.body);
+        console.log(notification);
+        console.log(notification.message);
+        if (sessionStorage.getItem('username') === notification.receiverEmail) {
+          this.notificationService.showRejectedPaymentNotification(
+            notification.message
+          );
+        }
+      }
+    );
   }
 
   setShowModalToFalse() {

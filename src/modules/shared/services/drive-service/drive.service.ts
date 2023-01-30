@@ -60,4 +60,8 @@ export class DriveService {
   addDrive(info: ScheduleInfo) {
     return this._http.post<any>(this.url + '/saveDrive', info);
   }
+
+  checkIfAllApproved(id: number) {
+    return this._http.get<VoidFunction>(this.url + '/checkIfAllApproved/' + id);
+  }
 }

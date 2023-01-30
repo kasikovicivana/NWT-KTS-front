@@ -31,4 +31,8 @@ export class NotificationService {
   toasterClickedHandler(driveId: number) {
     window.location.href = '/approveDrivePayment/' + driveId;
   }
+
+  showRejectedPaymentNotification(message: string) {
+    this.toast.error(message, 'REJECTED payment!');
+  }
 }

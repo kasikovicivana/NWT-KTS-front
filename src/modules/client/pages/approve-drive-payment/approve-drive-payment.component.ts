@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { DriveService } from '../../../shared/services/drive-service/drive.service';
 import { ClientDriveModel } from '../../../app/model/clientDrive.model';
 import { AlertsService } from '../../../shared/services/alerts-service/alerts.service';
+import * as SockJS from 'sockjs-client';
+import * as Stomp from 'stompjs';
+import { NotificationService } from '../../../shared/services/notification-service/notification.service';
 
 @Component({
   selector: 'app-approve-drive-payment',
@@ -12,12 +15,16 @@ import { AlertsService } from '../../../shared/services/alerts-service/alerts.se
 export class ApproveDrivePaymentComponent implements OnInit {
   private id: number = -1;
   public info!: ClientDriveModel;
+  private stompClient: any;
 
   constructor(
     private route: ActivatedRoute,
     private driveService: DriveService,
-    private alertsService: AlertsService
-  ) {}
+    private alertsService: AlertsService,
+    private notificationService: NotificationService
+  ) {
+    this.initializeWebSocketConnection();
+  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -27,17 +34,46 @@ export class ApproveDrivePaymentComponent implements OnInit {
       },
     });
   }
+  initializeWebSocketConnection() {
+    let ws = new SockJS('http://localhost:9000/socket');
+    this.stompClient = Stomp.over(ws);
+    let that = this;
+    this.stompClient.connect({}, function () {
+      that.openGlobalSocket();
+    });
+  }
+
+  openGlobalSocket() {
+    this.stompClient.subscribe(
+      '/notification/rejectedPayment',
+      (message: { body: string }) => {
+        let notification = JSON.parse(message.body);
+        console.log(notification);
+        console.log(notification.message);
+        if (sessionStorage.getItem('username') === notification.receiverEmail) {
+          this.notificationService.showRejectedPaymentNotification(
+            notification.message
+          );
+        }
+      }
+    );
+  }
 
   confirm() {
     this.driveService.approvePayment(this.info.id).subscribe({
       next: () => {
         this.alertsService.successAlert();
         //provjeri jesu li svi platili
-
-        window.location.href = '/home';
+        this.driveService.checkIfAllApproved(this.info.id).subscribe();
+        setTimeout(() => {
+          window.location.href = '/home';
+        }, 3000);
       },
       error: (err) => {
         this.alertsService.errorAlert("Don't have enough tokens to pay!");
+        setTimeout(() => {
+          window.location.href = '/home';
+        }, 3000);
       },
     });
   }
