@@ -11,6 +11,7 @@ import { EnterRejectReasonComponent } from './components/enter-reject-reason/ent
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { FormsModule } from '@angular/forms';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
+import { CurrentDrivesTableComponent } from './components/current-drives-table/current-drives-table.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
     ViewFutureDrivesComponent,
     EnterRejectReasonComponent,
     DriverDriveReportComponent,
+    CurrentDrivesTableComponent,
   ],
   imports: [
     CommonModule,

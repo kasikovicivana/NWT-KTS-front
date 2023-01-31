@@ -25,6 +25,7 @@ import { ReviewDriverChangesComponent } from './pages/review-driver-changes/revi
 import { DetailedDriverChangesComponent } from './pages/detailed-driver-changes/detailed-driver-changes.component';
 import { AddDriverComponent } from './pages/add-driver/add-driver.component';
 import { AdminDriveReportComponent } from './pages/admin-drive-report/admin-drive-report.component';
+import { HomepageComponent } from './pages/homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AdminDriveReportComponent } from './pages/admin-drive-report/admin-driv
     DetailedDriverChangesComponent,
     AddDriverComponent,
     AdminDriveReportComponent,
+    HomepageComponent,
   ],
   imports: [
     RouterModule.forChild(AdminRoutes),

@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
         (data) => {
           this.alerts.successAlert();
           this.loginSuccessful(data);
-          setTimeout(() => this.redirectToHomepage(), 1000);
+          setTimeout(() => this.redirectToHomepage(data.role), 1000);
         },
         (err) => {
           this.alerts.errorAlert('Wrong credentials!');
@@ -70,7 +70,14 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  redirectToHomepage() {
+  redirectToHomepage(role: string) {
+    if (role === 'ROLE_client') {
+      window.location.href = '/home';
+    } else if (role === 'ROLE_driver') {
+      window.location.href = '/driverProfile';
+    } else if (role === 'ROLE_admin') {
+      window.location.href = '/adminHomepage';
+    }
     window.location.href = '/home';
   }
 

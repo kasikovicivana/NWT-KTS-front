@@ -112,6 +112,17 @@ export class HomepageComponent {
         }
       }
     );
+    this.stompClient.subscribe(
+      '/notification/driverRejected',
+      (message: { body: string }) => {
+        let notification = JSON.parse(message.body);
+        if (sessionStorage.getItem('username') === notification.receiverEmail) {
+          this.notificationService.showDriverRejectedNotification(
+            notification.message
+          );
+        }
+      }
+    );
   }
 
   setShowModalToFalse() {

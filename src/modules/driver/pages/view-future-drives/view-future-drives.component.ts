@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Drive } from '../../../app/model/drive.model';
 import { DriveService } from '../../../shared/services/drive-service/drive.service';
 
@@ -9,7 +9,6 @@ import { DriveService } from '../../../shared/services/drive-service/drive.servi
 })
 export class ViewFutureDrivesComponent implements OnInit {
   public drives: Drive[] = [];
-  showModal: boolean = false;
   showRejectModal: boolean = false;
   drive: Drive = new Drive();
   constructor(private driveService: DriveService) {}
@@ -47,10 +46,6 @@ export class ViewFutureDrivesComponent implements OnInit {
     this.drives.sort((a, b) => b.startTime.getTime() - a.startTime.getTime());
   }
 
-  openModal(drive: Drive) {
-    this.showModal = true;
-    this.drive = drive;
-  }
   openRejectModal(drive: Drive) {
     this.showRejectModal = true;
     this.drive = drive;

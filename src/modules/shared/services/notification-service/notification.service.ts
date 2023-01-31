@@ -47,4 +47,8 @@ export class NotificationService {
   showReminderNotification(message: string) {
     this.toast.success(message);
   }
+
+  showDriverRejectedNotification(message: string) {
+    this.toast.error(message);
+  }
 }

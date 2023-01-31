@@ -32,11 +32,11 @@ import { ClientDriveHistoryComponent } from './pages/client-drive-history/client
 
 import { ClientDriveReportComponent } from './pages/client-drive-report/client-drive-report.component';
 import { NgxEchartsModule } from 'ngx-echarts';
-
 import { NotificationViewComponent } from './pages/notification-view/notification-view.component';
 import { NotificationTableComponent } from './components/notification-table/notification-table.component';
 import { ApproveDrivePaymentComponent } from './pages/approve-drive-payment/approve-drive-payment.component';
 import { RouteMapComponent } from '../shared/components/route-map/route-map.component';
+import { LeaveCurrentDriveCommentComponent } from './components/leave-current-drive-comment/leave-current-drive-comment.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +57,7 @@ import { RouteMapComponent } from '../shared/components/route-map/route-map.comp
     NotificationViewComponent,
     NotificationTableComponent,
     ApproveDrivePaymentComponent,
+    LeaveCurrentDriveCommentComponent,
   ],
   imports: [
     RouterModule.forChild(ClientRoutes),
