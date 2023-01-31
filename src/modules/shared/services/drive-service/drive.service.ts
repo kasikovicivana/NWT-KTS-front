@@ -68,4 +68,12 @@ export class DriveService {
   checkIfAllApproved(id: number) {
     return this._http.get<VoidFunction>(this.url + '/checkIfAllApproved/' + id);
   }
+
+  getFutureDriverDrives() {
+    return this._http.get<any>(this.url + '/getFutureDriverDrives');
+  }
+
+  setRejectionReason(reason: Drive) {
+    return this._http.post<any>(this.url + '/saveRejectionDriveReason', reason);
+  }
 }

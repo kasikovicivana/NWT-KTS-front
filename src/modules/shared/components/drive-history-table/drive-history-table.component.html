@@ -15,12 +15,12 @@
       <th scope="col">Route</th>
       <th scope="col">Price</th>
       <th scope="col">Date</th>
-      <th scope="col"></th>
+      <th colspan="2"></th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let drive of drives">
-      <td>Strazilovska-Puskinova</td>
+    <tr *ngFor="let drive of drives;let i = index">
+      <td>{{drive.routes[0].start.address}} - {{drive.routes[drives.length-1].end.address}}</td>
       <td>{{drive.price}}$</td>
       <td>{{drive.startTime.getDate()}}.{{drive.startTime.getMonth() + 1}}.{{drive.startTime.getFullYear()}}</td>
       <td>
@@ -29,6 +29,13 @@
           class="btn btn-rounded btn-sm fw-bold btn-success"
           style="font-size: 15px" (click)="openDetailsModal(drive)">
           Details
+        </button>
+        <button
+          *ngIf="futureDrives"
+          type="button"
+          class="btn btn-rounded btn-sm fw-bold btn-success"
+          style="font-size: 15px;margin-left: 20px" (click)="openRejectModalFunc(drive)">
+          Reject
         </button>
       </td>
     </tr>

@@ -6,10 +6,28 @@ import { ProfileViewComponent } from './pages/profile-view/profile-view.componen
 import { DriverRoutes } from './driver.routes';
 import { RouterModule } from '@angular/router';
 import { DriverDriveReportComponent } from './pages/driver-drive-report/driver-drive-report.component';
+import { ViewFutureDrivesComponent } from './pages/view-future-drives/view-future-drives.component';
+import { EnterRejectReasonComponent } from './components/enter-reject-reason/enter-reject-reason.component';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import { FormsModule } from '@angular/forms';
+import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 
 @NgModule({
-  declarations: [DriverDriveHistoryComponent, ProfileViewComponent,DriverDriveReportComponent],
-  imports: [CommonModule, SharedModule, RouterModule.forChild(DriverRoutes)],
+  declarations: [
+    DriverDriveHistoryComponent,
+    ProfileViewComponent,
+    ViewFutureDrivesComponent,
+    EnterRejectReasonComponent,
+    DriverDriveReportComponent,
+  ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule.forChild(DriverRoutes),
+    MdbFormsModule,
+    FormsModule,
+    MdbValidationModule,
+  ],
   providers: [],
 })
 export class DriverModule {}
