@@ -90,12 +90,10 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
     const button = fixture.debugElement.query(By.css('button'));
     expect(button.nativeElement.disabled).toBeTruthy();
+    flush();
   }));
 
   it('form should be valid', fakeAsync(() => {
-    const user = fixture.debugElement.query(By.css('#email'));
-    const pa = fixture.debugElement.query(By.css('#pass'));
-
     component.userInfo.username = 'maki@sas';
     component.userInfo.password = 'pass';
 
@@ -105,6 +103,7 @@ describe('LoginComponent', () => {
 
     const button = fixture.debugElement.query(By.css('#loginButton'));
     expect(button.nativeElement.disabled).toBeFalsy();
+    flush();
   }));
 
   it('display email error msg when email is blank', () => {
@@ -159,6 +158,5 @@ describe('LoginComponent', () => {
     expect(loginServiceSpy.login).toHaveBeenCalled();
     spyOn(component, 'redirectToHomepage');
     flush();
-    discardPeriodicTasks();
   }));
 });

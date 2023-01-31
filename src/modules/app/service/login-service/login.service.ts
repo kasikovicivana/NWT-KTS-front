@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -20,12 +20,4 @@ export class LoginService {
     sessionStorage.clear();
     window.location.href = '/';
   }
-
-  // getAuthorizationHeader() {
-  //   return new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'Access-Control-Allow-Origin': '*',
-  //     Authorization: `Bearer ` + sessionStorage.getItem('accessToken'),
-  //   });
-  // }
 }

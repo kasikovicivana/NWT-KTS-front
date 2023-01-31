@@ -12,7 +12,7 @@ export class RegistrationService {
   constructor(private _http: HttpClient) {}
 
   registerUser(user: User) {
-    return this._http.post<any>(this.url, user);
+    return this._http.post<User>(this.url, user);
   }
 
   activateAccount(token: string) {

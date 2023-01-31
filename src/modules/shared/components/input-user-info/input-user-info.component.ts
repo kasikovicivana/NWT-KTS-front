@@ -1,4 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { User } from '../../../app/model/user.model';
 
 @Component({
@@ -11,12 +19,18 @@ export class InputUserInfoComponent implements OnInit {
 
   @Input()
   user = new User();
+  @Output() registerClick = new EventEmitter<boolean>();
   reenteredPassword = '';
   isDriver = true;
+  loggedRole: string | null = sessionStorage.getItem('role');
 
   ngOnInit(): void {}
 
   onChange(deviceValue: string) {
     this.isDriver = deviceValue !== 'Client';
+  }
+
+  register() {
+    this.registerClick.emit(true);
   }
 }

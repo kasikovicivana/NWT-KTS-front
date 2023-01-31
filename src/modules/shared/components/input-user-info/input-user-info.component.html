@@ -1,9 +1,10 @@
 <section>
+  <form>
   <div class="row">
     <div class="col-md-6 mb-4">
 
       <mdb-form-control class="form-white">
-        <input mdbValidate mdbInput [(ngModel)]="user.name"  #firstName="ngModel" type="text" id="firstName" class="form-control form-control-lg text-light" placeholder="first name" required/>
+        <input mdbValidate mdbInput [(ngModel)]="user.name"  #firstName="ngModel" type="text" id="firstName" [ngModelOptions]="{standalone: true}" class="form-control form-control-lg text-light" placeholder="first name" required/>
         <label mdbLabel class="form-label" for="firstName">First Name</label>
         <mdb-error class="mt-1" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">First name is required</mdb-error>
       </mdb-form-control>
@@ -12,7 +13,7 @@
     <div class="col-md-6 mb-4">
 
       <mdb-form-control class="form-white">
-        <input mdbValidate mdbInput [(ngModel)]="user.surname" #lastName="ngModel" type="text" id="lastName" class="form-control form-control-lg text-light" placeholder="last name" required/>
+        <input mdbValidate mdbInput [(ngModel)]="user.surname" #lastName="ngModel" type="text" id="lastName" [ngModelOptions]="{standalone: true}" class="form-control form-control-lg text-light" placeholder="last name" required/>
         <label mdbLabel class="form-label" for="lastName">Last Name</label>
         <mdb-error class="mt-1" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">Last name is required</mdb-error>
       </mdb-form-control>
@@ -24,7 +25,7 @@
     <div class="col-md-6 mb-4 pb-2">
 
       <mdb-form-control class="form-white">
-        <input mdbValidate mdbInput [(ngModel)]="user.email" #email="ngModel" type="email" email id="emailAddress" class="form-control form-control-lg text-light" placeholder="name@example.com" required/>
+        <input mdbValidate mdbInput [(ngModel)]="user.email" #email="ngModel" type="email" email id="emailAddress" [ngModelOptions]="{standalone: true}" class="form-control form-control-lg text-light" placeholder="name@example.com" required/>
         <label mdbLabel class="form-label" for="emailAddress">Email</label>
         <div *ngIf="email.errors && (email.dirty || email.touched)">
           <mdb-error class="mt-1" *ngIf="email.errors['required']">Email is required</mdb-error>
@@ -36,7 +37,7 @@
     <div class="col-md-6 mb-4 pb-2">
 
       <mdb-form-control class="form-white">
-        <input mdbValidate mdbInput [(ngModel)]="user.phoneNumber" #phone="ngModel" type="text" id="phoneNumber"
+        <input mdbValidate mdbInput [(ngModel)]="user.phoneNumber" #phone="ngModel" type="text" id="phoneNumber" [ngModelOptions]="{standalone: true}"
                class="form-control form-control-lg text-light" placeholder="phone number" pattern="^(\+)?\d{8}\d+$"  required/>
         <label mdbLabel class="form-label" for="phoneNumber">Phone Number</label>
         <div *ngIf="phone.errors && (phone.dirty || phone.touched)">
@@ -51,7 +52,7 @@
   <div class="row mb-4">
     <div class="mb-3 col-6">
       <mdb-form-control class="form-white ">
-        <input mdbValidate mdbInput [(ngModel)]="user.city" #city="ngModel" type="text" id="city" class="form-control form-control-lg text-light" placeholder="city" required/>
+        <input mdbValidate mdbInput [(ngModel)]="user.city" #city="ngModel" type="text" id="city" [ngModelOptions]="{standalone: true}" class="form-control form-control-lg text-light" placeholder="city" required/>
         <label mdbLabel class="form-label" for="city">City</label>
         <mdb-error class="mt-1" *ngIf="city.invalid && (city.dirty || city.touched)">City is required</mdb-error>
       </mdb-form-control>
@@ -59,7 +60,7 @@
 
     <div class="mb-3 col-6">
       <mdb-form-control class="form-white">
-        <input mdbValidate mdbInput [(ngModel)]="user.role" #role="ngModel" type="text" id="role" class="form-control form-control-lg text-light bg-dark" placeholder="city" [readOnly]="true" required/>
+        <input mdbValidate mdbInput [(ngModel)]="user.role" #role="ngModel" type="text" id="role" [ngModelOptions]="{standalone: true}" class="form-control form-control-lg text-light bg-dark" placeholder="city" [readOnly]="true" required/>
         <label mdbLabel class="form-label" for="role">Role</label>
       </mdb-form-control>
     </div>
@@ -70,7 +71,7 @@
   <div class="row mb-3">
     <div class="mb-3 col-6">
       <mdb-form-control class="form-white">
-        <input mdbValidate mdbInput [(ngModel)]="user.password" #password="ngModel" type="password" id="typePasswordX" class="form-control form-control-lg text-light" placeholder="new password" required/>
+        <input mdbValidate mdbInput [(ngModel)]="user.password" #password="ngModel" type="password" [ngModelOptions]="{standalone: true}" id="typePasswordX" class="form-control form-control-lg text-light" placeholder="new password" required/>
         <label mdbLabel class="form-label" for="typePasswordX">New password</label>
         <mdb-error class="mt-1" *ngIf="password.invalid && (password.dirty || password.touched)">Password is required</mdb-error>
       </mdb-form-control>
@@ -80,7 +81,7 @@
     <div class="mb-3 col-6">
       <mdb-form-control class="form-white">
         <input mdbValidate mdbInput [(ngModel)]="reenteredPassword" #repassword="ngModel"
-               type="password" id="reenterPasswordX"
+               type="password" id="reenterPasswordX" [ngModelOptions]="{standalone: true}"
                class="form-control form-control-lg text-light"
                [validateSuccess]="user.password === reenteredPassword"
                placeholder="reenter password"/>
@@ -89,5 +90,7 @@
       </mdb-form-control>
     </div>
   </div>
-
+    <button *ngIf="user.role === 'Client'" id="reg" class="btn btn-outline-light btn-lg px-5" type="submit" [disabled]="firstName.invalid || lastName.invalid || email.invalid || phone.invalid ||
+              city.invalid || password.invalid || repassword.invalid || (user.password !== reenteredPassword)" (click)="register()">Register</button>
+  </form>
 </section>
