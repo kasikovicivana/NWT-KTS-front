@@ -108,6 +108,22 @@ export class RouteMapComponent implements AfterViewInit {
     );
 
     this.stompClient.subscribe(
+      '/map-updates/finish-drive',
+      (message: { body: string }) => {
+        let data = JSON.parse(message.body);
+        let username: string = '';
+        for (let d in data) {
+          username = d;
+        }
+        this.routes.get(username)?.remove();
+        this.routes.delete(username);
+        let pos: Position = new Position(data[username]);
+        this.positions.get(username)?.setLatLng([pos.lat, pos.lon]);
+        this.positions.get(username)?.addTo(this.map);
+      }
+    );
+
+    this.stompClient.subscribe(
       '/map-updates/driver-active',
       (message: { body: string }) => {
         let username = message.body;
