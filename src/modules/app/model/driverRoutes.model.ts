@@ -15,7 +15,7 @@ function parseDate(date: any): Date {
 }
 
 export class DriverRoutes {
-  public routes: Set<Route> = new Set<Route>();
+  public routes: Route[] = [];
   public username: string = '';
   public start: Date;
 
@@ -23,7 +23,7 @@ export class DriverRoutes {
     this.username = r.username;
     this.start = parseDate(r.startTime);
     for (let route of r.routes) {
-      this.routes.add(new Route(route));
+      this.routes.push(new Route(route));
     }
   }
 }

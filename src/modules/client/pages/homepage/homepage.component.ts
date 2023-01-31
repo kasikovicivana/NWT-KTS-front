@@ -73,6 +73,7 @@ export class HomepageComponent {
         }
       }
     );
+
     this.stompClient.subscribe(
       '/notification/noAvailableDriver',
       (message: { body: string }) => {
@@ -94,6 +95,18 @@ export class HomepageComponent {
         console.log(notification.message);
         if (sessionStorage.getItem('username') === notification.receiverEmail) {
           this.notificationService.showAcceptedDriveNotification(
+            notification.message
+          );
+        }
+      }
+    );
+
+    this.stompClient.subscribe(
+      '/notification/reminder',
+      (message: { body: string }) => {
+        let notification = JSON.parse(message.body);
+        if (sessionStorage.getItem('username') === notification.receiverEmail) {
+          this.notificationService.showReminderNotification(
             notification.message
           );
         }

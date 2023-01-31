@@ -43,4 +43,8 @@ export class NotificationService {
   showAcceptedDriveNotification(message: string) {
     this.toast.success(message, 'Accepted drive!');
   }
+
+  showReminderNotification(message: string) {
+    this.toast.success(message);
+  }
 }
