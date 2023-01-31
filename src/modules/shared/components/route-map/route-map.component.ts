@@ -1,27 +1,30 @@
 import { AfterViewInit, Component } from '@angular/core';
 import * as L from 'leaflet';
 import { Marker } from 'leaflet';
+import { RouteDetails } from '../../../app/model/routeDetails';
 import { MapService } from '../../services/map-service/map.service';
+import { Position } from '../../../app/model/position.model';
 import { DriveService } from '../../services/drive-service/drive.service';
-import 'leaflet.animatedmarker/src/AnimatedMarker.js';
-import 'leaflet.motion/dist/leaflet.motion.js';
-import { DriverRoutes } from '../../../app/model/driverRoutes.model';
-import 'leaflet.marker.slideto';
-import 'leaflet-extra-markers';
-import { Route } from '../../../app/model/route.model';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
+import { DriverRoutes } from '../../../app/model/driverRoutes.model';
+import { Route } from '../../../app/model/route.model';
+import 'leaflet-extra-markers';
+import 'leaflet.animatedmarker/src/AnimatedMarker.js';
+import 'leaflet.motion/dist/leaflet.motion.js';
+import 'leaflet.marker.slideto';
 
 @Component({
-  selector: 'app-map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css'],
+  selector: 'app-route-map',
+  templateUrl: './route-map.component.html',
+  styleUrls: ['./route-map.component.css'],
 })
-export class MapComponent implements AfterViewInit {
+export class RouteMapComponent implements AfterViewInit {
   private map: L.Map | L.LayerGroup | any;
+  private displayedRoutes: any[] = [];
+
   private positions = new Map<string, Marker>();
   private routes = new Map<string, any>();
-
   private stompClient: any;
 
   private greenCar: any = L.ExtraMarkers.icon({
@@ -39,6 +42,32 @@ export class MapComponent implements AfterViewInit {
     shape: 'circle',
     prefix: 'fa',
   });
+
+  private greenMarker = L.ExtraMarkers.icon({
+    icon: 'fa-star',
+    markerColor: 'green',
+    iconColor: 'white',
+    shape: 'circle',
+    prefix: 'fa',
+  });
+
+  private redMarker = L.ExtraMarkers.icon({
+    icon: 'fa-star',
+    markerColor: 'red',
+    iconColor: 'white',
+    shape: 'circle',
+    prefix: 'fa',
+  });
+
+  private blueMarker = L.ExtraMarkers.icon({
+    icon: 'fa-star',
+    markerColor: 'blue',
+    iconColor: 'white',
+    shape: 'circle',
+    prefix: 'fa',
+  });
+
+  private stops: Marker[] = [];
 
   constructor(
     private mapService: MapService,
@@ -63,7 +92,7 @@ export class MapComponent implements AfterViewInit {
       (message: { body: string }) => {
         let driverRoutes = JSON.parse(message.body);
         this.positions.get(driverRoutes.username)?.remove();
-        this.simulate(new DriverRoutes(driverRoutes)).then(() => {});
+        this.simulate(driverRoutes).then(() => {});
       }
     );
 
@@ -78,6 +107,23 @@ export class MapComponent implements AfterViewInit {
         this.routes.get(username)?.remove();
         this.routes.delete(username);
 
+        this.positions.get(username)?.addTo(this.map);
+      }
+    );
+
+    this.stompClient.subscribe(
+      '/map-updates/finish-drive',
+      (message: { body: string }) => {
+        let data = JSON.parse(message.body);
+        let username: string = '';
+        for (let d in data) {
+          username = d;
+        }
+        this.routes.get(username)?.remove();
+        this.routes.delete(username);
+        let pos: Position = new Position(data[username]);
+        this.positions.get(username)?.setLatLng([pos.lat, pos.lon]);
+        this.positions.get(username)?.setIcon(this.greenCar);
         this.positions.get(username)?.addTo(this.map);
       }
     );
@@ -154,7 +200,9 @@ export class MapComponent implements AfterViewInit {
     this.driveService.loadDrives().subscribe({
       next: (values) => {
         for (let v of values) {
-          this.simulate(new DriverRoutes(v)).then(() => {});
+          let rr: DriverRoutes = v;
+          console.log(rr);
+          this.simulate(v).then(() => {});
         }
       },
       error: () => {},
@@ -169,6 +217,99 @@ export class MapComponent implements AfterViewInit {
     await this.moveCar(value.username, coordinates, duration);
   }
 
+  showStops(stops: Position[], names: string[]) {
+    for (let m of this.stops) {
+      m.remove();
+    }
+    this.stops = [];
+
+    // pocetna stanica
+    let start = L.marker([stops[0].lat, stops[0].lon], {
+      icon: this.greenMarker,
+    })
+      .addTo(this.map)
+      .bindPopup(names[0]);
+    this.stops.push(start);
+
+    stops.splice(0, 1);
+    names.splice(0, 1);
+
+    // posljednja stanica
+    let end = L.marker(
+      [stops[stops.length - 1].lat, stops[stops.length - 1].lon],
+      { icon: this.redMarker }
+    )
+      .addTo(this.map)
+      .bindPopup(names[names.length - 1]);
+    this.stops.push(end);
+
+    stops.pop();
+    names.pop();
+
+    for (let s in stops) {
+      let pos: Position = stops[s];
+      let marker = L.marker([pos.lat, pos.lon], { icon: this.blueMarker })
+        .addTo(this.map)
+        .bindPopup(names[s]);
+      this.stops.push(marker);
+    }
+  }
+
+  showRoutes(routes: RouteDetails[][]) {
+    for (let r of this.displayedRoutes) {
+      r.remove();
+    }
+    this.displayedRoutes = [];
+
+    for (let r of routes) {
+      this.displayRoute(r[0], routes.indexOf(r));
+    }
+  }
+
+  displayRoute(r: RouteDetails, index: number) {
+    if (this.displayedRoutes.length > index) {
+      this.displayedRoutes[index].remove();
+    }
+
+    let color: string = '';
+    if (r.type == 'recommended') {
+      color = '#CC0815';
+    } else if (r.type == 'fastest') {
+      color = '#0B5CDE';
+    } else {
+      color = '#ff7800';
+    }
+
+    let myLine = [
+      {
+        type: 'LineString',
+        coordinates: r.coordinates,
+      },
+    ];
+
+    let myStyle = {
+      color: color,
+      weight: 5,
+      opacity: 0.65,
+    };
+
+    if (this.displayedRoutes.length > index) {
+      this.displayedRoutes[index] = (L as any)
+        .geoJSON(myLine, {
+          style: myStyle,
+        })
+        .addTo(this.map);
+    } else {
+      this.displayedRoutes.push(
+        (L as any)
+          .geoJSON(myLine, {
+            style: myStyle,
+          })
+          .addTo(this.map)
+      );
+    }
+  }
+
   private async moveCar(
     username: string,
     coordinates: number[][],
@@ -181,6 +322,11 @@ export class MapComponent implements AfterViewInit {
       shape: 'circle',
       prefix: 'fa',
     });
+
+    if (duration == 0) {
+      this.positions.get(username)?.setIcon(redMarker);
+      this.positions.get(username)?.addTo(this.map);
+    }
 
     if (coordinates.length > 0) {
       const a = (L as any).motion
@@ -208,7 +354,7 @@ export class MapComponent implements AfterViewInit {
   }
 
   private async getData(value: DriverRoutes) {
-    const start: Date = value.start;
+    const start: Date = new Date(Date.parse(value.startTime));
 
     let coordinates: number[][] = [];
     let duration = 0;

@@ -23,10 +23,11 @@
 
               <div>
                 <div *ngIf="role === 'ROLE_admin'">
-                  <strong>Driver: </strong><span class="pt-3" style="padding-bottom: 0">{{drive.driver.name}} {{drive.driver.surname}}</span>
+                  <strong>Driver: </strong><span class="pt-3"
+                                                 style="padding-bottom: 0">{{drive.driver.name}} {{drive.driver.surname}}</span>
                 </div>
-                <div class="row" *ngIf="role === 'ROLE_admin' || role === 'ROLE_driver'">
-                  <div class="col-4" >
+                <div *ngIf="role === 'ROLE_admin' || role === 'ROLE_driver'" class="row">
+                  <div class="col-4">
                     <strong>Passengers: </strong>
                   </div>
                   <div class="col-8 px-1">
@@ -41,43 +42,46 @@
 
 
               <div class="row pt-3 pb-1">
-                <span class="col-6" style="padding-right: 0">Driver grade: </span><star-rating class="col-5" [rating]="driverGrade"></star-rating>
+                <span class="col-6" style="padding-right: 0">Driver grade: </span>
+                <star-rating [rating]="driverGrade" class="col-5"></star-rating>
               </div>
               <div class="row">
-                <span class="col-6" style="padding-right: 0">Car grade: </span><star-rating class="col-5" [rating]="carGrade"></star-rating>
+                <span class="col-6" style="padding-right: 0">Car grade: </span>
+                <star-rating [rating]="carGrade" class="col-5"></star-rating>
               </div>
             </div>
 
             <div class="col-7 " style="height: 250px;">
-              <app-map></app-map>
+              <app-route-map></app-route-map>
             </div>
           </div>
         </div>
         <div *ngIf="role === 'ROLE_client'" class="modal-footer justify-content-start">
           <button
-            type="button"
             class="btn btn-rounded btn-sm fw-bold btn-success"
-            style="font-size: 14px">
+            style="font-size: 14px"
+            type="button">
             Ride again
           </button>
           <div style="padding-left: 15px">
             <button
-              type="button"
               class="btn btn-rounded btn-sm fw-bold btn-success"
-              style="font-size: 14px;">
+              style="font-size: 14px;"
+              type="button">
               Reserve
             </button>
           </div>
-          <div *ngIf="rateDrive" style="padding-left: 40%" >
+          <div *ngIf="rateDrive" style="padding-left: 40%">
             <button
-              type="button"
+              (click)="showGradeModal=true"
               class="btn btn-rounded btn-sm fw-bold btn-success"
               style="font-size: 14px;"
-              (click)="showGradeModal=true">
+              type="button">
               Rate drive
             </button>
           </div>
-          <app-grade-modal *ngIf="showGradeModal" (closeModal)="showGradeModal=false"  (closeDetailsModal)="closeDetailsModal()" [drive]="drive"></app-grade-modal>
+          <app-grade-modal (closeDetailsModal)="closeDetailsModal()" (closeModal)="showGradeModal=false"
+                           *ngIf="showGradeModal" [drive]="drive"></app-grade-modal>
         </div>
       </div>
     </div>

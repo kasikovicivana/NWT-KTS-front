@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MapService } from '../../../shared/services/map-service/map.service';
 import { Position } from '../../../app/model/position.model';
 import { RouteDetails } from '../../../app/model/routeDetails';
-import { RouteMapComponent } from '../../components/route-map/route-map.component';
+import { RouteMapComponent } from '../../../shared/components/route-map/route-map.component';
 import { SideBarComponent } from '../../components/side-bar/side-bar.component';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';

@@ -29,12 +29,14 @@ import { CollapseListComponent } from '../shared/components/collapse-list/collap
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { ClientDriveHistoryComponent } from './pages/client-drive-history/client-drive-history.component';
+
 import { ClientDriveReportComponent } from './pages/client-drive-report/client-drive-report.component';
 import { NgxEchartsModule } from 'ngx-echarts';
-import { RouteMapComponent } from './components/route-map/route-map.component';
+
 import { NotificationViewComponent } from './pages/notification-view/notification-view.component';
 import { NotificationTableComponent } from './components/notification-table/notification-table.component';
 import { ApproveDrivePaymentComponent } from './pages/approve-drive-payment/approve-drive-payment.component';
+import { RouteMapComponent } from '../shared/components/route-map/route-map.component';
 
 @NgModule({
   declarations: [

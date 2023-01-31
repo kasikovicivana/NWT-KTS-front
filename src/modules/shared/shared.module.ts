@@ -1,7 +1,6 @@
 import { DriveHistoryTableComponent } from './components/drive-history-table/drive-history-table.component';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
 import { DriveDetailsModalComponent } from './components/drive-details-modal/drive-details-modal.component';
-import { MapComponent } from './components/map/map.component';
 import { StarRatingModule } from 'angular-star-rating';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -30,6 +29,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { DriveReportComponent } from './components/drive-report/drive-report.component';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { RouteMapComponent } from './components/route-map/route-map.component';
 
 @NgModule({
   declarations: [
@@ -39,10 +39,10 @@ import { ToastrModule } from 'ngx-toastr';
     InputUserInfoComponent,
     DriveHistoryTableComponent,
     DriveDetailsModalComponent,
-    MapComponent,
     GradeModalComponent,
     DriveChartComponent,
     DriveReportComponent,
+    RouteMapComponent,
   ],
 
   imports: [
@@ -78,13 +78,13 @@ import { ToastrModule } from 'ngx-toastr';
   exports: [
     DriveHistoryTableComponent,
     DriveDetailsModalComponent,
-    MapComponent,
     ProfileInfoComponent,
     InputUserInfoComponent,
     CarTypeInfoComponent,
     GradeModalComponent,
     DriveChartComponent,
     DriveReportComponent,
+    RouteMapComponent,
   ],
 })
 export class SharedModule {}
