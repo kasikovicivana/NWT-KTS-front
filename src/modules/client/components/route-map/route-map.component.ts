@@ -4,6 +4,11 @@ import { Marker } from 'leaflet';
 import { RouteDetails } from '../../../app/model/routeDetails';
 import { MapService } from '../../../shared/services/map-service/map.service';
 import { Position } from '../../../app/model/position.model';
+import { DriveService } from '../../../shared/services/drive-service/drive.service';
+import * as SockJS from 'sockjs-client';
+import * as Stomp from 'stompjs';
+import { DriverRoutes } from '../../../app/model/driverRoutes.model';
+import { Route } from '../../../app/model/route.model';
 
 @Component({
   selector: 'app-route-map',
@@ -13,6 +18,26 @@ import { Position } from '../../../app/model/position.model';
 export class RouteMapComponent implements AfterViewInit {
   private map: L.Map | L.LayerGroup | any;
   private displayedRoutes: any[] = [];
+
+  private positions = new Map<string, Marker>();
+  private routes = new Map<string, any>();
+  private stompClient: any;
+
+  private greenCar: any = L.ExtraMarkers.icon({
+    icon: 'fa-car',
+    markerColor: 'green',
+    iconColor: 'white',
+    shape: 'circle',
+    prefix: 'fa',
+  });
+
+  private blackCar: any = L.ExtraMarkers.icon({
+    icon: 'fa-car',
+    markerColor: 'black',
+    iconColor: 'white',
+    shape: 'circle',
+    prefix: 'fa',
+  });
 
   private greenMarker = L.ExtraMarkers.icon({
     icon: 'fa-star',
@@ -40,7 +65,65 @@ export class RouteMapComponent implements AfterViewInit {
 
   private stops: Marker[] = [];
 
-  constructor(private mapService: MapService) {}
+  constructor(
+    private mapService: MapService,
+    private driveService: DriveService
+  ) {
+    this.initializeWebSocketConnection();
+  }
+
+  initializeWebSocketConnection() {
+    let ws = new SockJS('http://localhost:9000/socket');
+    this.stompClient = Stomp.over(ws);
+    this.stompClient.debug = null;
+    let that = this;
+    this.stompClient.connect({}, function () {
+      that.openGlobalSocket();
+    });
+  }
+
+  openGlobalSocket() {
+    this.stompClient.subscribe(
+      '/map-updates/new-drive',
+      (message: { body: string }) => {
+        let driverRoutes = JSON.parse(message.body);
+        this.positions.get(driverRoutes.username)?.remove();
+        this.simulate(new DriverRoutes(driverRoutes)).then(() => {});
+      }
+    );
+
+    this.stompClient.subscribe(
+      '/map-updates/stop-drive',
+      (message: { body: string }) => {
+        let data = JSON.parse(message.body);
+        let username: string = '';
+        for (let d in data) {
+          username = d;
+        }
+        this.routes.get(username)?.remove();
+        this.routes.delete(username);
+
+        this.positions.get(username)?.addTo(this.map);
+      }
+    );
+
+    this.stompClient.subscribe(
+      '/map-updates/driver-active',
+      (message: { body: string }) => {
+        let username = message.body;
+        this.positions.get(username)?.setIcon(this.blackCar);
+      }
+    );
+
+    this.stompClient.subscribe(
+      '/map-updates/driver-not-active',
+      (message: { body: string }) => {
+        let username = message.body;
+        this.routes.delete(username);
+        this.positions.get(username)?.setIcon(this.blackCar);
+      }
+    );
+  }
 
   ngAfterViewInit(): void {
     this.map = L.map('map', {
@@ -62,6 +145,53 @@ export class RouteMapComponent implements AfterViewInit {
     );
 
     tiles.addTo(this.map);
+
+    this.load();
+  }
+
+  load(): void {
+    this.driveService.loadPositionsActive().subscribe({
+      next: (values) => {
+        for (let key in values) {
+          const item = values[key];
+          let marker = L.marker([item.lat, item.lon], { icon: this.greenCar })
+            .addTo(this.map)
+            .bindPopup(key);
+          this.positions.set(key, marker);
+        }
+      },
+      error: () => {},
+    });
+
+    this.driveService.loadPositionsInactive().subscribe({
+      next: (values) => {
+        for (let key in values) {
+          const item = values[key];
+          let marker = L.marker([item.lat, item.lon], { icon: this.blackCar })
+            .addTo(this.map)
+            .bindPopup(key);
+          this.positions.set(key, marker);
+        }
+      },
+      error: () => {},
+    });
+
+    this.driveService.loadDrives().subscribe({
+      next: (values) => {
+        for (let v of values) {
+          this.simulate(new DriverRoutes(v)).then(() => {});
+        }
+      },
+      error: () => {},
+    });
+  }
+
+  async simulate(value: DriverRoutes): Promise<void> {
+    let data = await this.getData(value);
+    const coordinates = data.coordinates;
+    const duration = data.duration;
+    this.positions.get(value.username)?.remove();
+    await this.moveCar(value.username, coordinates, duration);
   }
 
   showStops(stops: Position[], names: string[]) {
@@ -155,5 +285,104 @@ export class RouteMapComponent implements AfterViewInit {
           .addTo(this.map)
       );
     }
+  }
+
+  private async moveCar(
+    username: string,
+    coordinates: number[][],
+    duration: number
+  ) {
+    let redMarker = L.ExtraMarkers.icon({
+      icon: 'fa-car',
+      markerColor: 'red',
+      iconColor: 'white',
+      shape: 'circle',
+      prefix: 'fa',
+    });
+
+    if (coordinates.length > 0) {
+      const a = (L as any).motion
+        .polyline(
+          coordinates,
+          {
+            color: 'transparent',
+          },
+          {
+            auto: true,
+            duration: duration * 1000,
+            easing: (L as any).Motion.Ease.easeInOutQuart,
+          },
+          {
+            removeOnEnd: false,
+            showMarker: true,
+            icon: redMarker,
+          }
+        )
+        .addTo(this.map);
+
+      a.bindPopup(username);
+      this.routes.set(username, a);
+    }
+  }
+
+  private async getData(value: DriverRoutes) {
+    const start: Date = value.start;
+
+    let coordinates: number[][] = [];
+    let duration = 0;
+    const now = new Date();
+
+    for (let r of value.routes) {
+      let rCoordinates: number[][] = [];
+      let rDuration = 0;
+
+      let data = await this.getRouteData(r, now, start, duration);
+      rCoordinates = data.rCoordinates;
+      rDuration = data.routeDuration;
+      coordinates = [...coordinates, ...rCoordinates];
+      duration += rDuration;
+    }
+
+    return { coordinates, duration };
+  }
+
+  private getRouteData(
+    r: Route,
+    now: Date,
+    start: Date,
+    duration: number
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.mapService.getRoute(r.start, r.end, r.type).subscribe({
+        next: (response) => {
+          const rCoordinates = response.features[0].geometry.coordinates;
+          const rDuration = response.features[0].properties.summary.duration;
+          const routeStart: Date = new Date(start.getTime() + duration * 1000);
+          let routeDuration = 0;
+
+          if (now.valueOf() - routeStart.valueOf() <= rDuration * 1000) {
+            rCoordinates.forEach((c: number[]) => {
+              c.reverse();
+            });
+            if (now.valueOf() > routeStart.valueOf()) {
+              // pocela je ruta i nije jos zavrsena
+              const timePassed = (now.valueOf() - routeStart.valueOf()) / 1000;
+              const interval: number = rDuration / rCoordinates.length;
+              const intervalsPassed = Math.floor(timePassed / interval);
+
+              rCoordinates.splice(0, intervalsPassed);
+              routeDuration = rDuration - timePassed;
+            } else {
+              // ruta jos nije ni pocela
+              routeDuration = rDuration;
+            }
+          }
+          resolve({ rCoordinates, routeDuration });
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
+    });
   }
 }

@@ -135,6 +135,7 @@ export class HomepageComponent {
 
     for (let pos of positions) {
       let { lat, lon } = await this.mapService.getCoordinates(pos);
+      console.log(pos + ' lat: ' + lat + ' lon: ' + lon);
       coordinates.push(new Position({ lat, lon, address: pos }));
     }
 
