@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Drive } from '../../../app/model/drive.model';
 import { DriveService } from '../../../shared/services/drive-service/drive.service';
+import { Driver } from '../../../app/model/driver.model';
 
 @Component({
   selector: 'app-current-drives-table',
@@ -9,6 +10,7 @@ import { DriveService } from '../../../shared/services/drive-service/drive.servi
 })
 export class CurrentDrivesTableComponent implements OnInit {
   @Input() drives: Drive[] = [];
+  @Input() driver: Driver | undefined = undefined;
   @Output() openRejectModal = new EventEmitter<Drive>();
   public firstDrive: number = -1;
 
@@ -32,11 +34,15 @@ export class CurrentDrivesTableComponent implements OnInit {
     this.openRejectModal.emit(drive);
   }
 
-  goToClient(drive: Drive) {
-    //pokrece praznu voznju
-    //setuj na going to client
-    drive.status = 'GOING_TO_CLIENT';
-    this.driveService.goToClient(drive).subscribe();
+  async goToClient(drive: Drive) {
+    if (this.driver?.position !== undefined) {
+      drive.status = 'GOING_TO_CLIENT';
+      let duration: number = await this.driveService.getDuration(
+        drive,
+        this.driver?.position
+      );
+      this.driveService.goToClient(drive, duration).subscribe();
+    }
   }
 
   start(drive: Drive) {

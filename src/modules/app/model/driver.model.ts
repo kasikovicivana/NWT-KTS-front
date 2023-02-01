@@ -1,4 +1,5 @@
 import { Note } from './note.model';
+import { Position } from './position.model';
 
 export class Driver {
   public notes: [Note] | undefined;
@@ -16,7 +17,8 @@ export class Driver {
     public photo: string = '',
     public enabled: boolean = true,
     public blocked: boolean = false,
-    public isSocialLogin: boolean = false
+    public isSocialLogin: boolean = false,
+    public position: Position | undefined = undefined
   ) {}
 }
 

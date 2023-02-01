@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Drive } from '../../../app/model/drive.model';
 import { DriveService } from '../../../shared/services/drive-service/drive.service';
+import { Driver } from '../../../app/model/driver.model';
+import { DriverService } from '../../../shared/services/driver-service/driver.service';
 
 @Component({
   selector: 'app-view-future-drives',
@@ -11,10 +13,20 @@ export class ViewFutureDrivesComponent implements OnInit {
   public drives: Drive[] = [];
   showRejectModal: boolean = false;
   drive: Drive = new Drive();
-  constructor(private driveService: DriveService) {}
+  driver: Driver | undefined = undefined;
+
+  constructor(
+    private driveService: DriveService,
+    private driverService: DriverService
+  ) {}
 
   ngOnInit(): void {
     this.getFutureDrives();
+    this.driverService.getDriver().subscribe({
+      next: (value) => {
+        this.driver = value;
+      },
+    });
   }
 
   getFutureDrives() {

@@ -7,6 +7,8 @@ import { Report } from '../../../app/model/report.model';
 import { ClientDriveModel } from '../../../app/model/clientDrive.model';
 import { ScheduleInfo } from '../../../app/model/schedule-info';
 import { ReportModel } from '../../../app/model/report,model';
+import { Position } from '../../../app/model/position.model';
+import { MapService } from '../map-service/map.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +16,7 @@ import { ReportModel } from '../../../app/model/report,model';
 export class DriveService {
   url = environment.backendUrl + 'api/drive';
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private mapService: MapService) {}
 
   loadDrives() {
     return this._http.get<Set<DriverRoutes>>(this.url + '/current');
@@ -78,8 +80,26 @@ export class DriveService {
     return this._http.post<any>(this.url + '/saveRejectionDriveReason', reason);
   }
 
-  goToClient(drive: Drive) {
-    return this._http.post<any>(this.url + '/goToClient', drive);
+  goToClient(drive: Drive, duration: number) {
+    return this._http.post<any>(this.url + '/goToClient', {
+      drive,
+      duration,
+    });
+  }
+
+  getDuration(drive: Drive, position: Position): Promise<number> {
+    return new Promise((resolve, reject) => {
+      this.mapService
+        .getRoute(position, drive.routes[0].start, 'recommended')
+        .subscribe({
+          next: (value) => {
+            let duration: number =
+              value.features[0].properties.summary.duration;
+            duration = Math.round((duration / 60) * 10) / 10;
+            resolve(duration);
+          },
+        });
+    });
   }
 
   start(drive: Drive) {

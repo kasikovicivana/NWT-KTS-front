@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { CarModel } from '../../../app/model/car.model';
+import { Driver } from '../../../app/model/driver.model';
 
 @Injectable({
   providedIn: 'root',
@@ -29,5 +30,10 @@ export class DriverService {
   changeDriverActivity(active: boolean) {
     const newUrl = this.url + '/changeDriverActivity';
     return this._http.post<any>(newUrl, active);
+  }
+
+  getDriver() {
+    const newUrl = this.url + '/getDriver';
+    return this._http.get<Driver>(newUrl);
   }
 }

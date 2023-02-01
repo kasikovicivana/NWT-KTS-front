@@ -13,6 +13,8 @@ export class ScheduleInfo {
   public routes: RouteDetails[] = [];
   public reservationTime: Date | undefined = undefined;
 
+  public favourite: boolean = false;
+
   public constructor(s: any) {
     this.passengers = s.passengers;
     this.car = s.car;
@@ -25,5 +27,6 @@ export class ScheduleInfo {
     this.reservation = s.reservation;
     this.routes = s.routes;
     this.reservationTime = s.reservationTime;
+    this.favourite = s.favourite;
   }
 }

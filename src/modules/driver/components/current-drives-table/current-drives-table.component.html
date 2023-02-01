@@ -9,37 +9,39 @@
     </thead>
     <tbody>
     <tr *ngFor="let drive of drives;let i = index">
-      <td>{{drive.routes[0].start.address}} - {{drive.routes[drives.length-1].end.address}}</td>
+      <td>{{drive.routes[0].start.address}} - {{drive.routes[drives.length - 1].end.address}}</td>
       <td>{{drive.price}}$</td>
       <td>
         <button
-          type="button"
-          class="btn btn-rounded btn-sm fw-bold btn-success"
-          style="font-size: 15px;margin-left: 20px" *ngIf="drive.startTime === null && drive.status === 'SCHEDULED'" [disabled]="drive.id !== firstDrive" (click)="goToClient(drive)">
+          (click)="goToClient(drive)"
+          *ngIf="drive.startTime === null && drive.status === 'SCHEDULED'"
+          [disabled]="drive.id !== firstDrive" class="btn btn-rounded btn-sm fw-bold btn-success"
+          style="font-size: 15px;margin-left: 20px" type="button">
           Go to client
         </button>
         <button
-          type="button"
-          class="btn btn-rounded btn-sm fw-bold btn-success"
-          style="font-size: 15px;margin-left: 20px" *ngIf="drive.startTime === null" (click)="openRejectModalFunc(drive)">
+          (click)="openRejectModalFunc(drive)"
+          *ngIf="drive.startTime === null"
+          class="btn btn-rounded btn-sm fw-bold btn-success" style="font-size: 15px;margin-left: 20px"
+          type="button">
           Reject
         </button>
         <button
-          type="button"
-          class="btn btn-rounded btn-sm fw-bold btn-success"
-          style="font-size: 15px;margin-left: 20px" *ngIf="drive.status === 'GOING_TO_CLIENT'" (click)="start(drive)">
+          (click)="start(drive)"
+          *ngIf="drive.status === 'GOING_TO_CLIENT'"
+          class="btn btn-rounded btn-sm fw-bold btn-success" style="font-size: 15px;margin-left: 20px" type="button">
           Start
         </button>
         <button
-          type="button"
-          class="btn btn-rounded btn-sm fw-bold btn-success"
-          style="font-size: 15px;margin-left: 20px" *ngIf="drive.status === 'IN_PROGRESS'" (click)="stop(drive)">
+          (click)="stop(drive)"
+          *ngIf="drive.status === 'IN_PROGRESS'"
+          class="btn btn-rounded btn-sm fw-bold btn-success" style="font-size: 15px;margin-left: 20px" type="button">
           Stop
         </button>
         <button
-          type="button"
-          class="btn btn-rounded btn-sm fw-bold btn-success"
-          style="font-size: 15px;margin-left: 20px" *ngIf="drive.status === 'IN_PROGRESS'" (click)="finish(drive)">
+          (click)="finish(drive)"
+          *ngIf="drive.status === 'IN_PROGRESS'"
+          class="btn btn-rounded btn-sm fw-bold btn-success" style="font-size: 15px;margin-left: 20px" type="button">
           Finish
         </button>
       </td>

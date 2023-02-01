@@ -26,8 +26,11 @@ export class HomepageComponent implements OnInit {
   allRoutes: RouteDetails[][] = [];
   distance: number = 0;
   duration: number = 0;
+  favourites: Drive[] = [];
+
   @ViewChild(RouteMapComponent) mapChild: RouteMapComponent | undefined;
   @ViewChild(SideBarComponent) sidebar: SideBarComponent | undefined;
+
   private stompClient: any;
 
   constructor(
@@ -239,23 +242,9 @@ export class HomepageComponent implements OnInit {
     this.mapChild?.displayRoute(this.chosenRoutes[params.i], params.i);
   }
 
-  finish(params: any) {
-    // neko obavjestenje da potvrdi placanjee
-    // imamo sve parametre, saljemo na  bek..
-
-    let info: ScheduleInfo = new ScheduleInfo({
-      passengers: params.passengers,
-      car: params.car,
-      babies: params.babies,
-      pet: params.pet,
-      price: params.price,
-      distance: this.distance,
-      duration: this.duration,
-      splitFaire: !params.alone,
-      reservation: params.reserve,
-      routes: this.chosenRoutes,
-      reservationTime: params.reservationTime,
-    });
+  finish(info: ScheduleInfo) {
+    info.routes = this.chosenRoutes;
+    info.duration = this.duration;
 
     this.driveService.addDrive(info).subscribe({
       next: () => {},
@@ -267,10 +256,14 @@ export class HomepageComponent implements OnInit {
   }
 
   showFavourites(drives: Drive[]) {
+    this.favourites = drives;
     this.showFavouriteRoutes = true;
   }
 
-  closeFavourites() {
+  closeFavourites(drive: Drive) {
     this.showFavouriteRoutes = false;
+    if (drive !== undefined) {
+      this.sidebar?.displayFavourite(drive);
+    }
   }
 }

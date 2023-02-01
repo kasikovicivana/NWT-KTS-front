@@ -2,9 +2,11 @@
   <div class="container py-5 h-100">
     <div *ngIf="drives.length != 0" class="row d-flex justify-content-center align-items-center h-100">
       <div class="col col-lg-10 mb-4 mb-lg-0">
-        <app-current-drives-table  (openRejectModal)="openRejectModal($event)" [drives]="drives"></app-current-drives-table>
+        <app-current-drives-table (openRejectModal)="openRejectModal($event)" [driver]="driver"
+                                  [drives]="drives"></app-current-drives-table>
       </div>
-      <app-enter-reject-reason [drive]="drive" (closeRejectModal)="showRejectModal=false" *ngIf="showRejectModal"> </app-enter-reject-reason>
+      <app-enter-reject-reason (closeRejectModal)="showRejectModal=false" *ngIf="showRejectModal"
+                               [drive]="drive"></app-enter-reject-reason>
     </div>
     <div *ngIf="drives.length == 0" style="color: white">
       There are no drives!
