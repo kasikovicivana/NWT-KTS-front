@@ -10,6 +10,7 @@ import { ScheduleInfo } from '../../../app/model/schedule-info';
 import { DriveService } from '../../../shared/services/drive-service/drive.service';
 import { NotificationService } from 'src/modules/shared/services/notification-service/notification.service';
 import { Drive } from '../../../app/model/drive.model';
+import { AlertsService } from '../../../shared/services/alerts-service/alerts.service';
 
 @Component({
   selector: 'app-homepage',
@@ -35,7 +36,8 @@ export class HomepageComponent implements OnInit {
   constructor(
     private mapService: MapService,
     private driveService: DriveService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private alertService: AlertsService
   ) {
     this.initializeWebSocketConnection();
   }
@@ -194,14 +196,21 @@ export class HomepageComponent implements OnInit {
   }
 
   async showPositions(positions: string[]) {
-    this.chosenRoutes = [];
     let coordinates: Position[] = [];
 
     for (let pos of positions) {
       let { lat, lon } = await this.mapService.getCoordinates(pos);
+      if (lat == -1 || lon == -1) {
+        this.alertService.errorAlert(
+          'Odabrana adresa "' + pos + ' " ne postoji.'
+        );
+        return;
+      }
       console.log(pos + ' lat: ' + lat + ' lon: ' + lon);
       coordinates.push(new Position({ lat, lon, address: pos }));
     }
+
+    this.chosenRoutes = [];
 
     let routes: RouteDetails[][] = [];
 

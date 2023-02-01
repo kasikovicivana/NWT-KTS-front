@@ -38,6 +38,9 @@ export class MapService {
     return new Promise((resolve, reject) => {
       this.getAddressInfo(address).subscribe({
         next: (response) => {
+          if (response.features[0] === undefined) {
+            resolve({ lat: -1, lon: -1 });
+          }
           const lon = response.features[0].geometry.coordinates[0];
           const lat = response.features[0].geometry.coordinates[1];
           resolve({ lat, lon });
