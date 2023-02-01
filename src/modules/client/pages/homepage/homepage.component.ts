@@ -123,6 +123,39 @@ export class HomepageComponent {
         }
       }
     );
+    this.stompClient.subscribe(
+      '/notification/driveStarted',
+      (message: { body: string }) => {
+        let notification = JSON.parse(message.body);
+        if (sessionStorage.getItem('username') === notification.receiverEmail) {
+          this.notificationService.showDriveStartedNotification(
+            notification.message
+          );
+        }
+      }
+    );
+    this.stompClient.subscribe(
+      '/notification/driveStopped',
+      (message: { body: string }) => {
+        let notification = JSON.parse(message.body);
+        if (sessionStorage.getItem('username') === notification.receiverEmail) {
+          this.notificationService.showDriveStoppedNotification(
+            notification.message
+          );
+        }
+      }
+    );
+    this.stompClient.subscribe(
+      '/notification/driveFinished',
+      (message: { body: string }) => {
+        let notification = JSON.parse(message.body);
+        if (sessionStorage.getItem('username') === notification.receiverEmail) {
+          this.notificationService.showDriveFinishedNotification(
+            notification.message
+          );
+        }
+      }
+    );
   }
 
   setShowModalToFalse() {

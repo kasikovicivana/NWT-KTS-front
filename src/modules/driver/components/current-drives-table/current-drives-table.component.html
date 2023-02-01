@@ -15,14 +15,32 @@
         <button
           type="button"
           class="btn btn-rounded btn-sm fw-bold btn-success"
-          style="font-size: 15px;margin-left: 20px" (click)="goToClient(drive)">
+          style="font-size: 15px;margin-left: 20px" *ngIf="drive.startTime === null && drive.status === 'SCHEDULED'" [disabled]="drive.id !== firstDrive" (click)="goToClient(drive)">
           Go to client
         </button>
         <button
           type="button"
           class="btn btn-rounded btn-sm fw-bold btn-success"
-          style="font-size: 15px;margin-left: 20px" (click)="openRejectModalFunc(drive)">
+          style="font-size: 15px;margin-left: 20px" *ngIf="drive.startTime === null" (click)="openRejectModalFunc(drive)">
           Reject
+        </button>
+        <button
+          type="button"
+          class="btn btn-rounded btn-sm fw-bold btn-success"
+          style="font-size: 15px;margin-left: 20px" *ngIf="drive.status === 'GOING_TO_CLIENT'" (click)="start(drive)">
+          Start
+        </button>
+        <button
+          type="button"
+          class="btn btn-rounded btn-sm fw-bold btn-success"
+          style="font-size: 15px;margin-left: 20px" *ngIf="drive.status === 'IN_PROGRESS'" (click)="stop(drive)">
+          Stop
+        </button>
+        <button
+          type="button"
+          class="btn btn-rounded btn-sm fw-bold btn-success"
+          style="font-size: 15px;margin-left: 20px" *ngIf="drive.status === 'IN_PROGRESS'" (click)="finish(drive)">
+          Finish
         </button>
       </td>
     </tr>

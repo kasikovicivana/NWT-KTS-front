@@ -76,4 +76,20 @@ export class DriveService {
   setRejectionReason(reason: Drive) {
     return this._http.post<any>(this.url + '/saveRejectionDriveReason', reason);
   }
+
+  goToClient(drive: Drive) {
+    return this._http.post<any>(this.url + '/goToClient', drive);
+  }
+
+  start(drive: Drive) {
+    return this._http.post<any>(this.url + '/start', drive.id);
+  }
+
+  stop(drive: Drive) {
+    return this._http.post<any>(this.url + '/stop', drive.id);
+  }
+
+  finish(drive: Drive) {
+    return this._http.post<any>(this.url + '/finish', drive.id);
+  }
 }

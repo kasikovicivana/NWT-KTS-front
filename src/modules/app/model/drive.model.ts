@@ -13,6 +13,7 @@ export class Drive {
     public passengers: Set<ClientDrive> = new Set<ClientDrive>(),
     public distance: number = 0,
     public rejectionReason: string = '',
-    public routes: Route[] = []
+    public routes: Route[] = [],
+    public createdTime: string = ''
   ) {}
 }

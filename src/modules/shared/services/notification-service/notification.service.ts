@@ -51,4 +51,23 @@ export class NotificationService {
   showDriverRejectedNotification(message: string) {
     this.toast.error(message);
   }
+
+  showDriveStartedNotification(message: string) {
+    this.toast.success(message, 'Drive started!');
+  }
+
+  showDriveStoppedNotification(message: string) {
+    this.toast.success(message, 'Drive stopped!');
+  }
+
+  showDriveFinishedNotification(message: string) {
+    this.toast
+      .success(message + ' Click me to grade drive!', 'Drive finished!')
+      .onTap.pipe(take(1))
+      .subscribe(() => this.grade());
+  }
+
+  grade() {
+    window.location.href = '/clientHistory';
+  }
 }

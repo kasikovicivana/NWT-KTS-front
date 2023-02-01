@@ -1,15 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
   <span class="navbar-brand" href="#">Uber app</span>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarNav"
+          data-toggle="collapse" type="button">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" id="home-nav" href="/home">Home</a>
+      <li *ngIf="role === 'ROLE_client' || role === null" class="nav-item">
+        <a class="nav-link" href="/home">Home</a>
       </li>
       <li *ngIf="role === 'ROLE_client'" class="nav-item">
-        <a class="nav-link" id="profile-nav-link" href="/clientProfile">Profile</a>
+        <a class="nav-link" href="/clientProfile" id="profile-nav-link">Profile</a>
       </li>
       <li *ngIf="role === 'ROLE_client'" class="nav-item">
         <a class="nav-link" href="/purchaseTokens">Tokens </a>
@@ -30,9 +31,9 @@
         <a class="nav-link" href="/messages">Messages </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" *ngIf="role === 'ROLE_client'" href="/clientHistory">History </a>
-        <a class="nav-link" *ngIf="role === 'ROLE_driver'" href="/driverHistory">History </a>
-        <a class="nav-link" *ngIf="role === 'ROLE_admin'" href="/adminHistory">History </a>
+        <a *ngIf="role === 'ROLE_client'" class="nav-link" href="/clientHistory">History </a>
+        <a *ngIf="role === 'ROLE_driver'" class="nav-link" href="/driverHistory">History </a>
+        <a *ngIf="role === 'ROLE_admin'" class="nav-link" href="/adminHistory">History </a>
       </li>
       <li *ngIf="role === 'ROLE_admin'" class="nav-item">
         <a class="nav-link" href="/reviewDriverChanges">Review changes </a>
@@ -44,16 +45,17 @@
         <a class="nav-link" href="/addDriver">Add driver</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" *ngIf="role === 'ROLE_client'" href="/clientReport">Report </a>
-        <a class="nav-link" *ngIf="role === 'ROLE_driver'" href="/driverReport">Report </a>
-        <a class="nav-link" *ngIf="role === 'ROLE_admin'" href="/adminReport">Report </a>
+        <a *ngIf="role === 'ROLE_client'" class="nav-link" href="/clientReport">Report </a>
+        <a *ngIf="role === 'ROLE_driver'" class="nav-link" href="/driverReport">Report </a>
+        <a *ngIf="role === 'ROLE_admin'" class="nav-link" href="/adminReport">Report </a>
       </li>
     </ul>
 
     <span class="navbar-text">
-      <button *ngIf="role === 'ROLE_driver'" #activeButton (click)="changeDriverActivity()" class="btn btn-rounded  fw-bold btn-success" style="margin-right: 30px"
+      <button #activeButton (click)="changeDriverActivity()" *ngIf="role === 'ROLE_driver'"
+              class="btn btn-rounded  fw-bold btn-success" style="margin-right: 30px"
               type="button">Active</button>
-     <a style="padding-bottom: 15px" href="#" (click)="logout()">Logout</a>
+     <a (click)="logout()" href="#" style="padding-bottom: 15px">Logout</a>
     </span>
   </div>
 </nav>
