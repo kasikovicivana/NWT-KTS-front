@@ -37,6 +37,7 @@ import { NotificationTableComponent } from './components/notification-table/noti
 import { ApproveDrivePaymentComponent } from './pages/approve-drive-payment/approve-drive-payment.component';
 import { RouteMapComponent } from '../shared/components/route-map/route-map.component';
 import { LeaveCurrentDriveCommentComponent } from './components/leave-current-drive-comment/leave-current-drive-comment.component';
+import { FavouriteModalComponent } from './components/favourite-modal/favourite-modal.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { LeaveCurrentDriveCommentComponent } from './components/leave-current-dr
     NotificationTableComponent,
     ApproveDrivePaymentComponent,
     LeaveCurrentDriveCommentComponent,
+    FavouriteModalComponent,
   ],
   imports: [
     RouterModule.forChild(ClientRoutes),

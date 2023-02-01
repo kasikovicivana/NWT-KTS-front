@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { RouteDetails } from '../../../app/model/routeDetails';
 import { CollapseListComponent } from '../../../shared/components/collapse-list/collapse-list.component';
+import { Drive } from '../../../app/model/drive.model';
+import { DriveService } from '../../../shared/services/drive-service/drive.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -15,6 +17,7 @@ import { CollapseListComponent } from '../../../shared/components/collapse-list/
 })
 export class SideBarComponent implements OnInit {
   @Output() openModal = new EventEmitter<boolean>();
+  @Output() showFavourites = new EventEmitter<Drive[]>();
   @Output() showPositions = new EventEmitter<string[]>();
   @Output() changeRouteType = new EventEmitter<any>();
 
@@ -26,7 +29,9 @@ export class SideBarComponent implements OnInit {
   routes: RouteDetails[][] = [];
   list: CollapseListComponent | undefined;
 
-  constructor() {}
+  favourites: Drive[] = [];
+
+  constructor(private driveService: DriveService) {}
 
   @ViewChild(CollapseListComponent) set content(
     content: CollapseListComponent
@@ -38,6 +43,11 @@ export class SideBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = sessionStorage.getItem('username') != null;
+    this.driveService.getFavouriteDrives().subscribe({
+      next: (value) => {
+        this.favourites = value;
+      },
+    });
   }
 
   addPin() {
@@ -94,6 +104,10 @@ export class SideBarComponent implements OnInit {
 
   isChooseDisabled() {
     return this.routes.length === 0;
+  }
+
+  chooseFavourite() {
+    this.showFavourites.emit(this.favourites);
   }
 
   private getPositions() {

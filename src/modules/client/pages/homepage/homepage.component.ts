@@ -9,6 +9,7 @@ import * as Stomp from 'stompjs';
 import { ScheduleInfo } from '../../../app/model/schedule-info';
 import { DriveService } from '../../../shared/services/drive-service/drive.service';
 import { NotificationService } from 'src/modules/shared/services/notification-service/notification.service';
+import { Drive } from '../../../app/model/drive.model';
 
 @Component({
   selector: 'app-homepage',
@@ -17,6 +18,7 @@ import { NotificationService } from 'src/modules/shared/services/notification-se
 })
 export class HomepageComponent {
   showModal: boolean = false;
+  showFavouriteRoutes: boolean = false;
   loggedUserRole: string | null = sessionStorage.getItem('role');
   chosenRoutes: RouteDetails[] = [];
 
@@ -259,5 +261,13 @@ export class HomepageComponent {
     // greska.. ??
 
     this.setShowModalToFalse();
+  }
+
+  showFavourites(drives: Drive[]) {
+    this.showFavouriteRoutes = true;
+  }
+
+  closeFavourites() {
+    this.showFavouriteRoutes = false;
   }
 }

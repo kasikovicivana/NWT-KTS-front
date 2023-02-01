@@ -1,5 +1,11 @@
 <div class="inputs min-vh-100 bg-dark py-5" id="sidebar">
 
+  <div *ngIf="favourites.length > 0" class="row pt-2">
+    <button (click)="chooseFavourite()" class="btn btn-success btn-rounded "
+            type="button">Choose from favourite routes
+    </button>
+  </div>
+
   <div class="points">
     <div class="input-group flex-nowrap pb-3">
       <span class="input-group-text" id="start"><em class="fa fa-home fa-lg"></em></span>

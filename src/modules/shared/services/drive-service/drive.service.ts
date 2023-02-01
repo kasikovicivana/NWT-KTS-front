@@ -92,4 +92,8 @@ export class DriveService {
   finish(drive: Drive) {
     return this._http.post<any>(this.url + '/finish', drive.id);
   }
+
+  getFavouriteDrives() {
+    return this._http.get<Drive[]>(this.url + '/getFavouriteDrives');
+  }
 }
