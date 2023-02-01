@@ -1,13 +1,13 @@
 <section>
   <div class="row">
 
-    <div class="col-3">
+    <div class="col-3" style="padding: 0;">
       <app-side-bar (changeRouteType)="changeRouteType($event)" (openModal)="setShowModalToTrue()"
                     (showFavourites)="showFavourites($event)"
                     (showPositions)="showPositions($event)"></app-side-bar>
     </div>
 
-    <div class="col-9">
+    <div class="col-9" style="padding: 0">
       <app-route-map></app-route-map>
     </div>
 
