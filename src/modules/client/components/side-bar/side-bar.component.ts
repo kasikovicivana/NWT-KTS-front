@@ -43,11 +43,13 @@ export class SideBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = sessionStorage.getItem('username') != null;
-    this.driveService.getFavouriteDrives().subscribe({
-      next: (value) => {
-        this.favourites = value;
-      },
-    });
+    if (this.isLoggedIn) {
+      this.driveService.getFavouriteDrives().subscribe({
+        next: (value) => {
+          this.favourites = value;
+        },
+      });
+    }
   }
 
   addPin() {
@@ -108,6 +110,36 @@ export class SideBarComponent implements OnInit {
 
   chooseFavourite() {
     this.showFavourites.emit(this.favourites);
+  }
+
+  displayFavourite(drive: Drive) {
+    this.pins = [];
+    this.start = drive.routes[0].start.address;
+    this.end = drive.routes[drive.routes.length - 1].end.address;
+
+    if (drive.routes.length > 1) {
+      this.pins.push(drive.routes[0].end.address);
+    }
+
+    drive.routes.splice(0, 1);
+    drive.routes.splice(drive.routes.length - 1, 1);
+
+    for (let r of drive.routes) {
+      this.pins.push(r.end.address);
+    }
+
+    this.driveService.getFavouriteDrives().subscribe({
+      next: (value) => {
+        this.favourites = value;
+      },
+    });
+  }
+
+  systemChoice() {
+    this.isMyChoice = false;
+    for (let r in this.routes) {
+      this.changeRoute({ i: r, route: 'recommended' });
+    }
   }
 
   private getPositions() {

@@ -26,3 +26,13 @@
   transform: scale(1.5);
 }
 
+
+#sidebar {
+  height: auto;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+}
+
+#sidebar::-webkit-scrollbar {
+  display: none;
+}

@@ -3,13 +3,62 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content bg-dark text-white">
         <div class="modal-header">
-          <h5 class="modal-title text-uppercase">Ride details</h5>
+          <h5 class="modal-title text-uppercase">Favourite routes</h5>
           <button aria-label="Close" class="close bg-dark" data-dismiss="modal" type="button">
             <span (click)="closeFavouriteModal()" aria-hidden="true" class="text-white">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          
+
+          <div class="accordion pt-2 pb-4" id="favouriteRoutes">
+            <div *ngFor="let f of favourites; let i = index;" class="accordion-item border-dark bg-dark">
+
+              <section class="row">
+                <h2 [attr.id]="'heading' + i" class="accordion-header col-11">
+                  <button [attr.aria-controls]="'collapse' + i" [attr.data-bs-target]="'#collapse' + i"
+                          aria-expanded="false"
+                          class="accordion-button collapsed" data-bs-toggle="collapse" type="button">
+                    {{f.routes[0].start.address}} - {{f.routes[f.routes.length - 1].end.address}}
+                  </button>
+                </h2>
+                <span class="col-1 pt-3"><a (click)="choose(f)" href="javascript:void(0)">
+                  <em class="fa fa-check fa-lg" id="fa-check" style="color: green"></em></a></span>
+              </section>
+
+
+              <div [attr.aria-labelledby]="'heading' + i" [attr.id]="'collapse' + i"
+                   class="accordion-collapse collapse col-11"
+                   data-bs-parent="#favouriteRoutes">
+                <div class="accordion-body px-0 py-1">
+                  <div class="list-group list-group-light">
+                    <section *ngFor="let r of f.routes; let rIndex = index">
+
+                      <a *ngIf="rIndex == 0"
+                         class="list-group-item list-group-item-action px-3 pt-2 rounded-3 mb-2 list-group-item-dark "
+                         href="javascript:void(0)"
+                         id="route_1">
+                        <div class="h-50">
+                          <div class="row">
+                            <span class="col-8">{{r.start.address}}</span>
+                          </div>
+                        </div>
+                      </a>
+
+                      <a class="list-group-item list-group-item-action px-3 pt-2 rounded-3 mb-2 list-group-item-dark "
+                         href="javascript:void(0)"
+                         id="route_2">
+                        <div class="h-50">
+                          <div class="row">
+                            <span class="col-8">{{r.end.address}}</span>
+                          </div>
+                        </div>
+                      </a>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>

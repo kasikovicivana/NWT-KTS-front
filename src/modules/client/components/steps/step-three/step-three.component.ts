@@ -12,9 +12,10 @@ export class StepThreeComponent implements OnInit {
   public aloneCheck: boolean = true;
   isReservation: boolean = false;
   reservationTime: string = '';
+  public isFavourite: boolean = false;
 
-  @Output() finish = new EventEmitter<boolean>();
-  @Output() reserve = new EventEmitter<any>();
+  @Output() finish = new EventEmitter();
+  @Output() reserve = new EventEmitter();
   @Input() passengers: Array<string> = [];
 
   @Input() price: number = 0;
@@ -51,10 +52,7 @@ export class StepThreeComponent implements OnInit {
 
   reserveRide() {
     this.alert.successAlert(); // ...
-    this.reserve.emit({
-      alone: this.aloneCheck,
-      time: this.getReservationDatetime(this.reservationTime),
-    });
+    this.reserve.emit();
   }
 
   getReservationDatetime(time: string) {
@@ -83,4 +81,6 @@ export class StepThreeComponent implements OnInit {
     let hoursDiff: number = diff / 1000 / 3600;
     return hoursDiff > 5 || hoursDiff < 0.25;
   }
+
+  saveAsFavourite() {}
 }

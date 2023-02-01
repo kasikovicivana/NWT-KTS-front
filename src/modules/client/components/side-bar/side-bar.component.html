@@ -1,9 +1,10 @@
-<div class="inputs min-vh-100 bg-dark py-5" id="sidebar">
+<div class="inputs vh-100 bg-dark py-5" id="sidebar">
 
-  <div *ngIf="favourites.length > 0" class="row pt-2">
-    <button (click)="chooseFavourite()" class="btn btn-success btn-rounded "
-            type="button">Choose from favourite routes
-    </button>
+  <div *ngIf="isLoggedIn && favourites.length > 0" class="row pt-1 pb-4">
+    <a (click)="chooseFavourite()" class="link-light col-7" href="javascript:void(0)">
+      <span class=""><em class="fa fa-star fa-lg" style="color: goldenrod"></em></span>
+      Choose from favourite routes
+    </a>
   </div>
 
   <div class="points">
@@ -45,7 +46,7 @@
   <div class="row py-4">
     <div class="form-check col-6">
       <input
-        (change)="isMyChoice = false"
+        (change)="systemChoice()"
         [checked]="true"
         [disabled]="isChooseDisabled()"
         class="my_radio"
@@ -73,7 +74,7 @@
   <app-collapse-list (changeRoute)="changeRoute($event)" [hidden]="!isMyChoice"></app-collapse-list>
 
 
-  <div *ngIf="isLoggedIn" class="button_row">
+  <div *ngIf="isLoggedIn" class="button_row pb-4">
     <button (click)="openStepperModal()" [disabled]="isChooseDisabled()" class="btn btn-success btn-rounded "
             type="button">Choose
     </button>

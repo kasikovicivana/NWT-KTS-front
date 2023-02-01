@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { StepOneComponent } from '../steps/step-one/step-one.component';
 import { StepTwoComponent } from '../steps/step-two/step-two.component';
+import { StepThreeComponent } from '../steps/step-three/step-three.component';
+import { ScheduleInfo } from '../../../app/model/schedule-info';
 
 @Component({
   selector: 'app-stepper-modal',
@@ -15,12 +17,13 @@ import { StepTwoComponent } from '../steps/step-two/step-two.component';
 })
 export class StepperModalComponent {
   @Output() closeModal = new EventEmitter<boolean>();
-  @Output() finishOrder = new EventEmitter<any>();
+  @Output() finishOrder = new EventEmitter<ScheduleInfo>();
 
   @Input() distance: number = 0;
 
   stepOne: StepOneComponent | undefined;
   stepTwo: StepTwoComponent | undefined;
+  stepThree: StepThreeComponent | undefined;
 
   constructor() {}
 
@@ -36,37 +39,73 @@ export class StepperModalComponent {
     }
   }
 
+  @ViewChild(StepThreeComponent) set three(three: StepThreeComponent) {
+    if (three) {
+      this.stepThree = three;
+    }
+  }
+
   closeStepperModal() {
     this.closeModal.emit(false);
   }
 
-  finish(alone: boolean) {
+  finish() {
     let { car, pet, babies, price } = this.stepOne?.getData();
     let passengers: string[] | undefined = this.stepTwo?.getData();
-    this.finishOrder.emit({
-      alone,
-      car,
-      pet,
-      babies,
+
+    let info: ScheduleInfo = new ScheduleInfo({
       passengers,
+      car,
+      babies,
+      pet,
       price,
-      reserve: false,
+      distance: this.distance,
+      duration: 0,
+      splitFaire: this.stepThree?.aloneCheck,
+      reservation: false,
+      routes: [],
       reservationTime: undefined,
+      favourite: this.stepThree?.isFavourite,
     });
+
+    this.finishOrder.emit(info);
   }
 
-  reserve(params: any) {
+  reserve() {
     let { car, pet, babies, price } = this.stepOne?.getData();
     let passengers: string[] | undefined = this.stepTwo?.getData();
-    this.finishOrder.emit({
-      alone: params.alone,
-      car,
-      pet,
-      babies,
+    let time = undefined;
+    if (this.stepThree?.reservationTime !== undefined) {
+      time = this.getReservationDatetime(this.stepThree?.reservationTime);
+    }
+
+    let info: ScheduleInfo = new ScheduleInfo({
       passengers,
+      car,
+      babies,
+      pet,
       price,
-      reserve: true,
-      reservationTime: params.time,
+      distance: this.distance,
+      duration: 0,
+      splitFaire: this.stepThree?.aloneCheck,
+      reservation: true,
+      routes: [],
+      reservationTime: time,
+      favourite: this.stepThree?.isFavourite,
     });
+
+    this.finishOrder.emit(info);
+  }
+
+  getReservationDatetime(time: string) {
+    let now = new Date();
+    let resTime: Date = new Date();
+    resTime.setHours(Number(time.split(':')[0]));
+    resTime.setMinutes(Number(time.split(':')[1]));
+
+    if (resTime.valueOf() < now.valueOf()) {
+      resTime.setDate(resTime.getDate() + 1);
+    }
+    return resTime;
   }
 }
