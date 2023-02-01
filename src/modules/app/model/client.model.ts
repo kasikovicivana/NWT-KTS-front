@@ -16,7 +16,8 @@ export class Client {
     public photo: string = '',
     public enabled: boolean = true,
     public blocked: boolean = false,
-    public isSocialLogin: boolean = false
+    public isSocialLogin: boolean = false,
+    public driving: boolean = false
   ) {}
 }
 

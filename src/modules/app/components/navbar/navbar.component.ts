@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from 'src/modules/app/service/login-service/login.service';
 import { DriverService } from '../../../shared/services/driver-service/driver.service';
+import { UserService } from '../../../shared/services/user-service/user.service';
+import { AlertsService } from '../../../shared/services/alerts-service/alerts.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +17,9 @@ export class NavbarComponent {
 
   constructor(
     private loginService: LoginService,
-    private driverService: DriverService
+    private driverService: DriverService,
+    private userService: UserService,
+    private alertService: AlertsService
   ) {
     this.role = sessionStorage.getItem('role');
   }
@@ -43,5 +47,17 @@ export class NavbarComponent {
       this.activeButton.nativeElement.innerHTML = 'Active';
       this.active = false;
     }
+  }
+
+  showLeaveReportModal() {
+    this.userService.getLoggedClient().subscribe({
+      next: (data) => {
+        if (data.driving) {
+          window.location.href = '/leaveReport';
+        } else {
+          this.alertService.errorAlert('You are not driving currently');
+        }
+      },
+    });
   }
 }

@@ -18,6 +18,9 @@
       <li *ngIf="role === 'ROLE_client'" class="nav-item">
         <a class="nav-link" href="/notifications">Notifications </a>
       </li>
+      <li *ngIf="role === 'ROLE_client'" class="nav-item">
+        <a class="nav-link" (click)="showLeaveReportModal()">Leave report </a>
+      </li>
       <li *ngIf="role === 'ROLE_admin'" class="nav-item">
         <a class="nav-link" href="/adminProfile">Profile </a>
       </li>

@@ -6,6 +6,7 @@ import { Drive } from '../../../app/model/drive.model';
 import { Report } from '../../../app/model/report.model';
 import { ClientDriveModel } from '../../../app/model/clientDrive.model';
 import { ScheduleInfo } from '../../../app/model/schedule-info';
+import { ReportModel } from '../../../app/model/report,model';
 
 @Injectable({
   providedIn: 'root',
@@ -95,5 +96,13 @@ export class DriveService {
 
   getFavouriteDrives() {
     return this._http.get<Drive[]>(this.url + '/getFavouriteDrives');
+  }
+
+  getCurrentDrive() {
+    return this._http.get<Drive>(this.url + '/getCurrentDrive');
+  }
+
+  saveReport(report: ReportModel) {
+    return this._http.post<any>(this.url + '/saveReport', report);
   }
 }

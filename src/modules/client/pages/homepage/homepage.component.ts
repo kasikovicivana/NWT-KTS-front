@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MapService } from '../../../shared/services/map-service/map.service';
 import { Position } from '../../../app/model/position.model';
 import { RouteDetails } from '../../../app/model/routeDetails';
@@ -10,13 +10,14 @@ import { ScheduleInfo } from '../../../app/model/schedule-info';
 import { DriveService } from '../../../shared/services/drive-service/drive.service';
 import { NotificationService } from 'src/modules/shared/services/notification-service/notification.service';
 import { Drive } from '../../../app/model/drive.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css'],
 })
-export class HomepageComponent {
+export class HomepageComponent implements OnInit {
   showModal: boolean = false;
   showFavouriteRoutes: boolean = false;
   loggedUserRole: string | null = sessionStorage.getItem('role');
@@ -36,6 +37,8 @@ export class HomepageComponent {
   ) {
     this.initializeWebSocketConnection();
   }
+
+  ngOnInit(): void {}
 
   initializeWebSocketConnection() {
     let ws = new SockJS('http://localhost:9000/socket');

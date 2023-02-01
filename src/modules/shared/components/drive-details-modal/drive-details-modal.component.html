@@ -13,7 +13,7 @@
             <div class="col-5">
               <div *ngIf="role === 'ROLE_client'">
                 <div class="img_cont">
-                  <img [src]="srcData" class="rounded-circle user_img">
+                  <img [src]="srcData" alt="slika" class="rounded-circle user_img">
                 </div>
                 <div class="text-center">
                   <h5 class="pt-3" style="padding-bottom: 0">{{drive.driver.name}} {{drive.driver.surname}}</h5>
@@ -51,8 +51,8 @@
               </div>
             </div>
 
-            <div class="col-7 " style="height: 250px;">
-              <app-route-map></app-route-map>
+            <div class="col-6 " style="height: 240px;">
+              <app-route-map ></app-route-map>
             </div>
           </div>
         </div>
