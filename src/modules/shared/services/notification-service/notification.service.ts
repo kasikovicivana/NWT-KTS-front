@@ -70,4 +70,8 @@ export class NotificationService {
   grade() {
     window.location.href = '/clientHistory';
   }
+
+  showGoingToClientNotification(message: string) {
+    this.toast.success(message, 'Vozac stize!');
+  }
 }

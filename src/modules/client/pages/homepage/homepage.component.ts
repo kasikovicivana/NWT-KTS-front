@@ -10,7 +10,6 @@ import { ScheduleInfo } from '../../../app/model/schedule-info';
 import { DriveService } from '../../../shared/services/drive-service/drive.service';
 import { NotificationService } from 'src/modules/shared/services/notification-service/notification.service';
 import { Drive } from '../../../app/model/drive.model';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -142,6 +141,19 @@ export class HomepageComponent implements OnInit {
         }
       }
     );
+
+    this.stompClient.subscribe(
+      '/notification/goingToClient',
+      (message: { body: string }) => {
+        let notification = JSON.parse(message.body);
+        if (sessionStorage.getItem('username') === notification.receiverEmail) {
+          this.notificationService.showGoingToClientNotification(
+            notification.message
+          );
+        }
+      }
+    );
+
     this.stompClient.subscribe(
       '/notification/driveStopped',
       (message: { body: string }) => {
