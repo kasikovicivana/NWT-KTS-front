@@ -13,7 +13,7 @@ export class NavbarComponent {
   @ViewChild('activeButton') activeButton!: ElementRef;
 
   role: string | null = '';
-  active: boolean = false;
+  active: boolean = true;
 
   constructor(
     private loginService: LoginService,
@@ -26,7 +26,7 @@ export class NavbarComponent {
 
   logout() {
     if (this.active) {
-      this.driverService.changeDriverActivity(false);
+      this.driverService.changeDriverActivity(true).subscribe();
     }
     this.loginService.logOut();
   }
@@ -40,11 +40,11 @@ export class NavbarComponent {
   }
 
   changeActiveButtonText() {
-    if (this.activeButton.nativeElement.innerHTML === 'Active') {
-      this.activeButton.nativeElement.innerHTML = 'Inactive';
+    if (this.activeButton.nativeElement.innerHTML === 'Inactive') {
+      this.activeButton.nativeElement.innerHTML = 'Active';
       this.active = true;
     } else {
-      this.activeButton.nativeElement.innerHTML = 'Active';
+      this.activeButton.nativeElement.innerHTML = 'Inactive';
       this.active = false;
     }
   }

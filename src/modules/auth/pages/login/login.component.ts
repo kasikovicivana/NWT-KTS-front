@@ -11,6 +11,7 @@ import {
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { MailModalComponent } from '../../../app/components/mail-modal/mail-modal.component';
 import { UserService } from '../../../shared/services/user-service/user.service';
+import { DriverService } from '../../../shared/services/driver-service/driver.service';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
     private socialAuthService: SocialAuthService,
     private loginService: LoginService,
     private userService: UserService,
+    private driverService: DriverService,
     private alerts: AlertsService,
     private modalService: MdbModalService
   ) {}
@@ -57,6 +59,7 @@ export class LoginComponent implements OnInit {
         (data) => {
           this.alerts.successAlert();
           this.loginSuccessful(data);
+
           setTimeout(() => this.redirectToHomepage(data.role), 1000);
         },
         (err) => {
@@ -74,6 +77,7 @@ export class LoginComponent implements OnInit {
     if (role === 'ROLE_client') {
       window.location.href = '/home';
     } else if (role === 'ROLE_driver') {
+      this.driverService.changeDriverActivity(false).subscribe();
       window.location.href = '/driverProfile';
     } else if (role === 'ROLE_admin') {
       window.location.href = '/adminHomepage';
