@@ -21,7 +21,7 @@
                          [distance]="distance"></app-stepper-modal>
     </div>
 
-    <div *ngIf="showFavouriteRoutes == true">
+    <div *ngIf="showFavouriteRoutes === true">
       <app-favourite-modal (closeFavourite)="closeFavourites($event)" [favourites]="favourites"></app-favourite-modal>
     </div>
 

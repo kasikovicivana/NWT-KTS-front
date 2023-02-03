@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Drive } from '../../../app/model/drive.model';
 import { DriveService } from '../../services/drive-service/drive.service';
 import { Report } from '../../../app/model/report.model';
@@ -9,7 +9,7 @@ import { AlertsService } from '../../services/alerts-service/alerts.service';
   templateUrl: './drive-report.component.html',
   styleUrls: ['./drive-report.component.css'],
 })
-export class DriveReportComponent implements OnInit {
+export class DriveReportComponent {
   today: string = new Date().toLocaleDateString('en-ca');
   startDate: string = '';
   endDate: string = '';
@@ -27,8 +27,6 @@ export class DriveReportComponent implements OnInit {
     public driveService: DriveService,
     public alertService: AlertsService
   ) {}
-
-  ngOnInit(): void {}
 
   setDatesInChart() {
     let start = new Date(this.startDate);

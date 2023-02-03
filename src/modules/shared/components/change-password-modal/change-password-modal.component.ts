@@ -2,7 +2,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -16,10 +15,12 @@ import { UserService } from '../../services/user-service/user.service';
   templateUrl: './change-password-modal.component.html',
   styleUrls: ['./change-password-modal.component.css'],
 })
-export class ChangePasswordModalComponent implements OnInit {
+export class ChangePasswordModalComponent {
   @ViewChild('oldPassInput') oldPassInput: ElementRef | undefined;
 
   @Output() closeEvent = new EventEmitter<boolean>();
+  newPass: string = '';
+  reenteredPass: string = '';
 
   constructor(
     private alerts: AlertsService,
@@ -27,11 +28,6 @@ export class ChangePasswordModalComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private userService: UserService
   ) {}
-
-  newPass: string = '';
-  reenteredPass: string = '';
-
-  ngOnInit(): void {}
 
   close() {
     this.closeEvent.next(false);

@@ -1,6 +1,6 @@
 <section class="vh-80 min-vh-100 hero-main">
   <div class="container py-5 h-100">
-    <div *ngIf="drives.length != 0" class="row d-flex justify-content-center align-items-center h-100">
+    <div *ngIf="drives.length !== 0" class="row d-flex justify-content-center align-items-center h-100">
       <div class="col col-lg-10 mb-4 mb-lg-0">
         <app-current-drives-table (openRejectModal)="openRejectModal($event)" [driver]="driver"
                                   [drives]="drives"></app-current-drives-table>
@@ -8,7 +8,7 @@
       <app-enter-reject-reason (closeRejectModal)="showRejectModal=false" *ngIf="showRejectModal"
                                [drive]="drive"></app-enter-reject-reason>
     </div>
-    <div *ngIf="drives.length == 0" style="color: white">
+    <div *ngIf="drives.length === 0" style="color: white">
       There are no drives!
     </div>
   </div>

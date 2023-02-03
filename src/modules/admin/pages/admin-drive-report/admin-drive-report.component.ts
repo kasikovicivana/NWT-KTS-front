@@ -1,15 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-admin-drive-report',
   templateUrl: './admin-drive-report.component.html',
-  styleUrls: ['./admin-drive-report.component.css']
+  styleUrls: ['./admin-drive-report.component.css'],
 })
-export class AdminDriveReportComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class AdminDriveReportComponent {
+  constructor() {}
 }

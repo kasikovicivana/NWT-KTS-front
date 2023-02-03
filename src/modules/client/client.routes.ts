@@ -7,7 +7,7 @@ import { ClientDriveHistoryComponent } from './pages/client-drive-history/client
 import { ClientDriveReportComponent } from './pages/client-drive-report/client-drive-report.component';
 import { NotificationViewComponent } from './pages/notification-view/notification-view.component';
 import { ApproveDrivePaymentComponent } from './pages/approve-drive-payment/approve-drive-payment.component';
-import { LeaveCurrentDriveComment } from './pages/leave-current-drive-comment/leave-current-drive-comment.component';
+import { LeaveCurrentDriveCommentComponent } from './pages/leave-current-drive-comment/leave-current-drive-comment.component';
 
 export const ClientRoutes: Routes = [
   {
@@ -59,6 +59,6 @@ export const ClientRoutes: Routes = [
   {
     path: 'leaveReport',
     pathMatch: 'full',
-    component: LeaveCurrentDriveComment,
+    component: LeaveCurrentDriveCommentComponent,
   },
 ];

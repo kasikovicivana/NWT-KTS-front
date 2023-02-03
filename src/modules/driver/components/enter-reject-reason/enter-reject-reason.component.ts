@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Drive } from '../../../app/model/drive.model';
 import { DriveService } from '../../../shared/services/drive-service/drive.service';
 import { AlertsService } from '../../../shared/services/alerts-service/alerts.service';
@@ -8,16 +8,15 @@ import { AlertsService } from '../../../shared/services/alerts-service/alerts.se
   templateUrl: './enter-reject-reason.component.html',
   styleUrls: ['./enter-reject-reason.component.css'],
 })
-export class EnterRejectReasonComponent implements OnInit {
+export class EnterRejectReasonComponent {
   @Input() drive: Drive | undefined = undefined;
   @Output() closeRejectModal = new EventEmitter<boolean>();
   public reason: string = '';
+
   constructor(
     private driveService: DriveService,
     private alerts: AlertsService
   ) {}
-
-  ngOnInit(): void {}
 
   close() {
     this.closeRejectModal.emit();

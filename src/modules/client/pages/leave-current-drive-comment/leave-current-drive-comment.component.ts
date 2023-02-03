@@ -9,7 +9,7 @@ import { AlertsService } from '../../../shared/services/alerts-service/alerts.se
   templateUrl: './leave-current-drive-comment.component.html',
   styleUrls: ['./leave-current-drive-comment.component.css'],
 })
-export class LeaveCurrentDriveComment implements OnInit {
+export class LeaveCurrentDriveCommentComponent implements OnInit {
   @Output() closeReportModal = new EventEmitter<boolean>();
   public drive: Drive = new Drive();
   public comment: string = '';

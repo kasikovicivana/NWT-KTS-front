@@ -1,12 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { User } from '../../../app/model/user.model';
 
 @Component({
@@ -14,9 +6,7 @@ import { User } from '../../../app/model/user.model';
   templateUrl: './input-user-info.component.html',
   styleUrls: ['./input-user-info.component.css'],
 })
-export class InputUserInfoComponent implements OnInit {
-  constructor() {}
-
+export class InputUserInfoComponent {
   @Input()
   user = new User();
   @Output() registerClick = new EventEmitter<boolean>();
@@ -24,7 +14,7 @@ export class InputUserInfoComponent implements OnInit {
   isDriver = true;
   loggedRole: string | null = sessionStorage.getItem('role');
 
-  ngOnInit(): void {}
+  constructor() {}
 
   onChange(deviceValue: string) {
     this.isDriver = deviceValue !== 'Client';
