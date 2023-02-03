@@ -40,10 +40,10 @@ export class LoginSocialComponent implements OnInit {
       this.phoneNumberPattern.test(this.user.phoneNumber)
     ) {
       this.registrationService.registerUser(this.user).subscribe(
-        (data) => {
+        () => {
           this.loginUser();
         },
-        (err) => this.alerts.errorAlert('Something went wrong!')
+        () => this.alerts.errorAlert('Something went wrong!')
       );
     } else {
       this.alerts.errorAlert('You must fill all fields!');
@@ -51,7 +51,7 @@ export class LoginSocialComponent implements OnInit {
   }
 
   loginUser() {
-    let info = new UserInfo();
+    const info = new UserInfo();
     info.username = this.user.email;
     info.password = this.user.password;
     this.loginService.login(info).subscribe({
@@ -60,7 +60,7 @@ export class LoginSocialComponent implements OnInit {
         this.loginSuccessful(data);
         setTimeout(() => (window.location.href = '/home'), 1000);
       },
-      error: (err) => this.alerts.errorAlert('Wrong credentials!'),
+      error: () => this.alerts.errorAlert('Wrong credentials!'),
     });
   }
 

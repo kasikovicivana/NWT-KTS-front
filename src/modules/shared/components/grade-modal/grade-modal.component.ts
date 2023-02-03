@@ -11,7 +11,7 @@ import { Drive } from '../../../app/model/drive.model';
   styleUrls: ['./grade-modal.component.css'],
 })
 export class GradeModalComponent implements OnInit {
-  comment: string = '';
+  comment = '';
   grade!: GradeModel;
   @Input() drive: Drive = new Drive();
   @Output() closeModal = new EventEmitter<void>();

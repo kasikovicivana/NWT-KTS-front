@@ -27,7 +27,7 @@ export class UserService {
   }
 
   getUser(email: string) {
-    let getUserUrl = environment.backendUrl + 'api/user/getUser/';
+    const getUserUrl = environment.backendUrl + 'api/user/getUser/';
     return this._http.get<any>(getUserUrl + email);
   }
 
@@ -45,7 +45,7 @@ export class UserService {
 
   getClients(page: number, size: number) {
     const newUrl = this.url + '/getClients';
-    let queryParams = {
+    const queryParams = {
       //      headers: this.loginService.getAuthorizationHeader(),
       observe: 'response' as 'body',
       params: new HttpParams()
@@ -58,7 +58,7 @@ export class UserService {
 
   getDrivers(page: number, size: number) {
     const newUrl = this.url + '/getDrivers';
-    let queryParams = {
+    const queryParams = {
       //      headers: this.loginService.getAuthorizationHeader(),
       observe: 'response' as 'body',
       params: new HttpParams()
@@ -129,7 +129,7 @@ export class UserService {
 
   getPendingDriverChanges(page: number, size: number) {
     const newUrl = this.url + '/getPendingDriverChanges';
-    let queryParams = {
+    const queryParams = {
       observe: 'response' as 'body',
       params: new HttpParams()
         .set('page', String(page))

@@ -11,17 +11,17 @@ import { AlertsService } from '../../services/alerts-service/alerts.service';
 })
 export class DriveReportComponent {
   today: string = new Date().toLocaleDateString('en-ca');
-  startDate: string = '';
-  endDate: string = '';
+  startDate = '';
+  endDate = '';
   xData: string[] = [];
   yDataRides: number[] = [];
   yDataDistance: number[] = [];
   yDataPrice: number[] = [];
-  ridesSum: number = 0;
-  distanceSum: number = 0;
-  priceSum: number = 0;
+  ridesSum = 0;
+  distanceSum = 0;
+  priceSum = 0;
   drives: Drive[] = [];
-  show: boolean = true;
+  show = true;
 
   constructor(
     public driveService: DriveService,
@@ -29,12 +29,12 @@ export class DriveReportComponent {
   ) {}
 
   setDatesInChart() {
-    let start = new Date(this.startDate);
-    let end = new Date(this.endDate);
+    const start = new Date(this.startDate);
+    const end = new Date(this.endDate);
     const diffTime = end.getTime() - start.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     for (let i = 0; i <= diffDays; i++) {
-      let addDate = new Date(start.getTime() + 1000 * 60 * 60 * 24 * i);
+      const addDate = new Date(start.getTime() + 1000 * 60 * 60 * 24 * i);
       this.xData.push(addDate.toLocaleDateString());
       this.yDataRides.push(0);
       this.yDataDistance.push(0);
@@ -44,7 +44,7 @@ export class DriveReportComponent {
 
   getDrives() {
     this.checkDates();
-    let role = sessionStorage.getItem('role');
+    const role = sessionStorage.getItem('role');
     this.show = false;
     this.clearData();
     this.setDatesInChart();
@@ -58,8 +58,8 @@ export class DriveReportComponent {
   }
 
   checkDates() {
-    let start = new Date(this.startDate);
-    let end = new Date(this.endDate);
+    const start = new Date(this.startDate);
+    const end = new Date(this.endDate);
     if (end < start) {
       this.alertService.errorAlert('Start date must be before end!');
     }
@@ -113,26 +113,26 @@ export class DriveReportComponent {
   }
 
   setNumberOfDrives(drives: Drive[]) {
-    for (let d of drives) {
-      let index = this.getIndex(d);
+    for (const d of drives) {
+      const index = this.getIndex(d);
       this.yDataRides[index] += 1;
       this.ridesSum += 1;
     }
   }
 
   setNumberOfKilometers(drives: Drive[]) {
-    for (let d of drives) {
-      let index = this.getIndex(d);
+    for (const d of drives) {
+      const index = this.getIndex(d);
       this.yDataDistance[index] += d.distance;
       this.distanceSum += d.distance;
     }
   }
 
   setPriceForClient(drives: Drive[]) {
-    let email = sessionStorage.getItem('username');
-    for (let d of drives) {
-      let index = this.getIndex(d);
-      for (let p of d.passengers) {
+    const email = sessionStorage.getItem('username');
+    for (const d of drives) {
+      const index = this.getIndex(d);
+      for (const p of d.passengers) {
         if (p.email === email) {
           this.yDataPrice[index] += p.price;
           this.priceSum += p.price;
@@ -142,16 +142,16 @@ export class DriveReportComponent {
   }
 
   setPrice(drives: Drive[]) {
-    for (let d of drives) {
-      let index = this.getIndex(d);
+    for (const d of drives) {
+      const index = this.getIndex(d);
       this.yDataPrice[index] += d.price;
       this.priceSum += d.price;
     }
   }
 
   getIndex(d: Drive): number {
-    let comp = d.startTime.toString().split(',');
-    let driveDate = new Date(
+    const comp = d.startTime.toString().split(',');
+    const driveDate = new Date(
       parseFloat(comp[0]),
       parseFloat(comp[1]) - 1,
       parseFloat(comp[2])

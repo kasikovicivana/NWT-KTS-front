@@ -1,7 +1,7 @@
 export class Position {
   public lat: number;
   public lon: number;
-  public address: string = '';
+  public address = '';
 
   constructor(pos: any) {
     this.lat = pos.lat;

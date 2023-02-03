@@ -4,8 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class UtilService {
-  constructor() {}
-
   public getNoPages(totalItems?: number, pageSize?: number): number {
     console.log(totalItems);
     if (totalItems != undefined && pageSize != undefined)

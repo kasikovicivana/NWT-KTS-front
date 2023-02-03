@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './driver-drive-report.component.html',
   styleUrls: ['./driver-drive-report.component.css'],
 })
-export class DriverDriveReportComponent {
-  constructor() {}
-}
+export class DriverDriveReportComponent {}

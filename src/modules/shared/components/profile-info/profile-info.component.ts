@@ -31,22 +31,22 @@ export class ProfileInfoComponent implements OnInit {
 
   @Input() info!: User | DriverCarInfo;
   @Input() srcData: SafeResourceUrl | undefined;
-  @Input() approveChanges: boolean = false;
+  @Input() approveChanges = false;
   @Output() approveChangesEvent = new EventEmitter<DriverCarInfo>();
   @Output() rejectChangesEvent = new EventEmitter<DriverCarInfo>();
 
   carTypes: CarType[] = [];
-  showModal: boolean = false;
-  isReadonly: boolean = true;
-  isDataValid: boolean = false;
+  showModal = false;
+  isReadonly = true;
+  isDataValid = false;
   emailPattern =
     /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/;
   phoneNumberPattern = /^(\+)?\d{8}\d+$/;
-  type: string = 'Van XL';
-  babiesAllowed: boolean = false;
-  petFriendly: boolean = false;
-  viewCarTypeInfo: boolean = false;
-  private imageUrl: string = '';
+  type = 'Van XL';
+  babiesAllowed = false;
+  petFriendly = false;
+  viewCarTypeInfo = false;
+  private imageUrl = '';
 
   constructor(
     private alerts: AlertsService,
@@ -119,12 +119,12 @@ export class ProfileInfoComponent implements OnInit {
 
   addAttachment(fileInput: any) {
     const fileRead = fileInput.target.files[0];
-    let picturePath = new FileReader();
+    const picturePath = new FileReader();
     picturePath.readAsDataURL(fileRead);
-    let that = this;
+    const that = this;
     picturePath.onload = (e) => {
       if (e.target != null) {
-        let i = new Image();
+        const i = new Image();
         i.path = fileRead.name;
         i.data = e.target.result as string;
         that.imageService.addImage(i).subscribe({

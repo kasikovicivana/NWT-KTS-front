@@ -6,11 +6,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
-import {
-  FacebookLoginProvider,
-  GoogleLoginProvider,
-  SocialAuthServiceConfig,
-} from '@abacritt/angularx-social-login';
 import { MailModalComponent } from './components/mail-modal/mail-modal.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgStepperModule } from 'angular-ng-stepper';

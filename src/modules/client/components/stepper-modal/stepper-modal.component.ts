@@ -19,13 +19,11 @@ export class StepperModalComponent {
   @Output() closeModal = new EventEmitter<boolean>();
   @Output() finishOrder = new EventEmitter<ScheduleInfo>();
 
-  @Input() distance: number = 0;
+  @Input() distance = 0;
 
   stepOne: StepOneComponent | undefined;
   stepTwo: StepTwoComponent | undefined;
   stepThree: StepThreeComponent | undefined;
-
-  constructor() {}
 
   @ViewChild(StepOneComponent) set one(one: StepOneComponent) {
     if (one) {
@@ -50,10 +48,11 @@ export class StepperModalComponent {
   }
 
   finish() {
-    let { car, pet, babies, price } = this.stepOne?.getData();
-    let passengers: string[] | undefined = this.stepTwo?.getData();
+    const { car, pet, babies, price } = this.stepOne?.getData();
+    let passengers: string[] | undefined;
+    passengers = this.stepTwo?.passengers;
 
-    let info: ScheduleInfo = new ScheduleInfo({
+    const info: ScheduleInfo = new ScheduleInfo({
       passengers,
       car,
       babies,
@@ -72,14 +71,14 @@ export class StepperModalComponent {
   }
 
   reserve() {
-    let { car, pet, babies, price } = this.stepOne?.getData();
-    let passengers: string[] | undefined = this.stepTwo?.getData();
+    const { car, pet, babies, price } = this.stepOne?.getData();
+    const passengers: string[] | undefined = this.stepTwo?.getData();
     let time = undefined;
     if (this.stepThree?.reservationTime !== undefined) {
       time = this.getReservationDatetime(this.stepThree?.reservationTime);
     }
 
-    let info: ScheduleInfo = new ScheduleInfo({
+    const info: ScheduleInfo = new ScheduleInfo({
       passengers,
       car,
       babies,
@@ -98,8 +97,8 @@ export class StepperModalComponent {
   }
 
   getReservationDatetime(time: string) {
-    let now = new Date();
-    let resTime: Date = new Date();
+    const now = new Date();
+    const resTime: Date = new Date();
     resTime.setHours(Number(time.split(':')[0]));
     resTime.setMinutes(Number(time.split(':')[1]));
 

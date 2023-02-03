@@ -22,7 +22,7 @@ export class UserBlockCardComponent implements OnInit {
   user!: Client | Driver;
 
   srcData: SafeResourceUrl | undefined;
-  imageUrl: string = '';
+  imageUrl = '';
 
   @Output() someEvent = new EventEmitter<Client | Driver>();
   @Output() blockClient = new EventEmitter<Client>();

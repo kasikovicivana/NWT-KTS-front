@@ -6,22 +6,11 @@ import { Drive } from '../../../app/model/drive.model';
   templateUrl: './drive-history-table.component.html',
   styleUrls: ['./drive-history-table.component.css'],
 })
-export class DriveHistoryTableComponent implements OnInit {
+export class DriveHistoryTableComponent {
   @Input() drives: Drive[] = [];
-  @Input() futureDrives: boolean = false;
+  @Input() futureDrives = false;
   @Output() openModal = new EventEmitter<Drive>();
   @Output() openRejectModal = new EventEmitter<Drive>();
-
-  constructor() {}
-
-  ngOnInit(): void {
-    for (let d of this.drives) {
-      console.log(d);
-      for (let r of d.routes) {
-        console.log(r);
-      }
-    }
-  }
 
   openDetailsModal(drive: Drive) {
     this.openModal.emit(drive);
@@ -37,7 +26,6 @@ export class DriveHistoryTableComponent implements OnInit {
     } else if (sortBy === 'Date') {
       this.sortByDate();
     }
-    //jos za rute kad budu dodati nazivi ulice
   }
 
   openRejectModalFunc(drive: Drive) {

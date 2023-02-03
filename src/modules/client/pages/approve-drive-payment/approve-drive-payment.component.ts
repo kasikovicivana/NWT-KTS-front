@@ -13,8 +13,8 @@ import { NotificationService } from '../../../shared/services/notification-servi
   styleUrls: ['./approve-drive-payment.component.css'],
 })
 export class ApproveDrivePaymentComponent implements OnInit {
-  private id: number = -1;
   public info!: ClientDriveModel;
+  private id = -1;
   private stompClient: any;
 
   constructor(
@@ -34,10 +34,11 @@ export class ApproveDrivePaymentComponent implements OnInit {
       },
     });
   }
+
   initializeWebSocketConnection() {
-    let ws = new SockJS('http://localhost:9000/socket');
+    const ws = new SockJS('http://localhost:9000/socket');
     this.stompClient = Stomp.over(ws);
-    let that = this;
+    const that = this;
     this.stompClient.connect({}, function () {
       that.openGlobalSocket();
     });
@@ -47,7 +48,7 @@ export class ApproveDrivePaymentComponent implements OnInit {
     this.stompClient.subscribe(
       '/notification/rejectedPayment',
       (message: { body: string }) => {
-        let notification = JSON.parse(message.body);
+        const notification = JSON.parse(message.body);
         console.log(notification);
         console.log(notification.message);
         if (sessionStorage.getItem('username') === notification.receiverEmail) {
@@ -60,7 +61,7 @@ export class ApproveDrivePaymentComponent implements OnInit {
     this.stompClient.subscribe(
       '/notification/noAvailableDriver',
       (message: { body: string }) => {
-        let notification = JSON.parse(message.body);
+        const notification = JSON.parse(message.body);
         console.log(notification);
         console.log(notification.message);
         if (sessionStorage.getItem('username') === notification.receiverEmail) {
@@ -73,7 +74,7 @@ export class ApproveDrivePaymentComponent implements OnInit {
     this.stompClient.subscribe(
       '/notification/approvedDrive',
       (message: { body: string }) => {
-        let notification = JSON.parse(message.body);
+        const notification = JSON.parse(message.body);
         console.log(notification);
         console.log(notification.message);
         if (sessionStorage.getItem('username') === notification.receiverEmail) {
@@ -95,7 +96,7 @@ export class ApproveDrivePaymentComponent implements OnInit {
           window.location.href = '/home';
         }, 3000);
       },
-      error: (err) => {
+      error: () => {
         this.alertsService.errorAlert("Don't have enough tokens to pay!");
         setTimeout(() => {
           window.location.href = '/home';

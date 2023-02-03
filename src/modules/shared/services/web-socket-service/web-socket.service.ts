@@ -18,14 +18,14 @@ export class WebSocketService {
   constructor(private _http: HttpClient, private loginService: LoginService) {}
 
   initializeWebSocketConnection(client: string, isAdmin: boolean) {
-    let ws = new SockJS('http://localhost:9000/socket');
+    const ws = new SockJS('http://localhost:9000/socket');
     this.stompClient = Stomp.over(ws);
     this.stompClient.debug = null;
-    let that = this;
+    const that = this;
     this.stompClient.connect({}, function () {
       that.stompClient.subscribe('/chat', (message: { body: string }) => {
         if (message.body) {
-          let msg: ChatMessage = JSON.parse(message.body);
+          const msg: ChatMessage = JSON.parse(message.body);
           if (msg.from.email === client || isAdmin || msg.to === client) {
             that.webSocketMessage.push(msg);
             console.log(message.body);

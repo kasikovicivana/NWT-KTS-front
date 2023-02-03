@@ -11,7 +11,7 @@ describe('RegistrationService', () => {
   let service: RegistrationService;
   let httpController: HttpTestingController;
 
-  let url = environment.backendUrl + 'auth/register';
+  const url = environment.backendUrl + 'auth/register';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -30,7 +30,7 @@ describe('RegistrationService', () => {
   });
 
   it('should call register and return an user', () => {
-    let userInfo = new User(
+    const userInfo = new User(
       1,
       'Ivana',
       'Jankovic',
@@ -40,7 +40,7 @@ describe('RegistrationService', () => {
       '062545784',
       'Client'
     );
-    let mockUser = new User(
+    const mockUser = new User(
       1,
       'Ivana',
       'Jankovic',

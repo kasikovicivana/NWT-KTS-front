@@ -2,9 +2,9 @@ import { Position } from './position.model';
 
 export class RouteDetails {
   public coordinates: number[][] = [];
-  public type: string = 'recommended';
-  public duration: number = 0;
-  public distance: number = 0;
+  public type = 'recommended';
+  public duration = 0;
+  public distance = 0;
 
   public start: Position | undefined;
   public end: Position | undefined;

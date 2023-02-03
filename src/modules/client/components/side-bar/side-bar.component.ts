@@ -22,11 +22,11 @@ export class SideBarComponent implements OnInit {
   @Output() showPositions = new EventEmitter<string[]>();
   @Output() changeRouteType = new EventEmitter<RouteParams>();
 
-  isMyChoice: boolean = false;
-  isLoggedIn: boolean = false;
+  isMyChoice = false;
+  isLoggedIn = false;
   pins: string[] = [];
-  start: string = '';
-  end: string = '';
+  start = '';
+  end = '';
   routes: RouteDetails[][] = [];
   list: CollapseListComponent | undefined;
 
@@ -71,13 +71,13 @@ export class SideBarComponent implements OnInit {
   }
 
   findPositions() {
-    let positions = this.getPositions();
+    const positions = this.getPositions();
     this.showPositions.emit(positions);
   }
 
   showRouteOptions(routes: RouteDetails[][]) {
     this.routes = routes;
-    let positions = this.getPositions();
+    const positions = this.getPositions();
     if (this.isMyChoice) {
       this.list?.showRouteOptions(this.routes, positions);
     }
@@ -85,7 +85,7 @@ export class SideBarComponent implements OnInit {
 
   myChoice() {
     this.isMyChoice = true;
-    let positions = this.getPositions();
+    const positions = this.getPositions();
     this.list?.showRouteOptions(this.routes, positions);
   }
 
@@ -97,7 +97,7 @@ export class SideBarComponent implements OnInit {
     if (this.start === '' || this.end === '') {
       return true;
     }
-    for (let p of this.pins) {
+    for (const p of this.pins) {
       if (p === '') {
         return true;
       }
@@ -125,7 +125,7 @@ export class SideBarComponent implements OnInit {
     drive.routes.splice(0, 1);
     drive.routes.splice(drive.routes.length - 1, 1);
 
-    for (let r of drive.routes) {
+    for (const r of drive.routes) {
       this.pins.push(r.end.address);
     }
 
@@ -138,8 +138,8 @@ export class SideBarComponent implements OnInit {
 
   systemChoice() {
     this.isMyChoice = false;
-    for (let r of this.routes) {
-      let params: RouteParams = new RouteParams(
+    for (const r of this.routes) {
+      const params: RouteParams = new RouteParams(
         this.routes.indexOf(r),
         'recommended'
       );
@@ -148,9 +148,9 @@ export class SideBarComponent implements OnInit {
   }
 
   private getPositions() {
-    let positions: string[] = [];
+    const positions: string[] = [];
     positions.push(this.start);
-    for (let pin of this.pins) {
+    for (const pin of this.pins) {
       positions.push(pin);
     }
     positions.push(this.end);

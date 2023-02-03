@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Note } from '../../../app/model/note.model';
-import { Driver } from '../../../app/model/driver.model';
 import { Observable } from 'rxjs';
 import { EditNote } from '../../../app/model/editNote.model';
 import { User } from '../../../app/model/user.model';
@@ -11,7 +10,7 @@ import { User } from '../../../app/model/user.model';
   providedIn: 'root',
 })
 export class NoteService {
-  public maxId: number = -1;
+  public maxId = -1;
   noteUrl = environment.backendUrl + 'api/note';
 
   constructor(private _http: HttpClient) {
@@ -24,8 +23,8 @@ export class NoteService {
   }
 
   private static getNoteInfo(user: User) {
-    let driverId: number = -1;
-    let clientId: number = -1;
+    let driverId = -1;
+    let clientId = -1;
     if (user.role === 'Driver') {
       driverId = user.id;
     } else {
@@ -35,11 +34,11 @@ export class NoteService {
   }
 
   editNotes(data: EditNote): void {
-    let { driverId, clientId } = NoteService.getNoteInfo(data.user);
+    const { driverId, clientId } = NoteService.getNoteInfo(data.user);
     if (data.notes != undefined && data.notesObj != undefined) {
-      for (let noteId in data.notes) {
+      for (const noteId in data.notes) {
         if (eval(noteId) >= data.notesObj.length) {
-          let newNote: Note = {
+          const newNote: Note = {
             id: this.maxId + 1,
             comment: data.notes[eval(noteId)],
             adminId: data.adminId,

@@ -2,18 +2,18 @@ import { RouteDetails } from './routeDetails';
 
 export class ScheduleInfo {
   public passengers: string[] = [];
-  public car: string = '';
-  public babies: boolean = false;
-  public pet: boolean = false;
-  public price: number = 0;
-  public distance: number = 0;
-  public duration: number = 0;
-  public splitFaire: boolean = false;
-  public reservation: boolean = false;
+  public car = '';
+  public babies = false;
+  public pet = false;
+  public price = 0;
+  public distance = 0;
+  public duration = 0;
+  public splitFaire = false;
+  public reservation = false;
   public routes: RouteDetails[] = [];
   public reservationTime: Date | undefined = undefined;
 
-  public favourite: boolean = false;
+  public favourite = false;
 
   public constructor(s: any) {
     this.passengers = s.passengers;

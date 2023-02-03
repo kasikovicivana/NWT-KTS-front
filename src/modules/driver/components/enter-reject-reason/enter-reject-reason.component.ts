@@ -11,7 +11,7 @@ import { AlertsService } from '../../../shared/services/alerts-service/alerts.se
 export class EnterRejectReasonComponent {
   @Input() drive: Drive | undefined = undefined;
   @Output() closeRejectModal = new EventEmitter<boolean>();
-  public reason: string = '';
+  public reason = '';
 
   constructor(
     private driveService: DriveService,

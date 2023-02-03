@@ -9,7 +9,7 @@ import { UserService } from '../../../shared/services/user-service/user.service'
   styleUrls: ['./mail-modal.component.css'],
 })
 export class MailModalComponent {
-  mail: string = '';
+  mail = '';
 
   constructor(
     public modalRef: MdbModalRef<MailModalComponent>,
@@ -24,11 +24,11 @@ export class MailModalComponent {
 
   sendMail() {
     this.userService.sendPasswordReset(this.mail).subscribe({
-      next: (value) => {
+      next: () => {
         this.alerts.successAlert();
         this.close();
       },
-      error: (err) => {
+      error: () => {
         this.close();
         this.alerts.errorAlert('Could not send an email to the given address.');
       },

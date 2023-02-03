@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './admin-drive-report.component.html',
   styleUrls: ['./admin-drive-report.component.css'],
 })
-export class AdminDriveReportComponent {
-  constructor() {}
-}
+export class AdminDriveReportComponent {}

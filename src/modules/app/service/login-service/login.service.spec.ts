@@ -11,7 +11,7 @@ describe('LoginService', () => {
   let service: LoginService;
   let httpController: HttpTestingController;
 
-  let url = environment.backendUrl + 'auth/login';
+  const url = environment.backendUrl + 'auth/login';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -30,8 +30,8 @@ describe('LoginService', () => {
   });
 
   it('should call login and return an loggedUser', () => {
-    let userInfo = new UserInfo('ivanaj0610@gmail.com', 'pass');
-    let mockLoggedUser = new LoggedUser(
+    const userInfo = new UserInfo('ivanaj0610@gmail.com', 'pass');
+    const mockLoggedUser = new LoggedUser(
       'ivanaj0610@gmail.com',
       '2564501',
       '26102522',

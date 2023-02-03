@@ -14,11 +14,9 @@ export class CollapseListComponent {
   routes: RouteDetails[][] = [];
   chosen: string[] = [];
 
-  constructor() {}
-
   selectRoute(i: number, route: string) {
     this.chosen[i] = route;
-    let params: RouteParams = new RouteParams(i, route);
+    const params: RouteParams = new RouteParams(i, route);
     this.changeRoute.emit(params);
   }
 

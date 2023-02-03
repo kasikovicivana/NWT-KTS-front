@@ -19,8 +19,8 @@ export class ChangePasswordModalComponent {
   @ViewChild('oldPassInput') oldPassInput: ElementRef | undefined;
 
   @Output() closeEvent = new EventEmitter<boolean>();
-  newPass: string = '';
-  reenteredPass: string = '';
+  newPass = '';
+  reenteredPass = '';
 
   constructor(
     private alerts: AlertsService,
@@ -35,7 +35,7 @@ export class ChangePasswordModalComponent {
 
   changePassword() {
     let isCorrectPass = undefined;
-    let context = this;
+    const context = this;
     this.userService
       .isOldPasswordCorrect(this.oldPassInput?.nativeElement.value)
       .subscribe((data) => {

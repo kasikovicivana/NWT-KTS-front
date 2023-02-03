@@ -10,11 +10,11 @@ import { AlertsService } from '../../../../shared/services/alerts-service/alerts
 })
 export class StepTwoComponent {
   public stepTwoForm: FormGroup;
-  public passengers: Array<string> = [];
-  public p: string = '';
+  public passengers: string[] = [];
+  public p = '';
   emailPattern =
     /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/\d=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/\d=?A-Z^_`a-z{|}~]+)*@[A-Za-z\d]([A-Za-z\d-]{0,61}[A-Za-z\d])?(\.[A-Za-z\d]([A-Za-z\d-]{0,61}[A-Za-z\d])?)*$/;
-  passengerInput: string = '';
+  passengerInput = '';
 
   constructor(
     private fb: FormBuilder,
@@ -38,7 +38,7 @@ export class StepTwoComponent {
         next: () => {
           this.passengers.push(this.passengerInput);
         },
-        error: (err) => {
+        error: () => {
           this.alertService.errorAlert('User not found');
         },
       });

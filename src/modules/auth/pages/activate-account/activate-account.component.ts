@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ActivateAccountComponent implements OnInit {
-  token: string = '';
+  token = '';
 
   constructor(
     private registrationService: RegistrationService,
@@ -21,7 +21,7 @@ export class ActivateAccountComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.route.snapshot.params['token'];
     this.registrationService.activateAccount(this.token).subscribe(
-      (data) => {
+      () => {
         this.alerts.successAlert();
         setTimeout(function () {
           window.location.href = '/';

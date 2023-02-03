@@ -1,6 +1,5 @@
 import {
   ComponentFixture,
-  discardPeriodicTasks,
   fakeAsync,
   flush,
   TestBed,

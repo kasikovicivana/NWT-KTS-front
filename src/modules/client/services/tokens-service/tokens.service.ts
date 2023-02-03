@@ -7,7 +7,7 @@ import { LoginService } from '../../../app/service/login-service/login.service';
   providedIn: 'root',
 })
 export class TokensService {
-  accessToken: string = '';
+  accessToken = '';
   paypalUrl = 'https://api-m.sandbox.paypal.com';
   systemUrl = environment.backendUrl + 'api/system';
   client_id =
@@ -16,7 +16,7 @@ export class TokensService {
     'EPMOwIdFjIYRnK24CM0qNmvbtR9ECpqr7DKTy7vWCouLzYnpSZfeISZxjdFevaZLn6nnXqN43W7b5aRR';
 
   constructor(private _http: HttpClient, private loginService: LoginService) {
-    let context = this;
+    const context = this;
     this.generateAccessToken().subscribe({
       next: (data) => {
         context.accessToken = data['access_token'];

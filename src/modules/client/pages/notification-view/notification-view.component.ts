@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Drive } from '../../../app/model/drive.model';
 import { NotificationModel } from '../../../app/model/notification.model';
 import { NotificationService } from '../../../shared/services/notification-service/notification.service';
 

@@ -3,7 +3,6 @@ import { User } from 'src/modules/app/model/user.model';
 import { AlertsService } from 'src/modules/shared/services/alerts-service/alerts.service';
 import { RegistrationService } from 'src/modules/app/service/registration-service/registration.service';
 import { InputUserInfoComponent } from '../../../shared/components/input-user-info/input-user-info.component';
-import { ComponentFixture } from '@angular/core/testing';
 
 @Component({
   selector: 'app-registration',
@@ -11,11 +10,11 @@ import { ComponentFixture } from '@angular/core/testing';
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
-  emailPattern: RegExp =
+  emailPattern =
     /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/\d=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/\d=?A-Z^_`a-z{|}~]+)*@[A-Za-z\d]([A-Za-z\d-]{0,61}[A-Za-z\d])?(\.[A-Za-z\d]([A-Za-z\d-]{0,61}[A-Za-z\d])?)*$/;
-  phoneNumberPattern: RegExp = /^(\+)?\d{8}\d+$/;
+  phoneNumberPattern = /^(\+)?\d{8}\d+$/;
   user: User = new User();
-  isDataValid: boolean = false;
+  isDataValid = false;
   @ViewChild(InputUserInfoComponent) child: InputUserInfoComponent | undefined;
 
   constructor(
@@ -45,11 +44,11 @@ export class RegistrationComponent implements OnInit {
     this.validateData();
     if (this.isDataValid) {
       this.registrationService.registerUser(this.user).subscribe(
-        (data) => {
+        () => {
           this.alerts.successAlert();
           setTimeout(() => this.redirectToHomepage(), 1000);
         },
-        (err) => this.alerts.errorAlert('You already have account!')
+        () => this.alerts.errorAlert('You already have account!')
       );
     } else {
       this.alerts.errorAlert('You must fill all fields!');
