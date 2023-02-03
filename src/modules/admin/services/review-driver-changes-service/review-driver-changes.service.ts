@@ -13,16 +13,16 @@ export class ReviewDriverChangesService {
 
   getDriverChangesById(id: number) {
     const payUrl = this.basicUrl + `/getDriverChanges/` + id;
-    return this._http.get<any>(payUrl);
+    return this._http.get<DriverCarInfo>(payUrl);
   }
 
   accept(info: DriverCarInfo) {
     const payUrl = this.basicUrl + `/acceptDriverChanges`;
-    return this._http.post<any>(payUrl, info);
+    return this._http.post<boolean>(payUrl, info);
   }
 
   reject(info: DriverCarInfo) {
     const payUrl = this.basicUrl + `/rejectDriverChanges`;
-    return this._http.post<any>(payUrl, info);
+    return this._http.post<boolean>(payUrl, info);
   }
 }

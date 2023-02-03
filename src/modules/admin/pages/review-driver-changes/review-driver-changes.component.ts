@@ -12,7 +12,7 @@ export class ReviewDriverChangesComponent implements OnInit {
   currentPage: number;
   totalSize: number;
 
-  reviews: [DriverCarInfo] | undefined;
+  reviews: DriverCarInfo[] | null = [];
 
   constructor(private userService: UserService) {
     this.pageSize = 4;

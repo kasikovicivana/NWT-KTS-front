@@ -172,27 +172,37 @@ export class RouteMapComponent implements AfterViewInit {
 
   load(): void {
     this.driveService.loadPositionsActive().subscribe({
-      next: (values) => {
-        for (let key in values) {
-          const item = values[key];
-          let marker = L.marker([item.lat, item.lon], { icon: this.greenCar })
-            .addTo(this.map)
-            .bindPopup(key);
-          this.positions.set(key, marker);
-        }
+      next: (values: Map<string, Position>) => {
+        let arr = Object.entries(values);
+        let map = new Map(arr);
+        map.forEach((value: Position, key) => {
+          const item = map.get(key);
+          if (item !== undefined) {
+            let marker = L.marker([item.lat, item.lon], { icon: this.greenCar })
+              .addTo(this.map)
+              .bindPopup(key);
+            this.positions.set(key, marker);
+          }
+        });
       },
       error: () => {},
     });
 
     this.driveService.loadPositionsInactive().subscribe({
-      next: (values) => {
-        for (let key in values) {
-          const item = values[key];
-          let marker = L.marker([item.lat, item.lon], { icon: this.blackCar })
-            .addTo(this.map)
-            .bindPopup(key);
-          this.positions.set(key, marker);
-        }
+      next: (values: Map<string, Position>) => {
+        let arr = Object.entries(values);
+        let map = new Map(arr);
+        map.forEach((value: Position, key) => {
+          const item = map.get(key);
+          if (item !== undefined) {
+            let marker = L.marker([item.lat, item.lon], {
+              icon: this.blackCar,
+            })
+              .addTo(this.map)
+              .bindPopup(key);
+            this.positions.set(key, marker);
+          }
+        });
       },
       error: () => {},
     });

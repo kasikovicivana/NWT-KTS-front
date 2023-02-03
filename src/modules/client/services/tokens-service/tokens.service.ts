@@ -83,6 +83,6 @@ export class TokensService {
 
   getTokenPrice() {
     const payUrl = this.systemUrl + `/getTokenPrice`;
-    return this._http.get<any>(payUrl);
+    return this._http.get<number>(payUrl);
   }
 }

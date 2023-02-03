@@ -2,12 +2,12 @@
 
   <div style="margin-left: 250px; margin-right: 250px; ">
       <span *ngFor="let x of reviews">
-        <app-driver-edit-card [info]="x" ></app-driver-edit-card>
+        <app-driver-edit-card [info]="x"></app-driver-edit-card>
       </span>
-    <span *ngIf="reviews === undefined || reviews.length < 1"><br> <h4> There are no reviews to show. </h4></span>
+    <span *ngIf="reviews === undefined || reviews === null || reviews.length < 1"><br> <h4> There are no reviews to show. </h4></span>
 
-    <app-pagination *ngIf="totalSize !== 0"
-                    (pageSelected)="changePage($event)"
+    <app-pagination (pageSelected)="changePage($event)"
+                    *ngIf="totalSize !== 0"
                     [activePage]="currentPage"
                     [pageSize]="pageSize"
                     [totalItems]="totalSize"

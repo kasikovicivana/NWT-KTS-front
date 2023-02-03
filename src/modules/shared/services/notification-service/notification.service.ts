@@ -3,6 +3,7 @@ import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
+import { NotificationModel } from '../../../app/model/notification.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +15,7 @@ export class NotificationService {
 
   getNotificationsOfLoggedClient() {
     const newUrl = this.url + '/getNotifications';
-    return this._http.get<any>(newUrl);
-  }
-
-  showSuccess() {
-    this.toast.success('Hello world!', 'Toastr fun!');
+    return this._http.get<NotificationModel[]>(newUrl);
   }
 
   showApprovePaymentNotification(message: string, driveId: number) {

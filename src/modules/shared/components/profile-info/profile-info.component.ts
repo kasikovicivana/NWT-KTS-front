@@ -15,7 +15,6 @@ import { UserService } from '../../services/user-service/user.service';
 import { User } from '../../../app/model/user.model';
 import { CarType } from '../../../app/model/carType.model';
 import { CarService } from '../../services/car-service/car.service';
-import { DomUtil } from 'leaflet';
 import { DriverCarInfo } from '../../../app/model/driver.model';
 
 @Component({
@@ -36,19 +35,18 @@ export class ProfileInfoComponent implements OnInit {
   @Output() approveChangesEvent = new EventEmitter<DriverCarInfo>();
   @Output() rejectChangesEvent = new EventEmitter<DriverCarInfo>();
 
-  carTypes: [CarType] | undefined;
-  private imageUrl: string = '';
+  carTypes: CarType[] = [];
   showModal: boolean = false;
   isReadonly: boolean = true;
   isDataValid: boolean = false;
   emailPattern =
     /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/;
   phoneNumberPattern = /^(\+)?\d{8}\d+$/;
-
   type: string = 'Van XL';
   babiesAllowed: boolean = false;
   petFriendly: boolean = false;
   viewCarTypeInfo: boolean = false;
+  private imageUrl: string = '';
 
   constructor(
     private alerts: AlertsService,
@@ -177,6 +175,19 @@ export class ProfileInfoComponent implements OnInit {
     }
   }
 
+  approve() {
+    console.log('kao apprvoe');
+    if ('babiesAllowed' in this.info) this.approveChangesEvent.next(this.info);
+    this.alerts.successAlert();
+    window.location.href = '/reviewDriverChanges';
+  }
+
+  reject() {
+    if ('babiesAllowed' in this.info) this.rejectChangesEvent.next(this.info);
+    this.alerts.successAlert();
+    window.location.href = '/reviewDriverChanges';
+  }
+
   private processRequestEdition() {
     this.validateData();
     if (this.isDataValid) {
@@ -190,18 +201,5 @@ export class ProfileInfoComponent implements OnInit {
     } else {
       this.alerts.errorAlert('You must fill all fields!');
     }
-  }
-
-  approve() {
-    console.log('kao apprvoe');
-    if ('babiesAllowed' in this.info) this.approveChangesEvent.next(this.info);
-    this.alerts.successAlert();
-    window.location.href = '/reviewDriverChanges';
-  }
-
-  reject() {
-    if ('babiesAllowed' in this.info) this.rejectChangesEvent.next(this.info);
-    this.alerts.successAlert();
-    window.location.href = '/reviewDriverChanges';
   }
 }

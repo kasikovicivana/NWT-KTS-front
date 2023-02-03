@@ -23,7 +23,7 @@
 
       <div class="col-6">
         <div style="margin-top: 150px">
-          <button  (click)="approveChanges()" class="btn btn-rounded  fw-bold btn-success" style="float: left"
+          <button (click)="approveChanges()" class="btn btn-rounded  fw-bold btn-success" style="float: left"
                   type="button">
             Approve
           </button>
@@ -33,9 +33,10 @@
             Reject
           </button>
 
-          <button  class="btn btn-rounded  fw-bold btn-success" style="margin-left: 20px"
+          <button class="btn btn-rounded  fw-bold btn-success" style="margin-left: 20px"
                   type="button">
-            <a style="color: white" routerLink="/detailedDriverChanges/{{info.id}}" routerLinkActive="active">View changes</a>
+            <a routerLink="/detailedDriverChanges/{{info.id}}" routerLinkActive="active" style="color: white">View
+              changes</a>
           </button>
 
         </div>

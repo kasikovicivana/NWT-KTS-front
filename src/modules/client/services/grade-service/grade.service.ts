@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { LoginService } from '../../../app/service/login-service/login.service';
 import { GradeModel } from '../../../app/model/grade.model';
 
 @Injectable({
@@ -14,7 +13,7 @@ export class GradeService {
 
   getGrade(id: number) {
     const newUrl = this.gradeUrl + '/getGrade/' + id;
-    return this._http.get<any>(newUrl);
+    return this._http.get<GradeModel>(newUrl);
   }
 
   getAllDriveGrades(driveId: number) {
@@ -24,6 +23,6 @@ export class GradeService {
 
   saveGrade(grade: GradeModel) {
     const newUrl = this.gradeUrl + '/save';
-    return this._http.post<any>(newUrl, grade);
+    return this._http.post<string>(newUrl, grade);
   }
 }

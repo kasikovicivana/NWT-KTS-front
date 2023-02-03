@@ -70,71 +70,56 @@ export class UserService {
 
   saveClient(client: Client) {
     const newUrl = this.url + '/saveClient';
-    return this._http.post<any>(newUrl, client);
+    return this._http.post<string>(newUrl, client);
   }
 
   saveDriver(driver: Driver) {
     const newUrl = this.url + '/saveDriver';
-    return this._http.post<any>(newUrl, driver);
-  }
-
-  getLoggedUserInfo() {
-    const newUrl = this.url + '/getClient';
-    return this._http.get<any>(newUrl);
+    return this._http.post<string>(newUrl, driver);
   }
 
   getLoggedAdmin() {
     const newUrl = this.url + '/getLoggedAdmin';
-    return this._http.get<any>(newUrl);
+    return this._http.get<User>(newUrl);
   }
 
   getLoggedClient() {
     const newUrl = this.url + '/getClient';
-    return this._http.get<any>(newUrl);
+    return this._http.get<Client>(newUrl);
   }
 
   getClientByMail(mail: string) {
     const newUrl = this.url + '/getClient/' + mail;
-    return this._http.get<any>(newUrl);
-  }
-
-  getLoggedUser() {
-    const newUrl = this.url + '/getLoggedUser';
-    return this._http.get<any>(newUrl);
+    return this._http.get<Client>(newUrl);
   }
 
   changePassword(newPassword: string) {
     const newUrl = this.url + '/changePassword';
-    return this._http.post<any>(newUrl, newPassword);
+    return this._http.post<string>(newUrl, newPassword);
   }
 
   isOldPasswordCorrect(oldPassword: string) {
     const newUrl = this.url + '/checkOldPassword';
-    return this._http.post<any>(newUrl, oldPassword);
+    return this._http.post<boolean>(newUrl, oldPassword);
   }
 
   saveUser(user: User) {
     console.log(user);
     if (user.role === 'Client') {
       const newUrl = this.url + '/saveClient';
-      return this._http.post<any>(newUrl, user);
+      return this._http.post<string>(newUrl, user);
     } else if (user.role === 'Driver') {
       const newUrl = this.url + '/saveDriver';
-      return this._http.post<any>(newUrl, user);
+      return this._http.post<string>(newUrl, user);
     } else {
       const newUrl = this.url + '/saveAdmin';
-      return this._http.post<any>(newUrl, user);
+      return this._http.post<string>(newUrl, user);
     }
-  }
-
-  getLoggedDriver() {
-    const newUrl = this.url + '/getDriver';
-    return this._http.get<any>(newUrl);
   }
 
   saveEditDriver(user: DriverCarInfo) {
     const newUrl = this.url + '/saveEditDriver';
-    return this._http.post<any>(newUrl, user);
+    return this._http.post<boolean>(newUrl, user);
   }
 
   getDriverCarInfo() {
@@ -151,15 +136,6 @@ export class UserService {
         .append('size', String(size)),
     };
 
-    return this._http.get<HttpResponse<any>>(newUrl, queryParams);
+    return this._http.get<HttpResponse<DriverCarInfo[]>>(newUrl, queryParams);
   }
-
-  getDriverById(id: number) {
-    const newUrl = this.url + '/getDriver/' + id;
-    return this._http.get<any>(newUrl);
-  }
-
-  approveDriverChanges() {}
-
-  rejectDriverChanges() {}
 }

@@ -20,7 +20,7 @@ export class NoteModalComponent {
   notes!: [string];
 
   @Input()
-  notesObj!: [Note] | undefined;
+  notesObj!: Note[];
 
   @Output() closeEvent = new EventEmitter<void>();
 

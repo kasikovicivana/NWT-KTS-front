@@ -9,6 +9,7 @@ import { RouteDetails } from '../../../app/model/routeDetails';
 import { CollapseListComponent } from '../../../shared/components/collapse-list/collapse-list.component';
 import { Drive } from '../../../app/model/drive.model';
 import { DriveService } from '../../../shared/services/drive-service/drive.service';
+import { RouteParams } from '../../../app/model/route-params';
 
 @Component({
   selector: 'app-side-bar',
@@ -19,7 +20,7 @@ export class SideBarComponent implements OnInit {
   @Output() openModal = new EventEmitter<boolean>();
   @Output() showFavourites = new EventEmitter<Drive[]>();
   @Output() showPositions = new EventEmitter<string[]>();
-  @Output() changeRouteType = new EventEmitter<any>();
+  @Output() changeRouteType = new EventEmitter<RouteParams>();
 
   isMyChoice: boolean = false;
   isLoggedIn: boolean = false;
@@ -56,7 +57,7 @@ export class SideBarComponent implements OnInit {
     this.pins.push('');
   }
 
-  trackByFn(index: number, item: string) {
+  trackByFn(index: number) {
     return index;
   }
 
@@ -88,7 +89,7 @@ export class SideBarComponent implements OnInit {
     this.list?.showRouteOptions(this.routes, positions);
   }
 
-  changeRoute(params: any) {
+  changeRoute(params: RouteParams) {
     this.changeRouteType.emit(params);
   }
 
@@ -137,8 +138,12 @@ export class SideBarComponent implements OnInit {
 
   systemChoice() {
     this.isMyChoice = false;
-    for (let r in this.routes) {
-      this.changeRoute({ i: r, route: 'recommended' });
+    for (let r of this.routes) {
+      let params: RouteParams = new RouteParams(
+        this.routes.indexOf(r),
+        'recommended'
+      );
+      this.changeRoute(params);
     }
   }
 

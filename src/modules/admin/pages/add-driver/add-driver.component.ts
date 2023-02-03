@@ -3,7 +3,6 @@ import { User } from '../../../app/model/user.model';
 import { CarType } from '../../../app/model/carType.model';
 import { CarService } from '../../../shared/services/car-service/car.service';
 import { AlertsService } from '../../../shared/services/alerts-service/alerts.service';
-import { UserService } from '../../../shared/services/user-service/user.service';
 import { CarModel } from '../../../app/model/car.model';
 import { RegistrationService } from '../../../app/service/registration-service/registration.service';
 
@@ -13,7 +12,7 @@ import { RegistrationService } from '../../../app/service/registration-service/r
   styleUrls: ['./add-driver.component.css'],
 })
 export class AddDriverComponent implements OnInit {
-  carTypes: [CarType] | undefined;
+  carTypes: CarType[] = [];
   isReadonly: boolean = true;
   viewCarTypeInfo: boolean = false;
   type: string = 'Van XL';
@@ -22,6 +21,8 @@ export class AddDriverComponent implements OnInit {
   emailPattern =
     /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/\d=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/\d=?A-Z^_`a-z{|}~]+)*@[A-Za-z\d]([A-Za-z\d-]{0,61}[A-Za-z\d])?(\.[A-Za-z\d]([A-Za-z\d-]{0,61}[A-Za-z\d])?)*$/;
   phoneNumberPattern = /^(\+)?\d{8}\d+$/;
+  user = new User();
+  reenteredPassword = '';
   private isDataValid: boolean = false;
 
   constructor(
@@ -29,8 +30,6 @@ export class AddDriverComponent implements OnInit {
     private alerts: AlertsService,
     private registrationService: RegistrationService
   ) {}
-  user = new User();
-  reenteredPassword = '';
 
   ngOnInit(): void {
     this.carService.getCarTypes().subscribe({
@@ -51,6 +50,7 @@ export class AddDriverComponent implements OnInit {
   changepetFriendly() {
     this.petFriendly = !this.petFriendly;
   }
+
   validateData() {
     this.isDataValid =
       this.user.name != '' &&

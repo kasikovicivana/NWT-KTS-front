@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { Client } from '../../../app/model/client.model';
 import { HttpClient } from '@angular/common/http';
-import { LoginService } from '../../../app/service/login-service/login.service';
 import { Note } from '../../../app/model/note.model';
 import { Driver } from '../../../app/model/driver.model';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { EditNote } from '../../../app/model/editNote.model';
-import { UserService } from '../../../shared/services/user-service/user.service';
 import { User } from '../../../app/model/user.model';
 
 @Injectable({
@@ -17,14 +14,10 @@ export class NoteService {
   public maxId: number = -1;
   noteUrl = environment.backendUrl + 'api/note';
 
-  constructor(
-    private _http: HttpClient,
-    private loginService: LoginService,
-    private userService: UserService
-  ) {
+  constructor(private _http: HttpClient) {
     this.getMaxId().subscribe({
       next: (info) => {
-        this.maxId = info.data;
+        this.maxId = info;
         console.log(this.maxId);
       },
     });
@@ -64,20 +57,7 @@ export class NoteService {
 
   saveNotes(data: EditNote) {
     const newUrl = this.noteUrl + '/saveNotes';
-    return this._http.post<any>(newUrl, data.notesObj);
-  }
-
-  getAdminInfo(): Observable<number> {
-    let adminId = -1;
-    let subject = new Subject<number>();
-    this.userService.getLoggedUser().subscribe({
-      next: (data) => {
-        console.log(data);
-        adminId = data.id;
-        subject.next(adminId);
-      },
-    });
-    return subject.asObservable();
+    return this._http.post<string>(newUrl, data.notesObj);
   }
 
   remove(note: Note): Observable<HttpClient> {
@@ -87,11 +67,11 @@ export class NoteService {
 
   getMaxId() {
     const newUrl = this.noteUrl + '/getMaxId';
-    return this._http.get<any>(newUrl);
+    return this._http.get<number>(newUrl);
   }
 
   getNotes(user: User) {
     const newUrl = this.noteUrl + '/getNotes/' + user.id;
-    return this._http.get<any>(newUrl);
+    return this._http.get<Note[]>(newUrl);
   }
 }

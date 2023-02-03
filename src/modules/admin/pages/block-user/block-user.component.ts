@@ -4,7 +4,6 @@ import { Note } from '../../../app/model/note.model';
 import { Client } from '../../../app/model/client.model';
 import { Driver } from '../../../app/model/driver.model';
 import { NoteService } from '../../services/note-service/note.service';
-import { User } from '../../../app/model/user.model';
 
 @Component({
   selector: 'app-block-user',
@@ -21,7 +20,7 @@ export class BlockUserComponent implements OnInit {
 
   showModal: boolean = false;
   notes: [string];
-  notesObj: [Note] | undefined;
+  notesObj: Note[] = [];
   currentUser: Client | Driver | undefined;
   showClients: boolean = true;
 

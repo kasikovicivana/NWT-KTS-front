@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { CarService } from '../../../../shared/services/car-service/car.service';
 import { CarType } from '../../../../app/model/carType.model';
 import { Driver } from '../../../../app/model/driver.model';
-import { CarModel } from '../../../../app/model/car.model';
 import { DriverService } from '../../../../shared/services/driver-service/driver.service';
 
 @Component({
@@ -46,21 +45,6 @@ export class StepOneComponent implements OnInit {
   selectCar(car: CarType) {
     this.active = car.type;
     this.price = car.price + 120 * this.distance;
-  }
-
-  findDriver() {
-    let car: CarModel = {
-      type: this.active,
-      babiesAllowed: this.babiesCheckbox,
-      petFriendly: this.petsCheckbox,
-      id: 0,
-      driverId: 0,
-    };
-    this.driverService.findActiveDriver(car).subscribe({
-      next: (data) => {
-        this.driver = data;
-      },
-    });
   }
 
   getData(): any {

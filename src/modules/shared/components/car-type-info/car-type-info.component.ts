@@ -8,7 +8,7 @@ import { CarType } from '../../../app/model/carType.model';
 })
 export class CarTypeInfoComponent {
   @Input()
-  carTypes!: [CarType];
+  carTypes!: CarType[];
 
   @Output() closeEvent = new EventEmitter<void>();
 

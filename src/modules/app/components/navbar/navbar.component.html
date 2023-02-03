@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
   <span class="navbar-brand" href="#">Uber app</span>
-  <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarNav"
+  <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+          data-target="#navbarNav"
           data-toggle="collapse" type="button">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -19,7 +20,7 @@
         <a class="nav-link" href="/notifications">Notifications </a>
       </li>
       <li *ngIf="role === 'ROLE_client'" class="nav-item">
-        <a class="nav-link" (click)="showLeaveReportModal()">Leave report </a>
+        <a (click)="showLeaveReportModal()" class="nav-link">Leave report </a>
       </li>
       <li *ngIf="role === 'ROLE_admin'" class="nav-item">
         <a class="nav-link" href="/adminProfile">Profile </a>
@@ -58,7 +59,9 @@
       <button #activeButton (click)="changeDriverActivity()" *ngIf="role === 'ROLE_driver'"
               class="btn btn-rounded  fw-bold btn-success" style="margin-right: 30px"
               type="button">Active</button>
-     <a (click)="logout()" href="#" style="padding-bottom: 15px">Logout</a>
+
+      <a *ngIf="role === null" href="#" style="padding-bottom: 15px">Login</a>
+      <a (click)="logout()" *ngIf="role !== null" href="#" style="padding-bottom: 15px">Logout</a>
     </span>
   </div>
 </nav>

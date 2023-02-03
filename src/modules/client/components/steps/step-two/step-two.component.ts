@@ -24,13 +24,13 @@ export class StepTwoComponent {
     this.stepTwoForm = this.fb.group({});
   }
 
-  trackByIndex(index: number, obj: any): any {
+  trackByIndex(index: number) {
     return index;
   }
 
   addUser() {
     if (sessionStorage.getItem('username') === this.passengerInput) {
-      this.alertService.errorAlert("You can't add yourself. Idiot.");
+      this.alertService.errorAlert("You can't add yourself.");
       return;
     }
     if (this.passengerInput !== '') {

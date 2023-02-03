@@ -35,7 +35,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { NotificationViewComponent } from './pages/notification-view/notification-view.component';
 import { NotificationTableComponent } from './components/notification-table/notification-table.component';
 import { ApproveDrivePaymentComponent } from './pages/approve-drive-payment/approve-drive-payment.component';
-import { RouteMapComponent } from '../shared/components/route-map/route-map.component';
 import { LeaveCurrentDriveComment } from './pages/leave-current-drive-comment/leave-current-drive-comment.component';
 import { FavouriteModalComponent } from './components/favourite-modal/favourite-modal.component';
 
@@ -54,7 +53,6 @@ import { FavouriteModalComponent } from './components/favourite-modal/favourite-
     CollapseListComponent,
     ClientDriveHistoryComponent,
     ClientDriveReportComponent,
-    RouteMapComponent,
     NotificationViewComponent,
     NotificationTableComponent,
     ApproveDrivePaymentComponent,

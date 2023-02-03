@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MapService } from '../../../shared/services/map-service/map.service';
 import { Position } from '../../../app/model/position.model';
 import { RouteDetails } from '../../../app/model/routeDetails';
@@ -11,13 +11,14 @@ import { DriveService } from '../../../shared/services/drive-service/drive.servi
 import { NotificationService } from 'src/modules/shared/services/notification-service/notification.service';
 import { Drive } from '../../../app/model/drive.model';
 import { AlertsService } from '../../../shared/services/alerts-service/alerts.service';
+import { RouteParams } from '../../../app/model/route-params';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css'],
 })
-export class HomepageComponent implements OnInit {
+export class HomepageComponent {
   showModal: boolean = false;
   showFavouriteRoutes: boolean = false;
   loggedUserRole: string | null = sessionStorage.getItem('role');
@@ -41,8 +42,6 @@ export class HomepageComponent implements OnInit {
   ) {
     this.initializeWebSocketConnection();
   }
-
-  ngOnInit(): void {}
 
   initializeWebSocketConnection() {
     let ws = new SockJS('http://localhost:9000/socket');
@@ -252,7 +251,7 @@ export class HomepageComponent implements OnInit {
     this.allRoutes = routes;
   }
 
-  changeRouteType(params: any) {
+  changeRouteType(params: RouteParams) {
     for (let r of this.allRoutes[params.i]) {
       if (r.type == params.route) {
         this.chosenRoutes[params.i] = r;

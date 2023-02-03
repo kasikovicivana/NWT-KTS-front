@@ -23,11 +23,13 @@ export class DriveService {
   }
 
   loadPositionsActive() {
-    return this._http.get<any>(this.url + '/positionsActive');
+    return this._http.get<Map<string, Position>>(this.url + '/positionsActive');
   }
 
   loadPositionsInactive() {
-    return this._http.get<any>(this.url + '/positionsInactive');
+    return this._http.get<Map<string, Position>>(
+      this.url + '/positionsInactive'
+    );
   }
 
   getClientDriveHistory() {
@@ -65,7 +67,7 @@ export class DriveService {
   }
 
   addDrive(info: ScheduleInfo) {
-    return this._http.post<any>(this.url + '/saveDrive', info);
+    return this._http.post<string>(this.url + '/saveDrive', info);
   }
 
   checkIfAllApproved(id: number) {
@@ -73,15 +75,18 @@ export class DriveService {
   }
 
   getFutureDriverDrives() {
-    return this._http.get<any>(this.url + '/getFutureDriverDrives');
+    return this._http.get<Drive[]>(this.url + '/getFutureDriverDrives');
   }
 
   setRejectionReason(reason: Drive) {
-    return this._http.post<any>(this.url + '/saveRejectionDriveReason', reason);
+    return this._http.post<string>(
+      this.url + '/saveRejectionDriveReason',
+      reason
+    );
   }
 
   goToClient(drive: Drive, duration: number) {
-    return this._http.post<any>(this.url + '/goToClient', {
+    return this._http.post<string>(this.url + '/goToClient', {
       drive,
       duration,
     });
@@ -103,15 +108,15 @@ export class DriveService {
   }
 
   start(drive: Drive) {
-    return this._http.post<any>(this.url + '/start', drive.id);
+    return this._http.post<string>(this.url + '/start', drive.id);
   }
 
   stop(drive: Drive) {
-    return this._http.post<any>(this.url + '/stop', drive.id);
+    return this._http.post<string>(this.url + '/stop', drive.id);
   }
 
   finish(drive: Drive) {
-    return this._http.post<any>(this.url + '/finish', drive.id);
+    return this._http.post<string>(this.url + '/finish', drive.id);
   }
 
   getFavouriteDrives() {
@@ -123,6 +128,6 @@ export class DriveService {
   }
 
   saveReport(report: ReportModel) {
-    return this._http.post<any>(this.url + '/saveReport', report);
+    return this._http.post<string>(this.url + '/saveReport', report);
   }
 }

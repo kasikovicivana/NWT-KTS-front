@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Position } from '../../../app/model/position.model';
+import { Coordinates } from '../../../app/model/coordinates';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,7 @@ export class MapService {
     );
   }
 
-  getCoordinates(address: string): Promise<any> {
+  getCoordinates(address: string): Promise<Coordinates> {
     return new Promise((resolve, reject) => {
       this.getAddressInfo(address).subscribe({
         next: (response) => {
@@ -43,7 +44,7 @@ export class MapService {
           }
           const lon = response.features[0].geometry.coordinates[0];
           const lat = response.features[0].geometry.coordinates[1];
-          resolve({ lat, lon });
+          resolve(new Coordinates(lat, lon));
         },
       });
     });
