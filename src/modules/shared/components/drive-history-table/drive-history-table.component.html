@@ -1,12 +1,13 @@
 <div>
   <div class="mb-4 col-2">
     <div class="form-floating form-white">
-      <select #sortBy (change)="onChangeSort(sortBy.value)" class="form-select form-control bg-dark text-light" id="role" required>
+      <select #sortBy (change)="onChangeSort(sortBy.value)" class="form-select form-control bg-dark text-light"
+              id="role" required>
         <option value="Date">Date</option>
         <option value="Price">Price</option>
         <option value="Route">Route</option>
       </select>
-      <label mdbLabel class="form-label text-light" for="role">Sort by</label>
+      <label class="form-label text-light" for="role" mdbLabel>Sort by</label>
     </div>
   </div>
   <table class="table bg-white table-hover " style="border-radius: .5rem;font-size: 18px">
@@ -20,14 +21,14 @@
     </thead>
     <tbody>
     <tr *ngFor="let drive of drives;let i = index">
-      <td>{{drive.routes[0].start.address}} - {{drive.routes[drives.length-1].end.address}}</td>
+      <td>{{drive.routes[0].start.address}} - {{drive.routes[drive.routes.length - 1].end.address}}</td>
       <td>{{drive.price}}$</td>
       <td>{{drive.startTime.getDate()}}.{{drive.startTime.getMonth() + 1}}.{{drive.startTime.getFullYear()}}</td>
       <td>
         <button
-          type="button"
+          (click)="openDetailsModal(drive)"
           class="btn btn-rounded btn-sm fw-bold btn-success"
-          style="font-size: 15px" (click)="openDetailsModal(drive)">
+          style="font-size: 15px" type="button">
           Details
         </button>
       </td>
