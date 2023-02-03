@@ -10,6 +10,9 @@
       <li *ngIf="role === 'ROLE_client' || role === null" class="nav-item">
         <a class="nav-link" href="/home">Home</a>
       </li>
+      <li *ngIf="role === 'ROLE_admin'" class="nav-item">
+        <a class="nav-link" href="/adminHomepage">Home</a>
+      </li>
       <li *ngIf="role === 'ROLE_client'" class="nav-item">
         <a class="nav-link" href="/clientProfile" id="profile-nav-link">Profile</a>
       </li>

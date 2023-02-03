@@ -77,12 +77,14 @@ export class LoginComponent implements OnInit {
     if (role === 'ROLE_client') {
       window.location.href = '/home';
     } else if (role === 'ROLE_driver') {
-      this.driverService.changeDriverActivity(false).subscribe();
-      window.location.href = '/driverProfile';
+      this.driverService.changeDriverActivity(false).subscribe(() => {
+        window.location.href = '/driverProfile';
+      });
     } else if (role === 'ROLE_admin') {
       window.location.href = '/adminHomepage';
+    } else {
+      window.location.href = '/home';
     }
-    window.location.href = '/home';
   }
 
   loginSuccessful(response: LoggedUser) {

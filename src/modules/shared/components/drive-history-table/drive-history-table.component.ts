@@ -16,8 +16,9 @@ export class DriveHistoryTableComponent implements OnInit {
 
   ngOnInit(): void {
     for (let d of this.drives) {
+      console.log(d);
       for (let r of d.routes) {
-        console.log(r.start);
+        console.log(r);
       }
     }
   }

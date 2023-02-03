@@ -34,7 +34,7 @@ export class LiveChatComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
     if (sessionStorage.getItem('role') === 'ROLE_client') {
-      this.userService.getLoggedClient().subscribe((data) => {
+      this.userService.getLoggedClient().subscribe((data: Client) => {
         this.client = data;
         if (!this.client.isSocialLogin) {
           this.imageService.loadImage(this.client.photo).subscribe((data) => {
