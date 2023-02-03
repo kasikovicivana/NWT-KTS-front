@@ -93,7 +93,7 @@ export class DriveService {
   }
 
   getDuration(drive: Drive, position: Position): Promise<number> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.mapService
         .getRoute(position, drive.routes[0].start, 'recommended')
         .subscribe({

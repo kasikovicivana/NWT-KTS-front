@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-drive-chart',
@@ -14,11 +8,9 @@ import {
 export class DriveChartComponent implements OnInit {
   @Input() yData: number[] = [];
   @Input() xData: string[] = [];
-  @Input() type: string = '';
+  @Input() type = '';
   chartOption: any;
   chartInstance: any;
-
-  constructor() {}
 
   ngOnInit(): void {
     console.log(this.xData);

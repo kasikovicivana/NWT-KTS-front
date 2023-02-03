@@ -57,7 +57,7 @@ export class NoteModalComponent {
 
   saveNotes(): void {
     if (this.currentUser != undefined) {
-      let data = new EditNote();
+      const data = new EditNote();
       data.notesObj = this.notesObj;
       data.notes = this.notes;
       data.user = this.currentUser;

@@ -18,9 +18,9 @@ import { UserService } from '../../../shared/services/user-service/user.service'
   styleUrls: ['./live-chat.component.css'],
 })
 export class LiveChatComponent implements OnInit, AfterViewChecked {
-  showModal: boolean = false;
-  messageText: string = '';
-  imageUrl: string = '';
+  showModal = false;
+  messageText = '';
+  imageUrl = '';
   srcData: SafeResourceUrl | undefined;
   client: Client = new Client();
   @ViewChild('scrollMe') myScrollContainer: ElementRef | undefined;
@@ -65,7 +65,7 @@ export class LiveChatComponent implements OnInit, AfterViewChecked {
           )
         );
       },
-      (err) => console.log('propo')
+      () => console.log('propo')
     );
   }
 
@@ -77,7 +77,9 @@ export class LiveChatComponent implements OnInit, AfterViewChecked {
     try {
       this.myScrollContainer!.nativeElement.scrollTop =
         this.myScrollContainer!.nativeElement.scrollHeight;
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   openChat() {
@@ -85,14 +87,14 @@ export class LiveChatComponent implements OnInit, AfterViewChecked {
   }
 
   sendMessage() {
-    let sender = new MessageClient(
+    const sender = new MessageClient(
       this.client.name,
       this.client.surname,
       this.client.email,
       this.client.photo,
       this.client.isSocialLogin
     );
-    let msg = new ChatMessage(sender, this.messageText, 'admins');
+    const msg = new ChatMessage(sender, this.messageText, 'admins');
     this.webSocket.sendMessage(msg);
     this.messageText = '';
   }

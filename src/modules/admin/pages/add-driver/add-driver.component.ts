@@ -13,17 +13,17 @@ import { RegistrationService } from '../../../app/service/registration-service/r
 })
 export class AddDriverComponent implements OnInit {
   carTypes: CarType[] = [];
-  isReadonly: boolean = true;
-  viewCarTypeInfo: boolean = false;
-  type: string = 'Van XL';
-  babiesAllowed: boolean = false;
-  petFriendly: boolean = false;
+  isReadonly = true;
+  viewCarTypeInfo = false;
+  type = 'Van XL';
+  babiesAllowed = false;
+  petFriendly = false;
   emailPattern =
     /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/\d=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/\d=?A-Z^_`a-z{|}~]+)*@[A-Za-z\d]([A-Za-z\d-]{0,61}[A-Za-z\d])?(\.[A-Za-z\d]([A-Za-z\d-]{0,61}[A-Za-z\d])?)*$/;
   phoneNumberPattern = /^(\+)?\d{8}\d+$/;
   user = new User();
   reenteredPassword = '';
-  private isDataValid: boolean = false;
+  private isDataValid = false;
 
   constructor(
     private carService: CarService,
@@ -67,7 +67,7 @@ export class AddDriverComponent implements OnInit {
   addDriver() {
     this.validateData();
     if (this.isDataValid) {
-      let car: CarModel = {
+      const car: CarModel = {
         type: this.type,
         babiesAllowed: this.babiesAllowed,
         petFriendly: this.petFriendly,
@@ -81,7 +81,7 @@ export class AddDriverComponent implements OnInit {
           car.driverId = data.id;
           this.carService.saveCar(car).subscribe();
         },
-        error: (err) => this.alerts.errorAlert('You already have account!'),
+        error: () => this.alerts.errorAlert('You already have account!'),
       });
     } else {
       this.alerts.errorAlert('You must fill all fields!');

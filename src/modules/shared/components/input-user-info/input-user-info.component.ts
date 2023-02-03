@@ -14,8 +14,6 @@ export class InputUserInfoComponent {
   isDriver = true;
   loggedRole: string | null = sessionStorage.getItem('role');
 
-  constructor() {}
-
   onChange(deviceValue: string) {
     this.isDriver = deviceValue !== 'Client';
   }

@@ -9,9 +9,9 @@ import { UserService } from '../../../shared/services/user-service/user.service'
   styleUrls: ['./password-change.component.css'],
 })
 export class PasswordChangeComponent implements OnInit {
-  token: string = '';
-  newPassword: string = '';
-  confirmPassword: string = '';
+  token = '';
+  newPassword = '';
+  confirmPassword = '';
 
   constructor(
     private alerts: AlertsService,
@@ -30,13 +30,13 @@ export class PasswordChangeComponent implements OnInit {
       this.alerts.errorAlert('You must enter the password!');
     } else {
       this.userService.resetPassword(this.token, this.newPassword).subscribe({
-        next: (value) => {
+        next: () => {
           this.alerts.successAlert();
           setTimeout(function () {
             window.location.href = '/';
           }, 2000);
         },
-        error: (err) => {
+        error: () => {
           this.alerts.errorAlert("Password couldn't be reset.");
         },
       });

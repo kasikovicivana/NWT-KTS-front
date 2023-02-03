@@ -12,9 +12,9 @@ import { UserService } from '../../../shared/services/user-service/user.service'
   styleUrls: ['./successful-payment.component.css'],
 })
 export class SuccessfulPaymentComponent implements OnInit {
-  token: string = '';
-  tokenPrice: number = 0.0;
-  id: string = '';
+  token = '';
+  tokenPrice = 0.0;
+  id = '';
   payingSources: PayingInfoModel = {
     payingSource: 'unknown',
     amount: 0.0,
@@ -35,7 +35,7 @@ export class SuccessfulPaymentComponent implements OnInit {
     const id = urlParams.get('token');
     if (id != null) {
       this.id = id;
-      let context = this;
+      const context = this;
       this.tokenService.generateAccessToken().subscribe({
         next: (data) => {
           context.token = data['access_token'];

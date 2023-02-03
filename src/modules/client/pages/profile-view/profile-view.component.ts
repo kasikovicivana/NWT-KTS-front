@@ -19,7 +19,7 @@ export class ProfileViewComponent implements OnInit {
   ) {}
 
   client: Client = new Client();
-  imageUrl: string = '';
+  imageUrl = '';
   srcData: SafeResourceUrl | undefined;
 
   ngOnInit(): void {

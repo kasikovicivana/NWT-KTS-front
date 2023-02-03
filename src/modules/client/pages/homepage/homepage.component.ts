@@ -19,14 +19,14 @@ import { RouteParams } from '../../../app/model/route-params';
   styleUrls: ['./homepage.component.css'],
 })
 export class HomepageComponent {
-  showModal: boolean = false;
-  showFavouriteRoutes: boolean = false;
+  showModal = false;
+  showFavouriteRoutes = false;
   loggedUserRole: string | null = sessionStorage.getItem('role');
   chosenRoutes: RouteDetails[] = [];
 
   allRoutes: RouteDetails[][] = [];
-  distance: number = 0;
-  duration: number = 0;
+  distance = 0;
+  duration = 0;
   favourites: Drive[] = [];
 
   @ViewChild(RouteMapComponent) mapChild: RouteMapComponent | undefined;
@@ -44,10 +44,10 @@ export class HomepageComponent {
   }
 
   initializeWebSocketConnection() {
-    let ws = new SockJS('http://localhost:9000/socket');
+    const ws = new SockJS('http://localhost:9000/socket');
     this.stompClient = Stomp.over(ws);
     this.stompClient.debug = null;
-    let that = this;
+    const that = this;
     this.stompClient.connect({}, function () {
       that.openGlobalSocket();
     });
@@ -57,7 +57,7 @@ export class HomepageComponent {
     this.stompClient.subscribe(
       '/notification/approvePayment',
       (message: { body: string }) => {
-        let notification = JSON.parse(message.body);
+        const notification = JSON.parse(message.body);
         console.log(notification);
         console.log(notification.message);
         if (sessionStorage.getItem('username') === notification.receiverEmail) {
@@ -71,7 +71,7 @@ export class HomepageComponent {
     this.stompClient.subscribe(
       '/notification/rejectedPayment',
       (message: { body: string }) => {
-        let notification = JSON.parse(message.body);
+        const notification = JSON.parse(message.body);
         console.log(notification);
         console.log(notification.message);
         if (sessionStorage.getItem('username') === notification.receiverEmail) {
@@ -85,7 +85,7 @@ export class HomepageComponent {
     this.stompClient.subscribe(
       '/notification/noAvailableDriver',
       (message: { body: string }) => {
-        let notification = JSON.parse(message.body);
+        const notification = JSON.parse(message.body);
         console.log(notification);
         console.log(notification.message);
         if (sessionStorage.getItem('username') === notification.receiverEmail) {
@@ -98,7 +98,7 @@ export class HomepageComponent {
     this.stompClient.subscribe(
       '/notification/approvedDrive',
       (message: { body: string }) => {
-        let notification = JSON.parse(message.body);
+        const notification = JSON.parse(message.body);
         console.log(notification);
         console.log(notification.message);
         if (sessionStorage.getItem('username') === notification.receiverEmail) {
@@ -112,7 +112,7 @@ export class HomepageComponent {
     this.stompClient.subscribe(
       '/notification/reminder',
       (message: { body: string }) => {
-        let notification = JSON.parse(message.body);
+        const notification = JSON.parse(message.body);
         if (sessionStorage.getItem('username') === notification.receiverEmail) {
           this.notificationService.showReminderNotification(
             notification.message
@@ -123,7 +123,7 @@ export class HomepageComponent {
     this.stompClient.subscribe(
       '/notification/driverRejected',
       (message: { body: string }) => {
-        let notification = JSON.parse(message.body);
+        const notification = JSON.parse(message.body);
         if (sessionStorage.getItem('username') === notification.receiverEmail) {
           this.notificationService.showDriverRejectedNotification(
             notification.message
@@ -134,7 +134,7 @@ export class HomepageComponent {
     this.stompClient.subscribe(
       '/notification/driveStarted',
       (message: { body: string }) => {
-        let notification = JSON.parse(message.body);
+        const notification = JSON.parse(message.body);
         if (sessionStorage.getItem('username') === notification.receiverEmail) {
           this.notificationService.showDriveStartedNotification(
             notification.message
@@ -146,7 +146,7 @@ export class HomepageComponent {
     this.stompClient.subscribe(
       '/notification/goingToClient',
       (message: { body: string }) => {
-        let notification = JSON.parse(message.body);
+        const notification = JSON.parse(message.body);
         if (sessionStorage.getItem('username') === notification.receiverEmail) {
           this.notificationService.showGoingToClientNotification(
             notification.message
@@ -158,7 +158,7 @@ export class HomepageComponent {
     this.stompClient.subscribe(
       '/notification/driveStopped',
       (message: { body: string }) => {
-        let notification = JSON.parse(message.body);
+        const notification = JSON.parse(message.body);
         if (sessionStorage.getItem('username') === notification.receiverEmail) {
           this.notificationService.showDriveStoppedNotification(
             notification.message
@@ -169,7 +169,7 @@ export class HomepageComponent {
     this.stompClient.subscribe(
       '/notification/driveFinished',
       (message: { body: string }) => {
-        let notification = JSON.parse(message.body);
+        const notification = JSON.parse(message.body);
         if (sessionStorage.getItem('username') === notification.receiverEmail) {
           this.notificationService.showDriveFinishedNotification(
             notification.message
@@ -195,10 +195,10 @@ export class HomepageComponent {
   }
 
   async showPositions(positions: string[]) {
-    let coordinates: Position[] = [];
+    const coordinates: Position[] = [];
 
-    for (let pos of positions) {
-      let { lat, lon } = await this.mapService.getCoordinates(pos);
+    for (const pos of positions) {
+      const { lat, lon } = await this.mapService.getCoordinates(pos);
       if (lat == -1 || lon == -1) {
         this.alertService.errorAlert(
           'Odabrana adresa "' + pos + ' " ne postoji.'
@@ -211,31 +211,31 @@ export class HomepageComponent {
 
     this.chosenRoutes = [];
 
-    let routes: RouteDetails[][] = [];
+    const routes: RouteDetails[][] = [];
 
     for (let i = 0; i < coordinates.length - 1; i++) {
-      let routeRecommended: RouteDetails = new RouteDetails(
+      const routeRecommended: RouteDetails = new RouteDetails(
         await this.mapService.getRouteDetails(
           coordinates[i],
           coordinates[i + 1],
           'recommended'
         )
       );
-      let routeFastest: RouteDetails = new RouteDetails(
+      const routeFastest: RouteDetails = new RouteDetails(
         await this.mapService.getRouteDetails(
           coordinates[i],
           coordinates[i + 1],
           'fastest'
         )
       );
-      let routeShortest: RouteDetails = new RouteDetails(
+      const routeShortest: RouteDetails = new RouteDetails(
         await this.mapService.getRouteDetails(
           coordinates[i],
           coordinates[i + 1],
           'shortest'
         )
       );
-      let routeList: RouteDetails[] = [];
+      const routeList: RouteDetails[] = [];
       routeList.push(routeRecommended);
       routeList.push(routeFastest);
       routeList.push(routeShortest);
@@ -252,7 +252,7 @@ export class HomepageComponent {
   }
 
   changeRouteType(params: RouteParams) {
-    for (let r of this.allRoutes[params.i]) {
+    for (const r of this.allRoutes[params.i]) {
       if (r.type == params.route) {
         this.chosenRoutes[params.i] = r;
         break;
@@ -266,11 +266,7 @@ export class HomepageComponent {
     info.routes = this.chosenRoutes;
     info.duration = this.duration;
 
-    this.driveService.addDrive(info).subscribe({
-      next: () => {},
-      error: () => {},
-    });
-    // greska.. ??
+    this.driveService.addDrive(info).subscribe();
 
     this.setShowModalToFalse();
   }

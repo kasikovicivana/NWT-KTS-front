@@ -12,15 +12,15 @@ import { DriverService } from '../../../../shared/services/driver-service/driver
 })
 export class StepOneComponent implements OnInit {
   public stepOneForm: FormGroup;
-  active: string = '';
+  active = '';
   carTypes: CarType[] = [];
-  petsCheckbox: boolean = false;
-  babiesCheckbox: boolean = false;
+  petsCheckbox = false;
+  babiesCheckbox = false;
   driver: Driver | undefined;
 
-  price: number = 0;
+  price = 0;
 
-  @Input() distance: number = 0;
+  @Input() distance = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -39,8 +39,6 @@ export class StepOneComponent implements OnInit {
       },
     });
   }
-
-  stepOneSubmit() {}
 
   selectCar(car: CarType) {
     this.active = car.type;

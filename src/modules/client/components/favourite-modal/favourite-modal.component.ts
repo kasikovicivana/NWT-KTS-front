@@ -12,8 +12,6 @@ export class FavouriteModalComponent implements OnInit {
 
   chosen: Drive | undefined = undefined;
 
-  constructor() {}
-
   ngOnInit(): void {
     if (this.favourites.length > 0) {
       this.chosen = this.favourites[0];

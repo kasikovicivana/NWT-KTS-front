@@ -8,15 +8,15 @@ import { Drive } from '../../../app/model/drive.model';
 })
 export class DriveHistoryTableComponent implements OnInit {
   @Input() drives: Drive[] = [];
-  @Input() futureDrives: boolean = false;
+  @Input() futureDrives = false;
   @Output() openModal = new EventEmitter<Drive>();
   @Output() openRejectModal = new EventEmitter<Drive>();
 
   constructor() {}
 
   ngOnInit(): void {
-    for (let d of this.drives) {
-      for (let r of d.routes) {
+    for (const d of this.drives) {
+      for (const r of d.routes) {
         console.log(r.start);
       }
     }

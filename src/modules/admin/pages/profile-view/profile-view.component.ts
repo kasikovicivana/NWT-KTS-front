@@ -20,7 +20,7 @@ export class ProfileViewComponent implements OnInit {
 
   admin: User = new User();
   srcData: SafeResourceUrl | undefined;
-  imageUrl: string = '';
+  imageUrl = '';
 
   ngOnInit(): void {
     this.userService.getLoggedAdmin().subscribe((data) => {

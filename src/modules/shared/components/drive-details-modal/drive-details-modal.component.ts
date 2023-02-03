@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Drive } from '../../../app/model/drive.model';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ImageService } from '../../services/image-service/image.service';
-import { UserService } from '../../services/user-service/user.service';
 import { GradeService } from '../../../client/services/grade-service/grade.service';
 import { GradeModel } from '../../../app/model/grade.model';
 
@@ -15,12 +14,12 @@ export class DriveDetailsModalComponent implements OnInit {
   @Input() drive: Drive = new Drive();
   @Output() closeModal = new EventEmitter<boolean>();
   srcData: SafeResourceUrl | undefined;
-  driverGrade: number = 0;
-  carGrade: number = 0;
+  driverGrade = 0;
+  carGrade = 0;
   grades: GradeModel[] = [];
-  rateDrive: boolean = true;
+  rateDrive = true;
   role: string | null = sessionStorage.getItem('role');
-  showGradeModal: boolean = false;
+  showGradeModal = false;
 
   constructor(
     private imageService: ImageService,
@@ -32,7 +31,7 @@ export class DriveDetailsModalComponent implements OnInit {
     console.log(this.drive);
     this.getGradesForDrive();
     this.imageService.loadImage(this.drive.driver.photo).subscribe((data) => {
-      let imageUrl = URL.createObjectURL(data);
+      const imageUrl = URL.createObjectURL(data);
       this.srcData = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
     });
   }
@@ -47,7 +46,7 @@ export class DriveDetailsModalComponent implements OnInit {
       this.grades = data;
       let driverGrade = 0;
       let carGrade = 0;
-      for (let grade of data) {
+      for (const grade of data) {
         driverGrade += grade.driverGrade;
         carGrade += grade.carGrade;
         this.checkIfRated(grade);
@@ -58,7 +57,7 @@ export class DriveDetailsModalComponent implements OnInit {
   }
 
   checkIfRated(grade: GradeModel) {
-    let email = sessionStorage.getItem('username');
+    const email = sessionStorage.getItem('username');
     if (grade.clientEmail === email) {
       this.rateDrive = false;
     }

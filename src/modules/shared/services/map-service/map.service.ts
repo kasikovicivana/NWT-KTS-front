@@ -36,7 +36,7 @@ export class MapService {
   }
 
   getCoordinates(address: string): Promise<Coordinates> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.getAddressInfo(address).subscribe({
         next: (response) => {
           if (response.features[0] === undefined) {

@@ -11,9 +11,6 @@ import { MessageClient } from '../../../app/model/client.model';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ImageService } from '../../../shared/services/image-service/image.service';
 import { UserService } from '../../../shared/services/user-service/user.service';
-import { Browser } from 'leaflet';
-import retina = Browser.retina;
-import { User } from '../../../app/model/user.model';
 
 @Component({
   selector: 'app-admin-chat-box',
@@ -21,7 +18,7 @@ import { User } from '../../../app/model/user.model';
   styleUrls: ['./admin-chat-box.component.css'],
 })
 export class AdminChatBoxComponent implements OnInit, AfterViewChecked {
-  messageText: string = '';
+  messageText = '';
   email: string | null = sessionStorage.getItem('username');
   clientBoxes: MessageClient[] = [];
   clientPhotos: Map<string, SafeResourceUrl> = new Map<
@@ -55,19 +52,19 @@ export class AdminChatBoxComponent implements OnInit, AfterViewChecked {
   }
 
   addClients(data: ClientChatMessage[]) {
-    for (let message of data) {
+    for (const message of data) {
       this.findClients(message.from);
       this.findClients(message.to);
     }
   }
 
   checkClient(m: ChatMessage): boolean {
-    let usernames = this.clientBoxes.map((x) => x.email);
+    const usernames = this.clientBoxes.map((x) => x.email);
     return m.from.email != this.email && !usernames.includes(m.from.email);
   }
 
   findClients(client: MessageClient) {
-    let usernames = this.clientBoxes.map((x) => x.email);
+    const usernames = this.clientBoxes.map((x) => x.email);
     if (client.email != this.email && !usernames.includes(client.email)) {
       this.clientBoxes.push(client);
       this.loadProfilePhoto(client);
@@ -76,16 +73,20 @@ export class AdminChatBoxComponent implements OnInit, AfterViewChecked {
 
   loadProfilePhoto(client: MessageClient) {
     this.imageService.loadImage(client.photo).subscribe((data) => {
-      let imageUrl = URL.createObjectURL(data);
-      let src = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+      const imageUrl = URL.createObjectURL(data);
+      const src = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
       this.clientPhotos.set(client.email, src);
     });
   }
 
   sendMessage() {
-    let admin = new MessageClient();
+    const admin = new MessageClient();
     admin.email = this.email!;
-    let msg = new ChatMessage(admin, this.messageText, this.activeClient.email);
+    const msg = new ChatMessage(
+      admin,
+      this.messageText,
+      this.activeClient.email
+    );
     this.webSocket.sendMessage(msg);
     this.messageText = '';
   }
@@ -102,6 +103,8 @@ export class AdminChatBoxComponent implements OnInit, AfterViewChecked {
     try {
       this.myScrollContainer!.nativeElement.scrollTop =
         this.myScrollContainer!.nativeElement.scrollHeight;
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   }
 }

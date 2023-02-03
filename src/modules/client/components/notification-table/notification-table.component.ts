@@ -9,8 +9,6 @@ import { NotificationModel } from '../../../app/model/notification.model';
 export class NotificationTableComponent implements OnInit {
   @Input() notifications: NotificationModel[] = [];
 
-  constructor() {}
-
   ngOnInit(): void {
     console.log(this.notifications);
   }

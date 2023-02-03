@@ -11,7 +11,7 @@ import { DriverService } from '../../../shared/services/driver-service/driver.se
 })
 export class ViewFutureDrivesComponent implements OnInit {
   public drives: Drive[] = [];
-  showRejectModal: boolean = false;
+  showRejectModal = false;
   drive: Drive = new Drive();
   driver: Driver | undefined = undefined;
 
@@ -43,9 +43,9 @@ export class ViewFutureDrivesComponent implements OnInit {
   }
 
   convertToDate() {
-    for (let drive of this.drives) {
-      let date = drive.startTime.toString();
-      let comp = date.split(',');
+    for (const drive of this.drives) {
+      const date = drive.startTime.toString();
+      const comp = date.split(',');
       drive.startTime = new Date(
         parseFloat(comp[0]),
         parseFloat(comp[1]) - 1,

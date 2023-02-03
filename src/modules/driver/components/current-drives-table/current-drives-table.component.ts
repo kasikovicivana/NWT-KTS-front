@@ -12,7 +12,7 @@ export class CurrentDrivesTableComponent implements OnInit {
   @Input() drives: Drive[] = [];
   @Input() driver: Driver | undefined = undefined;
   @Output() openRejectModal = new EventEmitter<Drive>();
-  public firstDrive: number = -1;
+  public firstDrive = -1;
 
   constructor(private driveService: DriveService) {}
 
@@ -20,8 +20,8 @@ export class CurrentDrivesTableComponent implements OnInit {
     if (this.drives.length !== 0) {
       let date: Date = new Date(Date.parse(this.drives[0].createdTime));
       this.firstDrive = this.drives[0].id;
-      for (let d of this.drives) {
-        let newDate: Date = new Date(Date.parse(d.createdTime));
+      for (const d of this.drives) {
+        const newDate: Date = new Date(Date.parse(d.createdTime));
         if (newDate.valueOf() < date.valueOf()) {
           this.firstDrive = d.id;
           date = newDate;
@@ -37,7 +37,7 @@ export class CurrentDrivesTableComponent implements OnInit {
   async goToClient(drive: Drive) {
     if (this.driver?.position !== undefined) {
       drive.status = 'GOING_TO_CLIENT';
-      let duration: number = await this.driveService.getDuration(
+      const duration: number = await this.driveService.getDuration(
         drive,
         this.driver?.position
       );

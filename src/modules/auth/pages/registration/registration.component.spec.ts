@@ -23,7 +23,7 @@ describe('RegistrationComponent', () => {
   let registrationServiceSpy: any;
 
   function inputValidData() {
-    let repass = fixture.debugElement.query(By.css('#reenterPasswordX'));
+    const repass = fixture.debugElement.query(By.css('#reenterPasswordX'));
     repass.nativeElement.value = 'makic';
     repass.nativeElement.dispatchEvent(new Event('input', { bubbles: true }));
 
@@ -74,7 +74,7 @@ describe('RegistrationComponent', () => {
     fixture.detectChanges();
     tick();
     fixture.detectChanges();
-    let button = fixture.debugElement.query(By.css('#reg'));
+    const button = fixture.debugElement.query(By.css('#reg'));
     expect(button.nativeElement.disabled).toBeTruthy();
     flush();
   }));
@@ -85,7 +85,7 @@ describe('RegistrationComponent', () => {
     fixture.detectChanges();
     tick();
     fixture.detectChanges();
-    let button = fixture.debugElement.query(By.css('#reg'));
+    const button = fixture.debugElement.query(By.css('#reg'));
     expect(button.nativeElement.disabled).toBeFalsy();
     flush();
   }));
@@ -136,7 +136,7 @@ describe('RegistrationComponent', () => {
     tick();
     fixture.detectChanges();
 
-    let button = fixture.debugElement.query(By.css('#reg'));
+    const button = fixture.debugElement.query(By.css('#reg'));
 
     button.nativeElement.click();
     fixture.detectChanges();

@@ -19,7 +19,7 @@ export class DriverEditCardComponent implements OnInit {
   driver!: Driver;
 
   srcData: SafeResourceUrl | undefined;
-  imageUrl: string = '';
+  imageUrl = '';
 
   constructor(
     private userService: UserService,

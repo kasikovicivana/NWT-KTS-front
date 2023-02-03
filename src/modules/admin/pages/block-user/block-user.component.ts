@@ -18,11 +18,11 @@ export class BlockUserComponent implements OnInit {
   clients: [Client] | undefined;
   drivers: [Driver] | undefined;
 
-  showModal: boolean = false;
+  showModal = false;
   notes: [string];
   notesObj: Note[] = [];
   currentUser: Client | Driver | undefined;
-  showClients: boolean = true;
+  showClients = true;
 
   constructor(
     private userService: UserService,
@@ -102,7 +102,7 @@ export class BlockUserComponent implements OnInit {
 
   private extractNoteComments(): void {
     this.notes = [''];
-    for (let note in this.notesObj) {
+    for (const note in this.notesObj) {
       if (this.notes[0] === '') {
         this.notes.pop();
       }

@@ -19,7 +19,7 @@ export class ProfileViewComponent implements OnInit {
   ) {}
 
   driver!: Driver;
-  imageUrl: string = '';
+  imageUrl = '';
   srcData: SafeResourceUrl | undefined;
 
   ngOnInit(): void {

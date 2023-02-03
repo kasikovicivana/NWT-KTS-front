@@ -12,7 +12,7 @@ import { AlertsService } from '../../../shared/services/alerts-service/alerts.se
 export class LeaveCurrentDriveCommentComponent implements OnInit {
   @Output() closeReportModal = new EventEmitter<boolean>();
   public drive: Drive = new Drive();
-  public comment: string = '';
+  public comment = '';
 
   constructor(
     private driveService: DriveService,
@@ -29,7 +29,7 @@ export class LeaveCurrentDriveCommentComponent implements OnInit {
   }
 
   save() {
-    let report: ReportModel = { driveId: this.drive.id, comment: this.comment };
+    const report: ReportModel = { driveId: this.drive.id, comment: this.comment };
     this.driveService.saveReport(report).subscribe();
     this.alerts.successAlert();
     window.location.href = '/home';

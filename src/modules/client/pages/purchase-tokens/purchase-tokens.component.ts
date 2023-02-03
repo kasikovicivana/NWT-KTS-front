@@ -11,8 +11,8 @@ import { UserService } from '../../../shared/services/user-service/user.service'
 })
 export class PurchaseTokensComponent implements OnInit {
   client: Client = new Client();
-  token: number = 0;
-  tokenPrice: number = 0.0;
+  token = 0;
+  tokenPrice = 0.0;
 
   constructor(
     private tokenService: TokensService,

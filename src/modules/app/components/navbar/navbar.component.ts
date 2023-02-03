@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { LoginService } from 'src/modules/app/service/login-service/login.service';
 import { DriverService } from '../../../shared/services/driver-service/driver.service';
 import { UserService } from '../../../shared/services/user-service/user.service';
@@ -13,7 +13,7 @@ export class NavbarComponent {
   @ViewChild('activeButton') activeButton!: ElementRef;
 
   role: string | null = '';
-  active: boolean = true;
+  active = true;
 
   constructor(
     private loginService: LoginService,

@@ -11,10 +11,10 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./detailed-driver-changes.component.css'],
 })
 export class DetailedDriverChangesComponent implements OnInit {
-  private id: number = -1;
+  private id = -1;
   info!: DriverCarInfo;
   srcData: SafeResourceUrl | undefined;
-  imageUrl: string = '';
+  imageUrl = '';
 
   constructor(
     private route: ActivatedRoute,

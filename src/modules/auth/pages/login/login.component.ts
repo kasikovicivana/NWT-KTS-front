@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn = user != null;
       if (this.isLoggedIn) {
         this.userService.getUser(this.socialUser.email).subscribe(
-          (data) => {
+          () => {
             this.isRegistered = true;
             this.userInfo.username = this.socialUser.email;
             this.userInfo.password = this.socialUser.id;
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
 
           setTimeout(() => this.redirectToHomepage(data.role), 1000);
         },
-        (err) => {
+        () => {
           this.alerts.errorAlert('Wrong credentials!');
           this.isLoggedIn = false;
           this.userInfo = new UserInfo();
@@ -97,19 +97,15 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithGoogle(): void {
-    this.socialAuthService
-      .signIn(GoogleLoginProvider.PROVIDER_ID)
-      .then((r) => {});
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then();
   }
 
   loginWithFacebook(): void {
-    this.socialAuthService
-      .signIn(FacebookLoginProvider.PROVIDER_ID)
-      .then((r) => {});
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then();
   }
 
   logOutSocial(): void {
-    this.socialAuthService.signOut().then((r) => {});
+    this.socialAuthService.signOut().then();
   }
 
   openMailModal() {

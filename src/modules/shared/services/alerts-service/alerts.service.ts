@@ -1,6 +1,5 @@
-import { ElementRef, Injectable, ViewChild } from '@angular/core';
+import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
-import { query } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root',
