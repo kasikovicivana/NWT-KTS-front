@@ -9,19 +9,21 @@
     </thead>
     <tbody>
     <tr *ngFor="let drive of drives;let i = index">
-      <td>{{drive.routes[0].start.address}} - {{drive.routes[drives.length - 1].end.address}}</td>
+      <td>{{drive.routes[0].start.address}} - {{drive.routes[drive.routes.length - 1].end.address}}</td>
       <td>{{drive.price}}$</td>
       <td>
         <button
           (click)="goToClient(drive)"
           *ngIf="drive.startTime === null && drive.status === 'SCHEDULED'"
-          [disabled]="drive.id !== firstDrive" class="btn btn-rounded btn-sm fw-bold btn-success"
+          [disabled]="drive.id !== firstDrive"
+          [id]="'goTo'+i" class="btn btn-rounded btn-sm fw-bold btn-success"
           style="font-size: 15px;margin-left: 20px" type="button">
           Go to client
         </button>
         <button
           (click)="openRejectModalFunc(drive)"
           *ngIf="drive.startTime === null"
+          [id]="'reject'+i"
           class="btn btn-rounded btn-sm fw-bold btn-success" style="font-size: 15px;margin-left: 20px"
           type="button">
           Reject
@@ -29,18 +31,21 @@
         <button
           (click)="start(drive)"
           *ngIf="drive.status === 'GOING_TO_CLIENT'"
+          [id]="'start'+i"
           class="btn btn-rounded btn-sm fw-bold btn-success" style="font-size: 15px;margin-left: 20px" type="button">
           Start
         </button>
         <button
           (click)="stop(drive)"
           *ngIf="drive.status === 'IN_PROGRESS'"
+          [id]="'stop'+i"
           class="btn btn-rounded btn-sm fw-bold btn-success" style="font-size: 15px;margin-left: 20px" type="button">
           Stop
         </button>
         <button
           (click)="finish(drive)"
           *ngIf="drive.status === 'IN_PROGRESS'"
+          [id]="'finish'+i"
           class="btn btn-rounded btn-sm fw-bold btn-success" style="font-size: 15px;margin-left: 20px" type="button">
           Finish
         </button>

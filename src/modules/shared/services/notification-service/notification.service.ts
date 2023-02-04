@@ -71,4 +71,12 @@ export class NotificationService {
   showGoingToClientNotification(message: string) {
     this.toast.success(message, 'Vozac stize!');
   }
+
+  showDriveStopped() {
+    this.toast.success('Drive suddenly stopped.', 'Drive stopped!');
+  }
+
+  showDriveFinished() {
+    this.toast.success('Drive finished.', 'Drive finished!');
+  }
 }

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Drive } from '../../../app/model/drive.model';
 import { DriveService } from '../../../shared/services/drive-service/drive.service';
 import { Driver } from '../../../app/model/driver.model';
+import { NotificationService } from '../../../shared/services/notification-service/notification.service';
 
 @Component({
   selector: 'app-current-drives-table',
@@ -14,9 +15,16 @@ export class CurrentDrivesTableComponent implements OnInit {
   @Output() openRejectModal = new EventEmitter<Drive>();
   public firstDrive = -1;
 
-  constructor(private driveService: DriveService) {}
+  constructor(
+    private driveService: DriveService,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit(): void {
+    this.updateFirst();
+  }
+
+  updateFirst() {
     if (this.drives.length !== 0) {
       let date: Date = new Date(Date.parse(this.drives[0].createdTime));
       this.firstDrive = this.drives[0].id;
@@ -56,10 +64,14 @@ export class CurrentDrivesTableComponent implements OnInit {
   stop(drive: Drive) {
     drive.status = 'STOPPED';
     this.driveService.stop(drive).subscribe();
+    this.notificationService.showDriveStopped();
   }
 
   finish(drive: Drive) {
     drive.status = 'FINISHED';
     this.driveService.finish(drive).subscribe();
+    this.notificationService.showDriveFinished();
+    this.drives.splice(this.drives.indexOf(drive), 1);
+    this.updateFirst();
   }
 }

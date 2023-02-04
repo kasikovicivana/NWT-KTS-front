@@ -23,7 +23,7 @@ export class DriverService {
 
   changeDriverActivity(active: boolean) {
     const newUrl = this.url + '/changeDriverActivity';
-    return this._http.post<string>(newUrl, active);
+    return this._http.post<boolean>(newUrl, active);
   }
 
   getDriver() {

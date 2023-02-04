@@ -132,7 +132,7 @@ export class RouteMapComponent implements AfterViewInit {
       '/map-updates/driver-active',
       (message: { body: string }) => {
         const username = message.body;
-        this.positions.get(username)?.setIcon(this.blackCar);
+        this.positions.get(username)?.setIcon(this.greenCar);
       }
     );
 

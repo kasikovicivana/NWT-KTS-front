@@ -10,6 +10,7 @@ import { CollapseListComponent } from '../../../shared/components/collapse-list/
 import { Drive } from '../../../app/model/drive.model';
 import { DriveService } from '../../../shared/services/drive-service/drive.service';
 import { RouteParams } from '../../../app/model/route-params';
+import { AlertsService } from '../../../shared/services/alerts-service/alerts.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -32,7 +33,10 @@ export class SideBarComponent implements OnInit {
 
   favourites: Drive[] = [];
 
-  constructor(private driveService: DriveService) {}
+  constructor(
+    private driveService: DriveService,
+    private alertService: AlertsService
+  ) {}
 
   @ViewChild(CollapseListComponent) set content(
     content: CollapseListComponent
@@ -66,8 +70,18 @@ export class SideBarComponent implements OnInit {
   }
 
   openStepperModal() {
-    // ...
-    this.openModal.emit(true);
+    this.driveService.getCurrentDrive().subscribe({
+      next: (data) => {
+        console.log(data);
+        if (data !== null) {
+          this.alertService.errorAlert(
+            'Ne mozete zakazati voznju ako je druga voznja u toku.'
+          );
+        } else {
+          this.openModal.emit(true);
+        }
+      },
+    });
   }
 
   findPositions() {
