@@ -23,6 +23,6 @@ export class GradeService {
 
   saveGrade(grade: GradeModel) {
     const newUrl = this.gradeUrl + '/save';
-    return this._http.post<string>(newUrl, grade);
+    return this._http.post<boolean>(newUrl, grade);
   }
 }
