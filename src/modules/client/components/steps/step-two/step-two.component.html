@@ -11,7 +11,7 @@
         <mdb-error *ngIf="email.invalid && (email.dirty || email.touched)" class="mt-1">Email is not in valid form
         </mdb-error>
       </mdb-form-control>
-      <button (click)="addUser()" class="btn btn-success btn-rounded col-3 m-lg-3 mt-0"><em
+      <button (click)="addUser()" id="addUser" class="btn btn-success btn-rounded col-3 m-lg-3 mt-0"><em
         class="fa fa-plus-circle"></em><span
         class="px-2">Add</span></button>
     </div>
@@ -35,7 +35,7 @@
       <button cdkStepperPrevious class="btn btn-success btn-rounded previous">Previous</button>
     </div>
     <div class="button col-3">
-      <button cdkStepperNext class="btn btn-success btn-rounded">Next</button>
+      <button cdkStepperNext id="secondNext" class="btn btn-success btn-rounded">Next</button>
     </div>
   </div>
 </div>

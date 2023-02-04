@@ -86,7 +86,7 @@
       <button (click)="reservation()" cdkStepperNext class="btn btn-success btn-rounded">Reserve</button>
     </div>
     <div class="button col-3">
-      <button (click)="finishRideChoice()" cdkStepperNext class="btn btn-success btn-rounded">Finish</button>
+      <button (click)="finishRideChoice()" id="thirdNext" cdkStepperNext class="btn btn-success btn-rounded">Finish</button>
     </div>
   </div>
 
@@ -98,7 +98,7 @@
       <input [(ngModel)]="reservationTime" class="form-control" id="time" type="time"/>
     </div>
     <div class="button ms-auto col-2">
-      <button (click)="reserveRide()" [disabled]="isReservationDisabled()" class="btn btn-success btn-rounded">End
+      <button (click)="reserveRide()"  [disabled]="isReservationDisabled()" class="btn btn-success btn-rounded">End
       </button>
     </div>
   </div>
