@@ -9,15 +9,15 @@
 
   <div class="points">
     <div class="input-group flex-nowrap pb-3">
-      <span class="input-group-text" id="start"><em class="fa fa-home fa-lg"></em></span>
-      <input [(ngModel)]="start" aria-label="start" class="form-control bg-dark text-white" placeholder="Start point"
+      <span class="input-group-text" ><em class="fa fa-home fa-lg"></em></span>
+      <input [(ngModel)]="start" id="start" aria-label="start" class="form-control bg-dark text-white" placeholder="Start point"
              type="text"/>
     </div>
 
     <div *ngFor="let pin of pins; let i = index; trackBy: trackByFn" class="input-group flex-nowrap pb-3"
          style="width: 108%">
       <span class="input-group-text"><em class="fa fa-map-marker fa-lg px-1"></em></span>
-      <input [(ngModel)]="pins[i]" aria-label="Username" class="form-control bg-dark text-white" id="pin_{{i}}"
+      <input [(ngModel)]="pins[i]" [id]="'place_'+i" aria-label="Username" class="form-control bg-dark text-white" id="pin_{{i}}"
              placeholder="Add point"
              type="text"/>
       <a (click)="removePin(i)" class="close_x" href="javascript:void(0)"><span class=""><em class="fa fa-close fa-lg"
@@ -25,19 +25,19 @@
     </div>
 
     <div class="input-group flex-nowrap pb-3">
-      <span class="input-group-text" id="end"><em class="fa fa-map-marker fa-lg px-1"></em></span>
-      <input [(ngModel)]="end" aria-label="end" class="form-control bg-dark text-white" placeholder="End point"
+      <span class="input-group-text" ><em class="fa fa-map-marker fa-lg px-1"></em></span>
+      <input [(ngModel)]="end" id="end" aria-label="end" class="form-control bg-dark text-white" placeholder="End point"
              type="text"/>
     </div>
   </div>
 
   <div class="row pt-2">
-    <a (click)="addPin()" class="link-light col-7" href="javascript:void(0)">
+    <a (click)="addPin()" id="addPin" class="link-light col-7" href="javascript:void(0)">
       <em class="fa fa-plus-circle"></em>
-      <span class="px-2">Add destination</span>
+      <span id="addDestination" class="px-2">Add destination</span>
     </a>
     <div class="col-5">
-      <button (click)="findPositions()" [disabled]="isFindDisabled()" class="btn btn-success btn-rounded" type="button">
+      <button (click)="findPositions()" id="findButton" [disabled]="isFindDisabled()" class="btn btn-success btn-rounded" type="button">
         Find
       </button>
     </div>
@@ -75,7 +75,7 @@
 
 
   <div *ngIf="isLoggedIn" class="button_row pb-4">
-    <button (click)="openStepperModal()" [disabled]="isChooseDisabled()" class="btn btn-success btn-rounded "
+    <button (click)="openStepperModal()" id="chooseButton" [disabled]="isChooseDisabled()" class="btn btn-success btn-rounded "
             type="button">Choose
     </button>
   </div>

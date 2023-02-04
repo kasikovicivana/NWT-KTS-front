@@ -5,7 +5,8 @@
         novalidate>
 
     <div class="list-group list-group-light pt-3 pb-3">
-      <a (click)="selectCar(type)" *ngFor="let type of carTypes" [class.active]="active === type.type"
+      <a (click)="selectCar(type)" *ngFor="let type of carTypes;let i = index" [class.active]="active === type.type"
+         [id]="'car_'+i"
          class="list-group-item list-group-item-action px-3 pt-2 rounded-3 mb-2 list-group-item-dark"
          href="javascript:void(0)"
          id="{{type.type}}">
@@ -54,7 +55,7 @@
     </div>
 
     <div class="button" style="float: right">
-      <button cdkStepperNext class="btn btn-success btn-rounded" type="submit">Next</button>
+      <button id="clickNext" cdkStepperNext class="btn btn-success btn-rounded" type="submit">Next</button>
     </div>
 
   </form>
