@@ -13,8 +13,10 @@
     <tr *ngFor="let notification of notifications;let i = index">
       <td colspan="3">{{notification.message}}</td>
       <td style="float: right;padding: 0 10px 0 0;">
-        <button *ngIf="notification.reason==='APPROVE_PAYMENT' && notification.approvedPayment === false && notification.driveStatus ==='SCHEDULING_IN_PROGRESS'" class="btn btn-rounded  fw-bold btn-success" style="margin: 15px;"
-                    type="button" [id]="'approvePayment_'+i" (click)="sendToApprove(notification.driveId)">View
+        <button
+          (click)="sendToApprove(notification.driveId)"
+          *ngIf="notification.reason==='APPROVE_PAYMENT' && notification.approvedPayment === false && (notification.driveStatus ==='SCHEDULING_IN_PROGRESS' || notification.driveStatus ==='RESERVED' )" [id]="'approvePayment_'+i"
+          class="btn btn-rounded  fw-bold btn-success" style="margin: 15px;" type="button">View
         </button>
         <span style="font-size: 9px;padding-left: 10px;">{{notification.dateTime}}</span>
       </td>

@@ -36,11 +36,9 @@ export class UserService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ` + token,
     });
-    return this._http.post<HttpStatusCode>(
-      `${this.url}/changePassword`,
-      newPassword,
-      { headers: header }
-    );
+    return this._http.post<boolean>(`${this.url}/changePassword`, newPassword, {
+      headers: header,
+    });
   }
 
   getClients(page: number, size: number) {
@@ -95,7 +93,7 @@ export class UserService {
 
   changePassword(newPassword: string) {
     const newUrl = this.url + '/changePassword';
-    return this._http.post<string>(newUrl, newPassword);
+    return this._http.post<boolean>(newUrl, newPassword);
   }
 
   isOldPasswordCorrect(oldPassword: string) {

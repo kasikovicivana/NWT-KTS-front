@@ -27,6 +27,7 @@ import { MdbRadioModule } from 'mdb-angular-ui-kit/radio';
 import { LoginSocialComponent } from './components/login-social/login-social.component';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
+import { MailModalComponent } from './components/mail-modal/mail-modal.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SharedModule } from '../shared/shared.module';
     ActivateAccountComponent,
     PasswordChangeComponent,
     LoginSocialComponent,
+    MailModalComponent,
   ],
   imports: [
     RouterModule.forChild(AuthRoutes),

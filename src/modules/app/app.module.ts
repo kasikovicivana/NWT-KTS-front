@@ -6,7 +6,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
-import { MailModalComponent } from './components/mail-modal/mail-modal.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgStepperModule } from 'angular-ng-stepper';
 import { CdkStepperModule } from '@angular/cdk/stepper';
@@ -26,7 +25,7 @@ import { SharedModule } from '../shared/shared.module';
 import 'ngx-toastr/toastr';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, MailModalComponent],
+  declarations: [AppComponent, NavbarComponent],
   imports: [
     ClientModule,
     AdminModule,

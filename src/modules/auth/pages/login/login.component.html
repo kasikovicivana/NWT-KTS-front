@@ -12,25 +12,34 @@
 
 
               <mdb-form-control class="mb-4 form-white">
-                <input #email="ngModel" (keyup.enter)="login()" [(ngModel)]="userInfo.username" class="form-control form-control-lg text-light"
-                       id="email" mdbInput mdbValidate
-                       placeholder="name@example.com" required type="email" email/>
+                <input #email="ngModel" (keyup.enter)="login()" [(ngModel)]="userInfo.username"
+                       class="form-control form-control-lg text-light"
+                       email id="email" mdbInput
+                       mdbValidate placeholder="name@example.com" required type="email"/>
                 <label class="form-label text-light" for="email" mdbLabel>name@example.com</label>
-                <mdb-error *ngIf="email.invalid && (email.dirty || email.touched)" class="mt-1" id="username-error-msg">Email is required</mdb-error>
+                <mdb-error *ngIf="email.invalid && (email.dirty || email.touched)" class="mt-1" id="username-error-msg">
+                  Email is required
+                </mdb-error>
               </mdb-form-control>
 
               <mdb-form-control class="mb-3 form-white">
-                <input #password="ngModel" (keyup.enter)="login()" [(ngModel)]="userInfo.password" class="form-control form-control-lg text-light"
+                <input #password="ngModel" (keyup.enter)="login()" [(ngModel)]="userInfo.password"
+                       class="form-control form-control-lg text-light"
                        id="pass" mdbInput mdbValidate
                        placeholder="password" required type="password"/>
                 <label class="form-label " for="pass" mdbLabel>password</label>
-                <mdb-error *ngIf="password.invalid && (password.dirty || password.touched)" class="mt-1">Password is required</mdb-error>
+                <mdb-error *ngIf="password.invalid && (password.dirty || password.touched)" class="mt-1">Password is
+                  required
+                </mdb-error>
               </mdb-form-control>
 
-              <p class="small mb-3 pb-lg-2"><a (click)="openMailModal()" class="text-white-50" href="#!">Forgot
+              <p class="small mb-3 pb-lg-2"><a (click)="openMailModal()" class="text-white-50">Forgot
                 password?</a></p>
 
-              <button id="loginButton" (click)="login()" [disabled]="password.invalid || email.invalid" class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+              <button (click)="login()" [disabled]="password.invalid || email.invalid"
+                      class="btn btn-outline-light btn-lg px-5"
+                      id="loginButton" type="submit">Login
+              </button>
 
               <div class="d-flex justify-content-center text-center mt-4 pt-1 ">
                 <a (click)="loginWithFacebook()" class="text-white" href="#"><em
@@ -52,6 +61,9 @@
           <app-login-social [socialUser]="socialUser"></app-login-social>
         </div>
 
+        <div>
+          <app-mail-modal (closeMail)="closeMail()" *ngIf="forgot"></app-mail-modal>
+        </div>
       </div>
     </div>
   </div>

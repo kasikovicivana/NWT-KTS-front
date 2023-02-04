@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AlertsService } from '../../../shared/services/alerts-service/alerts.service';
 import { UserService } from '../../../shared/services/user-service/user.service';
 
@@ -10,16 +9,15 @@ import { UserService } from '../../../shared/services/user-service/user.service'
 })
 export class MailModalComponent {
   mail = '';
+  @Output() closeMail = new EventEmitter<boolean>();
 
   constructor(
-    public modalRef: MdbModalRef<MailModalComponent>,
     private alerts: AlertsService,
     private userService: UserService
   ) {}
 
   close(): void {
-    const closeMessage = 'Modal closed';
-    this.modalRef.close(closeMessage);
+    this.closeMail.emit(true);
   }
 
   sendMail() {
@@ -29,8 +27,8 @@ export class MailModalComponent {
         this.close();
       },
       error: () => {
-        this.close();
         this.alerts.errorAlert('Could not send an email to the given address.');
+        this.close();
       },
     });
   }

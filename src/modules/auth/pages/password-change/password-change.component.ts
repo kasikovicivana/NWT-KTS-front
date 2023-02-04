@@ -36,7 +36,8 @@ export class PasswordChangeComponent implements OnInit {
             window.location.href = '/';
           }, 2000);
         },
-        error: () => {
+        error: (err) => {
+          console.log(err);
           this.alerts.errorAlert("Password couldn't be reset.");
         },
       });
